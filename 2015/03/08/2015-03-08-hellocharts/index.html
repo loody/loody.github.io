@@ -1,0 +1,891 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MPAndroidChart,hellocharts," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="前言记得之前介绍过关于MPAndroidChart的使用方法，但是长江后浪推前浪，最近github有出了一个新的开源曲线库，hellocharts,个人觉得这个库比MPAndroidChart更加酷炫，下面就介绍下它的一些使用方法
+github地址：https://github.com/lecho/hellocharts-android
+使用方法（同样以曲线为例，其他类似）
+xml
+&amp;lt;lec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hellocharts与MPAndroidChart的比较">
+<meta property="og:url" content="http://loody.github.io/2015/03/08/2015-03-08-hellocharts/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="前言记得之前介绍过关于MPAndroidChart的使用方法，但是长江后浪推前浪，最近github有出了一个新的开源曲线库，hellocharts,个人觉得这个库比MPAndroidChart更加酷炫，下面就介绍下它的一些使用方法
+github地址：https://github.com/lecho/hellocharts-android
+使用方法（同样以曲线为例，其他类似）
+xml
+&amp;lt;lec">
+<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hellocharts与MPAndroidChart的比较">
+<meta name="twitter:description" content="前言记得之前介绍过关于MPAndroidChart的使用方法，但是长江后浪推前浪，最近github有出了一个新的开源曲线库，hellocharts,个人觉得这个库比MPAndroidChart更加酷炫，下面就介绍下它的一些使用方法
+github地址：https://github.com/lecho/hellocharts-android
+使用方法（同样以曲线为例，其他类似）
+xml
+&amp;lt;lec">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> hellocharts与MPAndroidChart的比较 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">loody's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                hellocharts与MPAndroidChart的比较
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-08T00:00:00+08:00" content="2015-03-08">
+              2015-03-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/08/2015-03-08-hellocharts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/08/2015-03-08-hellocharts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记得之前介绍过关于MPAndroidChart的使用方法，但是长江后浪推前浪，最近github有出了一个新的开源曲线库，hellocharts,个人觉得这个库比MPAndroidChart更加酷炫，下面就介绍下它的一些使用方法</p>
+<p>github地址：<a href="https://github.com/lecho/hellocharts-android" target="_blank" rel="external">https://github.com/lecho/hellocharts-android</a></p>
+<h2 id="使用方法（同样以曲线为例，其他类似）"><a href="#使用方法（同样以曲线为例，其他类似）" class="headerlink" title="使用方法（同样以曲线为例，其他类似）"></a>使用方法（同样以曲线为例，其他类似）</h2><ul>
+<li><p>xml</p>
+<pre><code>&lt;lecho.lib.hellocharts.view.LineChartView 
+    android:id=&quot;@+id/linechart&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;/&gt;
+</code></pre></li>
+<li><p>code</p>
+<pre><code>LineChartView chart = new LineChartView(context);
+layout.addView(chart);
+</code></pre></li>
+<li><p>data    </p>
+<pre><code>List&lt;PointValue&gt; values = new ArrayList&lt;PointValue&gt;();
+values.add(new PointValue(x,y));
+...
+
+   Line line = new Line(values);
+List&lt;Line&gt; lines = new ArrayList&lt;Line&gt;();
+lines.add(line);//可以有多条曲线
+
+LineChartData data = new LineChartData();
+data.setLines(lines);
+
+chart.setLineChartData(data);
+</code></pre></li>
+</ul>
+<h2 id="hellocharts和MPAndroidChart的比较"><a href="#hellocharts和MPAndroidChart的比较" class="headerlink" title="hellocharts和MPAndroidChart的比较"></a>hellocharts和MPAndroidChart的比较</h2><h2 id="曲线的样式"><a href="#曲线的样式" class="headerlink" title="曲线的样式"></a>曲线的样式</h2><p>在这一点上，MPAndroidChart比hellocharts要好，MPAndroidChart对曲线的样式非常的详细，包括曲线的颜色，粗细、样式（实线、虚线），曲线上点的颜色、粗细、形状，选中的点的图例（类似地图的标注，还可以自定义布局样式）、单位，整个图标的图例（每条曲线的颜色，标题等信息），曲线的上下限标识，x轴，Y轴的字体颜色，大小，字体样式等</p>
+<p>特别说明：</p>
+<ol>
+<li><p>hellocharts在曲线的颜色，点的颜色，还有点的背景颜色默认是保持一致的，没法配置，这个比较伤脑筋，</p>
+</li>
+<li><p>MPAndroidChart不能在<code>set.setCubic(true)</code>模式下支持自定义<code>setFillColor()</code>;</p>
+<p> 如果说对这些要求比较高的就要慎重选择了</p>
+</li>
+</ol>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>MPAndroidChart更方便一点，它支持三种动画</p>
+<pre><code>animateX(int durationMillis):
+ animateY(int durationMillis):
+  animateXY(int xDuration, int yDuration): 
+</code></pre><p>hellocharts也可以自定义动画的</p>
+<pre><code>chartTop.setAnimation();
+</code></pre><h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>hellocharts更加灵活，它可以设置图标的缩放方向，而MPAndroidChart不能单独指定</p>
+<pre><code>chartTop.setZoomType(ZoomType.HORIZONTAL);
+//ZoomType:HORIZONTAL、VERTICAL、HORIZONTAL_AND_VERTICAL
+</code></pre><h2 id="分页展示与滑动"><a href="#分页展示与滑动" class="headerlink" title="分页展示与滑动"></a>分页展示与滑动</h2><p>两个库在这个方面的表现差异很大，hellocharts的体验优势很大，下面我们详细说说这个</p>
+<ol>
+<li><p>单屏</p>
+<p> MPAndroidChart默认是将所有的点都展示在一个屏幕上，这样一来，点少还可以，一旦点特别多的时候，展示就很难看，根本看不清楚点的x,y值，必须手动去缩放才能看清，很麻烦，图标展示就没有了意义.有人说，是不是可以通过通过设置曲线默认的缩放比例<code>mChart.setScaleMinima();</code>来达到分页展示的目的，事实上是可以的，但是效果很不好，很容易又恢复单屏显示</p>
+</li>
+<li><p>滑动不流畅</p>
+<p>  MPAndroidChart的滑动是没有惯性的，只能手指贴面滑，体验很不好</p>
+<p>有时候要展示的数据比较多，以上两个限制对用户的体验式致命的，还好，hellocharts解决了这两个问题，怎么解决的呢？</p>
+<p>在hellocharts中引入了一个Viewport的东西，作者的解释是：<br>**The viewport is represented by the coordinates of its 4 edges (left, top, right</p>
+<ul>
+<li>bottom). These fields can be accessed directly. Use width() and height() to retrieve the viewport’s width and height.**</li>
+</ul>
+<p>我的理解，Viewport就是一个视图的概念，这个视图有上下左右四个边，好比一张全国地图，我们只想看某个省份的地图，所以我们只需要拿到某个省份的上下左右边界，然后展示出来就可以了，他就是全国地图中的一个子集</p>
+<p>  public Viewport(float left, float top, float right, float bottom) </p>
+<p>hellocharts有两个方法</p>
+<p>  chartTop.setMaximumViewport(Viewport maxViewport)//所有的视图<br> chartTop.setCurrentViewport(Viewport targetViewport);//当前要展示的视图</p>
+</li>
+</ol>
+<p>我们需要拿到左右数据的最大视图范围和当前要展示的视图范围，调用上面两个方法，即可完成数据的分页展示，关键是这个曲线库的滑动非常流程，体验非常赞</p>
+<p>综上，如果大家要展示的数据比较少，对曲线样式，动画要求很高的可以选择MPAndroidChart，反之就选择hellocharts吧，当然具体情况还得自己斟酌，</p>
+<p>ps:两个库的作者对项目维护活跃的都很高，MPAndroidChart最近也提供了gradle依赖，使用android studio的同学用起来更方便了    ，具体更新请随时关注github.</p>
+<p>hellocharts：<a href="https://github.com/lecho/hellocharts-android" target="_blank" rel="external">https://github.com/lecho/hellocharts-android</a></p>
+<p>MPAndroidChart：<a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MPAndroidChart/" rel="tag">#MPAndroidChart</a>
+          
+            <a href="/tags/hellocharts/" rel="tag">#hellocharts</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/08/2015-02-08-canvas-matrix/" rel="next" title="Android中绘图学习笔记(三)">
+                <i class="fa fa-chevron-left"></i> Android中绘图学习笔记(三)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/06/2015-04-06-view-TouchEvent/" rel="prev" title="View的事件传递">
+                View的事件传递 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/08/2015-03-08-hellocharts/"
+     data-title="hellocharts与MPAndroidChart的比较"
+     data-content=""
+     data-url="http://loody.github.io/2015/03/08/2015-03-08-hellocharts/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/08/2015-03-08-hellocharts/"
+           data-title="hellocharts与MPAndroidChart的比较" data-url="http://loody.github.io/2015/03/08/2015-03-08-hellocharts/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法（同样以曲线为例，其他类似）"><span class="nav-number">2.</span> <span class="nav-text">使用方法（同样以曲线为例，其他类似）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hellocharts和MPAndroidChart的比较"><span class="nav-number">3.</span> <span class="nav-text">hellocharts和MPAndroidChart的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲线的样式"><span class="nav-number">4.</span> <span class="nav-text">曲线的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画"><span class="nav-number">5.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩放"><span class="nav-number">6.</span> <span class="nav-text">缩放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页展示与滑动"><span class="nav-number">7.</span> <span class="nav-text">分页展示与滑动</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+<div class="powered-by">
+  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+&nbsp&nbsp&nbsp本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+总访客数 <span id="busuanzi_value_site_uv"></span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"loody"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

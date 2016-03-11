@@ -1,0 +1,959 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="占位符," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="常见的几种占位符 String.format
+%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
+%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
+%s: 字符串类型，如：”ljq”
+%b: 布尔类型，如：true
+%%: 百分比类型，如：％
+%n: 换行符
+
+对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android中的常见的占位符及转义字符">
+<meta property="og:url" content="http://loody.github.io/2014/12/14/2014-12-14-string-format/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="常见的几种占位符 String.format
+%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
+%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
+%s: 字符串类型，如：”ljq”
+%b: 布尔类型，如：true
+%%: 百分比类型，如：％
+%n: 换行符
+
+对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分">
+<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android中的常见的占位符及转义字符">
+<meta name="twitter:description" content="常见的几种占位符 String.format
+%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
+%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
+%s: 字符串类型，如：”ljq”
+%b: 布尔类型，如：true
+%%: 百分比类型，如：％
+%n: 换行符
+
+对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> android中的常见的占位符及转义字符 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">loody's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                android中的常见的占位符及转义字符
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-14T00:00:00+08:00" content="2014-12-14">
+              2014-12-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/14/2014-12-14-string-format/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/14/2014-12-14-string-format/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="常见的几种占位符-String-format"><a href="#常见的几种占位符-String-format" class="headerlink" title="常见的几种占位符 String.format"></a>常见的几种占位符 String.format</h2><ul>
+<li>%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099</li>
+<li>%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数</li>
+<li>%s: 字符串类型，如：”ljq”</li>
+<li>%b: 布尔类型，如：true</li>
+<li>%%: 百分比类型，如：％</li>
+<li>%n: 换行符</li>
+</ul>
+<h2 id="对整数进行格式化：-index-标识-最小宽度-转换方式"><a href="#对整数进行格式化：-index-标识-最小宽度-转换方式" class="headerlink" title="对整数进行格式化：%[index$][标识][最小宽度]转换方式"></a>对整数进行格式化：%[index$][标识][最小宽度]转换方式</h2><p>我们可以看到，格式化字符串由4部分组成，其中%[index$]的含义我们上面已经讲过，[最小宽度]的含义也很好理解，就是最终该整数转化的字符串最少包含多少位数字。我们来看看剩下2个部分的含义吧：</p>
+<h3 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h3><ul>
+<li>‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用</li>
+<li>‘#’    只适用于8进制和16进制，8进制时在结果前面增加一个0，16进制时在结果前面增加0x</li>
+<li>‘+’    结果总是包括一个符号（一般情况下只适用于10进制，若对象为BigInteger才可以用于8进制和16进制）</li>
+<li>‘ ‘    正值前加空格，负值前加负号（一般情况下只适用于10进制，若对象为BigInteger才可以用于8进制和16进制）</li>
+<li>‘0’    结果将用零来填充</li>
+<li>‘,’    只适用于10进制，每3位数字之间用“，”分隔</li>
+<li>‘(‘    若参数是负数，则结果中不添加负号而是用圆括号把数字括起来（同‘+’具有同样的限制）</li>
+</ul>
+<h3 id="转换方式"><a href="#转换方式" class="headerlink" title="转换方式"></a>转换方式</h3><p>d:十进制<br>o:八进制<br>x或X:十六进制</p>
+<h2 id="对浮点数进行格式化：-index-标识-最少宽度-精度-转换方式"><a href="#对浮点数进行格式化：-index-标识-最少宽度-精度-转换方式" class="headerlink" title="对浮点数进行格式化：%[index$][标识][最少宽度][.精度]转换方式"></a>对浮点数进行格式化：%[index$][标识][最少宽度][.精度]转换方式</h2><p>我们可以看到，浮点数的转换多了一个“精度”选项，可以控制小数点后面的位数。</p>
+<h3 id="标识-1"><a href="#标识-1" class="headerlink" title="标识"></a>标识</h3><ul>
+<li>‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用</li>
+<li>‘+’    结果总是包括一个符号</li>
+<li>‘  ‘    正值前加空格，负值前加负号</li>
+<li>‘0’    结果将用零来填充</li>
+<li>‘,’    每3位数字之间用“，”分隔（只适用于fgG的转换）</li>
+<li>‘(‘    若参数是负数，则结果中不添加负号而是用圆括号把数字括起来（只适用于eEfgG的转换）</li>
+</ul>
+<h3 id="转换方式-1"><a href="#转换方式-1" class="headerlink" title="转换方式"></a>转换方式</h3><ul>
+<li>‘e’, ‘E’  –  结果被格式化为用计算机科学记数法表示的十进制数</li>
+<li>‘f’          –  结果被格式化为十进制普通表示方式</li>
+<li>‘g’, ‘G’    –  根据具体情况，自动选择用普通表示方式还是科学计数法方式</li>
+<li>‘a’, ‘A’    –   结果被格式化为带有效位数和指数的十六进制浮点数</li>
+</ul>
+<h2 id="对字符进行格式化："><a href="#对字符进行格式化：" class="headerlink" title="对字符进行格式化："></a>对字符进行格式化：</h2><p>对字符进行格式化是非常简单的，c表示字符，标识中’-‘表示左对齐，其他就没什么了。</p>
+<h2 id="对百分比符号进行格式化："><a href="#对百分比符号进行格式化：" class="headerlink" title="对百分比符号进行格式化："></a>对百分比符号进行格式化：</h2><p>看了上面的说明，大家会发现百分比符号“%”是特殊格式的一个前缀。那么我们要输入一个百分比符号该怎么办呢？肯定是需要转义字符的,但是要注意的是，在这里转义字符不是“\”，而是“%”。</p>
+<h2 id="取得平台独立的行分隔符："><a href="#取得平台独立的行分隔符：" class="headerlink" title="取得平台独立的行分隔符："></a>取得平台独立的行分隔符：</h2><p><code>System.getProperty(&quot;line.separator&quot;)</code>可以取得平台独立的行分隔符，但是用在format中间未免显得过于烦琐了。于是format函数自带了一个平台独立的行分隔符那就是<br><code>String.format(&quot;%n&quot;)</code>。</p>
+<h2 id="对日期类型进行格式化"><a href="#对日期类型进行格式化" class="headerlink" title="对日期类型进行格式化:"></a>对日期类型进行格式化:</h2><p>以下日期和时间转换的后缀字符是为 ‘t’ 和 ‘T’ 转换定义的。这些类型相似于但不完全等同于那些由 GNU date 和 POSIX strftime(3c) 定义的类型。提供其他转换类型是为了访问特定于 Java 的功能（如将 ‘L’ 用作秒中的毫秒）。</p>
+<p><strong>以下转换字符用来格式化时间：</strong></p>
+<ul>
+<li>‘H’     24 小时制的小时，被格式化为必要时带前导零的两位数，即 00 - 23。</li>
+<li>‘I’     12 小时制的小时，被格式化为必要时带前导零的两位数，即 01 - 12。</li>
+<li>‘k’     24 小时制的小时，即 0 - 23。</li>
+<li>‘l’     12 小时制的小时，即 1 - 12。</li>
+<li>‘M’     小时中的分钟，被格式化为必要时带前导零的两位数，即 00 - 59。</li>
+<li>‘S’     分钟中的秒，被格式化为必要时带前导零的两位数，即 00 - 60 （”60” 是支持闰秒所需的一个特殊值）。</li>
+<li>‘L’     秒中的毫秒，被格式化为必要时带前导零的三位数，即 000 - 999。</li>
+<li>‘N’     秒中的毫微秒，被格式化为必要时带前导零的九位数，即 000000000 - 999999999。</li>
+<li>‘p’     特定于语言环境的 上午或下午 标记以小写形式表示，例如 “am” 或 “pm”。使用转换前缀 ‘T’ 可以强行将此输出转换为大写形式。</li>
+<li>‘z’     相对于 GMT 的 RFC 822 格式的数字时区偏移量，例如 -0800。</li>
+<li>‘Z’     表示时区缩写形式的字符串。Formatter 的语言环境将取代参数的语言环境（如果有）。</li>
+<li>‘s’     自协调世界时 (UTC) 1970 年 1 月 1 日 00:00:00 至现在所经过的秒数，即 Long.MIN_VALUE/1000 与 Long.MAX_VALUE/1000 之间的差值。</li>
+<li>‘Q’     自协调世界时 (UTC) 1970 年 1 月 1 日 00:00:00 至现在所经过的毫秒数，即 Long.MIN_VALUE 与 Long.MAX_VALUE 之间的差值。</li>
+</ul>
+<p><strong>以下转换字符用来格式化日期：</strong></p>
+<ul>
+<li>‘B’     特定于语言环境的月份全称，例如 “January” 和 “February”。</li>
+<li>‘b’     特定于语言环境的月份简称，例如 “Jan” 和 “Feb”。</li>
+<li>‘h’     与 ‘b’ 相同。</li>
+<li>‘A’     特定于语言环境的星期几全称，例如 “Sunday” 和 “Monday”</li>
+<li>‘a’     特定于语言环境的星期几简称，例如 “Sun” 和 “Mon”</li>
+<li>‘C’     除以 100 的四位数表示的年份，被格式化为必要时带前导零的两位数，即 00 - 99</li>
+<li>‘Y’     年份，被格式化为必要时带前导零的四位数（至少），例如，0092 等于格里高利历的 92 CE。</li>
+<li>‘y’     年份的最后两位数，被格式化为必要时带前导零的两位数，即 00 - 99。</li>
+<li>‘j’     一年中的天数，被格式化为必要时带前导零的三位数，例如，对于格里高利历是 001 - 366。</li>
+<li>‘m’     月份，被格式化为必要时带前导零的两位数，即 01 - 13。</li>
+<li>‘d’     一个月中的天数，被格式化为必要时带前导零两位数，即 01 - 31</li>
+<li>‘e’     一个月中的天数，被格式化为两位数，即 1 - 31。</li>
+</ul>
+<p><strong>以下转换字符用于格式化常见的日期/时间组合。</strong></p>
+<ul>
+<li>‘R’     24 小时制的时间，被格式化为 “%tH:%tM”</li>
+<li>‘T’     24 小时制的时间，被格式化为 “%tH:%tM:%tS”。</li>
+<li>‘r’     12 小时制的时间，被格式化为 “%tI:%tM:%tS %Tp”。上午或下午标记 (‘%Tp’) 的位置可能与语言环境有关。</li>
+<li>‘D’     日期，被格式化为 “%tm/%td/%ty”。</li>
+<li>‘F’     ISO 8601 格式的完整日期，被格式化为 “%tY-%tm-%td”。</li>
+<li>‘c’     日期和时间，被格式化为 “%ta %tb %td %tT %tZ %tY”，例如 “Sun Jul 20 16:17:00 EDT 1969”。</li>
+</ul>
+<p>[index$]不加的话默认是从左到右的顺序依次取值</p>
+<p><strong>示例：</strong></p>
+<pre><code>Log.d(TAG, String.format(&quot;整数:%,d&quot;, -80000000));
+Log.d(TAG, String.format(&quot;浮点数:%.2f&quot;, 0.81634f));
+Log.d(TAG, String.format(&quot;字符串:%s&quot;, &quot;hello word&quot;));
+Log.d(TAG, String.format(&quot;布尔:%b&quot;, 8 &gt; 9));
+Log.d(TAG, String.format(&quot;百分比:%%%d&quot;, 80));
+Log.d(TAG, String.format(&quot;换行符:%n换行符&quot;));
+Log.d(TAG, String.format(&quot;日期R:%tR&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期T:%tT&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期D:%tD&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期F:%tF&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期c:%tc&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期H:%tH&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期I:%tI&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期k:%tk&quot;, new Date()));
+Log.d(TAG, String.format(&quot;日期l:%tl&quot;, new Date()));
+Log.d(TAG, String.format(&quot;整数:%,d--浮点数:%.2f--字符串:%s--布尔:%b--百分比:%%%d--换行符:%n换行符&quot;,
+            -80000000, 0.81634f, &quot;hello word&quot;, 8 &gt; 9, 80));
+Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--布尔:%4$b&quot;,
+            -80000000, &quot;hello word&quot;, 0.81634f, 8 &gt; 9));
+</code></pre><p><strong>输出</strong></p>
+<pre><code>12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 浮点数:0.82
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 字符串:hello word
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 布尔:false
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 百分比:%80
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 换行符:
+换行符
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期R:22:24
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期T:22:24:11
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期D:12/14/14
+12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期F:2014-12-14
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期c:星期日 12月 14 22:24:11 GMT+08:00 2014
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期H:22
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期I:10
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期k:22
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期l:10
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000--浮点数:0.82--字符串:hello word--布尔:false--百分比:%80--换行符:
+换行符
+12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000--浮点数:0.82--字符串:hello word--布尔:false               
+</code></pre><h2 id="常见的转义符"><a href="#常见的转义符" class="headerlink" title="常见的转义符"></a>常见的转义符</h2><ul>
+<li>“:双引号(\&#34;) </li>
+<li>‘:单引号(\&#39;) </li>
+<li>&amp;:(\&#38;) </li>
+<li>小于号(&lt;):(\&#60;) </li>
+<li>大于号(&gt;):(\&#62;) </li>
+<li>空格：（\&#160;）</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/占位符/" rel="tag">#占位符</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/07/2014-12-07-about-gradle dependency management/" rel="next" title="Gradle如何声明所需的依赖以及依赖的分类（分组）">
+                <i class="fa fa-chevron-left"></i> Gradle如何声明所需的依赖以及依赖的分类（分组）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/21/2014-12-21-weixin-pay/" rel="prev" title="微信支付需要注意的几个问题">
+                微信支付需要注意的几个问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/12/14/2014-12-14-string-format/"
+     data-title="android中的常见的占位符及转义字符"
+     data-content=""
+     data-url="http://loody.github.io/2014/12/14/2014-12-14-string-format/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/12/14/2014-12-14-string-format/"
+           data-title="android中的常见的占位符及转义字符" data-url="http://loody.github.io/2014/12/14/2014-12-14-string-format/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的几种占位符-String-format"><span class="nav-number">1.</span> <span class="nav-text">常见的几种占位符 String.format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对整数进行格式化：-index-标识-最小宽度-转换方式"><span class="nav-number">2.</span> <span class="nav-text">对整数进行格式化：%[index$][标识][最小宽度]转换方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标识"><span class="nav-number">2.1.</span> <span class="nav-text">标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换方式"><span class="nav-number">2.2.</span> <span class="nav-text">转换方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对浮点数进行格式化：-index-标识-最少宽度-精度-转换方式"><span class="nav-number">3.</span> <span class="nav-text">对浮点数进行格式化：%[index$][标识][最少宽度][.精度]转换方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标识-1"><span class="nav-number">3.1.</span> <span class="nav-text">标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换方式-1"><span class="nav-number">3.2.</span> <span class="nav-text">转换方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对字符进行格式化："><span class="nav-number">4.</span> <span class="nav-text">对字符进行格式化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对百分比符号进行格式化："><span class="nav-number">5.</span> <span class="nav-text">对百分比符号进行格式化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取得平台独立的行分隔符："><span class="nav-number">6.</span> <span class="nav-text">取得平台独立的行分隔符：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对日期类型进行格式化"><span class="nav-number">7.</span> <span class="nav-text">对日期类型进行格式化:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的转义符"><span class="nav-number">8.</span> <span class="nav-text">常见的转义符</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+<div class="powered-by">
+  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+&nbsp&nbsp&nbsp本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+总访客数 <span id="busuanzi_value_site_uv"></span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"loody"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

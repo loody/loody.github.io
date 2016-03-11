@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="签名,多渠道打包," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="为什么要签名
+开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
+
+由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
+
+APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于android签名及渠道打包">
+<meta property="og:url" content="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="为什么要签名
+开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
+
+由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
+
+APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
+<meta property="og:image" content="http://loody.github.io/images/umeng_package_tool.jpg">
+<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于android签名及渠道打包">
+<meta name="twitter:description" content="为什么要签名
+开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
+
+由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
+
+APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
+<meta name="twitter:image" content="http://loody.github.io/images/umeng_package_tool.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 关于android签名及渠道打包 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">loody's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于android签名及渠道打包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-23T00:00:00+08:00" content="2014-09-23">
+              2014-09-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="为什么要签名"><a href="#为什么要签名" class="headerlink" title="为什么要签名"></a>为什么要签名</h2><ul>
+<li><p>开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。</p>
+</li>
+<li><p>由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。</p>
+</li>
+<li><p>APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖或替换掉。这样签名其实也是开发者的身份标识。交易中抵赖等事情发生时，签名可以防止抵赖的发生。</p>
+</li>
+</ul>
+<h3 id="签名的注意事项"><a href="#签名的注意事项" class="headerlink" title="签名的注意事项"></a>签名的注意事项</h3><ul>
+<li><p>Android系统要求所有的程序经过数字签名才能安装，如果没有可用的数字签名，系统将不许安装运行此程序。不管是模拟器还是真实手机。因此，在设备或者是模拟器上运行调试程序之前，必须为应用程序设置数字签名。</p>
+</li>
+<li><p>Android签名的数字证书不需要权威机构来认证，是开发者自己产生的数字证书，即所谓的自签名。数字证书用来标识应用程序的作者和在应用程序之间建立信任关系，而不是用来决定最终用户可以安装哪些应用程序。系统仅仅会在安装的时候测试签名证书的有效期，如果应用程序的签名是在安装之后才到期，那么应用程序仍然可以正常启用。</p>
+</li>
+<li><p>可以使用标准工具-Keytool and Jarsigner-生成密钥，来签名应用程序的.apk文件。签名后需使用zipalign优化程序。</p>
+</li>
+<li><p>模拟器开发环境，开发时通过ADB接口上传的程序会先自动被签有Debug权限，然后才传递到模拟器。Eclipse菜单的Window -&gt; Preferences -&gt; Android –&gt; Build 下显示的是我们默认的调试用的签名数字证书。</p>
+</li>
+<li><p>正式发布一个Android应用时，必须使用一个合适的私钥生成的数字证书来给程序签名，不能使用ADT插件或者ANT工具生成的调试证书来发布。</p>
+</li>
+</ul>
+<h2 id="签名的步骤"><a href="#签名的步骤" class="headerlink" title="签名的步骤"></a>签名的步骤</h2><h3 id="方法一：利用命令行"><a href="#方法一：利用命令行" class="headerlink" title="方法一：利用命令行"></a>方法一：利用命令行</h3><ol>
+<li><p>创建key</p>
+<p> 生成keystore (如已有可直接利用)<br> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>keytool -genkey -alias android.keystore -keyalg RSA -validity 10000 -keystore android.keystore</code></p>
+<ul>
+<li><p>参数意义：</p>
+<p>  -genkey 产生密钥</p>
+<p>  -alias 别名</p>
+<p>  -keyalg RSA 使用RSA算法对签名加密</p>
+<p>  -validity 10000 有效期限10000天</p>
+<p>  -keystore 密钥名</p>
+</li>
+</ul>
+</li>
+<li><p>使用步骤1中产生的key对apk签名</p>
+<p> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>jarsigner -verbose -keystore android.keystore -signedjar demo_signed.apk demo.apk android.keystore</code></p>
+</li>
+</ol>
+<p><strong>注意事项</strong></p>
+<p><strong>android工程的bin目录下的demo.apk默认是已经使用debug用户签名的，所以不能使用上述步骤对此文件再次签名。正确步骤应该是:在工程点击右键-&gt;Android Tools-Export Unsigned Application Package导出的apk采用上述步骤签名。</strong></p>
+<h3 id="方法二：使用Eclipse导出带签名的apk"><a href="#方法二：使用Eclipse导出带签名的apk" class="headerlink" title="方法二：使用Eclipse导出带签名的apk"></a>方法二：使用Eclipse导出带签名的apk</h3><p>选中project,单击右键选择Android Tools—&gt;Export Signed Application Package,按提示完成即可（没有key的先创建）</p>
+<h3 id="签名之后，用zipalign-压缩对齐-优化你的APK文件。"><a href="#签名之后，用zipalign-压缩对齐-优化你的APK文件。" class="headerlink" title="签名之后，用zipalign(压缩对齐)优化你的APK文件。"></a>签名之后，用zipalign(压缩对齐)优化你的APK文件。</h3><p>未签名的apk不能使用，也不能优化。签名之后的apk谷歌推荐使用zipalign.exe(位于android-sdk-windows ools目录下)工具对其优化：<br>在JAVA_HOME\bin&gt;目录下<code>zipalign -v 4 demo_signed.apk final.apk</code><br>如上，zipalign能够使apk文件中未压缩的数据在4个字节边界上对齐（4个字节是一个性能很好的值），这样android系统就可以使用mmap()(请自行查阅这个函数的用途)函数读取文件，可以在读取资源上获得较高的性能</p>
+<p>PS:</p>
+<ol>
+<li><p>在4个字节边界上对齐的意思就是，一般来说，是指编译器吧4个字节作为一个单位来进行读取的结果，这样的话，CPU能够对变量进行高效、快速的访问（较之前不对齐）。</p>
+</li>
+<li><p>对齐的根源：android系统中的Davlik虚拟机使用自己专有的格式DEX，DEX的结构是紧凑的，为了让运行时的性能更好，可以进一步用”对齐”进一步优化，但是大小一般会有所增加。</p>
+</li>
+</ol>
+<h2 id="渠道打包"><a href="#渠道打包" class="headerlink" title="渠道打包"></a>渠道打包</h2><h3 id="为什么需要在应用程序中增加渠道信息？"><a href="#为什么需要在应用程序中增加渠道信息？" class="headerlink" title="为什么需要在应用程序中增加渠道信息？"></a>为什么需要在应用程序中增加渠道信息？</h3><p>Android应用的发布需要面对各种各样的市场，我们称之为渠道。有的时候，我们需要知道应用是从哪个渠道下载的。比如，我们可能需要统计哪些市场带来的用户量比较大。再比如，我们可能有一些盈利需要和具体的渠道进行分成。这些都是统计渠道的信息。</p>
+<h3 id="一般如何在应用中加入渠道信息？"><a href="#一般如何在应用中加入渠道信息？" class="headerlink" title="一般如何在应用中加入渠道信息？"></a>一般如何在应用中加入渠道信息？</h3><p>为了统计渠道信息，就不得不在程序的某个地方加入渠道的信息，然后针对不同的渠道打不同的包。一般可以在Manifest文件中加入渠道编号，而不直接写在代码中。这样做的好处是，可以针对不同渠道，自动化去修改Manifest文件中的渠道编号，然后自动为该渠道打包。<br>Manifest文件支持Meta Data标签，建议使用这种自定义标签。例如下面的文件片段。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:versionCode=&quot;X&quot;
+    android:versionName=&quot;X.X.X&quot;
+    package=&quot;com.XXX&quot;&gt;
+    ……
+    &lt;application android:icon=&quot;@drawable/icon&quot;
+    android:label=&quot;@string/app_name&quot;&gt;
+    ……
+    &lt;meta-data android:name=&quot;CHANNEL&quot; android:value=&quot;C_001&quot; /&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre><p>在这段代码示例中，我们在Application节点下增加了一个meta-data标签，名称是CHANNEL，值是C_001，是我们规定的一个渠道的编号。为不同的渠道打包，就要手工或者自动化修改C_001成为C_002、C_003等等其它我们定义的渠道编号，然后再打不同的包。</p>
+<h3 id="如何自动化打包过程？"><a href="#如何自动化打包过程？" class="headerlink" title="如何自动化打包过程？"></a>如何自动化打包过程？</h3><p>在这里介绍一款开源的打包工具 <strong>友盟渠道打包工具 (windows .net 4.0)</strong> 目前只支持windows版本</p>
+<p>github地址：<a href="https://github.com/umeng/umeng-muti-channel-build-tool" target="_blank" rel="external">https://github.com/umeng/umeng-muti-channel-build-tool</a></p>
+<p>现在最新版本号为:V3.2,本次更新最大的改变是放弃了 V2.x 版本中通过 Apktool 反编译apk文件打包的方式，这种打包方式会对开发的apk文件做出大幅度的修改，可能会产生许多不兼容的问题，比如对jar包中包含资源的情况无法支持，对包含 .so 文件的apk兼容性也不好，而且在打包时 AndroidManifest.xml 文件中的特殊标签会丢失。为了解决这些问题减少对开发者apk文件的修改, 我们决定放弃这种方式，而采用直接编辑二进制的AndroidManifest.xml 文件的方式。这种方式只会修改 AndroidManifest.xml 文件，对于apk包中的资源文件和代码文件都不会做任何改变。如果打包不成功，生成的apk文件有问题，在测试阶段也可以快速发现，因为修改只会影响AndroidManifest.xml 相关的少量的设置。</p>
+<h3 id="编辑渠道信息注意事项"><a href="#编辑渠道信息注意事项" class="headerlink" title="编辑渠道信息注意事项"></a>编辑渠道信息注意事项</h3><ol>
+<li>编辑渠道完成后按<code>Enter</code>确认</li>
+<li>常用渠道可以自行配置，模板地址：\UmengTools(Green)V3.2\V3.2\projects\template.xml(先配置好后再打开友盟打包工具)</li>
+<li>左下角配置文件可以自行填写，工具会自动保存你这次打包的信息（签名及渠道信息），下次可以在主页直接切换</li>
+</ol>
+<p>工具界面：</p>
+<p><img src="/images/umeng_package_tool.jpg" alt="umeng_package_too"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/签名/" rel="tag">#签名</a>
+          
+            <a href="/tags/多渠道打包/" rel="tag">#多渠道打包</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/17/2014-09-17-draw9patch/" rel="next" title="NinePatch的制作与使用">
+                <i class="fa fa-chevron-left"></i> NinePatch的制作与使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/10/19/2014-10-19-about MPAndroidChart/" rel="prev" title="图表库MPAndroidChart简介">
+                图表库MPAndroidChart简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /"
+     data-title="关于android签名及渠道打包"
+     data-content=""
+     data-url="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /"
+           data-title="关于android签名及渠道打包" data-url="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要签名"><span class="nav-number">1.</span> <span class="nav-text">为什么要签名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#签名的注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">签名的注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签名的步骤"><span class="nav-number">2.</span> <span class="nav-text">签名的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：利用命令行"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：利用命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：使用Eclipse导出带签名的apk"><span class="nav-number">2.2.</span> <span class="nav-text">方法二：使用Eclipse导出带签名的apk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#签名之后，用zipalign-压缩对齐-优化你的APK文件。"><span class="nav-number">2.3.</span> <span class="nav-text">签名之后，用zipalign(压缩对齐)优化你的APK文件。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渠道打包"><span class="nav-number">3.</span> <span class="nav-text">渠道打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要在应用程序中增加渠道信息？"><span class="nav-number">3.1.</span> <span class="nav-text">为什么需要在应用程序中增加渠道信息？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般如何在应用中加入渠道信息？"><span class="nav-number">3.2.</span> <span class="nav-text">一般如何在应用中加入渠道信息？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何自动化打包过程？"><span class="nav-number">3.3.</span> <span class="nav-text">如何自动化打包过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑渠道信息注意事项"><span class="nav-number">3.4.</span> <span class="nav-text">编辑渠道信息注意事项</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+<div class="powered-by">
+  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+&nbsp&nbsp&nbsp本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+总访客数 <span id="busuanzi_value_site_uv"></span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"loody"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
