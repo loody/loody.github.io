@@ -224,102 +224,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/初识groovy~/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-13T11:35:36+08:00" content="2016-03-13">
-              2016-03-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/13/初识groovy~/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/13/初识groovy~/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/11/初识groovy/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/12/初识groovy/" itemprop="url">
                   初识groovy
                 </a>
               
@@ -333,8 +238,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-11T13:29:32+08:00" content="2016-03-11">
-              2016-03-11
+            <time itemprop="dateCreated" datetime="2016-03-12T23:29:32+08:00" content="2016-03-12">
+              2016-03-12
             </time>
           </span>
 
@@ -363,8 +268,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/11/初识groovy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/初识groovy/" itemprop="commentsCount"></span>
+                <a href="/2016/03/12/初识groovy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/12/初识groovy/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1952,6 +1857,133 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="url">
+                  实现滚动隐藏header的layout
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-11T00:00:00+08:00" content="2015-04-11">
+              2015-04-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/11/2015-04-11-viewpager-head-scroll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近薄荷新版加入了圈子的功能，圈子主页效果图如下：</p>
+<p><img src="/images/club.jpg" alt="image"></p>
+<p>往上滑可以隐藏header,将4个tab停留在顶部，往下滑又可以展开header,其中tab里的内容还可以实现下拉刷新，上拉加载更多</p>
+<p>第一个想到的是外面包一层<strong><a href="https://github.com/emilsjolander/StickyScrollViewItems" target="_blank" rel="external">StickyScrollViewItems</a></strong>，可以很快的实现tab的悬浮，但是刷新的操作就必须放在外面了，于是又外面套了层swiperefreshlayout实现刷新，由于下面的tab有两个需要刷新，所以处理起来非常麻烦的，再加上scrollview+viewpager+listview的嵌套会出现各种冲突，所以这种思路从一开始就是个错误。于是想想有没有能实现滚动隐藏header的layout的呢？于是上github一搜，果然有类似效果的开源项目，那就是接下来要介绍的<strong><a href="https://github.com/ongakuer/ViewPagerHeaderScrollDemo" target="_blank" rel="external">ViewPagerHeaderScrollDemo</a></strong></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>通过自定义<code>TouchCallbackLayout</code>，这个类继承自FrameLayout,在里边放置一个ViewPager和一个header+tab的layout,给ViewPager设定一个marginTop的高度，这个高度也就是tab栏的高度，通过计算ViewPager中fragment的滑动来控制header的现实与隐藏</p>
+<p>fragment是怎么控制header的显示与隐藏的呢？总不能只要上滑就就隐藏，下滑就显示吧，这样如果fragment是一个很长的列表，当我滑到中间，再往下滑，这个时候我并不想看到header,我想看完列表中间以上的部分后再看到header怎么办？</p>
+<p>这里定义一个接口</p>
+<pre><code>public interface ScrollableListener {
+    //判断其是否可以显示header
+    public boolean isViewBeingDragged(MotionEvent event);
+}
+</code></pre><p>所有的fragment都要实现这个接口,作者已经实现fragment是如下两个类型的判断,ListView(AbsListViewDelegate)和ScrollView(ScrollViewDelegate)，基本已经满足大部分需求了，如果是WebView，可以在外面套一层ScrollView实现判断</p>
+<h2 id="Scrollable"><a href="#Scrollable" class="headerlink" title="Scrollable"></a>Scrollable</h2><p>就在不久前，github又有一个可以实现类似效果的开源库：<a href="https://github.com/noties/Scrollable" target="_blank" rel="external">Scrollable</a>，大概看了下它的源码，实现思路跟上面介绍的很相似，只是在代码层面，Scrollable封装的更好些，作者也提供了gradle依赖，使用起来更方便！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1997,7 +2029,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
