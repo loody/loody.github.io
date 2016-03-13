@@ -66,7 +66,7 @@ Groovy的语法与Java非常相似，以至于多数的Java代码也是正确的
 <meta property="og:description" content="Groovy概述Groovy是Java平台上设计的面向对象编程语言。这门动态语言拥有类似Python、Ruby和Smalltalk中的一些特性，可以作为Java平台的脚本语言使用。
 Groovy的语法与Java非常相似，以至于多数的Java代码也是正确的Groovy代码。Groovy代码动态的被编译器转换成Java字节码。由于其运行在JVM上的特性，Groovy可以使用其他Java语言编写的库。">
 <meta property="og:image" content="http://loody.github.io/images/groovy-1.png">
-<meta property="og:updated_time" content="2016-03-13T03:39:25.000Z">
+<meta property="og:updated_time" content="2016-03-13T04:03:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识groovy">
 <meta name="twitter:description" content="Groovy概述Groovy是Java平台上设计的面向对象编程语言。这门动态语言拥有类似Python、Ruby和Smalltalk中的一些特性，可以作为Java平台的脚本语言使用。
@@ -377,12 +377,12 @@ map[&quot;name&quot;]
 <p>闭包的一些快捷写法，当闭包作为闭包或方法的最后一个参数。可以将闭包从参数圆括号中提取出来接在最后，如果闭包是唯一的一个参数，则闭包或方法参数所在的圆括号也可以省略。对于有多个闭包参数的，只要是在参数声明最后的，均可以按上述方式省略。例如</p>
 <ol>
 <li><p>没有参数</p>
-<pre><code>def closure  {  
+<pre><code>def closure = {  
     println &quot;hello closure&quot; 
 } 
 </code></pre><p> //大括号括起来的<strong>代码块</strong>就是一个最简单的闭包</p>
 <p> 闭包有一个隐含的参数，这个参数名字叫it，和this的作用类似</p>
-<pre><code>def closure  {      
+<pre><code>def closure = {      
     it -&gt; println &quot;hello $it&quot; 
 } 
 </code></pre><p> 调用</p>
