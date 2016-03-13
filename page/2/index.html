@@ -224,6 +224,293 @@
             
               
                 
+                <a class="post-title-link" href="/2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="url">
+                  实现滚动隐藏header的layout
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-11T00:00:00+08:00" content="2015-04-11">
+              2015-04-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/11/2015-04-11-viewpager-head-scroll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近薄荷新版加入了圈子的功能，圈子主页效果图如下：</p>
+<p><img src="/images/club.jpg" alt="image"></p>
+<p>往上滑可以隐藏header,将4个tab停留在顶部，往下滑又可以展开header,其中tab里的内容还可以实现下拉刷新，上拉加载更多</p>
+<p>第一个想到的是外面包一层<strong><a href="https://github.com/emilsjolander/StickyScrollViewItems" target="_blank" rel="external">StickyScrollViewItems</a></strong>，可以很快的实现tab的悬浮，但是刷新的操作就必须放在外面了，于是又外面套了层swiperefreshlayout实现刷新，由于下面的tab有两个需要刷新，所以处理起来非常麻烦的，再加上scrollview+viewpager+listview的嵌套会出现各种冲突，所以这种思路从一开始就是个错误。于是想想有没有能实现滚动隐藏header的layout的呢？于是上github一搜，果然有类似效果的开源项目，那就是接下来要介绍的<strong><a href="https://github.com/ongakuer/ViewPagerHeaderScrollDemo" target="_blank" rel="external">ViewPagerHeaderScrollDemo</a></strong></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>通过自定义<code>TouchCallbackLayout</code>，这个类继承自FrameLayout,在里边放置一个ViewPager和一个header+tab的layout,给ViewPager设定一个marginTop的高度，这个高度也就是tab栏的高度，通过计算ViewPager中fragment的滑动来控制header的现实与隐藏</p>
+<p>fragment是怎么控制header的显示与隐藏的呢？总不能只要上滑就就隐藏，下滑就显示吧，这样如果fragment是一个很长的列表，当我滑到中间，再往下滑，这个时候我并不想看到header,我想看完列表中间以上的部分后再看到header怎么办？</p>
+<p>这里定义一个接口</p>
+<pre><code>public interface ScrollableListener {
+    //判断其是否可以显示header
+    public boolean isViewBeingDragged(MotionEvent event);
+}
+</code></pre><p>所有的fragment都要实现这个接口,作者已经实现fragment是如下两个类型的判断,ListView(AbsListViewDelegate)和ScrollView(ScrollViewDelegate)，基本已经满足大部分需求了，如果是WebView，可以在外面套一层ScrollView实现判断</p>
+<h2 id="Scrollable"><a href="#Scrollable" class="headerlink" title="Scrollable"></a>Scrollable</h2><p>就在不久前，github又有一个可以实现类似效果的开源库：<a href="https://github.com/noties/Scrollable" target="_blank" rel="external">Scrollable</a>，大概看了下它的源码，实现思路跟上面介绍的很相似，只是在代码层面，Scrollable封装的更好些，作者也提供了gradle依赖，使用起来更方便！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/04/06/2015-04-06-view-TouchEvent/" itemprop="url">
+                  View的事件传递
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-06T00:00:00+08:00" content="2015-04-06">
+              2015-04-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/06/2015-04-06-view-TouchEvent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/06/2015-04-06-view-TouchEvent/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直对view之间的手势事件传递机制模模糊糊，今天来好好理理，首先说说一些关于事件的一些基础知识</p>
+<h2 id="事件类型MotionEvent"><a href="#事件类型MotionEvent" class="headerlink" title="事件类型MotionEvent"></a>事件类型MotionEvent</h2><p><strong>ACTION_DOWN, ACTION_UP, ACTION_MOVE, ACTION_POINTER_DOWN, ACTION_POINTER_UP, ACTION_CANCEL</strong>等等，并且每个事件都是以<strong>ACTION_DOWN</strong>开始<strong>ACTION_UP</strong>结束的</p>
+<h2 id="事件处理分类"><a href="#事件处理分类" class="headerlink" title="事件处理分类"></a>事件处理分类</h2><ol>
+<li><p>事件分发</p>
+<pre><code>public boolean dispatchTouchEvent(MotionEvent ev)
+</code></pre><p> 只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法</p>
+</li>
+<li><p>事件拦截</p>
+<pre><code>public boolean onInterceptTouchEvent(MotionEvent ev)
+</code></pre><p> 只有ViewGroup才有onInterceptTouchEvent方法，因为一个普通的View肯定是位于最深层的View，touch事件能够传到这里已经是最后一站了</p>
+</li>
+<li><p>事件响应</p>
+<pre><code>public boolean onTouchEvent(MotionEvent ev)
+</code></pre></li>
+</ol>
+<h2 id="事件传递流程"><a href="#事件传递流程" class="headerlink" title="事件传递流程"></a>事件传递流程</h2><p>(1) 事件从Activity.dispatchTouchEvent()开始传递，只要没有被停止或拦截，从最上层的View(ViewGroup)开始一直往下(子View)传递。子View可以通过onTouchEvent()对事件进行处理。</p>
+<p>(2) 事件由父View(ViewGroup)传递给子View，ViewGroup可以通过onInterceptTouchEvent()对事件做拦截，停止其往下传递。</p>
+<p>(3) 如果事件从上往下传递过程中一直没有被停止，且最底层子View没有消费事件，事件会反向往上传递，这时父View(ViewGroup)可以进行消费，如果还是没有被消费的话，最后会到Activity的onTouchEvent()函数。        </p>
+<h2 id="事件的层级传递"><a href="#事件的层级传递" class="headerlink" title="事件的层级传递"></a>事件的层级传递</h2><p>我们都知道如果给一个控件注册了touch事件，每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件。这里需要注意，如果你在执行ACTION_DOWN的时候返回了false，后面一系列其它的action就不会再得到执行了。简单的说，就是当dispatchTouchEvent在进行事件分发的时候，只有前一个action返回true，才会触发后一个action。</p>
+<h2 id="底层的View如何阻止父层的View截获touch事件"><a href="#底层的View如何阻止父层的View截获touch事件" class="headerlink" title="底层的View如何阻止父层的View截获touch事件"></a>底层的View如何阻止父层的View截获touch事件</h2><p>方法一：重写底层view的dispatchTouchEvent方法</p>
+<pre><code>@Override    
+public boolean dispatchTouchEvent(MotionEvent ev) {   
+    getParent().requestDisallowInterceptTouchEvent(true);  
+    return super.dispatchTouchEvent(ev);    
+}  
+</code></pre><p>方法二：当用户按下的时候，我们告诉父组件，不要拦截我的事件（这个时候子组件是可以正常响应事件的），拿起之后就会告诉父组件可以阻止。</p>
+<pre><code>public boolean onTouch(View v, MotionEvent event) {
+     switch (event.getAction()) {
+         case MotionEvent.ACTION_MOVE: 
+             myView.requestDisallowInterceptTouchEvent(true);
+         break;
+         case MotionEvent.ACTION_UP:
+         case MotionEvent.ACTION_CANCEL:
+             myView.requestDisallowInterceptTouchEvent(false);
+         break;
+     }
+}
+</code></pre><p>最后在网上找了两张流程图，觉得表达的很好，也一起分享一下：</p>
+<ol>
+<li><p>View不处理事件流程图</p>
+<p> <img src="/images/view-touch-1.jpg" alt="view-touch-1"></p>
+</li>
+<li><p>View处理事件流程图</p>
+<p> <img src="/images/view-touch-2.jpg" alt="view-touch-2"></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/03/08/2015-03-08-hellocharts/" itemprop="url">
                   hellocharts与MPAndroidChart的比较
                 </a>
@@ -1538,390 +1825,11 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/15/2014-11-15-about activity lauchMode/" itemprop="url">
-                  Activity的四种启动模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-15T00:00:00+08:00" content="2014-11-15">
-              2014-11-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/11/15/2014-11-15-about activity lauchMode/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/15/2014-11-15-about activity lauchMode/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前两天在开发中碰到一些Activity重用的需求，流程如下：</p>
-<p><code>MainActivity</code>–&gt;<code>FirstActivity</code>–&gt;<code>SecondActivity</code>–&gt;<code>LoginActivity</code>–&gt;<code>MainActivity</code></p>
-<p>因为MainActivity是程序的主界面，一般都将其放置栈底，不可能干掉他，但是我们又要怎么回到MainActivity而又不会重新创建它呢？那就是利用Android的启动模式，下面就来简单介绍一下。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在android里，有4种activity的启动模式，分别为： </p>
-<p><strong>standard</strong>: 标准模式，一调用startActivity()方法就会产生一个新的实例。</p>
-<p><strong>singleTop</strong>: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。</p>
-<p><strong>singleTask</strong>: 会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了。</p>
-<p><strong>singleInstance</strong>: 这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，只能有这个activity实例，不能有其他的实例。</p>
-<p>上面的例子中我们就可以设置MainActivity的启动模式为singleTask，这样就可以保证它单实例存在了。</p>
-<h2 id="四种加载模式的区别"><a href="#四种加载模式的区别" class="headerlink" title="四种加载模式的区别"></a>四种加载模式的区别</h2><p><strong>所属task的区别</strong></p>
-<p>一般情况下，“standard”和”singleTop”的activity的目标task，和收到的Intent的发送者在同一个task内，就相当于谁调用它，它就跟谁在同一个Task中。除非Intent包括参数FLAG_ACTIVITY_NEW_TASK。如果提供了FLAG_ACTIVITY_NEW_TASK参数，会启动到别的task里。<br>“singleTask”和”singleInstance” 总是把要启动的activity作为一个task的根元素，他们不会被启动到一个其他task里。</p>
-<p><strong>是否允许多个实例</strong></p>
-<p>“standard”和”singleTop”可以被实例化多次，并且是可以存在于不同的task中；这种实例化时一个task可以包括一个activity的多个实例；“singleTask”和”singleInstance”则限制只生成一个实例，并且是task的根元素。singleTop 要求如果创建intent的时候栈顶已经有要创建的Activity的实例，则将intent发送给该实例，而不创建新的实例。</p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p> 当我们调用OnNewIntent时的需要注意当前Activity可能会被后台回收，导致数据丢失，详见:<a href="http://blog.csdn.net/tyj1982/article/details/6848879" target="_blank" rel="external">http://blog.csdn.net/tyj1982/article/details/6848879</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/10/26/2014-10-26-about LayoutInflater/" itemprop="url">
-                  Android LayoutInflater原理分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-26T00:00:00+08:00" content="2014-10-26">
-              2014-10-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/10/26/2014-10-26-about LayoutInflater/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/26/2014-10-26-about LayoutInflater/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>相信接触Android久一点的朋友对于LayoutInflater一定不会陌生，都会知道它主要是用于加载布局的。而刚接触Android的朋友可能对LayoutInflater不怎么熟悉，因为加载布局的任务通常都是在Activity中调用setContentView()方法来完成的。其实setContentView()方法的内部也是使用LayoutInflater来加载布局的，只不过这部分源码是internal的，不太容易查看到。那么今天我们就来把LayoutInflater的工作流程仔细地剖析一遍，也许还能解决掉某些困扰你心头多年的疑惑。</p>
-<h2 id="LayoutInflater的用法"><a href="#LayoutInflater的用法" class="headerlink" title="LayoutInflater的用法"></a>LayoutInflater的用法</h2><p>首先需要获取到LayoutInflater的实例，有两种方法可以获取到，</p>
-<p>第一种写法如下：</p>
-<pre><code>LayoutInflater layoutInflater = LayoutInflater.from(context);
-</code></pre><p>另外一种写法：</p>
-<pre><code>LayoutInflater layoutInflater = (LayoutInflater)     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-</code></pre><p>其实第一种就是第二种的简单写法，只是Android给我们做了一下封装而已。得到了LayoutInflater的实例之后就可以调用它的inflate()方法来加载布局了，如下所示：</p>
-<pre><code>layoutInflater.inflate(resourceId, root);
-</code></pre><p>inflate()方法一般接收两个参数，第一个参数就是要加载的布局id，第二个参数是指给该布局的外部再嵌套一层父布局，如果不需要就直接传null。这样就成功成功创建了一个布局的实例，之后再将它添加到指定的位置就可以显示出来了。</p>
-<p>下面我们就通过一个非常简单的小例子，来更加直观地看一下LayoutInflater的用法。比如说当前有一个项目，其中MainActivity对应的布局文件叫做activity_main.xml，代码如下所示：</p>
-<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:id=&quot;@+id/main_layout&quot;
-        android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; &gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>这个布局文件的内容非常简单，只有一个空的LinearLayout，里面什么控件都没有，因此界面上应该不会显示任何东西。<br>那么接下来我们再定义一个布局文件，给它取名为button_layout.xml，代码如下所示：</p>
-<pre><code>&lt;Button xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Button&quot; /&gt;
-</code></pre><p>这个布局文件也非常简单，只有一个Button按钮而已。现在我们要想办法，如何通过LayoutInflater来将button_layout这个布局添加到主布局文件的LinearLayout中。根据刚刚介绍的用法，修改MainActivity中的代码，如下所示：</p>
-<pre><code>public class MainActivity extends Activity {
-
-    private LinearLayout mainLayout;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mainLayout = (LinearLayout) findViewById(R.id.main_layout);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View buttonLayout = layoutInflater.inflate(R.layout.button_layout, null);
-        mainLayout.addView(buttonLayout);
-    }
-}    
-</code></pre><p>可以看到，这里先是获取到了LayoutInflater的实例，然后调用它的inflate()方法来加载button_layout这个布局，最后调用LinearLayout的addView()方法将它添加到LinearLayout中。<br>现在可以运行一下程序，Button在界面上显示出来了！说明我们确实是借助LayoutInflater成功将button_layout这个布局添加到LinearLayout中了。LayoutInflater技术广泛应用于需要动态添加View的时候，比如在ScrollView和ListView中，经常都可以看到LayoutInflater的身影。</p>
-<p>当然，仅仅只是介绍了如何使用LayoutInflater显然是远远无法满足大家的求知欲的，知其然也要知其所以然，接下来我们就从源码的角度上看一看LayoutInflater到底是如何工作的。</p>
-<p>不管你是使用的哪个inflate()方法的重载，最终都会辗转调用到LayoutInflater的如下代码中：</p>
-<pre><code>public View inflate(XmlPullParser parser, ViewGroup root, boolean attachToRoot) {
-synchronized (mConstructorArgs) {
-    final AttributeSet attrs = Xml.asAttributeSet(parser);
-    mConstructorArgs[0] = mContext;
-    View result = root;
-    try {
-        int type;
-        while ((type = parser.next()) != XmlPullParser.START_TAG &amp;&amp;
-                type != XmlPullParser.END_DOCUMENT) {
-        }
-        if (type != XmlPullParser.START_TAG) {
-            throw new InflateException(parser.getPositionDescription()
-                    + &quot;: No start tag found!&quot;);
-        }
-        final String name = parser.getName();
-        if (TAG_MERGE.equals(name)) {
-            if (root == null || !attachToRoot) {
-                throw new InflateException(&quot;merge can be used only with a valid &quot;
-                        + &quot;ViewGroup root and attachToRoot=true&quot;);
-            }
-            rInflate(parser, root, attrs);
-        } else {
-            View temp = createViewFromTag(name, attrs);
-            ViewGroup.LayoutParams params = null;
-            if (root != null) {
-                params = root.generateLayoutParams(attrs);
-                if (!attachToRoot) {
-                    temp.setLayoutParams(params);
-                }
-            }
-            rInflate(parser, temp, attrs);
-            if (root != null &amp;&amp; attachToRoot) {
-                root.addView(temp, params);
-            }
-            if (root == null || !attachToRoot) {
-                result = temp;
-            }
-        }
-    } catch (XmlPullParserException e) {
-        InflateException ex = new InflateException(e.getMessage());
-        ex.initCause(e);
-        throw ex;
-    } catch (IOException e) {
-        InflateException ex = new InflateException(
-                parser.getPositionDescription()
-                + &quot;: &quot; + e.getMessage());
-        ex.initCause(e);
-        throw ex;
-    }
-    return result;
-       }
-    }
-</code></pre><p>从这里我们就可以清楚地看出，LayoutInflater其实就是使用Android提供的pull解析方式来解析布局文件的.这里只是创建出了一个根布局的实例而已，接下来会调用rInflate()方法来循环遍历这个根布局下的子元素，代码如下所示：</p>
-<pre><code>private void rInflate(XmlPullParser parser, View parent, final AttributeSet attrs)
-    throws XmlPullParserException, IOException {
-final int depth = parser.getDepth();
-int type;
-while (((type = parser.next()) != XmlPullParser.END_TAG ||
-        parser.getDepth() &gt; depth) &amp;&amp; type != XmlPullParser.END_DOCUMENT) {
-    if (type != XmlPullParser.START_TAG) {
-        continue;
-    }
-    final String name = parser.getName();
-    if (TAG_REQUEST_FOCUS.equals(name)) {
-        parseRequestFocus(parser, parent);
-    } else if (TAG_INCLUDE.equals(name)) {
-        if (parser.getDepth() == 0) {
-            throw new InflateException(&quot;&lt;include /&gt; cannot be the root element&quot;);
-        }
-        parseInclude(parser, parent, attrs);
-    } else if (TAG_MERGE.equals(name)) {
-        throw new InflateException(&quot;&lt;merge /&gt; must be the root element&quot;);
-    } else {
-        final View view = createViewFromTag(name, attrs);
-        final ViewGroup viewGroup = (ViewGroup) parent;
-        final ViewGroup.LayoutParams params = viewGroup.generateLayoutParams(attrs);
-        rInflate(parser, view, attrs);
-        viewGroup.addView(view, params);
-    }
-}
-    parent.onFinishInflate();
-}
-</code></pre><p>同样是createViewFromTag()方法来创建View的实例,然后还会递归调用rInflate()方法来查找这个View下的子元素，每次递归完成后则将这个View添加到父布局当中。这样的话，把整个布局文件都解析完成后就形成了一个完整的DOM结构，最终会把最顶层的根布局返回，至此inflate()过程全部结束。LayoutInflater的工作原理和流程就是这样</p>
-<h2 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h2><p> 我们觉得上面那个例子的button的大小不合适，想改变一下宽高，运行发现button的大小并没有改变，这是为什么呢？查看源码发现，inflate()方法还有个接收三个参数的方法重载，结构如下：</p>
-<pre><code>inflate(int resource, ViewGroup root, boolean attachToRoot)
-</code></pre><ol>
-<li><p>如果root为null，attachToRoot将失去作用，设置任何值都没有意义。</p>
-</li>
-<li><p>如果root不为null，attachToRoot设为true，则会在加载的布局文件的最外层再嵌套一层root布局。</p>
-</li>
-<li><p>如果root不为null，attachToRoot设为false，则root参数失去作用。</p>
-</li>
-<li><p>在不设置attachToRoot参数的情况下，如果root不为null，attachToRoot参数默认为true。 </p>
-</li>
-</ol>
-<p>上面例子中的button的情况就是第三种，不管你将Button的layout_width和layout_height的值修改成多少，都不会有任何效果的，因为这两个值现在已经完全失去了作用</p>
-<p>也许有些朋友心中会有一个巨大的疑惑。不对呀！平时在Activity中指定布局文件的时候，最外层的那个布局是可以指定大小的呀，layout_width和layout_height都是有作用的。确实，这主要是因为，在setContentView()方法中，Android会自动在布局文件的最外层再嵌套一个FrameLayout，所以layout_width和layout_height属性才会有效果.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>平时我们经常使用layout_width和layout_height来设置View的大小，并且一直都能正常工作，就好像这两个属性确实是用于设置View的大小的。而实际上则不然，它们其实是用于设置View在布局中的大小的，也就是说，首先View必须存在于一个布局中，之后如果将layout_width设置成match_parent表示让View的宽度填充满布局，如果设置成wrap_content表示让View的宽度刚好可以包含其内容，如果设置成具体的数值则View的宽度会变成相应的数值。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1962,7 +1870,7 @@ while (((type = parser.next()) != XmlPullParser.END_TAG ||
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1970,7 +1878,7 @@ while (((type = parser.next()) != XmlPullParser.END_TAG ||
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1979,7 +1887,7 @@ while (((type = parser.next()) != XmlPullParser.END_TAG ||
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
