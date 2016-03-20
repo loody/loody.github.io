@@ -50,7 +50,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
 
 
 
@@ -202,6 +202,305 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/20/说说Handler的工作原理/" itemprop="url">
+                  说说Handler的工作原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T21:58:48+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/20/说说Handler的工作原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/说说Handler的工作原理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>我们知道，Android系统是<strong>单线程模型</strong>，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种<strong>单线程模型</strong>会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，导致退出整个应用程序或者短暂杀死应用程序,所以Android系统将大部分耗时、繁重任务交给子线程完成，不会在主线程中完成；同时，Android只允许主线程更新UI界面，子线程处理后的结果无法和主线程交互，即无法直接访问主线程，这就要用到<strong>Handler机制</strong>来解决此问题</p>
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>在我们在子线程中执行完耗时操作后很多情况下我们需要更新UI，但我们都知道，不能在子线程中更新UI。此时最常用的手段就是通过Handler将一个Message消息send到UI线程中，然后再在Handler的handleMessage方法中进行处理,常见代码</p>
+<pre><code>private Handler mHandle = new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what){
+            case xx:
+                break;
+
+        }
+    }
+};
+
+new Thread() {
+    @Override
+    public void run() {
+        super.run();
+        //耗时操作
+        Message msg = new Message();
+        msg.what = WHAT;
+        mHandle.sendMessage(msg);
+    }
+}.start(); 
+</code></pre><p>每个Handler都会关联一个消息队列，消息队列被封装在Lopper中，而每个Looper又会关联一个线程(ThreadLocal)，也就是每个消息队列会关联一个线程。Handler就是一个消息处理器，将消息投递给消息队列，然后再由对应的线程从消息队列中挨个取出消息，并且执行。默认情况下，消息队列只有一个，即主线程的消息队列，这个消息队列是在<a href="http://blog.csdn.net/luoshengyang/article/details/6747696" target="_blank" rel="external">系统的启动过程中</a>的ActivityThread.main方法中创建的，通过Lopper.prepareMainLooper()来创建，然后最后执行Looper.loop()来启动消息循环。那么我们为什么在平时的使用Handler的时候，并没有使用Looper呀，其实是因为系统为我们创建好了，我们可以查看ActivityThread.java来看看这个过程，只列了关键代码：</p>
+<pre><code>public final class ActivityThread {
+......
+
+public static final void main(String[] args) {
+    ...
+
+    Looper.prepareMainLooper();// 1、创建消息循环Looper  
+    if (sMainThreadHandler == null) {
+        sMainThreadHandler = new Handler(); // 主线程的Handler 
+    }
+
+    ActivityThread thread = new ActivityThread();
+    thread.attach(false);
+
+    if (false) {
+        Looper.myLooper().setMessageLogging(new
+            LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));
+    }
+    Looper.loop();// 2、执行消息循环
+
+    if (Process.supportsProcesses()) {
+        throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);
+    }
+
+    thread.detach();
+    ...
+}
+
+......
+</code></pre><p>}</p>
+<p>通过上面的原理介绍，我们可以画出下面这个流程图</p>
+<p><img src="/images/handler-1.jpg" alt=""></p>
+<p>那么它们具体是怎么协作的呢？下面我们通过源码一步步解析，首先看下Handler</p>
+<pre><code>/**
+ * Default constructor associates this handler with the {@link Looper} for the
+ * current thread.
+ *
+ * If this thread does not have a looper, this handler won&apos;t be able to receive messages
+ * so an exception is thrown.
+ */
+public Handler() {
+    this(null, false);
+}
+
+public Handler(Callback callback, boolean async) {
+    if (FIND_POTENTIAL_LEAKS) {
+        final Class&lt;? extends Handler&gt; klass = getClass();
+        if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
+                (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
+            Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
+                klass.getCanonicalName());
+        }
+    }
+
+    mLooper = Looper.myLooper();   // 获取Looper
+    if (mLooper == null) {
+        throw new RuntimeException(
+            &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
+    }
+    mQueue = mLooper.mQueue;       // 获取消息队列
+    mCallback = null;
+}
+</code></pre><p>从Handler默认的构造函数中我们可以看到，Handler会在内部通过Looper.getLooper()来获取Looper对象，并且与之关联，那么Looper.myLooper又是如何工作的呢？我们继续往下看.</p>
+<pre><code>/**
+ * Return the Looper object associated with the current thread.  Returns
+ * null if the calling thread is not associated with a Looper.
+ */
+public static Looper myLooper() {
+    return sThreadLocal.get();
+}
+
+/**
+ * Initialize the current thread as a looper, marking it as an
+ * application&apos;s main looper. The main looper for your application
+ * is created by the Android environment, so you should never need
+ * to call this function yourself.  See also: {@link #prepare()}
+ */
+public static void prepareMainLooper() {
+    prepare();
+    setMainLooper(myLooper());
+    myLooper().mQueue.mQuitAllowed = false;
+}
+
+private synchronized static void setMainLooper(Looper looper) {
+    mMainLooper = looper;
+}
+
+ /** Initialize the current thread as a looper.
+  * This gives you a chance to create handlers that then reference
+  * this looper, before actually starting the loop. Be sure to call
+  * {@link #loop()} after calling this method, and end it by calling
+  * {@link #quit()}.
+  */
+public static void prepare() {
+    if (sThreadLocal.get() != null) {
+        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
+    }
+    sThreadLocal.set(new Looper());
+}
+</code></pre><p> 我们看到myLooper()方法是通过sThreadLocal.get()来获取的，上面也提到，在ActivityThread.main方法中会调用<code>prepareMainLooper()</code>方法，prepareMainLooper中执行了<code>prepare</code>，<code>prepare</code>中会创建一个Looper并赋值给 <code>sThreadLocal</code>，这样Looper就和线程关联上了，而且有一点很重要，普通的线程是没有looper的，如果需要looper对象，那么必须要先调用Looper.prepare()方法，而且一个线程只能有一个looper ，而在Handler中，消息队列通过Looper与线程关联，而Handler又与Looper关联，因此Handler最终就和线程、线程的消息队列关联上了，那么创建了Looper后，是如何执行消息循环呢？我们来看下<code>Looper.loop()</code>方法</p>
+<pre><code>public static void loop() {
+    final Looper me = myLooper();//获取looper对象
+    if (me == null) {
+        //若为空则说明当前线程不是LooperThread，抛出异常
+        throw new RuntimeException(&quot;No Looper; Looper.prepare() wasn&apos;t called on this thread.&quot;);
+    }
+    final MessageQueue queue = me.mQueue; 获取消息队列
+    .....
+    for (;;) {
+        //死循环不断取出消息
+        Message msg = queue.next(); // might block 
+        if (msg == null) {
+            // No message indicates that the message queue is quitting.
+            return;
+        }
+
+        // This must be in a local variable, in case a UI event sets the logger
+        //打印log，说明开始处理message。msg.target就是Handler对象
+        Printer logging = me.mLogging;
+        if (logging != null) {
+            logging.println(&quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot; +
+                    msg.callback + &quot;: &quot; + msg.what);
+        }
+
+        //开始处理message，msg.target就是Handler对象
+        msg.target.dispatchMessage(msg);
+
+        .....
+    }
+}
+</code></pre><p>很明显，就是一个大的循环，不断从消息队列出取出消息。然后调用一个很关键的方法msg.target.dispatchMessage(msg)开始处理消息。msg.target就是message对应的handler，所以对于Looper，我们结论就是通过Looper.prepare()来创建Looper对象(消息队列封装在Looper对象中)，并且保存在sThreadLoal中，然后通过Looper.loop()来执行消息循环，这两步通常是成对出现的！</p>
+<p>最后我们看看消息处理机制，先看看Message</p>
+<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><pre><code>public final class Message implements Parcelable {
+
+    public int what;
+
+    public int arg1; 
+
+    public int arg2;
+
+    public Object obj;
+
+
+    int flags;
+
+    long when;
+
+    Bundle data;
+
+    Handler target;         // target处理
+
+    Runnable callback;      // Runnable类型的callback
+
+    // sometimes we store linked lists of these things
+       Message next;           // 下一条消息，消息队列是链式存储的
+
+    ....
+}
+</code></pre><p>前面说到loop循环中处理信息的msg.target.dispatchMessage(msg)方法。现在我们来看下这个方法的源码</p>
+<pre><code>public void dispatchMessage(Message msg) {
+    //注意！这里先判断message的callback是否为空，否则就直接处理message的回调函数
+    if (msg.callback != null) {
+        handleCallback(msg);
+    } else {
+        if (mCallback != null) {
+            //正是在这调用我们平常重写handleMessage
+            if (mCallback.handleMessage(msg)) {
+                return;
+            }
+        }
+        handleMessage(msg);
+    }
+}
+</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件，看源码：</p>
+<pre><code>public final boolean post(Runnable r){
+    //获取消息并发送给消息队列
+    return  sendMessageDelayed(getPostMessage(r), 0);
+}
+</code></pre><p>至此，Handler的工作原理就说完了。    </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1862,133 +2161,6 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="url">
-                  实现滚动隐藏header的layout
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-11T00:00:00+08:00" content="2015-04-11">
-              2015-04-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/11/2015-04-11-viewpager-head-scroll/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近薄荷新版加入了圈子的功能，圈子主页效果图如下：</p>
-<p><img src="/images/club.jpg" alt="image"></p>
-<p>往上滑可以隐藏header,将4个tab停留在顶部，往下滑又可以展开header,其中tab里的内容还可以实现下拉刷新，上拉加载更多</p>
-<p>第一个想到的是外面包一层<strong><a href="https://github.com/emilsjolander/StickyScrollViewItems" target="_blank" rel="external">StickyScrollViewItems</a></strong>，可以很快的实现tab的悬浮，但是刷新的操作就必须放在外面了，于是又外面套了层swiperefreshlayout实现刷新，由于下面的tab有两个需要刷新，所以处理起来非常麻烦的，再加上scrollview+viewpager+listview的嵌套会出现各种冲突，所以这种思路从一开始就是个错误。于是想想有没有能实现滚动隐藏header的layout的呢？于是上github一搜，果然有类似效果的开源项目，那就是接下来要介绍的<strong><a href="https://github.com/ongakuer/ViewPagerHeaderScrollDemo" target="_blank" rel="external">ViewPagerHeaderScrollDemo</a></strong></p>
-<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>通过自定义<code>TouchCallbackLayout</code>，这个类继承自FrameLayout,在里边放置一个ViewPager和一个header+tab的layout,给ViewPager设定一个marginTop的高度，这个高度也就是tab栏的高度，通过计算ViewPager中fragment的滑动来控制header的现实与隐藏</p>
-<p>fragment是怎么控制header的显示与隐藏的呢？总不能只要上滑就就隐藏，下滑就显示吧，这样如果fragment是一个很长的列表，当我滑到中间，再往下滑，这个时候我并不想看到header,我想看完列表中间以上的部分后再看到header怎么办？</p>
-<p>这里定义一个接口</p>
-<pre><code>public interface ScrollableListener {
-    //判断其是否可以显示header
-    public boolean isViewBeingDragged(MotionEvent event);
-}
-</code></pre><p>所有的fragment都要实现这个接口,作者已经实现fragment是如下两个类型的判断,ListView(AbsListViewDelegate)和ScrollView(ScrollViewDelegate)，基本已经满足大部分需求了，如果是WebView，可以在外面套一层ScrollView实现判断</p>
-<h2 id="Scrollable"><a href="#Scrollable" class="headerlink" title="Scrollable"></a>Scrollable</h2><p>就在不久前，github又有一个可以实现类似效果的开源库：<a href="https://github.com/noties/Scrollable" target="_blank" rel="external">Scrollable</a>，大概看了下它的源码，实现思路跟上面介绍的很相似，只是在代码层面，Scrollable封装的更好些，作者也提供了gradle依赖，使用起来更方便！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2034,7 +2206,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

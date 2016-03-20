@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="签名,多渠道打包," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -57,33 +57,18 @@
 
 
 
-<meta name="description" content="为什么要签名
-开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
-
-由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
-
-APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
+<meta name="description" content="单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于android签名及渠道打包">
-<meta property="og:url" content="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /index.html">
+<meta property="og:title" content="说说Handler的工作原理">
+<meta property="og:url" content="http://loody.github.io/2016/03/20/说说Handler的工作原理/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="为什么要签名
-开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
-
-由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
-
-APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
-<meta property="og:image" content="http://loody.github.io/images/umeng_package_tool.jpg">
-<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta property="og:description" content="单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，">
+<meta property="og:image" content="http://loody.github.io/images/handler-1.jpg">
+<meta property="og:updated_time" content="2016-03-20T15:47:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于android签名及渠道打包">
-<meta name="twitter:description" content="为什么要签名
-开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
-
-由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
-
-APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖">
-<meta name="twitter:image" content="http://loody.github.io/images/umeng_package_tool.jpg">
+<meta name="twitter:title" content="说说Handler的工作原理">
+<meta name="twitter:description" content="单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，">
+<meta name="twitter:image" content="http://loody.github.io/images/handler-1.jpg">
 
 
 
@@ -101,7 +86,7 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
   };
 </script>
 
-  <title> 关于android签名及渠道打包 | loody's blog </title>
+  <title> 说说Handler的工作原理 | loody's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +224,7 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
             
             
               
-                关于android签名及渠道打包
+                说说Handler的工作原理
               
             
           </h1>
@@ -251,38 +236,19 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-23T00:00:00+08:00" content="2014-09-23">
-              2014-09-23
+            <time itemprop="dateCreated" datetime="2016-03-20T21:58:48+08:00" content="2016-03-20">
+              2016-03-20
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /" itemprop="commentsCount"></span>
+                <a href="/2016/03/20/说说Handler的工作原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/说说Handler的工作原理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -304,79 +270,210 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
       
 
       
-        <h2 id="为什么要签名"><a href="#为什么要签名" class="headerlink" title="为什么要签名"></a>为什么要签名</h2><ul>
-<li><p>开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。</p>
-</li>
-<li><p>由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。</p>
-</li>
-<li><p>APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖或替换掉。这样签名其实也是开发者的身份标识。交易中抵赖等事情发生时，签名可以防止抵赖的发生。</p>
-</li>
-</ul>
-<h3 id="签名的注意事项"><a href="#签名的注意事项" class="headerlink" title="签名的注意事项"></a>签名的注意事项</h3><ul>
-<li><p>Android系统要求所有的程序经过数字签名才能安装，如果没有可用的数字签名，系统将不许安装运行此程序。不管是模拟器还是真实手机。因此，在设备或者是模拟器上运行调试程序之前，必须为应用程序设置数字签名。</p>
-</li>
-<li><p>Android签名的数字证书不需要权威机构来认证，是开发者自己产生的数字证书，即所谓的自签名。数字证书用来标识应用程序的作者和在应用程序之间建立信任关系，而不是用来决定最终用户可以安装哪些应用程序。系统仅仅会在安装的时候测试签名证书的有效期，如果应用程序的签名是在安装之后才到期，那么应用程序仍然可以正常启用。</p>
-</li>
-<li><p>可以使用标准工具-Keytool and Jarsigner-生成密钥，来签名应用程序的.apk文件。签名后需使用zipalign优化程序。</p>
-</li>
-<li><p>模拟器开发环境，开发时通过ADB接口上传的程序会先自动被签有Debug权限，然后才传递到模拟器。Eclipse菜单的Window -&gt; Preferences -&gt; Android –&gt; Build 下显示的是我们默认的调试用的签名数字证书。</p>
-</li>
-<li><p>正式发布一个Android应用时，必须使用一个合适的私钥生成的数字证书来给程序签名，不能使用ADT插件或者ANT工具生成的调试证书来发布。</p>
-</li>
-</ul>
-<h2 id="签名的步骤"><a href="#签名的步骤" class="headerlink" title="签名的步骤"></a>签名的步骤</h2><h3 id="方法一：利用命令行"><a href="#方法一：利用命令行" class="headerlink" title="方法一：利用命令行"></a>方法一：利用命令行</h3><ol>
-<li><p>创建key</p>
-<p> 生成keystore (如已有可直接利用)<br> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>keytool -genkey -alias android.keystore -keyalg RSA -validity 10000 -keystore android.keystore</code></p>
-<ul>
-<li><p>参数意义：</p>
-<p>  -genkey 产生密钥</p>
-<p>  -alias 别名</p>
-<p>  -keyalg RSA 使用RSA算法对签名加密</p>
-<p>  -validity 10000 有效期限10000天</p>
-<p>  -keystore 密钥名</p>
-</li>
-</ul>
-</li>
-<li><p>使用步骤1中产生的key对apk签名</p>
-<p> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>jarsigner -verbose -keystore android.keystore -signedjar demo_signed.apk demo.apk android.keystore</code></p>
-</li>
-</ol>
-<p><strong>注意事项</strong></p>
-<p><strong>android工程的bin目录下的demo.apk默认是已经使用debug用户签名的，所以不能使用上述步骤对此文件再次签名。正确步骤应该是:在工程点击右键-&gt;Android Tools-Export Unsigned Application Package导出的apk采用上述步骤签名。</strong></p>
-<h3 id="方法二：使用Eclipse导出带签名的apk"><a href="#方法二：使用Eclipse导出带签名的apk" class="headerlink" title="方法二：使用Eclipse导出带签名的apk"></a>方法二：使用Eclipse导出带签名的apk</h3><p>选中project,单击右键选择Android Tools—&gt;Export Signed Application Package,按提示完成即可（没有key的先创建）</p>
-<h3 id="签名之后，用zipalign-压缩对齐-优化你的APK文件。"><a href="#签名之后，用zipalign-压缩对齐-优化你的APK文件。" class="headerlink" title="签名之后，用zipalign(压缩对齐)优化你的APK文件。"></a>签名之后，用zipalign(压缩对齐)优化你的APK文件。</h3><p>未签名的apk不能使用，也不能优化。签名之后的apk谷歌推荐使用zipalign.exe(位于android-sdk-windows ools目录下)工具对其优化：<br>在JAVA_HOME\bin&gt;目录下<code>zipalign -v 4 demo_signed.apk final.apk</code><br>如上，zipalign能够使apk文件中未压缩的数据在4个字节边界上对齐（4个字节是一个性能很好的值），这样android系统就可以使用mmap()(请自行查阅这个函数的用途)函数读取文件，可以在读取资源上获得较高的性能</p>
-<p>PS:</p>
-<ol>
-<li><p>在4个字节边界上对齐的意思就是，一般来说，是指编译器吧4个字节作为一个单位来进行读取的结果，这样的话，CPU能够对变量进行高效、快速的访问（较之前不对齐）。</p>
-</li>
-<li><p>对齐的根源：android系统中的Davlik虚拟机使用自己专有的格式DEX，DEX的结构是紧凑的，为了让运行时的性能更好，可以进一步用”对齐”进一步优化，但是大小一般会有所增加。</p>
-</li>
-</ol>
-<h2 id="渠道打包"><a href="#渠道打包" class="headerlink" title="渠道打包"></a>渠道打包</h2><h3 id="为什么需要在应用程序中增加渠道信息？"><a href="#为什么需要在应用程序中增加渠道信息？" class="headerlink" title="为什么需要在应用程序中增加渠道信息？"></a>为什么需要在应用程序中增加渠道信息？</h3><p>Android应用的发布需要面对各种各样的市场，我们称之为渠道。有的时候，我们需要知道应用是从哪个渠道下载的。比如，我们可能需要统计哪些市场带来的用户量比较大。再比如，我们可能有一些盈利需要和具体的渠道进行分成。这些都是统计渠道的信息。</p>
-<h3 id="一般如何在应用中加入渠道信息？"><a href="#一般如何在应用中加入渠道信息？" class="headerlink" title="一般如何在应用中加入渠道信息？"></a>一般如何在应用中加入渠道信息？</h3><p>为了统计渠道信息，就不得不在程序的某个地方加入渠道的信息，然后针对不同的渠道打不同的包。一般可以在Manifest文件中加入渠道编号，而不直接写在代码中。这样做的好处是，可以针对不同渠道，自动化去修改Manifest文件中的渠道编号，然后自动为该渠道打包。<br>Manifest文件支持Meta Data标签，建议使用这种自定义标签。例如下面的文件片段。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:versionCode=&quot;X&quot;
-    android:versionName=&quot;X.X.X&quot;
-    package=&quot;com.XXX&quot;&gt;
-    ……
-    &lt;application android:icon=&quot;@drawable/icon&quot;
-    android:label=&quot;@string/app_name&quot;&gt;
-    ……
-    &lt;meta-data android:name=&quot;CHANNEL&quot; android:value=&quot;C_001&quot; /&gt;
-    &lt;/application&gt;
-&lt;/manifest&gt;
-</code></pre><p>在这段代码示例中，我们在Application节点下增加了一个meta-data标签，名称是CHANNEL，值是C_001，是我们规定的一个渠道的编号。为不同的渠道打包，就要手工或者自动化修改C_001成为C_002、C_003等等其它我们定义的渠道编号，然后再打不同的包。</p>
-<h3 id="如何自动化打包过程？"><a href="#如何自动化打包过程？" class="headerlink" title="如何自动化打包过程？"></a>如何自动化打包过程？</h3><p>在这里介绍一款开源的打包工具 <strong>友盟渠道打包工具 (windows .net 4.0)</strong> 目前只支持windows版本</p>
-<p>github地址：<a href="https://github.com/umeng/umeng-muti-channel-build-tool" target="_blank" rel="external">https://github.com/umeng/umeng-muti-channel-build-tool</a></p>
-<p>现在最新版本号为:V3.2,本次更新最大的改变是放弃了 V2.x 版本中通过 Apktool 反编译apk文件打包的方式，这种打包方式会对开发的apk文件做出大幅度的修改，可能会产生许多不兼容的问题，比如对jar包中包含资源的情况无法支持，对包含 .so 文件的apk兼容性也不好，而且在打包时 AndroidManifest.xml 文件中的特殊标签会丢失。为了解决这些问题减少对开发者apk文件的修改, 我们决定放弃这种方式，而采用直接编辑二进制的AndroidManifest.xml 文件的方式。这种方式只会修改 AndroidManifest.xml 文件，对于apk包中的资源文件和代码文件都不会做任何改变。如果打包不成功，生成的apk文件有问题，在测试阶段也可以快速发现，因为修改只会影响AndroidManifest.xml 相关的少量的设置。</p>
-<h3 id="编辑渠道信息注意事项"><a href="#编辑渠道信息注意事项" class="headerlink" title="编辑渠道信息注意事项"></a>编辑渠道信息注意事项</h3><ol>
-<li>编辑渠道完成后按<code>Enter</code>确认</li>
-<li>常用渠道可以自行配置，模板地址：\UmengTools(Green)V3.2\V3.2\projects\template.xml(先配置好后再打开友盟打包工具)</li>
-<li>左下角配置文件可以自行填写，工具会自动保存你这次打包的信息（签名及渠道信息），下次可以在主页直接切换</li>
-</ol>
-<p>工具界面：</p>
-<p><img src="/images/umeng_package_tool.jpg" alt="umeng_package_too"></p>
+        <h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>我们知道，Android系统是<strong>单线程模型</strong>，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种<strong>单线程模型</strong>会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，导致退出整个应用程序或者短暂杀死应用程序,所以Android系统将大部分耗时、繁重任务交给子线程完成，不会在主线程中完成；同时，Android只允许主线程更新UI界面，子线程处理后的结果无法和主线程交互，即无法直接访问主线程，这就要用到<strong>Handler机制</strong>来解决此问题</p>
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>在我们在子线程中执行完耗时操作后很多情况下我们需要更新UI，但我们都知道，不能在子线程中更新UI。此时最常用的手段就是通过Handler将一个Message消息send到UI线程中，然后再在Handler的handleMessage方法中进行处理,常见代码</p>
+<pre><code>private Handler mHandle = new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what){
+            case xx:
+                break;
+
+        }
+    }
+};
+
+new Thread() {
+    @Override
+    public void run() {
+        super.run();
+        //耗时操作
+        Message msg = new Message();
+        msg.what = WHAT;
+        mHandle.sendMessage(msg);
+    }
+}.start(); 
+</code></pre><p>每个Handler都会关联一个消息队列，消息队列被封装在Lopper中，而每个Looper又会关联一个线程(ThreadLocal)，也就是每个消息队列会关联一个线程。Handler就是一个消息处理器，将消息投递给消息队列，然后再由对应的线程从消息队列中挨个取出消息，并且执行。默认情况下，消息队列只有一个，即主线程的消息队列，这个消息队列是在<a href="http://blog.csdn.net/luoshengyang/article/details/6747696" target="_blank" rel="external">系统的启动过程中</a>的ActivityThread.main方法中创建的，通过Lopper.prepareMainLooper()来创建，然后最后执行Looper.loop()来启动消息循环。那么我们为什么在平时的使用Handler的时候，并没有使用Looper呀，其实是因为系统为我们创建好了，我们可以查看ActivityThread.java来看看这个过程，只列了关键代码：</p>
+<pre><code>public final class ActivityThread {
+......
+
+public static final void main(String[] args) {
+    ...
+
+    Looper.prepareMainLooper();// 1、创建消息循环Looper  
+    if (sMainThreadHandler == null) {
+        sMainThreadHandler = new Handler(); // 主线程的Handler 
+    }
+
+    ActivityThread thread = new ActivityThread();
+    thread.attach(false);
+
+    if (false) {
+        Looper.myLooper().setMessageLogging(new
+            LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));
+    }
+    Looper.loop();// 2、执行消息循环
+
+    if (Process.supportsProcesses()) {
+        throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);
+    }
+
+    thread.detach();
+    ...
+}
+
+......
+</code></pre><p>}</p>
+<p>通过上面的原理介绍，我们可以画出下面这个流程图</p>
+<p><img src="/images/handler-1.jpg" alt=""></p>
+<p>那么它们具体是怎么协作的呢？下面我们通过源码一步步解析，首先看下Handler</p>
+<pre><code>/**
+ * Default constructor associates this handler with the {@link Looper} for the
+ * current thread.
+ *
+ * If this thread does not have a looper, this handler won&apos;t be able to receive messages
+ * so an exception is thrown.
+ */
+public Handler() {
+    this(null, false);
+}
+
+public Handler(Callback callback, boolean async) {
+    if (FIND_POTENTIAL_LEAKS) {
+        final Class&lt;? extends Handler&gt; klass = getClass();
+        if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
+                (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
+            Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
+                klass.getCanonicalName());
+        }
+    }
+
+    mLooper = Looper.myLooper();   // 获取Looper
+    if (mLooper == null) {
+        throw new RuntimeException(
+            &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
+    }
+    mQueue = mLooper.mQueue;       // 获取消息队列
+    mCallback = null;
+}
+</code></pre><p>从Handler默认的构造函数中我们可以看到，Handler会在内部通过Looper.getLooper()来获取Looper对象，并且与之关联，那么Looper.myLooper又是如何工作的呢？我们继续往下看.</p>
+<pre><code>/**
+ * Return the Looper object associated with the current thread.  Returns
+ * null if the calling thread is not associated with a Looper.
+ */
+public static Looper myLooper() {
+    return sThreadLocal.get();
+}
+
+/**
+ * Initialize the current thread as a looper, marking it as an
+ * application&apos;s main looper. The main looper for your application
+ * is created by the Android environment, so you should never need
+ * to call this function yourself.  See also: {@link #prepare()}
+ */
+public static void prepareMainLooper() {
+    prepare();
+    setMainLooper(myLooper());
+    myLooper().mQueue.mQuitAllowed = false;
+}
+
+private synchronized static void setMainLooper(Looper looper) {
+    mMainLooper = looper;
+}
+
+ /** Initialize the current thread as a looper.
+  * This gives you a chance to create handlers that then reference
+  * this looper, before actually starting the loop. Be sure to call
+  * {@link #loop()} after calling this method, and end it by calling
+  * {@link #quit()}.
+  */
+public static void prepare() {
+    if (sThreadLocal.get() != null) {
+        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
+    }
+    sThreadLocal.set(new Looper());
+}
+</code></pre><p> 我们看到myLooper()方法是通过sThreadLocal.get()来获取的，上面也提到，在ActivityThread.main方法中会调用<code>prepareMainLooper()</code>方法，prepareMainLooper中执行了<code>prepare</code>，<code>prepare</code>中会创建一个Looper并赋值给 <code>sThreadLocal</code>，这样Looper就和线程关联上了，而且有一点很重要，普通的线程是没有looper的，如果需要looper对象，那么必须要先调用Looper.prepare()方法，而且一个线程只能有一个looper ，而在Handler中，消息队列通过Looper与线程关联，而Handler又与Looper关联，因此Handler最终就和线程、线程的消息队列关联上了，那么创建了Looper后，是如何执行消息循环呢？我们来看下<code>Looper.loop()</code>方法</p>
+<pre><code>public static void loop() {
+    final Looper me = myLooper();//获取looper对象
+    if (me == null) {
+        //若为空则说明当前线程不是LooperThread，抛出异常
+        throw new RuntimeException(&quot;No Looper; Looper.prepare() wasn&apos;t called on this thread.&quot;);
+    }
+    final MessageQueue queue = me.mQueue; 获取消息队列
+    .....
+    for (;;) {
+        //死循环不断取出消息
+        Message msg = queue.next(); // might block 
+        if (msg == null) {
+            // No message indicates that the message queue is quitting.
+            return;
+        }
+
+        // This must be in a local variable, in case a UI event sets the logger
+        //打印log，说明开始处理message。msg.target就是Handler对象
+        Printer logging = me.mLogging;
+        if (logging != null) {
+            logging.println(&quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot; +
+                    msg.callback + &quot;: &quot; + msg.what);
+        }
+
+        //开始处理message，msg.target就是Handler对象
+        msg.target.dispatchMessage(msg);
+
+        .....
+    }
+}
+</code></pre><p>很明显，就是一个大的循环，不断从消息队列出取出消息。然后调用一个很关键的方法msg.target.dispatchMessage(msg)开始处理消息。msg.target就是message对应的handler，所以对于Looper，我们结论就是通过Looper.prepare()来创建Looper对象(消息队列封装在Looper对象中)，并且保存在sThreadLoal中，然后通过Looper.loop()来执行消息循环，这两步通常是成对出现的！</p>
+<p>最后我们看看消息处理机制，先看看Message</p>
+<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><pre><code>public final class Message implements Parcelable {
+
+    public int what;
+
+    public int arg1; 
+
+    public int arg2;
+
+    public Object obj;
+
+
+    int flags;
+
+    long when;
+
+    Bundle data;
+
+    Handler target;         // target处理
+
+    Runnable callback;      // Runnable类型的callback
+
+    // sometimes we store linked lists of these things
+       Message next;           // 下一条消息，消息队列是链式存储的
+
+    ....
+}
+</code></pre><p>前面说到loop循环中处理信息的msg.target.dispatchMessage(msg)方法。现在我们来看下这个方法的源码</p>
+<pre><code>public void dispatchMessage(Message msg) {
+    //注意！这里先判断message的callback是否为空，否则就直接处理message的回调函数
+    if (msg.callback != null) {
+        handleCallback(msg);
+    } else {
+        if (mCallback != null) {
+            //正是在这调用我们平常重写handleMessage
+            if (mCallback.handleMessage(msg)) {
+                return;
+            }
+        }
+        handleMessage(msg);
+    }
+}
+</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件，看源码：</p>
+<pre><code>public final boolean post(Runnable r){
+    //获取消息并发送给消息队列
+    return  sendMessageDelayed(getPostMessage(r), 0);
+}
+</code></pre><p>至此，Handler的工作原理就说完了。    </p>
 
       
     </div>
@@ -389,30 +486,18 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/签名/" rel="tag">#签名</a>
-          
-            <a href="/tags/多渠道打包/" rel="tag">#多渠道打包</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/09/17/2014-09-17-draw9patch/" rel="next" title="NinePatch的制作与使用">
-                <i class="fa fa-chevron-left"></i> NinePatch的制作与使用
+              <a href="/2016/03/12/初识groovy/" rel="next" title="初识Groovy">
+                <i class="fa fa-chevron-left"></i> 初识Groovy
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/10/19/2014-10-19-about MPAndroidChart/" rel="prev" title="图表库MPAndroidChart简介">
-                图表库MPAndroidChart简介 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -427,10 +512,10 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /"
-     data-title="关于android签名及渠道打包"
+        <div class="ds-share flat" data-thread-key="2016/03/20/说说Handler的工作原理/"
+     data-title="说说Handler的工作原理"
      data-content=""
-     data-url="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /">
+     data-url="http://loody.github.io/2016/03/20/说说Handler的工作原理/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -457,8 +542,8 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /"
-           data-title="关于android签名及渠道打包" data-url="http://loody.github.io/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /">
+      <div class="ds-thread" data-thread-key="2016/03/20/说说Handler的工作原理/"
+           data-title="说说Handler的工作原理" data-url="http://loody.github.io/2016/03/20/说说Handler的工作原理/">
       </div>
     
   </div>
@@ -571,7 +656,7 @@ APK如果使用一个key签名，发布时另一个key签名的文件将无法�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要签名"><span class="nav-number">1.</span> <span class="nav-text">为什么要签名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#签名的注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">签名的注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签名的步骤"><span class="nav-number">2.</span> <span class="nav-text">签名的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：利用命令行"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：利用命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：使用Eclipse导出带签名的apk"><span class="nav-number">2.2.</span> <span class="nav-text">方法二：使用Eclipse导出带签名的apk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#签名之后，用zipalign-压缩对齐-优化你的APK文件。"><span class="nav-number">2.3.</span> <span class="nav-text">签名之后，用zipalign(压缩对齐)优化你的APK文件。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渠道打包"><span class="nav-number">3.</span> <span class="nav-text">渠道打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要在应用程序中增加渠道信息？"><span class="nav-number">3.1.</span> <span class="nav-text">为什么需要在应用程序中增加渠道信息？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般如何在应用中加入渠道信息？"><span class="nav-number">3.2.</span> <span class="nav-text">一般如何在应用中加入渠道信息？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何自动化打包过程？"><span class="nav-number">3.3.</span> <span class="nav-text">如何自动化打包过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑渠道信息注意事项"><span class="nav-number">3.4.</span> <span class="nav-text">编辑渠道信息注意事项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程模型"><span class="nav-number">1.</span> <span class="nav-text">单线程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler"><span class="nav-number">2.</span> <span class="nav-text">Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Message"><span class="nav-number">3.</span> <span class="nav-text">Message</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

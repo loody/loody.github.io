@@ -50,7 +50,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
 
 
 
@@ -202,6 +202,152 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="url">
+                  解决ScrollView嵌套ListView的冲突问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-07-20T00:00:00+08:00" content="2014-07-20">
+              2014-07-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案</p>
+<h2 id="手动设置ListView高度"><a href="#手动设置ListView高度" class="headerlink" title="手动设置ListView高度"></a>手动设置ListView高度</h2><pre><code>经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测量。于是需要手动代码设置ListView高度，实现代码如下：
+
+&gt;取代ListView的LinearLayout，使之能够成功嵌套在ScrollView中
+
+    public class LinearLayoutForListView extends LinearLayout {
+        private BaseAdapter adapter;
+        private OnClickListener onClickListener = null;
+        public void bindLinearLayout() {
+        int count = adapter.getCount();
+        this.removeAllViews();
+        for (int i = 0; i &lt; count; i++) {
+            View v = adapter.getView(i, null, null);
+            v.setOnClickListener(this.onClickListener);
+            addView(v, i);
+        }
+           Log.v(&quot;countTAG&quot;, &quot;&quot; + count);
+    }
+    public LinearLayoutForListView(Context context) {
+        super(context);  
+</code></pre><p>采用这个方法有个细节需要注意：就是getView方法返回的View必须由LinearLayout组成，而且LinearLayout里面也不能有其他的如LinearLayout，RelativeLayout等的子布局，只能存在一个外围的LinearLayout布局，最近做的项目就是遇到这个问题，所以在ListView中遇到比较复杂的布局的时候就要考虑其他方案了，比如下面介绍的两种方法</p>
+<h2 id="采用LinearLayout取代ListView"><a href="#采用LinearLayout取代ListView" class="headerlink" title="采用LinearLayout取代ListView"></a>采用LinearLayout取代ListView</h2><pre><code>如果ListView 中Item的数量不是很大，完全没必要用ListView,用LinearLayout代替即可，也不会出现上述冲突问题
+</code></pre><h2 id="自定义可适应ScrollView的ListView"><a href="#自定义可适应ScrollView的ListView" class="headerlink" title="自定义可适应ScrollView的ListView"></a>自定义可适应ScrollView的ListView</h2><pre><code>这种方法比较省事，而且改动也很小，只需要自定义一个类继承自ListView，然后重写里面的onMeasure方法，代码如下：
+
+ &gt; 重写该方法，达到使ListView适应ScrollView的效果
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2,
+        MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -388,7 +534,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
