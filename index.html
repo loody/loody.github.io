@@ -472,12 +472,19 @@ public static void prepare() {
         handleMessage(msg);
     }
 }
-</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件，看源码：</p>
+</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件</p>
 <pre><code>public final boolean post(Runnable r){
     //获取消息并发送给消息队列
     return  sendMessageDelayed(getPostMessage(r), 0);
 }
-</code></pre><p>至此，Handler的工作原理就说完了。    </p>
+
+private final Message getPostMessage(Runnable r) {  
+    Message m = Message.obtain();  
+    m.callback = r;  
+return m;  
+</code></pre><p>}</p>
+<p>在post(Runnable r)时，会将Runnable包装成Message对象，并且将Runnable对象设置给Message对象的callback字段，最后会将该Message对象插入消息队列。</p>
+<p>至此，Handler的工作原理就说完了。    </p>
 
           
         
@@ -2295,11 +2302,6 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
     NexT.Muse
   </a>
 </div>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-&nbsp&nbsp&nbsp本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
-总访客数 <span id="busuanzi_value_site_uv"></span>
 
 
 

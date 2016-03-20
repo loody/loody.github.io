@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，">
 <meta property="og:image" content="http://loody.github.io/images/handler-1.jpg">
-<meta property="og:updated_time" content="2016-03-20T15:47:30.000Z">
+<meta property="og:updated_time" content="2016-03-20T15:54:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="说说Handler的工作原理">
 <meta name="twitter:description" content="单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，">
@@ -468,12 +468,19 @@ public static void prepare() {
         handleMessage(msg);
     }
 }
-</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件，看源码：</p>
+</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件</p>
 <pre><code>public final boolean post(Runnable r){
     //获取消息并发送给消息队列
     return  sendMessageDelayed(getPostMessage(r), 0);
 }
-</code></pre><p>至此，Handler的工作原理就说完了。    </p>
+
+private final Message getPostMessage(Runnable r) {  
+    Message m = Message.obtain();  
+    m.callback = r;  
+return m;  
+</code></pre><p>}</p>
+<p>在post(Runnable r)时，会将Runnable包装成Message对象，并且将Runnable对象设置给Message对象的callback字段，最后会将该Message对象插入消息队列。</p>
+<p>至此，Handler的工作原理就说完了。    </p>
 
       
     </div>
@@ -694,11 +701,6 @@ public static void prepare() {
     NexT.Muse
   </a>
 </div>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-&nbsp&nbsp&nbsp本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
-总访客数 <span id="busuanzi_value_site_uv"></span>
 
 
 
