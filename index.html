@@ -399,7 +399,7 @@ public static void prepare() {
     sThreadLocal.set(new Looper());
 }
 </code></pre><p> 我们看到myLooper()方法是通过sThreadLocal.get()来获取的，上面也提到，在ActivityThread.main方法中会调用<code>prepareMainLooper()</code>方法，prepareMainLooper中执行了<code>prepare</code>，<code>prepare</code>中会创建一个Looper并赋值给 <code>sThreadLocal</code>，这样Looper就和线程关联上了，而且有一点很重要，普通的线程是没有looper的，如果需要looper对象，那么必须要先调用Looper.prepare()方法，而且一个线程只能有一个looper ，而在Handler中，消息队列通过Looper与线程关联，而Handler又与Looper关联，因此Handler最终就和线程、线程的消息队列关联上了，那么创建了Looper后，是如何执行消息循环呢？我们来看下<code>Looper.loop()</code>方法</p>
-<pre><code>public static void loop() {
+<h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><pre><code>public static void loop() {
     final Looper me = myLooper();//获取looper对象
     if (me == null) {
         //若为空则说明当前线程不是LooperThread，抛出异常
@@ -430,8 +430,8 @@ public static void prepare() {
     }
 }
 </code></pre><p>很明显，就是一个大的循环，不断从消息队列出取出消息。然后调用一个很关键的方法msg.target.dispatchMessage(msg)开始处理消息。msg.target就是message对应的handler，所以对于Looper，我们结论就是通过Looper.prepare()来创建Looper对象(消息队列封装在Looper对象中)，并且保存在sThreadLoal中，然后通过Looper.loop()来执行消息循环，这两步通常是成对出现的！</p>
-<p>最后我们看看消息处理机制，先看看Message</p>
-<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><pre><code>public final class Message implements Parcelable {
+<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><p>最后我们看看消息处理机制，先看看Message</p>
+<pre><code>public final class Message implements Parcelable {
 
     public int what;
 
@@ -481,9 +481,9 @@ public static void prepare() {
 private final Message getPostMessage(Runnable r) {  
     Message m = Message.obtain();  
     m.callback = r;  
-return m;  
-</code></pre><p>}</p>
-<p>在post(Runnable r)时，会将Runnable包装成Message对象，并且将Runnable对象设置给Message对象的callback字段，最后会将该Message对象插入消息队列。</p>
+    return m;  
+}
+</code></pre><p>在post(Runnable r)时，会将Runnable包装成Message对象，并且将Runnable对象设置给Message对象的callback字段，最后会将该Message对象插入消息队列。</p>
 <p>至此，Handler的工作原理就说完了。    </p>
 
           
