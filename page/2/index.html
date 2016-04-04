@@ -224,6 +224,182 @@
             
               
                 
+                <a class="post-title-link" href="/2015/04/16/2015-04-16-http缓存/" itemprop="url">
+                  HTTP缓存机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-16T00:00:00+08:00" content="2015-04-16">
+              2015-04-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/http/" itemprop="url" rel="index">
+                    <span itemprop="name">http</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/16/2015-04-16-http缓存/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/16/2015-04-16-http缓存/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关于http缓存"><a href="#关于http缓存" class="headerlink" title="关于http缓存"></a>关于http缓存</h2><p>有很多解释，大体都相似，其实就是当Web请求抵达缓存时， 如果本地有“已缓存的”副本，就可以从本地存储设备而不是从原始服务器中提取这个文档。缓存有很多的好处</p>
+<ol>
+<li><p>减少了冗余的数据传输，节省了网费。</p>
+</li>
+<li><p>减少了服务器的负担， 大大提高了网站的性能</p>
+</li>
+<li><p>加快了客户端加载网页的速度</p>
+</li>
+</ol>
+<h2 id="如何判断缓存新鲜度"><a href="#如何判断缓存新鲜度" class="headerlink" title="如何判断缓存新鲜度"></a>如何判断缓存新鲜度</h2><p>Web服务器通过2种方式来判断浏览器缓存是否是最新的。</p>
+<ol>
+<li><p>浏览器把缓存文件的最后修改时间Last-Modified 通过 header ”If-Modified-Since“来告诉Web服务器。</p>
+</li>
+<li><p>浏览器把缓存文件的ETag, 通过header “If-None-Match”, 来告诉Web服务器。</p>
+</li>
+</ol>
+<p><strong>Last-Modified/If-Modified-Since</strong></p>
+<p>Last-Modified/If-Modified-Since要配合Cache-Control使用。</p>
+<p><strong>Last-Modified</strong>：标示这个响应资源的最后修改时间。web服务器在响应请求时，告诉浏览器资源的最后修改时间。</p>
+<p><strong>If-Modified-Since</strong>：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。web服务器收到请求后发现有头If-Modified-Since 则与被请求资源的最后修改时间进行比对。若最后修改时间较新，说明资源又被改动过，则响应整片资源内容（写在响应消息包体内），HTTP 200；若最后修改时间较旧，说明资源无新修改，则响应HTTP 304 (无需包体，节省浏览)，告知浏览器继续使用所保存的cache。</p>
+<p><strong>Etag/If-None-Match</strong></p>
+<p>Etag/If-None-Match也要配合Cache-Control使用。</p>
+<p><strong>Etag</strong>：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器觉得）。Apache中，<strong><em>ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。</em></strong></p>
+<p><strong>If-None-Match</strong>：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定返回200或304。</p>
+<h2 id="为什么使用ETag呢？"><a href="#为什么使用ETag呢？" class="headerlink" title="为什么使用ETag呢？"></a>为什么使用ETag呢？</h2><p>主要是为了解决Last-Modified 无法解决的一些问题。</p>
+<ol>
+<li><p>某些服务器不能精确得到文件的最后修改时间， 这样就无法通过最后修改时间来判断文件是否更新了。</p>
+</li>
+<li><p>某些文件的修改非常频繁，在秒以下的时间内进行修改. Last-Modified只能精确到秒。</p>
+</li>
+<li><p>一些文件的最后修改时间改变了，但是内容并未改变。 我们不希望客户端认为这个文件修改了。</p>
+</li>
+</ol>
+<h2 id="与缓存有关的header"><a href="#与缓存有关的header" class="headerlink" title="与缓存有关的header"></a>与缓存有关的header</h2><ul>
+<li><p><strong>request</strong></p>
+<ul>
+<li>Cache-Control: max-age=0    以秒为单位</li>
+<li>If-Modified-Since: Mon, 19 Nov 2012 08:38:01 GMT 缓存文件的最后修改时间。</li>
+<li>If-None-Match: “0693f67a67cc1:0”    缓存文件的Etag值</li>
+<li>Cache-Control: no-cache    不使用缓存</li>
+<li>Pragma: no-cache    不使用缓存</li>
+</ul>
+</li>
+<li><p><strong>response</strong></p>
+<ul>
+<li>Cache-Control: public        响应被缓存，并且在多用户间共享</li>
+<li>Cache-Control: private    响应只能作为私有缓存，不能在用户之间共享</li>
+<li>Cache-Control:no-cache    提醒浏览器要从服务器提取文档进行验证</li>
+<li>Cache-Control:no-store    绝对禁止缓存（用于机密，敏感文件）</li>
+<li>Cache-Control: max-age=60         60秒之后缓存过期（相对时间）</li>
+<li>Date: Mon, 19 Nov 2012 08:39:00 GMT    当前response发送的时间</li>
+<li>Expires: Mon, 19 Nov 2012 08:40:01 GMT    缓存过期的时间（绝对时间）</li>
+<li>Last-Modified: Mon, 19 Nov 2012 08:38:01 GMT 服务器端文件的最后修改时间</li>
+<li>ETag: “20b1add7ec1cd1:0”    服务器端文件的Etag值</li>
+</ul>
+</li>
+</ul>
+<p>下面是一张http缓存流程图，画的非常简洁易懂</p>
+<p><img src="/images/http-cache.png" alt="http-cache"></p>
+<p>参考：</p>
+<p><a href="http://www.cnblogs.com/skynet/archive/2012/11/28/2792503.html" target="_blank" rel="external">浏览器缓存机制</a>    </p>
+<p><a href="http://www.cnblogs.com/tankxiao/archive/2012/11/28/2793365.html" target="_blank" rel="external">HTTP协议 (四) 缓存</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="url">
                   实现滚动隐藏header的layout
                 </a>
@@ -1657,174 +1833,6 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/07/2014-12-07-about-gradle dependency management/" itemprop="url">
-                  Gradle如何声明所需的依赖以及依赖的分类（分组）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-07T00:00:00+08:00" content="2014-12-07">
-              2014-12-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Gradle/" itemprop="url" rel="index">
-                    <span itemprop="name">Gradle</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/07/2014-12-07-about-gradle dependency management/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/07/2014-12-07-about-gradle dependency management/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近项目在采用android studio来开发，它采用的是Gradle构建系统，当我们要添加外部依赖的时候我们只需要在build.gradle下配置如下即可</p>
-<pre><code>dependencies {
-    compile &apos;com.android.support:appcompat-v7:21.0.2&apos;
-}
-</code></pre><p>但是这是什么意思呢？于是就去学习了一下granle的依赖管理，原来定义外部依赖包含group, name和version这三个属性，上面的写法是一种简洁的写法，把它补全就是</p>
-<pre><code>dependencies {
-    compile group:&apos;com.android.support&apos;,name:&apos;support-v4&apos;,version:&apos;21.0.2&apos;    }
-</code></pre><h2 id="依赖管理简介"><a href="#依赖管理简介" class="headerlink" title="依赖管理简介"></a>依赖管理简介</h2><p>在配置完项目仓库后，我们可以声明其中的依赖，如果我们想要声明一个新的依赖，可以采用如下步骤：</p>
-<p>指定依赖的配置。<br>声明所需的依赖。<br>让我们看一下详细步骤：</p>
-<h2 id="配置中的依赖分类"><a href="#配置中的依赖分类" class="headerlink" title="配置中的依赖分类"></a>配置中的依赖分类</h2><p>在Gradle中，依赖是按照指定名称进行分类的，这些分类被称为配置项，我们可以使用配置项声明项目的外部依赖。</p>
-<p>Java插件指定了若干依赖配置项，其描述如下：当项目的源代码被编译时，</p>
-<p>compile配置项中的依赖是必须的。</p>
-<p>runtime配置项中包含的依赖在运行时是必须的。</p>
-<p>testCompile配置项中包含的依赖在编译项目的测试代码时是必须的。</p>
-<p>testRuntime配置项中包含的依赖在运行测试代码时是必须的。</p>
-<p>archives配置项中包含项目生成的文件（如Jar文件）。</p>
-<p>default配置项中包含运行时必须的依赖。</p>
-<h2 id="声明项目依赖"><a href="#声明项目依赖" class="headerlink" title="声明项目依赖"></a>声明项目依赖</h2><p>最普遍的依赖称为外部依赖，这些依赖存放在外部仓库中。一个外部依赖可以由以下属性指定：</p>
-<p><code>group</code>属性指定依赖的分组（在Maven中，就是groupId）。</p>
-<p><code>name</code>属性指定依赖的名称（在Maven中，就是artifactId）。</p>
-<p><code>vertion</code>属性指定外部依赖的版本（在Maven中，就是version）。</p>
-<p>我们假设我们需要指定以下依赖：</p>
-<p>依赖的分组是foo。</p>
-<p>依赖的名称是foo。</p>
-<p>依赖的版本是0.1。</p>
-<p>在项目编译时需要这些依赖。我们可以将以下代码片段加入到build.gradle中，进行依赖声明：</p>
-<pre><code>dependencies {
-    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
-}
-</code></pre><p>我们也可以采用一种快捷方式声明依赖：[group]:[name]:[version]。如果我们想用这种方式，我们可以将以下代码段加入到build.gradle中：</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;
-}
-</code></pre><p>我们也可以在同一个配置项中加入多个依赖，传统的方式如下：</p>
-<pre><code>dependencies {
-    compile (
-        [group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;],
-        [group: &apos;bar&apos;, name: &apos;bar&apos;, version: &apos;0.1&apos;]
-    )
-}
-</code></pre><p>如果采用快捷方式，那可以是这样：</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;, &apos;bar:bar:0.1&apos;
-}
-</code></pre><p>自然地，声明属于不同配置项的依赖也是可以的。比如说，如果我们想要声明属于compile和testCompile配置项的依赖，可以这么做：</p>
-<pre><code>dependencies {
-    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
-    testCompile group: &apos;test&apos;, name: &apos;test&apos;, version: &apos;0.1&apos;
-}
-</code></pre><p>同样的，给力的快捷方式又来了</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;
-    testCompile &apos;test:test:0.1&apos;
-}                
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +1878,7 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1878,7 +1886,7 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1887,7 +1895,7 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

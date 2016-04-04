@@ -224,6 +224,174 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/07/2014-12-07-about-gradle dependency management/" itemprop="url">
+                  Gradle如何声明所需的依赖以及依赖的分类（分组）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-07T00:00:00+08:00" content="2014-12-07">
+              2014-12-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Gradle/" itemprop="url" rel="index">
+                    <span itemprop="name">Gradle</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/07/2014-12-07-about-gradle dependency management/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/07/2014-12-07-about-gradle dependency management/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近项目在采用android studio来开发，它采用的是Gradle构建系统，当我们要添加外部依赖的时候我们只需要在build.gradle下配置如下即可</p>
+<pre><code>dependencies {
+    compile &apos;com.android.support:appcompat-v7:21.0.2&apos;
+}
+</code></pre><p>但是这是什么意思呢？于是就去学习了一下granle的依赖管理，原来定义外部依赖包含group, name和version这三个属性，上面的写法是一种简洁的写法，把它补全就是</p>
+<pre><code>dependencies {
+    compile group:&apos;com.android.support&apos;,name:&apos;support-v4&apos;,version:&apos;21.0.2&apos;    }
+</code></pre><h2 id="依赖管理简介"><a href="#依赖管理简介" class="headerlink" title="依赖管理简介"></a>依赖管理简介</h2><p>在配置完项目仓库后，我们可以声明其中的依赖，如果我们想要声明一个新的依赖，可以采用如下步骤：</p>
+<p>指定依赖的配置。<br>声明所需的依赖。<br>让我们看一下详细步骤：</p>
+<h2 id="配置中的依赖分类"><a href="#配置中的依赖分类" class="headerlink" title="配置中的依赖分类"></a>配置中的依赖分类</h2><p>在Gradle中，依赖是按照指定名称进行分类的，这些分类被称为配置项，我们可以使用配置项声明项目的外部依赖。</p>
+<p>Java插件指定了若干依赖配置项，其描述如下：当项目的源代码被编译时，</p>
+<p>compile配置项中的依赖是必须的。</p>
+<p>runtime配置项中包含的依赖在运行时是必须的。</p>
+<p>testCompile配置项中包含的依赖在编译项目的测试代码时是必须的。</p>
+<p>testRuntime配置项中包含的依赖在运行测试代码时是必须的。</p>
+<p>archives配置项中包含项目生成的文件（如Jar文件）。</p>
+<p>default配置项中包含运行时必须的依赖。</p>
+<h2 id="声明项目依赖"><a href="#声明项目依赖" class="headerlink" title="声明项目依赖"></a>声明项目依赖</h2><p>最普遍的依赖称为外部依赖，这些依赖存放在外部仓库中。一个外部依赖可以由以下属性指定：</p>
+<p><code>group</code>属性指定依赖的分组（在Maven中，就是groupId）。</p>
+<p><code>name</code>属性指定依赖的名称（在Maven中，就是artifactId）。</p>
+<p><code>vertion</code>属性指定外部依赖的版本（在Maven中，就是version）。</p>
+<p>我们假设我们需要指定以下依赖：</p>
+<p>依赖的分组是foo。</p>
+<p>依赖的名称是foo。</p>
+<p>依赖的版本是0.1。</p>
+<p>在项目编译时需要这些依赖。我们可以将以下代码片段加入到build.gradle中，进行依赖声明：</p>
+<pre><code>dependencies {
+    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
+}
+</code></pre><p>我们也可以采用一种快捷方式声明依赖：[group]:[name]:[version]。如果我们想用这种方式，我们可以将以下代码段加入到build.gradle中：</p>
+<pre><code>dependencies {
+    compile &apos;foo:foo:0.1&apos;
+}
+</code></pre><p>我们也可以在同一个配置项中加入多个依赖，传统的方式如下：</p>
+<pre><code>dependencies {
+    compile (
+        [group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;],
+        [group: &apos;bar&apos;, name: &apos;bar&apos;, version: &apos;0.1&apos;]
+    )
+}
+</code></pre><p>如果采用快捷方式，那可以是这样：</p>
+<pre><code>dependencies {
+    compile &apos;foo:foo:0.1&apos;, &apos;bar:bar:0.1&apos;
+}
+</code></pre><p>自然地，声明属于不同配置项的依赖也是可以的。比如说，如果我们想要声明属于compile和testCompile配置项的依赖，可以这么做：</p>
+<pre><code>dependencies {
+    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
+    testCompile group: &apos;test&apos;, name: &apos;test&apos;, version: &apos;0.1&apos;
+}
+</code></pre><p>同样的，给力的快捷方式又来了</p>
+<pre><code>dependencies {
+    compile &apos;foo:foo:0.1&apos;
+    testCompile &apos;test:test:0.1&apos;
+}                
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/11/15/2014-11-15-about activity lauchMode/" itemprop="url">
                   Activity的四种启动模式
                 </a>
@@ -1758,205 +1926,6 @@ public int locationAreaCode;(lac)//区域代码
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/03/2014-08-03-ichartjs in android/" itemprop="url">
-                  ichartjs在android应用中的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-03T00:00:00+08:00" content="2014-08-03">
-              2014-08-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/03/2014-08-03-ichartjs in android/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/03/2014-08-03-ichartjs in android/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> <strong>ichartjs</strong> 是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 ichartjs致力于为您的应用提供简单、直观、可交互的体验级图表组件。是WEB/APP图表展示方面的解决方案 。如果你正在开发HTML5的应用，ichartjs正好适合您。 ichartjs目前支持饼图、环形图、折线图、面积图、柱形图、条形图。ichartjs是基于Apache License 2.0协议的开源项目。</p>
-<p>此文以制作一个3D的柱形图为例讲解ichartjs的使用</p>
-<p>首先,我们要去ichartjs官网下载其js库，因为我们的要用到东西就是在html文件中导入一个js文件即可</p>
-<p>ichartjs官网地址：<a href="http://www.ichartjs.com/" target="_blank" rel="external"><em>http://www.ichartjs.com/</em></a></p>
-<p>源代码地址：<a href="http://code.google.com/p/ichartjs/source/checkout" target="_blank" rel="external"><em>http://code.google.com/p/ichartjs/source/checkout</em></a></p>
-<p>将ichart.1.2.min.js放置assets文件中，新建一个html文件，也放置在assets文件下，代码如下：</p>
-<pre><code>&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;head&gt; 
-&lt;meta charset=&quot;UTF-8&quot; /&gt; 
-&lt;title&gt;ichartjs 示例&lt;/title&gt; 
-&lt;script type=&quot;text/javascript&quot; src=&quot;ichart.1.2.min.js&quot;&gt;&lt;/script&gt; 
-&lt;script type=&quot;text/javascript&quot;&gt; 
-$(function(){
-    var data = [
-                {name : &apos;IE&apos;,value : 35.75,color:&apos;#bc6666&apos;},
-                {name : &apos;Chrome&apos;,value : 29.84,color:&apos;#cbab4f&apos;},
-                {name : &apos;Firefox&apos;,value : 24.88,color:&apos;#76a871&apos;},
-                {name : &apos;Safari&apos;,value : 6.77,color:&apos;#9f7961&apos;},
-                {name : &apos;Opera&apos;,value : 2.02,color:&apos;#2ba5a4&apos;},
-                {name : &apos;Other&apos;,value : 0.73,color:&apos;#6f83a5&apos;}
-            ];
-
-    new iChart.Column3D({
-        render : &apos;canvasDiv&apos;,
-        data: data,
-        title : &apos;Top 5 Browsers from 1 to 29 Feb 2012&apos;,
-        width : 800,
-        height : 400,
-        align:&apos;left&apos;,
-        offsetx:50,
-        legend : {
-            enable : true
-        },
-        sub_option:{
-            label:{
-                color:&apos;#111111&apos;
-            }
-        },
-        coordinate:{
-            width:600,
-            scale:[{
-                 position:&apos;left&apos;,    
-                 start_scale:0,
-                 end_scale:40,
-                 scale_space:8,
-                 listeners:{
-                    parseText:function(t,x,y){
-                        return {text:t+&quot;%&quot;}
-                    }
-                }
-            }]
-        }
-    }).draw();
-});
-&lt;/script&gt; 
-</code></pre><p>以上画图部分的属性大家可以参照源代码中docs文件夹中的 API文档  所有的属性都有说明，可以根据自己需求定制不同的效果，在此不做详细说明,最后，在Activity中</p>
-<pre><code>package com.example.ichartjsdemo; 
-
-import android.annotation.SuppressLint; 
-import android.app.Activity; 
-import android.os.Bundle; 
-import android.view.Menu; 
-import android.webkit.WebView; 
-public class MainActivity extends Activity { 
-    private WebView webView; 
-    @SuppressLint({ &quot;JavascriptInterface&quot;, &quot;SetJavaScriptEnabled&quot; }) 
-    @Override 
-    protected void onCreate(Bundle savedInstanceState) { 
-        super.onCreate(savedInstanceState); 
-        setContentView(R.layout.activity_main); 
-        webView = (WebView) findViewById(R.id.webview); 
-        webView.getSettings().setJavaScriptEnabled(true); // 设定该WebView可以执行JavaScript程序 
-        webView.getSettings().setBuiltInZoomControls(true); // 设定该WebView可以缩放 
-        webView.loadUrl(&quot;file:///android_asset/line.html&quot;); 
-    } 
-
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu) { 
-        getMenuInflater().inflate(R.menu.main, menu); 
-        return false; 
-    } 
-} 
-</code></pre><p>运行效果图：</p>
-<p><img src="/images/ichartjs_in_android.png" alt="ichartjs_in_android.png"> </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2002,7 +1971,7 @@ public class MainActivity extends Activity {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2010,7 +1979,7 @@ public class MainActivity extends Activity {
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -2019,7 +1988,7 @@ public class MainActivity extends Activity {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

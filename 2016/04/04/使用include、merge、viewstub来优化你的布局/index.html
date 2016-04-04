@@ -1,0 +1,1011 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="include,merge,ViewStub,性能优化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
+include[include](http://developer.android.com/intl/zh-cn/training/improv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用include、merge、ViewStub来优化你的布局">
+<meta property="og:url" content="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
+include[include](http://developer.android.com/intl/zh-cn/training/improv">
+<meta property="og:updated_time" content="2016-04-04T13:43:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用include、merge、ViewStub来优化你的布局">
+<meta name="twitter:description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
+include[include](http://developer.android.com/intl/zh-cn/training/improv">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 使用include、merge、ViewStub来优化你的布局 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">loody's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用include、merge、ViewStub来优化你的布局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-04T19:35:36+08:00" content="2016-04-04">
+              2016-04-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android性能优化/" itemprop="url" rel="index">
+                    <span itemprop="name">Android性能优化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/04/使用include、merge、viewstub来优化你的布局/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解<code>include</code>、<code>merge</code>、<code>ViewStub</code>在优化布局中的使用方法</p>
+<h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><code>[include](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
+<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          android:layout_width=&quot;match_parent&quot;
+          android:layout_height=&quot;match_parent&quot;
+          android:background=&quot;@color/window_background&quot;
+          android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;include layout=&quot;@layout/toolbar&quot;/&gt;
+
+               ...
+
+   &lt;/LinearLayout&gt;
+</code></pre><p>这里的toolbar就是被抽离出来的布局，这样我们在其他Activity需要加入toolbar的时候直接include<code>toolbar.xml</code>就可以了</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><code>[merge](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
+<ol>
+<li>当购物车为空时，显示<code>view_order_none.xml</code></li>
+<li>当购物车不为空时，显示列表ListView</li>
+</ol>
+<p>下面贴一下布局文件的源码fragment_cart.xml，方便大家理解</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ViewStub
+    android:id=&quot;@+id/vs_cart_none&quot;
+    android:inflatedId=&quot;@+id/stub_fl&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout=&quot;@layout/view_order_none&quot;/&gt;
+
+
+&lt;ListView
+    android:id=&quot;@+id/lv&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;/&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre><p><code>view_order_none.xml</code>代码如下</p>
+<pre><code>&lt;FrameLayout
+    android:id=&quot;@+id/fl_cart_none&quot;
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;
+</code></pre><p>这里<code>fragment_cart.xml</code>包含了两个布局，<code>ViewStub</code>（下面会介绍）和<code>ListView</code>，他们通过一个FramLayout包裹起来，其实我们再仔细一想，这个FrameLayout的存在有没有必要呢？结果是没有必要的，它只会让我们层级又多了一层，这个时候就可以用<code>merge</code>标签替换它了，这也是<code>merge</code>的使用场景,用merge替换后的代码如下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;merge xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ViewStub
+    android:id=&quot;@+id/vs_cart_none&quot;
+    android:inflatedId=&quot;@+id/stub_fl&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout=&quot;@layout/view_order_none&quot;/&gt;
+
+
+&lt;ListView
+    android:id=&quot;@+id/lv&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;/&gt;
+
+&lt;/merge&gt;
+</code></pre><h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><code>[ViewStub](http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html)</code>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
+<p>判断ViewStub是否加载</p>
+<pre><code>ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  
+// 加载购物车列表布局  
+vs_cart_none.setVisibility(View.VISIBLE);  
+// 获取到购物车ListView，注意这里是通过ViewStub的inflatedId来获取  
+FrameLayout stub_fl = findViewById(R.id.stub_fl);  
+if (vs_cart_none.getVisibility() == View.VISIBLE ) {  
+// 已经加载, 否则还没有加载
+    stub_fl.setVisibility(View.GONE); 
+}else{
+    stub_fl.setVisibility(View.VISIBLE); 
+}  
+</code></pre><p>上面我们是通过<code>vs_cart_none.setVisibility(View.VISIBLE);</code> 来加载ViewStub的布局的，还有另外一种方法</p>
+<pre><code>FrameLayout stub_fl；
+...
+
+ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);
+if(stub_fl==null){
+    //加载购物车布局
+    stub_fl = (ListView)vs_cart_none.inflate();
+}else{
+
+}
+</code></pre><p> 注意这两种加载方法的判断逻辑是不一样的</p>
+<p> 还有一点 我们的ViewStub布局中有这个么一个属性，android:inflatedId=”@+id/stub_fl”，在判断ViewStub是否加载的第一种方法中，我们是通过这个<code>inflatedId</code>来找到FrameLayout的，开始我也举得很疑惑，我们的FrameLayout不是有自己的id<code>stub_fl</code>吗？为什么要通过这个<code>inflatedId</code>来找，如果这两个id同时存在，该通过那个id来找，带着疑问我们去看下ViewStub的源码；</p>
+<pre><code> public ViewStub(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context);
+
+    final TypedArray a = context.obtainStyledAttributes(attrs,
+            R.styleable.ViewStub, defStyleAttr, defStyleRes);
+    //获取inflatedId
+    mInflatedId = a.getResourceId(R.styleable.ViewStub_inflatedId, NO_ID);
+    mLayoutResource = a.getResourceId(R.styleable.ViewStub_layout, 0);
+    mID = a.getResourceId(R.styleable.ViewStub_id, NO_ID);
+    a.recycle();
+
+    setVisibility(GONE);//设置不可见
+    setWillNotDraw(true);//设置不绘制
+}
+
+
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    setMeasuredDimension(0, 0);//宽高默认为0
+}
+
+
+/**
+ * When visibility is set to {@link #VISIBLE} or {@link #INVISIBLE},
+ * {@link #inflate()} is invoked and this StubbedView is replaced in its parent
+ * by the inflated layout resource. After that calls to this function are passed
+ * through to the inflated view.
+ *
+ * @param visibility One of {@link #VISIBLE}, {@link #INVISIBLE}, or {@link #GONE}.
+ *
+ * @see #inflate() 
+ */
+@Override
+@android.view.RemotableViewMethod
+public void setVisibility(int visibility) {
+    if (mInflatedViewRef != null) {
+        //已经加载只设置是否可见
+        View view = mInflatedViewRef.get();
+        if (view != null) {
+            view.setVisibility(visibility);
+        } else {
+            throw new IllegalStateException(&quot;setVisibility called on un-referenced view&quot;);
+        }
+    } else {
+        super.setVisibility(visibility);
+        if (visibility == VISIBLE || visibility == INVISIBLE) {
+            //VISIBLE或INVISIBLE条件下就加载
+            inflate();
+        }
+    }
+}
+
+
+ /**
+ * Inflates the layout resource identified by {@link #getLayoutResource()}
+ * and replaces this StubbedView in its parent by the inflated layout resource.
+ *
+ * @return The inflated layout resource.
+ *
+ */
+public View inflate() {
+    final ViewParent viewParent = getParent();
+
+    if (viewParent != null &amp;&amp; viewParent instanceof ViewGroup) {
+        if (mLayoutResource != 0) {
+            final ViewGroup parent = (ViewGroup) viewParent;
+            final LayoutInflater factory;
+            if (mInflater != null) {
+                factory = mInflater;
+            } else {
+                factory = LayoutInflater.from(mContext);
+            }
+            //此处的view为layout包裹的布局的根布局
+            final View view = factory.inflate(mLayoutResource, parent,
+                    false);
+            //如果布局中设置了inflatedId，就将这个id赋给view
+            if (mInflatedId != NO_ID) {
+                view.setId(mInflatedId);
+            }
+
+            final int index = parent.indexOfChild(this);
+            parent.removeViewInLayout(this);
+
+            final ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            if (layoutParams != null) {
+                parent.addView(view, index, layoutParams);
+            } else {
+                parent.addView(view, index);
+            }
+
+            mInflatedViewRef = new WeakReference&lt;View&gt;(view);
+
+            if (mInflateListener != null) {
+                mInflateListener.onInflate(this, view);
+            }
+
+            return view;
+        } else {
+            throw new IllegalArgumentException(&quot;ViewStub must have a valid layoutResource&quot;);
+        }
+    } else {
+        throw new IllegalStateException(&quot;ViewStub must have a non-null ViewGroup viewParent&quot;);
+    }
+}
+</code></pre><p>所以如果ViewStub属性中设置了<code>android:inflatedId:stub_fl</code>,那么<code>view_order_none.xml</code>中的<code>android:id=&quot;@+id/fl_cart_none&quot;</code>就无效了，否则就可以通过<code>fl_cart_none</code>取到</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的介绍，我想大家应该大概了解include、merge、VIewStub的使用方法了，其实并不是有多难，只是我们很少用他们而已，我们在做性能优化优化的时候，UI布局的优化也是其中的一部分，那么让我们用上它们吧！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/include/" rel="tag">#include</a>
+          
+            <a href="/tags/merge/" rel="tag">#merge</a>
+          
+            <a href="/tags/ViewStub/" rel="tag">#ViewStub</a>
+          
+            <a href="/tags/性能优化/" rel="tag">#性能优化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/20/说说Handler的工作原理/" rel="next" title="说说Handler的工作原理">
+                <i class="fa fa-chevron-left"></i> 说说Handler的工作原理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/"
+     data-title="使用include、merge、ViewStub来优化你的布局"
+     data-content=""
+     data-url="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/"
+           data-title="使用include、merge、ViewStub来优化你的布局" data-url="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">2.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewStub"><span class="nav-number">3.</span> <span class="nav-text">ViewStub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+<div class="powered-by">
+  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"loody"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

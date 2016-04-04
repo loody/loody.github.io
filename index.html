@@ -224,6 +224,323 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="url">
+                  使用include、merge、ViewStub来优化你的布局
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-04T19:35:36+08:00" content="2016-04-04">
+              2016-04-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android性能优化/" itemprop="url" rel="index">
+                    <span itemprop="name">Android性能优化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/04/使用include、merge、viewstub来优化你的布局/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解<code>include</code>、<code>merge</code>、<code>ViewStub</code>在优化布局中的使用方法</p>
+<h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><code>[include](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
+<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          android:layout_width=&quot;match_parent&quot;
+          android:layout_height=&quot;match_parent&quot;
+          android:background=&quot;@color/window_background&quot;
+          android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;include layout=&quot;@layout/toolbar&quot;/&gt;
+
+               ...
+
+   &lt;/LinearLayout&gt;
+</code></pre><p>这里的toolbar就是被抽离出来的布局，这样我们在其他Activity需要加入toolbar的时候直接include<code>toolbar.xml</code>就可以了</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><code>[merge](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
+<ol>
+<li>当购物车为空时，显示<code>view_order_none.xml</code></li>
+<li>当购物车不为空时，显示列表ListView</li>
+</ol>
+<p>下面贴一下布局文件的源码fragment_cart.xml，方便大家理解</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ViewStub
+    android:id=&quot;@+id/vs_cart_none&quot;
+    android:inflatedId=&quot;@+id/stub_fl&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout=&quot;@layout/view_order_none&quot;/&gt;
+
+
+&lt;ListView
+    android:id=&quot;@+id/lv&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;/&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre><p><code>view_order_none.xml</code>代码如下</p>
+<pre><code>&lt;FrameLayout
+    android:id=&quot;@+id/fl_cart_none&quot;
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;
+</code></pre><p>这里<code>fragment_cart.xml</code>包含了两个布局，<code>ViewStub</code>（下面会介绍）和<code>ListView</code>，他们通过一个FramLayout包裹起来，其实我们再仔细一想，这个FrameLayout的存在有没有必要呢？结果是没有必要的，它只会让我们层级又多了一层，这个时候就可以用<code>merge</code>标签替换它了，这也是<code>merge</code>的使用场景,用merge替换后的代码如下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;merge xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;ViewStub
+    android:id=&quot;@+id/vs_cart_none&quot;
+    android:inflatedId=&quot;@+id/stub_fl&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:layout=&quot;@layout/view_order_none&quot;/&gt;
+
+
+&lt;ListView
+    android:id=&quot;@+id/lv&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;/&gt;
+
+&lt;/merge&gt;
+</code></pre><h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><code>[ViewStub](http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html)</code>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
+<p>判断ViewStub是否加载</p>
+<pre><code>ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  
+// 加载购物车列表布局  
+vs_cart_none.setVisibility(View.VISIBLE);  
+// 获取到购物车ListView，注意这里是通过ViewStub的inflatedId来获取  
+FrameLayout stub_fl = findViewById(R.id.stub_fl);  
+if (vs_cart_none.getVisibility() == View.VISIBLE ) {  
+// 已经加载, 否则还没有加载
+    stub_fl.setVisibility(View.GONE); 
+}else{
+    stub_fl.setVisibility(View.VISIBLE); 
+}  
+</code></pre><p>上面我们是通过<code>vs_cart_none.setVisibility(View.VISIBLE);</code> 来加载ViewStub的布局的，还有另外一种方法</p>
+<pre><code>FrameLayout stub_fl；
+...
+
+ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);
+if(stub_fl==null){
+    //加载购物车布局
+    stub_fl = (ListView)vs_cart_none.inflate();
+}else{
+
+}
+</code></pre><p> 注意这两种加载方法的判断逻辑是不一样的</p>
+<p> 还有一点 我们的ViewStub布局中有这个么一个属性，android:inflatedId=”@+id/stub_fl”，在判断ViewStub是否加载的第一种方法中，我们是通过这个<code>inflatedId</code>来找到FrameLayout的，开始我也举得很疑惑，我们的FrameLayout不是有自己的id<code>stub_fl</code>吗？为什么要通过这个<code>inflatedId</code>来找，如果这两个id同时存在，该通过那个id来找，带着疑问我们去看下ViewStub的源码；</p>
+<pre><code> public ViewStub(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context);
+
+    final TypedArray a = context.obtainStyledAttributes(attrs,
+            R.styleable.ViewStub, defStyleAttr, defStyleRes);
+    //获取inflatedId
+    mInflatedId = a.getResourceId(R.styleable.ViewStub_inflatedId, NO_ID);
+    mLayoutResource = a.getResourceId(R.styleable.ViewStub_layout, 0);
+    mID = a.getResourceId(R.styleable.ViewStub_id, NO_ID);
+    a.recycle();
+
+    setVisibility(GONE);//设置不可见
+    setWillNotDraw(true);//设置不绘制
+}
+
+
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    setMeasuredDimension(0, 0);//宽高默认为0
+}
+
+
+/**
+ * When visibility is set to {@link #VISIBLE} or {@link #INVISIBLE},
+ * {@link #inflate()} is invoked and this StubbedView is replaced in its parent
+ * by the inflated layout resource. After that calls to this function are passed
+ * through to the inflated view.
+ *
+ * @param visibility One of {@link #VISIBLE}, {@link #INVISIBLE}, or {@link #GONE}.
+ *
+ * @see #inflate() 
+ */
+@Override
+@android.view.RemotableViewMethod
+public void setVisibility(int visibility) {
+    if (mInflatedViewRef != null) {
+        //已经加载只设置是否可见
+        View view = mInflatedViewRef.get();
+        if (view != null) {
+            view.setVisibility(visibility);
+        } else {
+            throw new IllegalStateException(&quot;setVisibility called on un-referenced view&quot;);
+        }
+    } else {
+        super.setVisibility(visibility);
+        if (visibility == VISIBLE || visibility == INVISIBLE) {
+            //VISIBLE或INVISIBLE条件下就加载
+            inflate();
+        }
+    }
+}
+
+
+ /**
+ * Inflates the layout resource identified by {@link #getLayoutResource()}
+ * and replaces this StubbedView in its parent by the inflated layout resource.
+ *
+ * @return The inflated layout resource.
+ *
+ */
+public View inflate() {
+    final ViewParent viewParent = getParent();
+
+    if (viewParent != null &amp;&amp; viewParent instanceof ViewGroup) {
+        if (mLayoutResource != 0) {
+            final ViewGroup parent = (ViewGroup) viewParent;
+            final LayoutInflater factory;
+            if (mInflater != null) {
+                factory = mInflater;
+            } else {
+                factory = LayoutInflater.from(mContext);
+            }
+            //此处的view为layout包裹的布局的根布局
+            final View view = factory.inflate(mLayoutResource, parent,
+                    false);
+            //如果布局中设置了inflatedId，就将这个id赋给view
+            if (mInflatedId != NO_ID) {
+                view.setId(mInflatedId);
+            }
+
+            final int index = parent.indexOfChild(this);
+            parent.removeViewInLayout(this);
+
+            final ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            if (layoutParams != null) {
+                parent.addView(view, index, layoutParams);
+            } else {
+                parent.addView(view, index);
+            }
+
+            mInflatedViewRef = new WeakReference&lt;View&gt;(view);
+
+            if (mInflateListener != null) {
+                mInflateListener.onInflate(this, view);
+            }
+
+            return view;
+        } else {
+            throw new IllegalArgumentException(&quot;ViewStub must have a valid layoutResource&quot;);
+        }
+    } else {
+        throw new IllegalStateException(&quot;ViewStub must have a non-null ViewGroup viewParent&quot;);
+    }
+}
+</code></pre><p>所以如果ViewStub属性中设置了<code>android:inflatedId:stub_fl</code>,那么<code>view_order_none.xml</code>中的<code>android:id=&quot;@+id/fl_cart_none&quot;</code>就无效了，否则就可以通过<code>fl_cart_none</code>取到</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的介绍，我想大家应该大概了解include、merge、VIewStub的使用方法了，其实并不是有多难，只是我们很少用他们而已，我们在做性能优化优化的时候，UI布局的优化也是其中的一部分，那么让我们用上它们吧！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/20/说说Handler的工作原理/" itemprop="url">
                   说说Handler的工作原理
                 </a>
@@ -1992,182 +2309,6 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/16/2015-04-16-http缓存/" itemprop="url">
-                  HTTP缓存机制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-16T00:00:00+08:00" content="2015-04-16">
-              2015-04-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/http/" itemprop="url" rel="index">
-                    <span itemprop="name">http</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/16/2015-04-16-http缓存/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/16/2015-04-16-http缓存/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="关于http缓存"><a href="#关于http缓存" class="headerlink" title="关于http缓存"></a>关于http缓存</h2><p>有很多解释，大体都相似，其实就是当Web请求抵达缓存时， 如果本地有“已缓存的”副本，就可以从本地存储设备而不是从原始服务器中提取这个文档。缓存有很多的好处</p>
-<ol>
-<li><p>减少了冗余的数据传输，节省了网费。</p>
-</li>
-<li><p>减少了服务器的负担， 大大提高了网站的性能</p>
-</li>
-<li><p>加快了客户端加载网页的速度</p>
-</li>
-</ol>
-<h2 id="如何判断缓存新鲜度"><a href="#如何判断缓存新鲜度" class="headerlink" title="如何判断缓存新鲜度"></a>如何判断缓存新鲜度</h2><p>Web服务器通过2种方式来判断浏览器缓存是否是最新的。</p>
-<ol>
-<li><p>浏览器把缓存文件的最后修改时间Last-Modified 通过 header ”If-Modified-Since“来告诉Web服务器。</p>
-</li>
-<li><p>浏览器把缓存文件的ETag, 通过header “If-None-Match”, 来告诉Web服务器。</p>
-</li>
-</ol>
-<p><strong>Last-Modified/If-Modified-Since</strong></p>
-<p>Last-Modified/If-Modified-Since要配合Cache-Control使用。</p>
-<p><strong>Last-Modified</strong>：标示这个响应资源的最后修改时间。web服务器在响应请求时，告诉浏览器资源的最后修改时间。</p>
-<p><strong>If-Modified-Since</strong>：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Last-Modified声明，则再次向web服务器请求时带上头 If-Modified-Since，表示请求时间。web服务器收到请求后发现有头If-Modified-Since 则与被请求资源的最后修改时间进行比对。若最后修改时间较新，说明资源又被改动过，则响应整片资源内容（写在响应消息包体内），HTTP 200；若最后修改时间较旧，说明资源无新修改，则响应HTTP 304 (无需包体，节省浏览)，告知浏览器继续使用所保存的cache。</p>
-<p><strong>Etag/If-None-Match</strong></p>
-<p>Etag/If-None-Match也要配合Cache-Control使用。</p>
-<p><strong>Etag</strong>：web服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器觉得）。Apache中，<strong><em>ETag的值，默认是对文件的索引节（INode），大小（Size）和最后修改时间（MTime）进行Hash后得到的。</em></strong></p>
-<p><strong>If-None-Match</strong>：当资源过期时（使用Cache-Control标识的max-age），发现资源具有Etage声明，则再次向web服务器请求时带上头If-None-Match （Etag的值）。web服务器收到请求后发现有头If-None-Match 则与被请求资源的相应校验串进行比对，决定返回200或304。</p>
-<h2 id="为什么使用ETag呢？"><a href="#为什么使用ETag呢？" class="headerlink" title="为什么使用ETag呢？"></a>为什么使用ETag呢？</h2><p>主要是为了解决Last-Modified 无法解决的一些问题。</p>
-<ol>
-<li><p>某些服务器不能精确得到文件的最后修改时间， 这样就无法通过最后修改时间来判断文件是否更新了。</p>
-</li>
-<li><p>某些文件的修改非常频繁，在秒以下的时间内进行修改. Last-Modified只能精确到秒。</p>
-</li>
-<li><p>一些文件的最后修改时间改变了，但是内容并未改变。 我们不希望客户端认为这个文件修改了。</p>
-</li>
-</ol>
-<h2 id="与缓存有关的header"><a href="#与缓存有关的header" class="headerlink" title="与缓存有关的header"></a>与缓存有关的header</h2><ul>
-<li><p><strong>request</strong></p>
-<ul>
-<li>Cache-Control: max-age=0    以秒为单位</li>
-<li>If-Modified-Since: Mon, 19 Nov 2012 08:38:01 GMT 缓存文件的最后修改时间。</li>
-<li>If-None-Match: “0693f67a67cc1:0”    缓存文件的Etag值</li>
-<li>Cache-Control: no-cache    不使用缓存</li>
-<li>Pragma: no-cache    不使用缓存</li>
-</ul>
-</li>
-<li><p><strong>response</strong></p>
-<ul>
-<li>Cache-Control: public        响应被缓存，并且在多用户间共享</li>
-<li>Cache-Control: private    响应只能作为私有缓存，不能在用户之间共享</li>
-<li>Cache-Control:no-cache    提醒浏览器要从服务器提取文档进行验证</li>
-<li>Cache-Control:no-store    绝对禁止缓存（用于机密，敏感文件）</li>
-<li>Cache-Control: max-age=60         60秒之后缓存过期（相对时间）</li>
-<li>Date: Mon, 19 Nov 2012 08:39:00 GMT    当前response发送的时间</li>
-<li>Expires: Mon, 19 Nov 2012 08:40:01 GMT    缓存过期的时间（绝对时间）</li>
-<li>Last-Modified: Mon, 19 Nov 2012 08:38:01 GMT 服务器端文件的最后修改时间</li>
-<li>ETag: “20b1add7ec1cd1:0”    服务器端文件的Etag值</li>
-</ul>
-</li>
-</ul>
-<p>下面是一张http缓存流程图，画的非常简洁易懂</p>
-<p><img src="/images/http-cache.png" alt="http-cache"></p>
-<p>参考：</p>
-<p><a href="http://www.cnblogs.com/skynet/archive/2012/11/28/2792503.html" target="_blank" rel="external">浏览器缓存机制</a>    </p>
-<p><a href="http://www.cnblogs.com/tankxiao/archive/2012/11/28/2793365.html" target="_blank" rel="external">HTTP协议 (四) 缓存</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2213,7 +2354,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2221,7 +2362,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -2230,7 +2371,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

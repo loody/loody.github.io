@@ -224,6 +224,205 @@
             
               
                 
+                <a class="post-title-link" href="/2014/08/03/2014-08-03-ichartjs in android/" itemprop="url">
+                  ichartjs在android应用中的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-03T00:00:00+08:00" content="2014-08-03">
+              2014-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/03/2014-08-03-ichartjs in android/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/03/2014-08-03-ichartjs in android/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <strong>ichartjs</strong> 是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 ichartjs致力于为您的应用提供简单、直观、可交互的体验级图表组件。是WEB/APP图表展示方面的解决方案 。如果你正在开发HTML5的应用，ichartjs正好适合您。 ichartjs目前支持饼图、环形图、折线图、面积图、柱形图、条形图。ichartjs是基于Apache License 2.0协议的开源项目。</p>
+<p>此文以制作一个3D的柱形图为例讲解ichartjs的使用</p>
+<p>首先,我们要去ichartjs官网下载其js库，因为我们的要用到东西就是在html文件中导入一个js文件即可</p>
+<p>ichartjs官网地址：<a href="http://www.ichartjs.com/" target="_blank" rel="external"><em>http://www.ichartjs.com/</em></a></p>
+<p>源代码地址：<a href="http://code.google.com/p/ichartjs/source/checkout" target="_blank" rel="external"><em>http://code.google.com/p/ichartjs/source/checkout</em></a></p>
+<p>将ichart.1.2.min.js放置assets文件中，新建一个html文件，也放置在assets文件下，代码如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+&lt;head&gt; 
+&lt;meta charset=&quot;UTF-8&quot; /&gt; 
+&lt;title&gt;ichartjs 示例&lt;/title&gt; 
+&lt;script type=&quot;text/javascript&quot; src=&quot;ichart.1.2.min.js&quot;&gt;&lt;/script&gt; 
+&lt;script type=&quot;text/javascript&quot;&gt; 
+$(function(){
+    var data = [
+                {name : &apos;IE&apos;,value : 35.75,color:&apos;#bc6666&apos;},
+                {name : &apos;Chrome&apos;,value : 29.84,color:&apos;#cbab4f&apos;},
+                {name : &apos;Firefox&apos;,value : 24.88,color:&apos;#76a871&apos;},
+                {name : &apos;Safari&apos;,value : 6.77,color:&apos;#9f7961&apos;},
+                {name : &apos;Opera&apos;,value : 2.02,color:&apos;#2ba5a4&apos;},
+                {name : &apos;Other&apos;,value : 0.73,color:&apos;#6f83a5&apos;}
+            ];
+
+    new iChart.Column3D({
+        render : &apos;canvasDiv&apos;,
+        data: data,
+        title : &apos;Top 5 Browsers from 1 to 29 Feb 2012&apos;,
+        width : 800,
+        height : 400,
+        align:&apos;left&apos;,
+        offsetx:50,
+        legend : {
+            enable : true
+        },
+        sub_option:{
+            label:{
+                color:&apos;#111111&apos;
+            }
+        },
+        coordinate:{
+            width:600,
+            scale:[{
+                 position:&apos;left&apos;,    
+                 start_scale:0,
+                 end_scale:40,
+                 scale_space:8,
+                 listeners:{
+                    parseText:function(t,x,y){
+                        return {text:t+&quot;%&quot;}
+                    }
+                }
+            }]
+        }
+    }).draw();
+});
+&lt;/script&gt; 
+</code></pre><p>以上画图部分的属性大家可以参照源代码中docs文件夹中的 API文档  所有的属性都有说明，可以根据自己需求定制不同的效果，在此不做详细说明,最后，在Activity中</p>
+<pre><code>package com.example.ichartjsdemo; 
+
+import android.annotation.SuppressLint; 
+import android.app.Activity; 
+import android.os.Bundle; 
+import android.view.Menu; 
+import android.webkit.WebView; 
+public class MainActivity extends Activity { 
+    private WebView webView; 
+    @SuppressLint({ &quot;JavascriptInterface&quot;, &quot;SetJavaScriptEnabled&quot; }) 
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+        webView = (WebView) findViewById(R.id.webview); 
+        webView.getSettings().setJavaScriptEnabled(true); // 设定该WebView可以执行JavaScript程序 
+        webView.getSettings().setBuiltInZoomControls(true); // 设定该WebView可以缩放 
+        webView.loadUrl(&quot;file:///android_asset/line.html&quot;); 
+    } 
+
+    @Override 
+    public boolean onCreateOptionsMenu(Menu menu) { 
+        getMenuInflater().inflate(R.menu.main, menu); 
+        return false; 
+    } 
+} 
+</code></pre><p>运行效果图：</p>
+<p><img src="/images/ichartjs_in_android.png" alt="ichartjs_in_android.png"> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="url">
                   解决ScrollView嵌套ListView的冲突问题
                 </a>
@@ -534,7 +733,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -542,7 +741,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -551,7 +750,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
