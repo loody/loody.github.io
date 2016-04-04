@@ -58,18 +58,18 @@
 
 
 <meta name="description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
-include[include](http://developer.android.com/intl/zh-cn/training/improv">
+includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用include、merge、ViewStub来优化你的布局">
 <meta property="og:url" content="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
-include[include](http://developer.android.com/intl/zh-cn/training/improv">
-<meta property="og:updated_time" content="2016-04-04T13:43:31.000Z">
+includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将">
+<meta property="og:updated_time" content="2016-04-04T13:49:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用include、merge、ViewStub来优化你的布局">
 <meta name="twitter:description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
-include[include](http://developer.android.com/intl/zh-cn/training/improv">
+includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将">
 
 
 
@@ -291,7 +291,7 @@ include[include](http://developer.android.com/intl/zh-cn/training/improv">
 
       
         <p>在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解<code>include</code>、<code>merge</code>、<code>ViewStub</code>在优化布局中的使用方法</p>
-<h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><code>[include](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
+<h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">include</a>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
 <pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
           android:layout_width=&quot;match_parent&quot;
           android:layout_height=&quot;match_parent&quot;
@@ -304,7 +304,7 @@ include[include](http://developer.android.com/intl/zh-cn/training/improv">
 
    &lt;/LinearLayout&gt;
 </code></pre><p>这里的toolbar就是被抽离出来的布局，这样我们在其他Activity需要加入toolbar的时候直接include<code>toolbar.xml</code>就可以了</p>
-<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><code>[merge](http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html)</code>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">merge</a>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
 <ol>
 <li>当购物车为空时，显示<code>view_order_none.xml</code></li>
 <li>当购物车不为空时，显示列表ListView</li>
@@ -361,7 +361,7 @@ include[include](http://developer.android.com/intl/zh-cn/training/improv">
     android:layout_height=&quot;match_parent&quot;/&gt;
 
 &lt;/merge&gt;
-</code></pre><h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><code>[ViewStub](http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html)</code>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
+</code></pre><h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><a href="http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html" target="_blank" rel="external">ViewStub</a>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
 <p>判断ViewStub是否加载</p>
 <pre><code>ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  
 // 加载购物车列表布局  
@@ -493,6 +493,7 @@ public View inflate() {
 }
 </code></pre><p>所以如果ViewStub属性中设置了<code>android:inflatedId:stub_fl</code>,那么<code>view_order_none.xml</code>中的<code>android:id=&quot;@+id/fl_cart_none&quot;</code>就无效了，否则就可以通过<code>fl_cart_none</code>取到</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的介绍，我想大家应该大概了解include、merge、VIewStub的使用方法了，其实并不是有多难，只是我们很少用他们而已，我们在做性能优化优化的时候，UI布局的优化也是其中的一部分，那么让我们用上它们吧！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html</a><br><a href="http://www.devtf.cn/?p=509" target="_blank" rel="external">http://www.devtf.cn/?p=509</a></p>
 
       
     </div>
@@ -687,7 +688,7 @@ public View inflate() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">2.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewStub"><span class="nav-number">3.</span> <span class="nav-text">ViewStub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">2.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewStub"><span class="nav-number">3.</span> <span class="nav-text">ViewStub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
