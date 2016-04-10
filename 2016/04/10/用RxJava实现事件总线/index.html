@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ScrollView,ListView," />
+  <meta name="keywords" content="RxJava,RxBus," />
 
 
 
@@ -57,19 +57,16 @@
 
 
 
-<meta name="description" content="最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案
-手动设置ListView高度经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测">
+<meta name="description" content="最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决ScrollView嵌套ListView的冲突问题">
-<meta property="og:url" content="http://loody.github.io/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/index.html">
+<meta property="og:title" content="用RxJava实现事件总线">
+<meta property="og:url" content="http://loody.github.io/2016/04/10/用RxJava实现事件总线/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案
-手动设置ListView高度经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测">
-<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta property="og:description" content="最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值">
+<meta property="og:updated_time" content="2016-04-10T12:31:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决ScrollView嵌套ListView的冲突问题">
-<meta name="twitter:description" content="最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案
-手动设置ListView高度经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测">
+<meta name="twitter:title" content="用RxJava实现事件总线">
+<meta name="twitter:description" content="最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> 解决ScrollView嵌套ListView的冲突问题 | loody's blog </title>
+  <title> 用RxJava实现事件总线 | loody's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +222,7 @@
             
             
               
-                解决ScrollView嵌套ListView的冲突问题
+                用RxJava实现事件总线
               
             
           </h1>
@@ -237,38 +234,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-07-20T00:00:00+08:00" content="2014-07-20">
-              2014-07-20
+            <time itemprop="dateCreated" datetime="2016-04-10T19:08:48+08:00" content="2016-04-10">
+              2016-04-10
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="commentsCount"></span>
+                <a href="/2016/04/10/用RxJava实现事件总线/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/10/用RxJava实现事件总线/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -290,39 +268,131 @@
       
 
       
-        <p>最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案</p>
-<h2 id="手动设置ListView高度"><a href="#手动设置ListView高度" class="headerlink" title="手动设置ListView高度"></a>手动设置ListView高度</h2><pre><code>经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测量。于是需要手动代码设置ListView高度，实现代码如下：
+        <p>最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值得学习和借鉴的。</p>
+<p>回到刚刚的需求，在app中获取用户的未读消息数，我们在拿到消息数后怎么通知呢，这就要用到消息通知机制了，有人选择Android原生的<a href="http://developer.android.com/intl/zh-cn/reference/android/database/Observable.html" target="_blank" rel="external">android.database.Observable</a>，也有人选择<a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a>,或者<a href="http://square.github.io/otto/" target="_blank" rel="external">otto</a>，大家用的比较多的应该是EventBus吧，我在知乎上看到以前关于<a href="http://www.zhihu.com/question/32179258/answer/54989242" target="_blank" rel="external">RxJava和EventBus的区别？</a>，可以参读一下，大家支持使用Rxjava的还是占多数的，这里美恰团队也是使用的Rxjava来实现的事件总线，所以我也打算在项目中使用RxJava了，当然RxJava的功能远不止这么简单，那就从用RxJava实现事件总线开始吧，因为RxJava也是基于观察者模式,天生就具备这种事件通知的功能。</p>
+<p>首先我们看一下美恰的实现方式：</p>
+<pre><code>public class RxBus {
+    private Subject&lt;Object, Object&gt; mBus;
+    private static RxBus sInstance;
 
-&gt;取代ListView的LinearLayout，使之能够成功嵌套在ScrollView中
+    private RxBus() {
+        mBus = new SerializedSubject&lt;&gt;(PublishSubject.create());
+    }
 
-    public class LinearLayoutForListView extends LinearLayout {
-        private BaseAdapter adapter;
-        private OnClickListener onClickListener = null;
-        public void bindLinearLayout() {
-        int count = adapter.getCount();
-        this.removeAllViews();
-        for (int i = 0; i &lt; count; i++) {
-            View v = adapter.getView(i, null, null);
-            v.setOnClickListener(this.onClickListener);
-            addView(v, i);
+    public static RxBus getInstance() {
+        if (sInstance == null) {
+            // [1]
+            synchronized (RxBus.class) {
+                if (sInstance == null) {
+                    //单例模式之双重检测：线程一在此之前线程二到达了位置[1],如果此处不二次判断，那么线程二执行到这里的时候还会重新new
+                    sInstance = new RxBus();
+                }
+            }
         }
-           Log.v(&quot;countTAG&quot;, &quot;&quot; + count);
+        return sInstance;
     }
-    public LinearLayoutForListView(Context context) {
-        super(context);  
-</code></pre><p>采用这个方法有个细节需要注意：就是getView方法返回的View必须由LinearLayout组成，而且LinearLayout里面也不能有其他的如LinearLayout，RelativeLayout等的子布局，只能存在一个外围的LinearLayout布局，最近做的项目就是遇到这个问题，所以在ListView中遇到比较复杂的布局的时候就要考虑其他方案了，比如下面介绍的两种方法</p>
-<h2 id="采用LinearLayout取代ListView"><a href="#采用LinearLayout取代ListView" class="headerlink" title="采用LinearLayout取代ListView"></a>采用LinearLayout取代ListView</h2><pre><code>如果ListView 中Item的数量不是很大，完全没必要用ListView,用LinearLayout代替即可，也不会出现上述冲突问题
-</code></pre><h2 id="自定义可适应ScrollView的ListView"><a href="#自定义可适应ScrollView的ListView" class="headerlink" title="自定义可适应ScrollView的ListView"></a>自定义可适应ScrollView的ListView</h2><pre><code>这种方法比较省事，而且改动也很小，只需要自定义一个类继承自ListView，然后重写里面的onMeasure方法，代码如下：
 
- &gt; 重写该方法，达到使ListView适应ScrollView的效果
+    private Subject&lt;Object, Object&gt; getBus() {
+        return mBus;
+    }
 
+    public static Observable&lt;Object&gt; toObserverable() {
+        return getInstance().getBus();
+    }
+
+    public static void send(Object obj) {
+           getInstance().getBus().onNext(obj);
+    }
+
+    public static boolean hasObservers() {
+        return getInstance().getBus().hasObservers();
+    }
+
+}
+</code></pre><p>下面是我的实现方式：</p>
+<pre><code>public class RxBus {
+    private static volatile RxBus mInstance;
+
+    private final Subject bus;
+
+    private Subject getBus() {
+        return bus;
+    }
+
+    //Subject是非线程安全的，要避免该问题，需要将 Subject转换为一个 SerializedSubject 
+    //PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
+    public RxBus() {    
+        bus = new SerializedSubject&lt;&gt;(PublishSubject.create());
+    }
+
+    public static RxBus getInstance() {
+        RxBus rxBus = mInstance;
+        if (mInstance == null) {
+            synchronized (RxBus.class) {
+                rxBus = mInstance;
+                if (mInstance == null) {
+                    rxBus = new RxBus();
+                    mInstance = rxBus;
+                }
+            }
+        }
+        return rxBus;
+    }
+
+    public static void post(Object o) {
+        if (hasObservers()){
+            getInstance().getBus().onNext(o);
+        }
+    }
+
+
+    public static &lt;T&gt; Observable&lt;T&gt; toObserverable(Class&lt;T&gt; eventType) {
+        return getInstance().getBus().ofType(eventType);
+    }
+
+    public static boolean hasObservers() {
+        return getInstance().getBus().hasObservers();
+    }
+}
+</code></pre><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
+<li><p>发送事件</p>
+<pre><code>RxBus.post(new UnreadChatMessageEvent());      
+</code></pre></li>
+<li><p>监听事件</p>
+<pre><code>mSubscription = RxBus.toObserverable(IncreaseEvent.class).subscribe(new Action1&lt;IncreaseEvent&gt;() {
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2,
-        MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
+    public void call(IncreaseEvent increaseEvent) {
+        tv_increase.setText(increaseEvent.getNum() + &quot;&quot;);
     }
-</code></pre>
+});
+</code></pre></li>
+</ol>
+<p>   这里有点需要注意，在生命周期结束的地方取消订阅事件，防止RxJava可能会引起的内存泄漏问题</p>
+<pre><code>   @Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (mSubscription != null &amp;&amp; !mSubscription.isUnsubscribed()) {
+        mSubscription.unsubscribe();
+    }
+}
+</code></pre><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ol>
+<li>单例加了双重校验锁，更多单例讲解请看<a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></li>
+<li><p>根据传递的 eventType 类型返回特定类型(eventType)的 被观察者,我们可以看下<code>ofType</code>的源码实现：</p>
+<pre><code>public final &lt;R&gt; Observable&lt;R&gt; ofType(final Class&lt;R&gt; klass) {
+    return filter(new Func1&lt;T, Boolean&gt;() {
+        @Override
+        public final Boolean call(T t) {
+            return klass.isInstance(t);
+        }
+    }).cast(klass);
+}
+</code></pre><p> 其内部就是filter+cast，filter操作符可以使你提供一个指定的测试数据项，只有通过测试的数据才会被“发射”。cast操作符可以将一个Observable转换成指定类型的Observable。</p>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="external">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
+<p><a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></p>
+<p><a href="https://drakeet.me/rxbus" target="_blank" rel="external">https://drakeet.me/rxbus</a></p>
+
       
     </div>
 
@@ -336,9 +406,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ScrollView/" rel="tag">#ScrollView</a>
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
           
-            <a href="/tags/ListView/" rel="tag">#ListView</a>
+            <a href="/tags/RxBus/" rel="tag">#RxBus</a>
           
         </div>
       
@@ -347,17 +417,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/07/12/2014-07-12-meizu smartbar adapter 1/" rel="next" title="关于魅族SmartBar的适配1">
-                <i class="fa fa-chevron-left"></i> 关于魅族SmartBar的适配1
+              <a href="/2016/04/04/使用include、merge、viewstub来优化你的布局/" rel="next" title="使用include、merge、ViewStub来优化你的布局">
+                <i class="fa fa-chevron-left"></i> 使用include、merge、ViewStub来优化你的布局
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/08/03/2014-08-03-ichartjs in android/" rel="prev" title="ichartjs在android应用中的使用">
-                ichartjs在android应用中的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -372,10 +438,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/"
-     data-title="解决ScrollView嵌套ListView的冲突问题"
+        <div class="ds-share flat" data-thread-key="2016/04/10/用RxJava实现事件总线/"
+     data-title="用RxJava实现事件总线"
      data-content=""
-     data-url="http://loody.github.io/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/">
+     data-url="http://loody.github.io/2016/04/10/用RxJava实现事件总线/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -402,8 +468,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/"
-           data-title="解决ScrollView嵌套ListView的冲突问题" data-url="http://loody.github.io/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/">
+      <div class="ds-thread" data-thread-key="2016/04/10/用RxJava实现事件总线/"
+           data-title="用RxJava实现事件总线" data-url="http://loody.github.io/2016/04/10/用RxJava实现事件总线/">
       </div>
     
   </div>
@@ -516,7 +582,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#手动设置ListView高度"><span class="nav-number">1.</span> <span class="nav-text">手动设置ListView高度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#采用LinearLayout取代ListView"><span class="nav-number">2.</span> <span class="nav-text">采用LinearLayout取代ListView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义可适应ScrollView的ListView"><span class="nav-number">3.</span> <span class="nav-text">自定义可适应ScrollView的ListView</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">1.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进"><span class="nav-number">2.</span> <span class="nav-text">改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

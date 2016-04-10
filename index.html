@@ -224,6 +224,225 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/10/用RxJava实现事件总线/" itemprop="url">
+                  用RxJava实现事件总线
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-10T19:08:48+08:00" content="2016-04-10">
+              2016-04-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/10/用RxJava实现事件总线/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/10/用RxJava实现事件总线/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值得学习和借鉴的。</p>
+<p>回到刚刚的需求，在app中获取用户的未读消息数，我们在拿到消息数后怎么通知呢，这就要用到消息通知机制了，有人选择Android原生的<a href="http://developer.android.com/intl/zh-cn/reference/android/database/Observable.html" target="_blank" rel="external">android.database.Observable</a>，也有人选择<a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a>,或者<a href="http://square.github.io/otto/" target="_blank" rel="external">otto</a>，大家用的比较多的应该是EventBus吧，我在知乎上看到以前关于<a href="http://www.zhihu.com/question/32179258/answer/54989242" target="_blank" rel="external">RxJava和EventBus的区别？</a>，可以参读一下，大家支持使用Rxjava的还是占多数的，这里美恰团队也是使用的Rxjava来实现的事件总线，所以我也打算在项目中使用RxJava了，当然RxJava的功能远不止这么简单，那就从用RxJava实现事件总线开始吧，因为RxJava也是基于观察者模式,天生就具备这种事件通知的功能。</p>
+<p>首先我们看一下美恰的实现方式：</p>
+<pre><code>public class RxBus {
+    private Subject&lt;Object, Object&gt; mBus;
+    private static RxBus sInstance;
+
+    private RxBus() {
+        mBus = new SerializedSubject&lt;&gt;(PublishSubject.create());
+    }
+
+    public static RxBus getInstance() {
+        if (sInstance == null) {
+            // [1]
+            synchronized (RxBus.class) {
+                if (sInstance == null) {
+                    //单例模式之双重检测：线程一在此之前线程二到达了位置[1],如果此处不二次判断，那么线程二执行到这里的时候还会重新new
+                    sInstance = new RxBus();
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    private Subject&lt;Object, Object&gt; getBus() {
+        return mBus;
+    }
+
+    public static Observable&lt;Object&gt; toObserverable() {
+        return getInstance().getBus();
+    }
+
+    public static void send(Object obj) {
+           getInstance().getBus().onNext(obj);
+    }
+
+    public static boolean hasObservers() {
+        return getInstance().getBus().hasObservers();
+    }
+
+}
+</code></pre><p>下面是我的实现方式：</p>
+<pre><code>public class RxBus {
+    private static volatile RxBus mInstance;
+
+    private final Subject bus;
+
+    private Subject getBus() {
+        return bus;
+    }
+
+    //Subject是非线程安全的，要避免该问题，需要将 Subject转换为一个 SerializedSubject 
+    //PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
+    public RxBus() {    
+        bus = new SerializedSubject&lt;&gt;(PublishSubject.create());
+    }
+
+    public static RxBus getInstance() {
+        RxBus rxBus = mInstance;
+        if (mInstance == null) {
+            synchronized (RxBus.class) {
+                rxBus = mInstance;
+                if (mInstance == null) {
+                    rxBus = new RxBus();
+                    mInstance = rxBus;
+                }
+            }
+        }
+        return rxBus;
+    }
+
+    public static void post(Object o) {
+        if (hasObservers()){
+            getInstance().getBus().onNext(o);
+        }
+    }
+
+
+    public static &lt;T&gt; Observable&lt;T&gt; toObserverable(Class&lt;T&gt; eventType) {
+        return getInstance().getBus().ofType(eventType);
+    }
+
+    public static boolean hasObservers() {
+        return getInstance().getBus().hasObservers();
+    }
+}
+</code></pre><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
+<li><p>发送事件</p>
+<pre><code>RxBus.post(new UnreadChatMessageEvent());      
+</code></pre></li>
+<li><p>监听事件</p>
+<pre><code>mSubscription = RxBus.toObserverable(IncreaseEvent.class).subscribe(new Action1&lt;IncreaseEvent&gt;() {
+    @Override
+    public void call(IncreaseEvent increaseEvent) {
+        tv_increase.setText(increaseEvent.getNum() + &quot;&quot;);
+    }
+});
+</code></pre></li>
+</ol>
+<p>   这里有点需要注意，在生命周期结束的地方取消订阅事件，防止RxJava可能会引起的内存泄漏问题</p>
+<pre><code>   @Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (mSubscription != null &amp;&amp; !mSubscription.isUnsubscribed()) {
+        mSubscription.unsubscribe();
+    }
+}
+</code></pre><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ol>
+<li>单例加了双重校验锁，更多单例讲解请看<a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></li>
+<li><p>根据传递的 eventType 类型返回特定类型(eventType)的 被观察者,我们可以看下<code>ofType</code>的源码实现：</p>
+<pre><code>public final &lt;R&gt; Observable&lt;R&gt; ofType(final Class&lt;R&gt; klass) {
+    return filter(new Func1&lt;T, Boolean&gt;() {
+        @Override
+        public final Boolean call(T t) {
+            return klass.isInstance(t);
+        }
+    }).cast(klass);
+}
+</code></pre><p> 其内部就是filter+cast，filter操作符可以使你提供一个指定的测试数据项，只有通过测试的数据才会被“发射”。cast操作符可以将一个Observable转换成指定类型的Observable。</p>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="external">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
+<p><a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></p>
+<p><a href="https://drakeet.me/rxbus" target="_blank" rel="external">https://drakeet.me/rxbus</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="url">
                   使用include、merge、ViewStub来优化你的布局
                 </a>
@@ -2111,205 +2330,6 @@ public void onProgressChanged(WebView view, int newProgress) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/04/26/2015-04-26-recycleview-cardview/" itemprop="url">
-                  RecyclerView、CardView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-26T00:00:00+08:00" content="2015-04-26">
-              2015-04-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/26/2015-04-26-recycleview-cardview/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/26/2015-04-26-recycleview-cardview/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Android L的support library中包含了两个新的组件（<strong>RecyclerView</strong>和<strong>CardView</strong>），他们可以用于显示复杂的布局而且都默认采用了Material的风格。</p>
-<h2 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h2><p>很多人将它跟ListView对比，说它升级版的ListView,其实它可以做的更多，比如GridView也可以用它来代替，还比如listView中item的样式有多种，也可以通过它来实现，拓展性很强，这里只是简单介绍下它们的使用方法，就以薄荷的收货地址为例，没用RecyclerView的样子如下图：</p>
-<p><img src="/images/recyclerview-cardview-1.png" alt="recyclerview-cardview1"></p>
-<p>使用起来很简单</p>
-<ol>
-<li><p>添加依赖</p>
-<pre><code>compile &apos;com.android.support:recyclerview-v7:21.0.3&apos;
-compile &apos;com.android.support:cardview-v7:21.0.3&apos;
-</code></pre></li>
-<li><p>添加xml文件</p>
-<pre><code>&lt;android.support.v7.widget.RecyclerView
-  android:id=&quot;@+id/recycler_view&quot;
-  android:layout_width=&quot;match_parent&quot;
-  android:layout_height=&quot;match_parent&quot; /&gt;
-</code></pre></li>
-<li><p>初始化（跟listview不同）</p>
-<pre><code> recycler_view = (RecyclerView) findViewById(id.recycler_view);
-//设置LinearLayoutManager  可以指定方向，默认是垂直， 可以设置成水平。
-mLayoutManager = new LinearLayoutManager(this);
-//mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-recycler_view.setLayoutManager(mLayoutManager);
-//设置adapter 
-addressListAdapter = new AddressListAdapter(ctx, mAddressList);
-recycler_view.setAdapter(addressListAdapter);
-</code></pre></li>
-</ol>
-<p>这里和listview对比最大的不同就是Adapter了，它必须继承自<code>RecyclerView.Adapter</code>，源码如下：</p>
-<pre><code>public class AddressListAdapter extends RecyclerView.Adapter&lt;AddressListAdapter.ViewHolder&gt; {
-static final String TAG = AddressListAdapter.class.getName();
-public onAddressUpdateListener addressUpdateListener;
-
-private Context mContext;
-private List&lt;Address&gt; mAddresses;
-
-public AddressListAdapter(Context mContext, List&lt;Address&gt; addresses) {
-    super();
-    this.mContext = mContext;
-    this.mAddresses = addresses;
-}
-
-public static class ViewHolder extends RecyclerView.ViewHolder {
-    public TextView txt_real_name;
-
-    public ViewHolder(View v) {
-        super(v);
-        txt_real_name = (TextView) v.findViewById(R.id.txt_real_name);
-
-    }
-}
-
-@Override
-public int getItemCount() {
-    return mAddresses.size();
-}
-
-
-@Override
-public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.uchoice_address_list_item, parent, false);
-    return new ViewHolder(v);
-}
-
-@Override
-public void onBindViewHolder(final ViewHolder holder, final int position) {
-    final Address address = mAddresses.get(position);
-    holder.txt_real_name.setText(address.real_name);
-}
-
-}//为了看起来直观只贴了部分代码
-</code></pre><p>RecyclerView标准化了ViewHolder，ListView中convertView是复用的，在RecyclerView中，是把ViewHolder作为缓存的单位了，然后convertView作为ViewHolder的成员变量保持在ViewHolder中,<code>onCreateViewHolder()</code>专门用来生成    ViewHolder，<code>onBindViewHolder()</code>用来加载数据，分工很明确，比之前所有的逻辑都放在getView()要清晰很多，以上就是RecyclerView的简单用法了</p>
-<h2 id="ItemAnimator"><a href="#ItemAnimator" class="headerlink" title="ItemAnimator"></a>ItemAnimator</h2><p>ItemAnimator也是一个抽象类，系统为我们提供了一种默认的实现类（<code>DefaultItemAnimator</code>），添加的方法也很简单：</p>
-<pre><code>// 设置item动画
-recycler_view.setItemAnimator(new DefaultItemAnimator());
-</code></pre><p>如果我们想实现更多的动画效果呢？别急，已经有人写好很多了，请看：<a href="https://github.com/gabrielemariotti/RecyclerViewItemAnimators" target="_blank" rel="external">RecyclerViewItemAnimators</a></p>
-<h2 id="CardView"><a href="#CardView" class="headerlink" title="CardView"></a>CardView</h2><p>CardView继承自FrameLayout类，可以在一个卡片布局中一致性的显示内容，使用方法跟FrameLayout一样，卡片可以包含<strong>圆角和阴影</strong>。我们可以使用</p>
-<ul>
-<li><p>android:cardCornerRadius属性指定圆角半径</p>
-</li>
-<li><p>android:cardBackgroundColor属性设置卡片颜色</p>
-</li>
-<li><p>android:elevation：设置阴影的大小</p>
-</li>
-</ul>
-<p>最后效果如下：</p>
-<p><img src="/images/recyclerview-cardview.png" alt="recyclerview-cardview"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2355,7 +2375,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2372,7 +2392,7 @@ recycler_view.setItemAnimator(new DefaultItemAnimator());
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
