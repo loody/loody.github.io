@@ -224,6 +224,148 @@
             
               
                 
+                <a class="post-title-link" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="url">
+                  WebViewClient和WebChromeClient的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-03T00:00:00+08:00" content="2015-05-03">
+              2015-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/03/2015-05-03-webviewclient-chromeclient/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="WebViewClient"><a href="#WebViewClient" class="headerlink" title="WebViewClient"></a>WebViewClient</h2><p>WebViewClient主要帮助WebView处理各种通知、请求事件等，比较常用的方法有</p>
+<pre><code>public boolean shouldOverrideUrlLoading(WebView view, String url) 
+</code></pre><p>这个方法有以下三种情况：</p>
+<ol>
+<li>若没有设置 WebViewClient 则在点击链接之后由系统处理该 url，通常是使用浏览器打开或弹出浏览器选择对话框。</li>
+<li>若设置 WebViewClient 且该方法返回 true ，则说明由应用的代码处理该 url，WebView 不处理。薄荷现在很多自定义协议就属于这种情况</li>
+<li>若设置 WebViewClient 且该方法返回 false，则说明由 WebView 处理该 url，即用 WebView 加载该 url。    </li>
+</ol>
+<hr>
+<pre><code>public void onPageStarted(WebView view, String url, Bitmap favicon)  
+
+public void onPageFinished(WebView view, String url) 
+</code></pre><p>页面开始与结束的监听方法</p>
+<hr>
+<pre><code>public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) 
+</code></pre><p>通常我们通过webview来访问web页面都是在网络的情况下，一旦没有网络就会显示”无法找到该网页”的信息，这样会暴露我们的连接，如下图</p>
+<p><img src="/images/webview-error.png" alt="webview-error"></p>
+<p>所以我们需要一个有好的提示，并且不会暴露链接的方法。这时候WebViewClient的onReceivedError方法就派上了用场了，我们需要在本地自定义一个错误页面，然后加载即可</p>
+<h2 id="WebChromeClient"><a href="#WebChromeClient" class="headerlink" title="WebChromeClient"></a>WebChromeClient</h2><p>WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等,常用的方法有</p>
+<pre><code>@Override
+public void onProgressChanged(WebView view, int newProgress) {
+    super.onProgressChanged(view, newProgress);
+    getActivity().setProgress(newProgress);
+}
+</code></pre><p>监视加载进度，如果我们想在布局顶部显示一个进度条，我们可以直接在上面方法中调用 <code>getActivity().setProgress(newProgress);</code>，而不需要在顶部加个progressBar了</p>
+<hr>
+<pre><code>public boolean onJsAlert(WebView view, String url, String message, JsResult result) 
+</code></pre><p>监测javascript的alert()弹出，类似的还有onJsPrompt，onJsConfirm</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/26/2015-04-26-recycleview-cardview/" itemprop="url">
                   RecyclerView、CardView
                 </a>
@@ -1650,147 +1792,6 @@ private void getTopForNav() {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/21/2014-12-21-weixin-pay/" itemprop="url">
-                  微信支付需要注意的几个问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-21T00:00:00+08:00" content="2014-12-21">
-              2014-12-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/21/2014-12-21-weixin-pay/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/21/2014-12-21-weixin-pay/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上周在项目中增加了支持微信支付的功能，遇到了不少问题，现将其mark如下</p>
-<h2 id="微信支付流程"><a href="#微信支付流程" class="headerlink" title="微信支付流程"></a>微信支付流程</h2><ol>
-<li><p>获取access_token()<br> 这步需要用到<code>APP_ID</code> 和 <code>APP_SECRET</code>，需要在微信开放平台注册应用获得</p>
-</li>
-<li><p>生成预支付订单 </p>
-</li>
-<li><p>调起微信支付</p>
-</li>
-<li><p>支付完成后</p>
-<p> 微信会回调 WXPayEntryActivity 的public void onResp(BaseResp resp)方法，所以后续操作，放在这个回调函数中操作就可以了。</p>
-<p> resp.errCode== 0 ：表示支付成功</p>
-<p> resp.errCode== -1 ：表示支付失败</p>
-<p> resp.errCode== -2 ：表示取消支付</p>
-<p>具体步骤大家可以去微信开放平台下载demo文档查看，地址是：<a href="https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_android_tmpl" target="_blank" rel="external">https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_android_tmpl</a></p>
-<p>官方建议，为安全起见，上面步骤一和步骤二建议放在服务端完成，客户端拿到这些参数直接掉起PayReq，设置完参数完成支付</p>
-</li>
-</ol>
-<h2 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h2><p><strong>1、 每次运行点完支付都返回-1，即支付失败，并不能调出支付确认界面，原因可能是如下几个原因：</strong></p>
-<ol>
-<li>这个问题多半是签名错误，或者keystore，包名，签名不一致导致。</li>
-<li>再有错误，就是你第二步生成Prepayid时的app_signature 生成错误，仔细看下demo和文档。</li>
-</ol>
-<p>demo中有一个debug.store可以作为测试签名文件，可以直接掉出支付页面，eclipse(目前文档是基于eclipse的，用as的同学请见谅)步骤如下：<br>Window-&gt;Preferences-&gt;Android-&gt;Build-&gt;指定Custom debug keystore选项的路径为sdk demo工程目录中的debug.keystore文件<br>运行，程序，进入支付页面即可调出支付页面了，如下</p>
-<p><img src="/images/wx_pay.jpg" alt="wx_pay.jpg"></p>
-<p><strong>2、可以弹出微信支付的界面，但是支付之后没有进入回调的Activity：WXPayEntryActivity ?
-</strong><br>微信开放平台有个 不成文的规定（文档里没有说明），就是回调的Activity必须是：你的包名（微信demo里是：net.sourceforge.simcpux）+.wxapi.WXPayEntryActivity.java<br>其他的接口回调的Activity必须是：你的包名（微信demo里是：net.sourceforge.simcpux）+.wxapi.WXEntryActivity.java,<br>而且这两个回调的Activity必须要实现IWXAPIEventHandler的接口 。(抓瞎)</p>
-<p><strong>3、项目中用到了友盟社会化分享组件，jar包处理问题</strong><br>如果你的项目中用到了友盟集成的关于微信的功能，友盟中有两个关于微信的jar包<br><code>SocialSDK_WeiXin_1</code>、<code>SocialSDK_WeiXin_2</code>，<br>其中SocialSDK_WeiXin_1就是微信功能的原生jar包（libammsdk.jar），所有关于微信的功能都在这个jar包里，大家只需替换这个jar包即可完成升级。SocialSDK_WeiXin_2继续保留<br>友盟只是对微信的包名做了修改（libammsdk.jar -&gt; SocialSDK_WeiXin_1.jar）</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1836,7 +1837,7 @@ private void getTopForNav() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1853,7 +1854,7 @@ private void getTopForNav() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

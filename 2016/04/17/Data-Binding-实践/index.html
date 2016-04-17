@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="scrollview嵌套webview,锚点," />
+  <meta name="keywords" content="Data Binding,MVVM," />
 
 
 
@@ -57,34 +57,18 @@
 
 
 
-<meta name="description" content="最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
-思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
-实现：页面布局是这样的
-&amp;lt;ScrollView&amp;gt;
-    &amp;lt;View&amp;gt;
-
-    &amp;l">
+<meta name="description" content="Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrollview嵌套webview导致锚点无法使用的解决方案">
-<meta property="og:url" content="http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/index.html">
+<meta property="og:title" content="Data Binding 实践">
+<meta property="og:url" content="http://loody.github.io/2016/04/17/Data-Binding-实践/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
-思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
-实现：页面布局是这样的
-&amp;lt;ScrollView&amp;gt;
-    &amp;lt;View&amp;gt;
-
-    &amp;l">
-<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta property="og:description" content="Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的">
+<meta property="og:image" content="http://loody.github.io/images/mvvm.png">
+<meta property="og:updated_time" content="2016-04-17T14:57:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrollview嵌套webview导致锚点无法使用的解决方案">
-<meta name="twitter:description" content="最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
-思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
-实现：页面布局是这样的
-&amp;lt;ScrollView&amp;gt;
-    &amp;lt;View&amp;gt;
-
-    &amp;l">
+<meta name="twitter:title" content="Data Binding 实践">
+<meta name="twitter:description" content="Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的">
+<meta name="twitter:image" content="http://loody.github.io/images/mvvm.png">
 
 
 
@@ -102,7 +86,7 @@
   };
 </script>
 
-  <title> scrollview嵌套webview导致锚点无法使用的解决方案 | loody's blog </title>
+  <title> Data Binding 实践 | loody's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +224,7 @@
             
             
               
-                scrollview嵌套webview导致锚点无法使用的解决方案
+                Data Binding 实践
               
             
           </h1>
@@ -252,38 +236,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-25T00:00:00+08:00" content="2014-12-25">
-              2014-12-25
+            <time itemprop="dateCreated" datetime="2016-04-17T20:43:15+08:00" content="2016-04-17">
+              2016-04-17
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="commentsCount"></span>
+                <a href="/2016/04/17/Data-Binding-实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/Data-Binding-实践/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -305,60 +270,208 @@
       
 
       
-        <p>最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，</p>
-<p><strong>思路</strong>：通过计算目标点在scrollview的位置top，调用<code>scrollTo(0,top)</code>方法定位</p>
-<p><strong>实现</strong>：页面布局是这样的</p>
-<pre><code>&lt;ScrollView&gt;
-    &lt;View&gt;
-
-    &lt;/View&gt;
-    &lt;WebView&gt;
-        &lt;div id=&quot;anchor&quot;&gt;&lt;/div&gt; 
-    &lt;/WebView&gt;
-&lt;/ScrollView&gt;
-</code></pre><p>so top=height(View)+height(div)</p>
-<p>首先View到顶部的距离好说，view.getTop即可，代码如下：</p>
-<pre><code>/**
- * 测量商品信息导航栏离顶端高度
- */
-private void getTopForNav() {
-    ViewTreeObserver vto = rg_info_nav.getViewTreeObserver();
-    vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()         {
-        public boolean onPreDraw() {
-            mHeight = rg_info_nav.getTop();
-            return true;
-        }
-    });
+        <h2 id="Data-Binding-Library"><a href="#Data-Binding-Library" class="headerlink" title="Data Binding Library"></a>Data Binding Library</h2><p>去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且<br>Android Studio还没有很好的支持，就没有怎么实践，前段时间Android Studio发布了2.0正式版，而且已经内置了该框架的支持，配置起来也很简单</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在主目录的<code>build.gradle</code>中如下配置即可</p>
+<pre><code>android {
+    ....
+    dataBinding {
+        enabled = true
+    }
 }
-</code></pre><p>问题来了，怎么计算webview中某个节点离webview顶端的距离呢，没错，就是通过js计算，然后通过alert（）弹出，在android中就可以拿到了，代码如下：</p>
-<p>js:</p>
-<pre><code>function d_desc(){
-    var desc = document.getElementById(&quot;desc&quot;);
-     var topa = desc.offsetTop;
-     alert(topa);
+</code></pre><p>Layout文件跟之前有很大的不同，我们先看看原来的布局文件 <code>activity_main.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout 
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
+
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
+
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+       &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;name&quot;/&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;age&quot;/&gt;
+
+        &lt;Button
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:gravity=&quot;center&quot;
+            android:onClick=&quot;onClickButton&quot;
+            android:text=&quot;jump&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;/&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>下面是Data Binding的 <code>activity_main.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
+
+&lt;data&gt;
+
+    &lt;import type=&quot;me.loody.databindingdemo.User&quot;/&gt;
+
+    &lt;variable
+        name=&quot;user&quot;
+        type=&quot;User&quot;/&gt;
+&lt;/data&gt;
+
+&lt;LinearLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
+
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
+
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;@{user.name)}&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;test&quot;/&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;@{String.valueOf(user.age)}&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;test&quot;/&gt;
+
+        &lt;Button
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:gravity=&quot;center&quot;
+            android:onClick=&quot;onClickButton&quot;
+            android:text=&quot;jump&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;/&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/layout&gt;
+</code></pre><p>我们看到Data Binding layout文件有点不同的是：起始根标签是layout，接下来一个data元素以及一个view的根元素。这个view元素就是你没有使用Data Binding的layout文件的根元素.</p>
+<p>我们定义的一个<code>User</code>类</p>
+<pre><code>public class User {
+    public final String name;
+    public final int age;
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 }
-</code></pre><p>android:</p>
-<pre><code>mWebView.setWebChromeClient(new WebChromeClient() {
+</code></pre><h2 id="Binding数据"><a href="#Binding数据" class="headerlink" title="Binding数据"></a>Binding数据</h2><p>在MainActivity中添加如下代码</p>
+<pre><code>ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+User user = new User(&quot;loody&quot;, 27);
+activityMainBinding.setUser(user);
+</code></pre><p>这里的ActivityMainBinding是根据布局文件<code>activity_main</code>的名称生成的。布局文件和绑定的数据一定要写对，否则无法生成Binging文件</p>
+<p>这样我们程序就可以将User的信息显示出来了，如下图：</p>
+<p>其中布局文件还有还有两个节点</p>
+<blockquote>
+<p><strong>import</strong>:等价于java文件中的import导包</p>
+<p><strong>variable</strong>:申明变量  每一个variable元素描述了一个用于layout文件中Binding表达式的属性。</p>
+</blockquote>
+<p><em>同样Data Binding的layout也是支持include、ViewStub的，具体使用方法在这里不多说</em></p>
+<h2 id="Observable-Binding"><a href="#Observable-Binding" class="headerlink" title="Observable Binding"></a>Observable Binding</h2><p>通过Data Binding,我们已经把对象的属性绑定到UI上了，有的时候，代码会修改我们绑定的对象的某些属性，那么怎么通知界面刷新呢？这就要用到Observable Binding了，它有两种方式</p>
+<ol>
+<li><p>让你的绑定数据类继承BaseObservable，然后通过调用notifyPropertyChanged方法来通知界面属性改变，如下：</p>
+<pre><code>public class ObservableUser extends BaseObservable {
+    public String name;
+    public int age;
 
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            result.cancel();
-            if (!TextUtils.isEmpty(message)) {
-                try {
-                    int top = Integer.parseInt(message);
-                    mStickyScrollView.scrollTo(0, mHeight + (int) (top * mDensity));
-                } catch (Exception e) {
-                }
+    public ObservableUser(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
-            }
-            return true;
-        }
-    });
+    @Bindable
+    public String getName() {
+        return name;
+       }
 
-//mDensity=getResources().getDisplayMetrics().density;屏幕密度
-</code></pre><p>在需要定位的地方调用即可：</p>
-<pre><code>mWebView.loadUrl(&quot;javascript: d_desc()&quot;);
-</code></pre><h3 id="疑点"><a href="#疑点" class="headerlink" title="疑点"></a>疑点</h3><p><code>top * mDensity</code>：通过js获取到的top值就是px，mHeigh获取到的也是px，但是如果调用scrollTo（mHeigh+top）位置会不对，必须写成scrollTo（mHeigh+top*mDensity），此问题暂时在此mark,待弄清楚后再来解释</p>
+    @Bindable
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+</code></pre><p> 在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了</p>
+</li>
+<li><p>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</p>
+<p> public class PlainUser {</p>
+<pre><code>public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
+public final ObservableInt age = new ObservableInt();
+</code></pre><p> }</p>
+</li>
+</ol>
+<p>然后使用下面的代码来访问：</p>
+<pre><code>user.name.set(&quot;loody&quot;);
+user.age.set(18); 
+</code></pre><p>调用set方法时，Data Binding Library就会自动的帮我们通知界面刷新了。</p>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>以上就是关于Data Binding的一些基础实践，并没有多么复杂，关键是它要传达的一种思想即View的变化可以自动的反应在ViewModel，ViewModel的数据变化也会自动反应到View上，这种思想也就是我们常常提到的 MVVM 设计模式，最后借用一张图来介绍下MVVM</p>
+<p><img src="/images/mvvm.png" alt="mvvm"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html" target="_blank" rel="external">https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html</a><br><a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="external">Data Binding（数据绑定）用户指南</a><br><a href="http://gold.xitu.io/entry/56781baf00b01b78ac54c10a" target="_blank" rel="external">http://gold.xitu.io/entry/56781baf00b01b78ac54c10a</a></p>
 
       
     </div>
@@ -373,9 +486,9 @@ private void getTopForNav() {
       
         <div class="post-tags">
           
-            <a href="/tags/scrollview嵌套webview/" rel="tag">#scrollview嵌套webview</a>
+            <a href="/tags/Data-Binding/" rel="tag">#Data Binding</a>
           
-            <a href="/tags/锚点/" rel="tag">#锚点</a>
+            <a href="/tags/MVVM/" rel="tag">#MVVM</a>
           
         </div>
       
@@ -384,17 +497,13 @@ private void getTopForNav() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/21/2014-12-21-weixin-pay/" rel="next" title="微信支付需要注意的几个问题">
-                <i class="fa fa-chevron-left"></i> 微信支付需要注意的几个问题
+              <a href="/2016/04/10/用RxJava实现事件总线/" rel="next" title="用RxJava实现事件总线">
+                <i class="fa fa-chevron-left"></i> 用RxJava实现事件总线
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/01/25/2015-01-25-canvas-1/" rel="prev" title="Android中绘图学习笔记(一)">
-                Android中绘图学习笔记(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -409,10 +518,10 @@ private void getTopForNav() {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/"
-     data-title="scrollview嵌套webview导致锚点无法使用的解决方案"
+        <div class="ds-share flat" data-thread-key="2016/04/17/Data-Binding-实践/"
+     data-title="Data Binding 实践"
      data-content=""
-     data-url="http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/">
+     data-url="http://loody.github.io/2016/04/17/Data-Binding-实践/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -439,8 +548,8 @@ private void getTopForNav() {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/"
-           data-title="scrollview嵌套webview导致锚点无法使用的解决方案" data-url="http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/">
+      <div class="ds-thread" data-thread-key="2016/04/17/Data-Binding-实践/"
+           data-title="Data Binding 实践" data-url="http://loody.github.io/2016/04/17/Data-Binding-实践/">
       </div>
     
   </div>
@@ -553,7 +662,7 @@ private void getTopForNav() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#疑点"><span class="nav-number">1.</span> <span class="nav-text">疑点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Binding-Library"><span class="nav-number">1.</span> <span class="nav-text">Data Binding Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binding数据"><span class="nav-number">3.</span> <span class="nav-text">Binding数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Observable-Binding"><span class="nav-number">4.</span> <span class="nav-text">Observable Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVVM"><span class="nav-number">5.</span> <span class="nav-text">MVVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

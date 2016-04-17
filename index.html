@@ -224,6 +224,303 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/17/Data-Binding-实践/" itemprop="url">
+                  Data Binding 实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-17T20:43:15+08:00" content="2016-04-17">
+              2016-04-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/17/Data-Binding-实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/Data-Binding-实践/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Data-Binding-Library"><a href="#Data-Binding-Library" class="headerlink" title="Data Binding Library"></a>Data Binding Library</h2><p>去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且<br>Android Studio还没有很好的支持，就没有怎么实践，前段时间Android Studio发布了2.0正式版，而且已经内置了该框架的支持，配置起来也很简单</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在主目录的<code>build.gradle</code>中如下配置即可</p>
+<pre><code>android {
+    ....
+    dataBinding {
+        enabled = true
+    }
+}
+</code></pre><p>Layout文件跟之前有很大的不同，我们先看看原来的布局文件 <code>activity_main.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout 
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
+
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
+
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+       &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;name&quot;/&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;age&quot;/&gt;
+
+        &lt;Button
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:gravity=&quot;center&quot;
+            android:onClick=&quot;onClickButton&quot;
+            android:text=&quot;jump&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;/&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>下面是Data Binding的 <code>activity_main.xml</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
+
+&lt;data&gt;
+
+    &lt;import type=&quot;me.loody.databindingdemo.User&quot;/&gt;
+
+    &lt;variable
+        name=&quot;user&quot;
+        type=&quot;User&quot;/&gt;
+&lt;/data&gt;
+
+&lt;LinearLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
+
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
+
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;@{user.name)}&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;test&quot;/&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;@{String.valueOf(user.age)}&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;
+            tools:text=&quot;test&quot;/&gt;
+
+        &lt;Button
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:gravity=&quot;center&quot;
+            android:onClick=&quot;onClickButton&quot;
+            android:text=&quot;jump&quot;
+            android:textColor=&quot;@color/colorPrimaryDark&quot;
+            android:textSize=&quot;18dp&quot;/&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/layout&gt;
+</code></pre><p>我们看到Data Binding layout文件有点不同的是：起始根标签是layout，接下来一个data元素以及一个view的根元素。这个view元素就是你没有使用Data Binding的layout文件的根元素.</p>
+<p>我们定义的一个<code>User</code>类</p>
+<pre><code>public class User {
+    public final String name;
+    public final int age;
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+</code></pre><h2 id="Binding数据"><a href="#Binding数据" class="headerlink" title="Binding数据"></a>Binding数据</h2><p>在MainActivity中添加如下代码</p>
+<pre><code>ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+User user = new User(&quot;loody&quot;, 27);
+activityMainBinding.setUser(user);
+</code></pre><p>这里的ActivityMainBinding是根据布局文件<code>activity_main</code>的名称生成的。布局文件和绑定的数据一定要写对，否则无法生成Binging文件</p>
+<p>这样我们程序就可以将User的信息显示出来了，如下图：</p>
+<p>其中布局文件还有还有两个节点</p>
+<blockquote>
+<p><strong>import</strong>:等价于java文件中的import导包</p>
+<p><strong>variable</strong>:申明变量  每一个variable元素描述了一个用于layout文件中Binding表达式的属性。</p>
+</blockquote>
+<p><em>同样Data Binding的layout也是支持include、ViewStub的，具体使用方法在这里不多说</em></p>
+<h2 id="Observable-Binding"><a href="#Observable-Binding" class="headerlink" title="Observable Binding"></a>Observable Binding</h2><p>通过Data Binding,我们已经把对象的属性绑定到UI上了，有的时候，代码会修改我们绑定的对象的某些属性，那么怎么通知界面刷新呢？这就要用到Observable Binding了，它有两种方式</p>
+<ol>
+<li><p>让你的绑定数据类继承BaseObservable，然后通过调用notifyPropertyChanged方法来通知界面属性改变，如下：</p>
+<pre><code>public class ObservableUser extends BaseObservable {
+    public String name;
+    public int age;
+
+    public ObservableUser(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Bindable
+    public String getName() {
+        return name;
+       }
+
+    @Bindable
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+</code></pre><p> 在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了</p>
+</li>
+<li><p>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</p>
+<p> public class PlainUser {</p>
+<pre><code>public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
+public final ObservableInt age = new ObservableInt();
+</code></pre><p> }</p>
+</li>
+</ol>
+<p>然后使用下面的代码来访问：</p>
+<pre><code>user.name.set(&quot;loody&quot;);
+user.age.set(18); 
+</code></pre><p>调用set方法时，Data Binding Library就会自动的帮我们通知界面刷新了。</p>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>以上就是关于Data Binding的一些基础实践，并没有多么复杂，关键是它要传达的一种思想即View的变化可以自动的反应在ViewModel，ViewModel的数据变化也会自动反应到View上，这种思想也就是我们常常提到的 MVVM 设计模式，最后借用一张图来介绍下MVVM</p>
+<p><img src="/images/mvvm.png" alt="mvvm"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html" target="_blank" rel="external">https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html</a><br><a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="external">Data Binding（数据绑定）用户指南</a><br><a href="http://gold.xitu.io/entry/56781baf00b01b78ac54c10a" target="_blank" rel="external">http://gold.xitu.io/entry/56781baf00b01b78ac54c10a</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/10/用RxJava实现事件总线/" itemprop="url">
                   用RxJava实现事件总线
                 </a>
@@ -2188,148 +2485,6 @@ This method sets the file-pointer offset, measured from the beginning of this fi
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="url">
-                  WebViewClient和WebChromeClient的区别
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-03T00:00:00+08:00" content="2015-05-03">
-              2015-05-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/03/2015-05-03-webviewclient-chromeclient/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="WebViewClient"><a href="#WebViewClient" class="headerlink" title="WebViewClient"></a>WebViewClient</h2><p>WebViewClient主要帮助WebView处理各种通知、请求事件等，比较常用的方法有</p>
-<pre><code>public boolean shouldOverrideUrlLoading(WebView view, String url) 
-</code></pre><p>这个方法有以下三种情况：</p>
-<ol>
-<li>若没有设置 WebViewClient 则在点击链接之后由系统处理该 url，通常是使用浏览器打开或弹出浏览器选择对话框。</li>
-<li>若设置 WebViewClient 且该方法返回 true ，则说明由应用的代码处理该 url，WebView 不处理。薄荷现在很多自定义协议就属于这种情况</li>
-<li>若设置 WebViewClient 且该方法返回 false，则说明由 WebView 处理该 url，即用 WebView 加载该 url。    </li>
-</ol>
-<hr>
-<pre><code>public void onPageStarted(WebView view, String url, Bitmap favicon)  
-
-public void onPageFinished(WebView view, String url) 
-</code></pre><p>页面开始与结束的监听方法</p>
-<hr>
-<pre><code>public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) 
-</code></pre><p>通常我们通过webview来访问web页面都是在网络的情况下，一旦没有网络就会显示”无法找到该网页”的信息，这样会暴露我们的连接，如下图</p>
-<p><img src="/images/webview-error.png" alt="webview-error"></p>
-<p>所以我们需要一个有好的提示，并且不会暴露链接的方法。这时候WebViewClient的onReceivedError方法就派上了用场了，我们需要在本地自定义一个错误页面，然后加载即可</p>
-<h2 id="WebChromeClient"><a href="#WebChromeClient" class="headerlink" title="WebChromeClient"></a>WebChromeClient</h2><p>WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等,常用的方法有</p>
-<pre><code>@Override
-public void onProgressChanged(WebView view, int newProgress) {
-    super.onProgressChanged(view, newProgress);
-    getActivity().setProgress(newProgress);
-}
-</code></pre><p>监视加载进度，如果我们想在布局顶部显示一个进度条，我们可以直接在上面方法中调用 <code>getActivity().setProgress(newProgress);</code>，而不需要在顶部加个progressBar了</p>
-<hr>
-<pre><code>public boolean onJsAlert(WebView view, String url, String message, JsResult result) 
-</code></pre><p>监测javascript的alert()弹出，类似的还有onJsPrompt，onJsConfirm</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2375,7 +2530,7 @@ public void onProgressChanged(WebView view, int newProgress) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2392,7 +2547,7 @@ public void onProgressChanged(WebView view, int newProgress) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
