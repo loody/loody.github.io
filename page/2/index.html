@@ -224,6 +224,194 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="url">
+                  高亮显示滚轮控件WheelView选中项
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-07T00:00:00+08:00" content="2015-06-07">
+              2015-06-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先看效果图</p>
+<p><img src="/images/hightlight-wheel-current.png" alt="image"></p>
+<p>本示例基于开源项目<a href="https://code.google.com/p/android-wheel/" target="_blank" rel="external">android-wheel</a>修改，这个项目已经开源很早，相信很多人也已用过了，最近项目需要将当前选中的item高亮显示，现将我采用的方法分享一下</p>
+<p>我们显示的滚轮一般就两种类型（文字或者数字），对应的Adapter分别是<code>ArrayWheelAdapter</code>和<code>NumericWheelAdapter</code>，我们只需要重写这两个Adapter即可</p>
+<p>文字类型:</p>
+<pre><code>public class UnitArrayWheelAdapter extends ArrayWheelAdapter&lt;String&gt; {
+    // Index of current item
+    int currentItem;
+    // Index of item to be highlighted
+    int currentValue;
+
+    /**
+     * Constructor
+     */
+    public UnitArrayWheelAdapter(Context context, String[] items, int current) {
+        super(context, items);
+        this.currentValue = current;
+    }
+
+    @Override
+    protected void configureTextView(TextView view) {
+        super.configureTextView(view);
+        if (currentItem == currentValue) {
+            view.setTextColor(0xFFFF7500);
+            view.setTextSize(18);
+        }
+        view.setTypeface(Typeface.SANS_SERIF);
+    }
+
+    @Override
+    public View getItem(int index, View cachedView, ViewGroup parent) {
+        currentItem = index;
+        return super.getItem(index, cachedView, parent);
+    }
+}
+</code></pre><p>数字类型:</p>
+<pre><code>public class UnitNumericWheelAdapter extends NumericWheelAdapter {
+    // Index of current item
+    int currentItem;
+    // Index of item to be highlighted
+    int currentValue;
+
+    /**
+     * Constructor
+     */
+    public UnitNumericWheelAdapter(Context context, int minValue, int maxValue, int current) {
+        super(context, minValue, maxValue);
+        this.currentValue = current;
+    }
+
+    @Override
+    protected void configureTextView(TextView view) {
+        super.configureTextView(view);
+        if (currentItem == currentValue) {
+            view.setTextColor(0xFFFF7500);
+            view.setTextSize(18);
+        }
+        view.setTypeface(Typeface.SANS_SERIF);
+
+    }
+
+    @Override
+    public View getItem(int index, View cachedView, ViewGroup parent) {
+        currentItem = index;
+        return super.getItem(index, cachedView, parent);
+    }
+}
+</code></pre><p>最后需要对wheelview添加滚动监听</p>
+<pre><code>wheelview.addChangingListener(new OnWheelChangedListener() {
+        @Override
+        public void onChanged(WheelView wheel, int oldValue, int newValue) {
+             wheel.setViewAdapter(new UnitArrayWheelAdapter(context, strings, current);//important
+        }
+    });
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="url">
                   WebViewClient和WebChromeClient的区别
                 </a>
@@ -1624,174 +1812,6 @@ Canvas c = new Canvas(b);
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="url">
-                  scrollview嵌套webview导致锚点无法使用的解决方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-25T00:00:00+08:00" content="2014-12-25">
-              2014-12-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，</p>
-<p><strong>思路</strong>：通过计算目标点在scrollview的位置top，调用<code>scrollTo(0,top)</code>方法定位</p>
-<p><strong>实现</strong>：页面布局是这样的</p>
-<pre><code>&lt;ScrollView&gt;
-    &lt;View&gt;
-
-    &lt;/View&gt;
-    &lt;WebView&gt;
-        &lt;div id=&quot;anchor&quot;&gt;&lt;/div&gt; 
-    &lt;/WebView&gt;
-&lt;/ScrollView&gt;
-</code></pre><p>so top=height(View)+height(div)</p>
-<p>首先View到顶部的距离好说，view.getTop即可，代码如下：</p>
-<pre><code>/**
- * 测量商品信息导航栏离顶端高度
- */
-private void getTopForNav() {
-    ViewTreeObserver vto = rg_info_nav.getViewTreeObserver();
-    vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()         {
-        public boolean onPreDraw() {
-            mHeight = rg_info_nav.getTop();
-            return true;
-        }
-    });
-}
-</code></pre><p>问题来了，怎么计算webview中某个节点离webview顶端的距离呢，没错，就是通过js计算，然后通过alert（）弹出，在android中就可以拿到了，代码如下：</p>
-<p>js:</p>
-<pre><code>function d_desc(){
-    var desc = document.getElementById(&quot;desc&quot;);
-     var topa = desc.offsetTop;
-     alert(topa);
-}
-</code></pre><p>android:</p>
-<pre><code>mWebView.setWebChromeClient(new WebChromeClient() {
-
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            result.cancel();
-            if (!TextUtils.isEmpty(message)) {
-                try {
-                    int top = Integer.parseInt(message);
-                    mStickyScrollView.scrollTo(0, mHeight + (int) (top * mDensity));
-                } catch (Exception e) {
-                }
-
-            }
-            return true;
-        }
-    });
-
-//mDensity=getResources().getDisplayMetrics().density;屏幕密度
-</code></pre><p>在需要定位的地方调用即可：</p>
-<pre><code>mWebView.loadUrl(&quot;javascript: d_desc()&quot;);
-</code></pre><h3 id="疑点"><a href="#疑点" class="headerlink" title="疑点"></a>疑点</h3><p><code>top * mDensity</code>：通过js获取到的top值就是px，mHeigh获取到的也是px，但是如果调用scrollTo（mHeigh+top）位置会不对，必须写成scrollTo（mHeigh+top*mDensity），此问题暂时在此mark,待弄清楚后再来解释</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1837,7 +1857,7 @@ private void getTopForNav() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1854,7 +1874,7 @@ private void getTopForNav() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
