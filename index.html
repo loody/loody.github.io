@@ -699,22 +699,24 @@ activityMainBinding.setUser(user);
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(me.loody.databindingdemo.BR.name);
     }
 
     public void setAge(int age) {
         this.age = age;
+        notifyPropertyChanged(me.loody.databindingdemo.BR.age);
     }
 }
 </code></pre><p> 在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了</p>
 </li>
 <li><p>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</p>
-<p> public class PlainUser {</p>
-<pre><code>public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
-public final ObservableInt age = new ObservableInt();
-</code></pre><p> }</p>
 </li>
 </ol>
-<p>然后使用下面的代码来访问：</p>
+<pre><code>public class PlainUser {
+    public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
+    public final ObservableInt age = new ObservableInt();
+}
+</code></pre><p>然后使用下面的代码来访问：</p>
 <pre><code>user.name.set(&quot;loody&quot;);
 user.age.set(18); 
 </code></pre><p>调用set方法时，Data Binding Library就会自动的帮我们通知界面刷新了。</p>
