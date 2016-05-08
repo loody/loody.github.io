@@ -224,6 +224,158 @@
             
               
                 
+                <a class="post-title-link" href="/2015/01/25/2015-01-25-canvas-1/" itemprop="url">
+                  Android中绘图学习笔记(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-25T00:00:00+08:00" content="2015-01-25">
+              2015-01-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/25/2015-01-25-canvas-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/2015-01-25-canvas-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近项目中要用到图表，但是现有的开源图表库不能满足我们的要求，所以要去修改它的源码，发现所有的图表库都用的是Canvas去画的，之前没有研究过它的绘制原理，接下来将其学习笔记记录与此</p>
+<h2 id="绘图三要素"><a href="#绘图三要素" class="headerlink" title="绘图三要素"></a>绘图三要素</h2><p>Paint—————画笔</p>
+<p>Bitmap————–画布</p>
+<p>Canvas————–画家</p>
+<p>它们三个是紧密相连的，缺一不可，不管我们画任何图形，文字，都需要用到它们</p>
+<h2 id="如何创建"><a href="#如何创建" class="headerlink" title="如何创建"></a>如何创建</h2><p>Bitmap的创建有很多</p>
+<ol>
+<li>Bitmap.createBitmap()(Api提供了六种重载)</li>
+<li><p>使用BitmapFactory获取位图 </p>
+<pre><code>Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.ic_launcher);
+</code></pre></li>
+<li><p>…</p>
+</li>
+</ol>
+<p>Canvas对象的获取方式有两种：</p>
+<ol>
+<li>一种我们通过重写View.onDraw方法，View中的Canvas对象会被当做参数传递过来，我们操作这个Canvas，效果会直接反应在View中。</li>
+<li><p>另一种就是当你想创建一个Canvas对象时使用的方法：</p>
+<pre><code>Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);   
+Canvas c = new Canvas(b);
+</code></pre><p>上面代码创建了一个尺寸是100*100的Bitmap，使用它作为Canvas操作的对象，这时候的Canvas就是使用创建的方式</p>
+</li>
+</ol>
+<p>Paint的创建最简单<br> Paint paint = new Paint();  关于Paint的属性介绍，可以参考如下地址：<a href="http://blog.csdn.net/xanxus46/article/details/7883554" target="_blank" rel="external">http://blog.csdn.net/xanxus46/article/details/7883554</a></p>
+<h2 id="绘图种类"><a href="#绘图种类" class="headerlink" title="绘图种类"></a>绘图种类</h2><ol>
+<li>弧线(arcs)</li>
+<li>填充颜色(argb和color)</li>
+<li>Bitmap</li>
+<li>圆(circle和oval)</li>
+<li>点(point)</li>
+<li>线(line)</li>
+<li>矩形(Rect)</li>
+<li>图片(Picture)</li>
+<li>圆角矩形 (RoundRect)</li>
+<li>文本(text)</li>
+<li>顶点(Vertices)</li>
+<li>路径(path)</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="url">
                   scrollview嵌套webview导致锚点无法使用的解决方案
                 </a>
@@ -1823,195 +1975,6 @@ lineData.addLimitLine(minLine);
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/11/2014-09-11-about universal-image-loader/" itemprop="url">
-                  开源库universal-image-loader的学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-09-11T00:00:00+08:00" content="2014-09-11">
-              2014-09-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/09/11/2014-09-11-about universal-image-loader/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/11/2014-09-11-about universal-image-loader/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>UIL aims to provide a powerful, flexible and highly customizable instrument for image loading, caching and displaying. It provides a lot of configuration options and good control over the image loading and caching process.</p>
-<p><img src="http://loody.github.io/images/uil_demo.png" alt="uil_demo"></p>
-<p>Github：<a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">https://github.com/nostra13/Android-Universal-Image-Loader</a></p>
-<h6 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h6><ol>
-<li>多线程下载图片，图片可以来源于网络，文件系统，项目文件夹assets中以及drawable中等</li>
-<li>支持随意的配置ImageLoader，例如线程池，图片下载器，内存缓存策略，硬盘缓存策略，图片显示选项以及其他的一些配置</li>
-<li>支持图片的内存缓存，文件系统缓存或者SD卡缓存</li>
-<li>支持图片下载过程的监听</li>
-<li>根据控件(ImageView)的大小对Bitmap进行裁剪，减少Bitmap占用过多的内存</li>
-<li>较好的控制图片的加载过程，例如暂停图片加载，重新开始加载图片，一般使用         ListView,GridView中，滑动过程中暂停加载图片，停止滑动的时候去加载图片</li>
-<li>提供在较慢的网络下对图片进行加载</li>
-</ol>
-<h6 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h6><p><img src="http://loody.github.io/images/the_flow_chart.png" alt="the_flow_chart"></p>
-<h6 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h6><pre><code>uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;  
-</code></pre><ol>
-<li>下载JAR包添加到工程libs目录下</li>
-<li><p>配置Android Manifest文件</p>
-<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;  
-&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
-</code></pre></li>
-<li><p>配置ImageLoaderConfiguration这个类实现全局ImageLoader，可以选择在Application中初始化设置该类</p>
-<pre><code>ImageLoaderConfiguration config = new ImageLoaderConfiguration  
-.Builder(context)  
-.memoryCacheExtraOptions(480, 800) // max width, max height，即保存的每个缓存文件的最大长宽  
-.discCacheExtraOptions(480, 800, CompressFormat.JPEG, 75, null) // Can slow ImageLoader, use it carefully (Better don&apos;t use it)/设置缓存的详细信息，最好不要设置这个  
-.threadPoolSize(3)//线程池内加载的数量  
-.threadPriority(Thread.NORM_PRIORITY - 2)  
-.denyCacheImageMultipleSizesInMemory()  
-.memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024)) // You can pass your own memory cache implementation/你可以通过自己的内存缓存实现  
-.memoryCacheSize(2 * 1024 * 1024)    
-.discCacheSize(50 * 1024 * 1024)    
-.discCacheFileNameGenerator(new Md5FileNameGenerator())//将保存的时候的URI名称用MD5 加密  
-.tasksProcessingOrder(QueueProcessingType.LIFO)  
-.discCacheFileCount(100) //缓存的文件数量  
-.discCache(new UnlimitedDiscCache(cacheDir))//自定义缓存路径  
-.defaultDisplayImageOptions(DisplayImageOptions.createSimple())  
-.imageDownloader(new BaseImageDownloader(context, 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间  
-.writeDebugLogs() // Remove for release app  
-.build();//开始构建  
-</code></pre><p> 以上的配置看个人需求进行选择，不是所有都要进行配置。<br> 配置好ImageLoaderConfiguration后，调用以下方法来实现初始化：</p>
-<pre><code>ImageLoader.getInstance().init(config);//全局初始化此配置 
-</code></pre></li>
-<li><p>使用ImageLoader加载图片</p>
-<p> 使用ImageLoader进行图片加载的时候，先要实例化ImageLoader，代码如下，建议放在基类Activity中，这样不必每次都去申明</p>
-<pre><code>ImageLoader imageLoader = ImageLoader.getInstance(); 
-imageLoader.displayImage(...); 
-//一般用这个方法比较多
-imageLoader.displayImage(Stirng uri, ImageView imageView, DisplayImageOptions options );
-</code></pre></li>
-</ol>
-<h6 id="ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系"><a href="#ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系" class="headerlink" title="ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系"></a>ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系</h6><p><strong>ImageLoaderConfiguration</strong>：针对图片缓存的全局配置，主要有线程类、缓存大小、磁盘大小、图片下载与解析、日志方面的配置。</p>
-<p><strong>ImageLoader</strong>：具体下载图片，缓存图片，显示图片的具体执行类，它有两个具体的方法displayImage(…)、loadImage(…)，但是其实最终他们的实现都是displayImage(…)。</p>
-<p><strong>DisplayImageOptions</strong>：用于指导每一个Imageloader根据网络图片的状态（空白、下载错误、正在下载）显示对应的图片，是否将缓存加载到磁盘上，下载完后对图片进行怎么样的处理。</p>
-<p>从三者的协作关系上看，他们有点像厨房规定、厨师、客户个人口味之间的关系。ImageLoaderConfiguration就像是厨房里面的规定，每一个厨师要怎么着装，要怎么保持厨房的干净，这是针对每一个厨师都适用的规定，而且不允许个性化改变。ImageLoader就像是具体做菜的厨师，负责具体菜谱的制作。DisplayImageOptions就像每个客户的偏好，根据客户是重口味还是清淡，每一个imageLoader根据DisplayImageOptions的要求具体执行。</p>
-<h6 id="Acceptable-URIs-examples"><a href="#Acceptable-URIs-examples" class="headerlink" title="Acceptable URIs examples"></a>Acceptable URIs examples</h6><pre><code>String imageUri = &quot;http://site.com/image.png&quot;; // from Web
-String imageUri = &quot;file:///mnt/sdcard/image.png&quot;; // from SD card
-String imageUri = &quot;content://media/external/audio/albumart/13&quot;; // from content provider
-String imageUri = &quot;assets://image.png&quot;; // from assets
-String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (non-9patch images)
-</code></pre><h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><ol>
-<li>上述提到的2个权限必须加入，否则会出错</li>
-<li>ImageLoaderConfiguration必须配置并且全局化的初始化这个配置ImageLoader.getInstance().init(config);  否则也会出现错误提示</li>
-<li>ImageLoader是根据ImageView的height，width确定图片的宽高。</li>
-<li><p>如果经常出现OOM（别人那边看到的，觉得很有提的必要）</p>
-<ul>
-<li>减少配置之中线程池的大小，(.threadPoolSize).推荐1-5;</li>
-<li>使用.bitmapConfig(Bitmap.config.RGB_565)代替ARGB_8888;</li>
-<li>使用.imageScaleType(ImageScaleType.IN_SAMPLE_INT)或者        try.imageScaleType(ImageScaleType.EXACTLY)；</li>
-<li>避免使用RoundedBitmapDisplayer.他会创建新的ARGB_8888格式的Bitmap对象；</li>
-<li>使用.memoryCache(new WeakMemoryCache())，不要使用.cacheInMemory();</li>
-</ul>
-</li>
-</ol>
-<p>参考链接</p>
-<p><a href="http://blog.csdn.net/vipzjyno1/article/details/23206387" target="_blank" rel="external">http://blog.csdn.net/vipzjyno1/article/details/23206387</a><br><a href="http://www.cnblogs.com/kissazi2/p/3886563.html" target="_blank" rel="external">http://www.cnblogs.com/kissazi2/p/3886563.html</a><br><a href="http://blog.csdn.net/xiaanming/article/details/26810303" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/26810303</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2057,7 +2020,7 @@ String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (n
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2074,7 +2037,7 @@ String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (n
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
