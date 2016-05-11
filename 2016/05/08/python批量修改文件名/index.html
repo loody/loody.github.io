@@ -70,7 +70,7 @@
 @2x,@3x是什么鬼，一问才知道这是为了做屏幕适配的一种文件命名方式，可以在Android资源文件的命名是不支持存在@字符的，所以我们得把所有的文件进行重命名，文件少点还行，多了就太累了，所以有没有办法可以快速对这些文件进行重命名呢？当然了，python就适合干这事
 关">
 <meta property="og:image" content="http://loody.github.io/images/iphone-png.png">
-<meta property="og:updated_time" content="2016-05-08T11:50:07.000Z">
+<meta property="og:updated_time" content="2016-05-11T01:51:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python批量修改文件名">
 <meta name="twitter:description" content="在平时的开发中，设计师在做设计稿的时候往往都是按照iphone的模板来做的，所以在切图的时候也不例外，她们给的切图是这样子的
@@ -251,6 +251,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -285,31 +304,12 @@
 <p>关于python的安装什么在这里就不说了，大就可以去看廖雪峰写的<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="external">python教程</a>，讲的很详细</p>
 <p>我们看了上面的文件就知道，我们只需要把文件名中的@3x去掉就可以了，所以代码实现的思路也是这样，直接贴代码</p>
 <p>rename_res.py</p>
-<pre><code>#!/usr/bin/python
-# coding=utf-8
-import os
-import sys
-
-path = sys.path[0] #sys.path[0]为当前文件夹的路径
-
-filelist=os.listdir(path) #该文件夹下所有的文件（包括文件夹）
-for files in filelist: #遍历所有文件
-      oldpath=os.path.join(path,files); #原来的文件路径
-      if os.path.isdir(oldpath):
-        continue;
-      filename=os.path.splitext(files)[0]; #文件名
-      filetype=os.path.splitext(files)[1]; #文件扩展名
-
-      if filename.find(&apos;@3x&apos;)&gt;=0: #如果文件名中含有@3x
-        newpath=os.path.join(path,filename.split(&apos;@3x&apos;)[0]+filetype);
-        #取@3x前面的字符，若需要取后面的字符则使用filename.split(&apos;@3x&apos;)[1]
-        if not os.path.isfile(newpath):
-              os.rename(oldpath,newpath);
-              print newpath,&apos;ok&apos;
-</code></pre><p>将python文件拷贝到要进行重命名的文件下，执行<code>python rename_res.py</code>就可以完成文件的批量修改了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">path = sys.path[<span class="number">0</span>] <span class="comment">#sys.path[0]为当前文件夹的路径</span></span><br><span class="line"></span><br><span class="line">filelist=os.listdir(path) <span class="comment">#该文件夹下所有的文件（包括文件夹）</span></span><br><span class="line"><span class="keyword">for</span> files <span class="keyword">in</span> filelist: <span class="comment">#遍历所有文件</span></span><br><span class="line"> 		oldpath=os.path.join(path,files) <span class="comment">#原来的文件路径</span></span><br><span class="line"> 		<span class="keyword">if</span> os.path.isdir(oldpath):</span><br><span class="line">   		<span class="keyword">continue</span></span><br><span class="line"> 		filename=os.path.splitext(files)[<span class="number">0</span>] <span class="comment">#文件名</span></span><br><span class="line"> 		filetype=os.path.splitext(files)[<span class="number">1</span>] <span class="comment">#文件扩展名</span></span><br><span class="line"></span><br><span class="line"> 		<span class="keyword">if</span> filename.find(<span class="string">'@3x'</span>)&gt;=<span class="number">0</span>: <span class="comment">#如果文件名中含有@3x</span></span><br><span class="line">   		newpath=os.path.join(path,filename.split(<span class="string">'@3x'</span>)[<span class="number">0</span>]+filetype);</span><br><span class="line">   		<span class="comment">#取@3x前面的字符，若需要取后面的字符则使用filename.split('@3x')[1]</span></span><br><span class="line">   		<span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(newpath)</span><br><span class="line">     			os.rename(oldpath,newpath)</span><br><span class="line">     			<span class="keyword">print</span> newpath,<span class="string">'ok'</span></span><br></pre></td></tr></table></figure>
+<p>将python文件拷贝到要进行重命名的文件下，执行<code>python rename_res.py</code>就可以完成文件的批量修改了</p>
 <p>有时候我们不想每次拷贝<code>*rename_res.py*</code>到相应文件夹里，我们也可以通过将相应文件夹动态的传递进来，改起来也很简单，只需要将path的获取方法改动一下，如下</p>
-<pre><code>path=sys.argv[1] #sys.argv[1]为我们执行python时传递的第二个参数
-</code></pre><p>最后执行<code>python rename_res.py /Users/loody/Downloads/切图/3x</code>即可</p>
+<pre><code class="python">path=sys.argv[<span class="number">1</span>] <span class="comment">#sys.argv[1]为我们执行python时传递的第二个参数</span>
+</code></pre>
+<p>最后执行<code>python rename_res.py /Users/loody/Downloads/切图/3x</code>即可</p>
 
       
     </div>
@@ -438,7 +438,7 @@ for files in filelist: #遍历所有文件
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -447,7 +447,7 @@ for files in filelist: #遍历所有文件
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

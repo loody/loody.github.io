@@ -293,46 +293,30 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近项目中要用到图表，但是现有的开源图表库不能满足我们的要求，所以要去修改它的源码，发现所有的图表库都用的是Canvas去画的，之前没有研究过它的绘制原理，接下来将其学习笔记记录与此</p>
-<h2 id="绘图三要素"><a href="#绘图三要素" class="headerlink" title="绘图三要素"></a>绘图三要素</h2><p>Paint—————画笔</p>
-<p>Bitmap————–画布</p>
-<p>Canvas————–画家</p>
-<p>它们三个是紧密相连的，缺一不可，不管我们画任何图形，文字，都需要用到它们</p>
-<h2 id="如何创建"><a href="#如何创建" class="headerlink" title="如何创建"></a>如何创建</h2><p>Bitmap的创建有很多</p>
-<ol>
-<li>Bitmap.createBitmap()(Api提供了六种重载)</li>
-<li><p>使用BitmapFactory获取位图 </p>
-<pre><code>Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.ic_launcher);
-</code></pre></li>
-<li><p>…</p>
-</li>
-</ol>
-<p>Canvas对象的获取方式有两种：</p>
-<ol>
-<li>一种我们通过重写View.onDraw方法，View中的Canvas对象会被当做参数传递过来，我们操作这个Canvas，效果会直接反应在View中。</li>
-<li><p>另一种就是当你想创建一个Canvas对象时使用的方法：</p>
-<pre><code>Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);   
-Canvas c = new Canvas(b);
-</code></pre><p>上面代码创建了一个尺寸是100*100的Bitmap，使用它作为Canvas操作的对象，这时候的Canvas就是使用创建的方式</p>
-</li>
-</ol>
-<p>Paint的创建最简单<br> Paint paint = new Paint();  关于Paint的属性介绍，可以参考如下地址：<a href="http://blog.csdn.net/xanxus46/article/details/7883554" target="_blank" rel="external">http://blog.csdn.net/xanxus46/article/details/7883554</a></p>
-<h2 id="绘图种类"><a href="#绘图种类" class="headerlink" title="绘图种类"></a>绘图种类</h2><ol>
-<li>弧线(arcs)</li>
-<li>填充颜色(argb和color)</li>
-<li>Bitmap</li>
-<li>圆(circle和oval)</li>
-<li>点(point)</li>
-<li>线(line)</li>
-<li>矩形(Rect)</li>
-<li>图片(Picture)</li>
-<li>圆角矩形 (RoundRect)</li>
-<li>文本(text)</li>
-<li>顶点(Vertices)</li>
-<li>路径(path)</li>
-</ol>
+          前言最近项目中要用到图表，但是现有的开源图表库不能满足我们的要求，所以要去修改它的源码，发现所有的图表库都用的是Canvas去画的，之前没有研究过它的绘制原理，接下来将其学习笔记记录与此
+绘图三要素Paint—————画笔
+Bitmap————–画布
+Canvas————–画家
+它们三个是紧密相连的，缺一不可，不管我们画任何图形，文字，都需要用到它们
+如何创建Bitmap的创建有很多
 
-          
+Bitmap.createBitmap()(Api提供了六种重载)
+使用BitmapFactory获取位图 
+Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.ic_launcher);
+
+…
+
+
+Canvas对象的获取方式有两种：
+
+一种我们通过重写View.onDraw方法，View中的Canvas对象会被当做参数传递过来，我们操作这个Can
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/01/25/2015-01-25-canvas-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -445,10 +429,10 @@ Canvas c = new Canvas(b);
       
         
           
-            <p>最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，</p>
-<p><strong>思路</strong>：通过计算目标点在scrollview的位置top，调用<code>scrollTo(0,top)</code>方法定位</p>
-<p><strong>实现</strong>：页面布局是这样的</p>
-<pre><code>&lt;ScrollView&gt;
+          最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
+思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
+实现：页面布局是这样的
+&lt;ScrollView&gt;
     &lt;View&gt;
 
     &lt;/View&gt;
@@ -456,51 +440,17 @@ Canvas c = new Canvas(b);
         &lt;div id=&quot;anchor&quot;&gt;&lt;/div&gt; 
     &lt;/WebView&gt;
 &lt;/ScrollView&gt;
-</code></pre><p>so top=height(View)+height(div)</p>
-<p>首先View到顶部的距离好说，view.getTop即可，代码如下：</p>
-<pre><code>/**
- * 测量商品信息导航栏离顶端高度
- */
-private void getTopForNav() {
-    ViewTreeObserver vto = rg_info_nav.getViewTreeObserver();
-    vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()         {
-        public boolean onPreDraw() {
-            mHeight = rg_info_nav.getTop();
-            return true;
-        }
-    });
-}
-</code></pre><p>问题来了，怎么计算webview中某个节点离webview顶端的距离呢，没错，就是通过js计算，然后通过alert（）弹出，在android中就可以拿到了，代码如下：</p>
-<p>js:</p>
-<pre><code>function d_desc(){
-    var desc = document.getElementById(&quot;desc&quot;);
-     var topa = desc.offsetTop;
-     alert(topa);
-}
-</code></pre><p>android:</p>
-<pre><code>mWebView.setWebChromeClient(new WebChromeClient() {
+so top=height(View)+height(div)
+首先View到顶部的距离好说，view.getTop即可，代码如下：
+/**
+ 
+          ...
 
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            result.cancel();
-            if (!TextUtils.isEmpty(message)) {
-                try {
-                    int top = Integer.parseInt(message);
-                    mStickyScrollView.scrollTo(0, mHeight + (int) (top * mDensity));
-                } catch (Exception e) {
-                }
-
-            }
-            return true;
-        }
-    });
-
-//mDensity=getResources().getDisplayMetrics().density;屏幕密度
-</code></pre><p>在需要定位的地方调用即可：</p>
-<pre><code>mWebView.loadUrl(&quot;javascript: d_desc()&quot;);
-</code></pre><h3 id="疑点"><a href="#疑点" class="headerlink" title="疑点"></a>疑点</h3><p><code>top * mDensity</code>：通过js获取到的top值就是px，mHeigh获取到的也是px，但是如果调用scrollTo（mHeigh+top）位置会不对，必须写成scrollTo（mHeigh+top*mDensity），此问题暂时在此mark,待弄清楚后再来解释</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -613,35 +563,27 @@ private void getTopForNav() {
       
         
           
-            <p>上周在项目中增加了支持微信支付的功能，遇到了不少问题，现将其mark如下</p>
-<h2 id="微信支付流程"><a href="#微信支付流程" class="headerlink" title="微信支付流程"></a>微信支付流程</h2><ol>
-<li><p>获取access_token()<br> 这步需要用到<code>APP_ID</code> 和 <code>APP_SECRET</code>，需要在微信开放平台注册应用获得</p>
-</li>
-<li><p>生成预支付订单 </p>
-</li>
-<li><p>调起微信支付</p>
-</li>
-<li><p>支付完成后</p>
-<p> 微信会回调 WXPayEntryActivity 的public void onResp(BaseResp resp)方法，所以后续操作，放在这个回调函数中操作就可以了。</p>
-<p> resp.errCode== 0 ：表示支付成功</p>
-<p> resp.errCode== -1 ：表示支付失败</p>
-<p> resp.errCode== -2 ：表示取消支付</p>
-<p>具体步骤大家可以去微信开放平台下载demo文档查看，地址是：<a href="https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_android_tmpl" target="_blank" rel="external">https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_android_tmpl</a></p>
-<p>官方建议，为安全起见，上面步骤一和步骤二建议放在服务端完成，客户端拿到这些参数直接掉起PayReq，设置完参数完成支付</p>
-</li>
-</ol>
-<h2 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h2><p><strong>1、 每次运行点完支付都返回-1，即支付失败，并不能调出支付确认界面，原因可能是如下几个原因：</strong></p>
-<ol>
-<li>这个问题多半是签名错误，或者keystore，包名，签名不一致导致。</li>
-<li>再有错误，就是你第二步生成Prepayid时的app_signature 生成错误，仔细看下demo和文档。</li>
-</ol>
-<p>demo中有一个debug.store可以作为测试签名文件，可以直接掉出支付页面，eclipse(目前文档是基于eclipse的，用as的同学请见谅)步骤如下：<br>Window-&gt;Preferences-&gt;Android-&gt;Build-&gt;指定Custom debug keystore选项的路径为sdk demo工程目录中的debug.keystore文件<br>运行，程序，进入支付页面即可调出支付页面了，如下</p>
-<p><img src="/images/wx_pay.jpg" alt="wx_pay.jpg"></p>
-<p><strong>2、可以弹出微信支付的界面，但是支付之后没有进入回调的Activity：WXPayEntryActivity ?
-</strong><br>微信开放平台有个 不成文的规定（文档里没有说明），就是回调的Activity必须是：你的包名（微信demo里是：net.sourceforge.simcpux）+.wxapi.WXPayEntryActivity.java<br>其他的接口回调的Activity必须是：你的包名（微信demo里是：net.sourceforge.simcpux）+.wxapi.WXEntryActivity.java,<br>而且这两个回调的Activity必须要实现IWXAPIEventHandler的接口 。(抓瞎)</p>
-<p><strong>3、项目中用到了友盟社会化分享组件，jar包处理问题</strong><br>如果你的项目中用到了友盟集成的关于微信的功能，友盟中有两个关于微信的jar包<br><code>SocialSDK_WeiXin_1</code>、<code>SocialSDK_WeiXin_2</code>，<br>其中SocialSDK_WeiXin_1就是微信功能的原生jar包（libammsdk.jar），所有关于微信的功能都在这个jar包里，大家只需替换这个jar包即可完成升级。SocialSDK_WeiXin_2继续保留<br>友盟只是对微信的包名做了修改（libammsdk.jar -&gt; SocialSDK_WeiXin_1.jar）</p>
+          上周在项目中增加了支持微信支付的功能，遇到了不少问题，现将其mark如下
+微信支付流程
+获取access_token() 这步需要用到APP_ID 和 APP_SECRET，需要在微信开放平台注册应用获得
 
-          
+生成预支付订单 
+
+调起微信支付
+
+支付完成后
+ 微信会回调 WXPayEntryActivity 的public void onResp(BaseResp resp)方法，所以后续操作，放在这个回调函数中操作就可以了。
+ resp.errCode== 0 ：表示支付成功
+ resp.errCode== -1 ：表示支付失败
+ resp.errCode== -2 ：表示取消支付
+具体步骤大家可以去微信开放平台下载demo文档查看，地址是：https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_a
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/21/2014-12-21-weixin-pay/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -754,135 +696,26 @@ private void getTopForNav() {
       
         
           
-            <h2 id="常见的几种占位符-String-format"><a href="#常见的几种占位符-String-format" class="headerlink" title="常见的几种占位符 String.format"></a>常见的几种占位符 String.format</h2><ul>
-<li>%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099</li>
-<li>%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数</li>
-<li>%s: 字符串类型，如：”ljq”</li>
-<li>%b: 布尔类型，如：true</li>
-<li>%%: 百分比类型，如：％</li>
-<li>%n: 换行符</li>
-</ul>
-<h2 id="对整数进行格式化：-index-标识-最小宽度-转换方式"><a href="#对整数进行格式化：-index-标识-最小宽度-转换方式" class="headerlink" title="对整数进行格式化：%[index$][标识][最小宽度]转换方式"></a>对整数进行格式化：%[index$][标识][最小宽度]转换方式</h2><p>我们可以看到，格式化字符串由4部分组成，其中%[index$]的含义我们上面已经讲过，[最小宽度]的含义也很好理解，就是最终该整数转化的字符串最少包含多少位数字。我们来看看剩下2个部分的含义吧：</p>
-<h3 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h3><ul>
-<li>‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用</li>
-<li>‘#’    只适用于8进制和16进制，8进制时在结果前面增加一个0，16进制时在结果前面增加0x</li>
-<li>‘+’    结果总是包括一个符号（一般情况下只适用于10进制，若对象为BigInteger才可以用于8进制和16进制）</li>
-<li>‘ ‘    正值前加空格，负值前加负号（一般情况下只适用于10进制，若对象为BigInteger才可以用于8进制和16进制）</li>
-<li>‘0’    结果将用零来填充</li>
-<li>‘,’    只适用于10进制，每3位数字之间用“，”分隔</li>
-<li>‘(‘    若参数是负数，则结果中不添加负号而是用圆括号把数字括起来（同‘+’具有同样的限制）</li>
-</ul>
-<h3 id="转换方式"><a href="#转换方式" class="headerlink" title="转换方式"></a>转换方式</h3><p>d:十进制<br>o:八进制<br>x或X:十六进制</p>
-<h2 id="对浮点数进行格式化：-index-标识-最少宽度-精度-转换方式"><a href="#对浮点数进行格式化：-index-标识-最少宽度-精度-转换方式" class="headerlink" title="对浮点数进行格式化：%[index$][标识][最少宽度][.精度]转换方式"></a>对浮点数进行格式化：%[index$][标识][最少宽度][.精度]转换方式</h2><p>我们可以看到，浮点数的转换多了一个“精度”选项，可以控制小数点后面的位数。</p>
-<h3 id="标识-1"><a href="#标识-1" class="headerlink" title="标识"></a>标识</h3><ul>
-<li>‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用</li>
-<li>‘+’    结果总是包括一个符号</li>
-<li>‘  ‘    正值前加空格，负值前加负号</li>
-<li>‘0’    结果将用零来填充</li>
-<li>‘,’    每3位数字之间用“，”分隔（只适用于fgG的转换）</li>
-<li>‘(‘    若参数是负数，则结果中不添加负号而是用圆括号把数字括起来（只适用于eEfgG的转换）</li>
-</ul>
-<h3 id="转换方式-1"><a href="#转换方式-1" class="headerlink" title="转换方式"></a>转换方式</h3><ul>
-<li>‘e’, ‘E’  –  结果被格式化为用计算机科学记数法表示的十进制数</li>
-<li>‘f’          –  结果被格式化为十进制普通表示方式</li>
-<li>‘g’, ‘G’    –  根据具体情况，自动选择用普通表示方式还是科学计数法方式</li>
-<li>‘a’, ‘A’    –   结果被格式化为带有效位数和指数的十六进制浮点数</li>
-</ul>
-<h2 id="对字符进行格式化："><a href="#对字符进行格式化：" class="headerlink" title="对字符进行格式化："></a>对字符进行格式化：</h2><p>对字符进行格式化是非常简单的，c表示字符，标识中’-‘表示左对齐，其他就没什么了。</p>
-<h2 id="对百分比符号进行格式化："><a href="#对百分比符号进行格式化：" class="headerlink" title="对百分比符号进行格式化："></a>对百分比符号进行格式化：</h2><p>看了上面的说明，大家会发现百分比符号“%”是特殊格式的一个前缀。那么我们要输入一个百分比符号该怎么办呢？肯定是需要转义字符的,但是要注意的是，在这里转义字符不是“\”，而是“%”。</p>
-<h2 id="取得平台独立的行分隔符："><a href="#取得平台独立的行分隔符：" class="headerlink" title="取得平台独立的行分隔符："></a>取得平台独立的行分隔符：</h2><p><code>System.getProperty(&quot;line.separator&quot;)</code>可以取得平台独立的行分隔符，但是用在format中间未免显得过于烦琐了。于是format函数自带了一个平台独立的行分隔符那就是<br><code>String.format(&quot;%n&quot;)</code>。</p>
-<h2 id="对日期类型进行格式化"><a href="#对日期类型进行格式化" class="headerlink" title="对日期类型进行格式化:"></a>对日期类型进行格式化:</h2><p>以下日期和时间转换的后缀字符是为 ‘t’ 和 ‘T’ 转换定义的。这些类型相似于但不完全等同于那些由 GNU date 和 POSIX strftime(3c) 定义的类型。提供其他转换类型是为了访问特定于 Java 的功能（如将 ‘L’ 用作秒中的毫秒）。</p>
-<p><strong>以下转换字符用来格式化时间：</strong></p>
-<ul>
-<li>‘H’     24 小时制的小时，被格式化为必要时带前导零的两位数，即 00 - 23。</li>
-<li>‘I’     12 小时制的小时，被格式化为必要时带前导零的两位数，即 01 - 12。</li>
-<li>‘k’     24 小时制的小时，即 0 - 23。</li>
-<li>‘l’     12 小时制的小时，即 1 - 12。</li>
-<li>‘M’     小时中的分钟，被格式化为必要时带前导零的两位数，即 00 - 59。</li>
-<li>‘S’     分钟中的秒，被格式化为必要时带前导零的两位数，即 00 - 60 （”60” 是支持闰秒所需的一个特殊值）。</li>
-<li>‘L’     秒中的毫秒，被格式化为必要时带前导零的三位数，即 000 - 999。</li>
-<li>‘N’     秒中的毫微秒，被格式化为必要时带前导零的九位数，即 000000000 - 999999999。</li>
-<li>‘p’     特定于语言环境的 上午或下午 标记以小写形式表示，例如 “am” 或 “pm”。使用转换前缀 ‘T’ 可以强行将此输出转换为大写形式。</li>
-<li>‘z’     相对于 GMT 的 RFC 822 格式的数字时区偏移量，例如 -0800。</li>
-<li>‘Z’     表示时区缩写形式的字符串。Formatter 的语言环境将取代参数的语言环境（如果有）。</li>
-<li>‘s’     自协调世界时 (UTC) 1970 年 1 月 1 日 00:00:00 至现在所经过的秒数，即 Long.MIN_VALUE/1000 与 Long.MAX_VALUE/1000 之间的差值。</li>
-<li>‘Q’     自协调世界时 (UTC) 1970 年 1 月 1 日 00:00:00 至现在所经过的毫秒数，即 Long.MIN_VALUE 与 Long.MAX_VALUE 之间的差值。</li>
-</ul>
-<p><strong>以下转换字符用来格式化日期：</strong></p>
-<ul>
-<li>‘B’     特定于语言环境的月份全称，例如 “January” 和 “February”。</li>
-<li>‘b’     特定于语言环境的月份简称，例如 “Jan” 和 “Feb”。</li>
-<li>‘h’     与 ‘b’ 相同。</li>
-<li>‘A’     特定于语言环境的星期几全称，例如 “Sunday” 和 “Monday”</li>
-<li>‘a’     特定于语言环境的星期几简称，例如 “Sun” 和 “Mon”</li>
-<li>‘C’     除以 100 的四位数表示的年份，被格式化为必要时带前导零的两位数，即 00 - 99</li>
-<li>‘Y’     年份，被格式化为必要时带前导零的四位数（至少），例如，0092 等于格里高利历的 92 CE。</li>
-<li>‘y’     年份的最后两位数，被格式化为必要时带前导零的两位数，即 00 - 99。</li>
-<li>‘j’     一年中的天数，被格式化为必要时带前导零的三位数，例如，对于格里高利历是 001 - 366。</li>
-<li>‘m’     月份，被格式化为必要时带前导零的两位数，即 01 - 13。</li>
-<li>‘d’     一个月中的天数，被格式化为必要时带前导零两位数，即 01 - 31</li>
-<li>‘e’     一个月中的天数，被格式化为两位数，即 1 - 31。</li>
-</ul>
-<p><strong>以下转换字符用于格式化常见的日期/时间组合。</strong></p>
-<ul>
-<li>‘R’     24 小时制的时间，被格式化为 “%tH:%tM”</li>
-<li>‘T’     24 小时制的时间，被格式化为 “%tH:%tM:%tS”。</li>
-<li>‘r’     12 小时制的时间，被格式化为 “%tI:%tM:%tS %Tp”。上午或下午标记 (‘%Tp’) 的位置可能与语言环境有关。</li>
-<li>‘D’     日期，被格式化为 “%tm/%td/%ty”。</li>
-<li>‘F’     ISO 8601 格式的完整日期，被格式化为 “%tY-%tm-%td”。</li>
-<li>‘c’     日期和时间，被格式化为 “%ta %tb %td %tT %tZ %tY”，例如 “Sun Jul 20 16:17:00 EDT 1969”。</li>
-</ul>
-<p>[index$]不加的话默认是从左到右的顺序依次取值</p>
-<p><strong>示例：</strong></p>
-<pre><code>Log.d(TAG, String.format(&quot;整数:%,d&quot;, -80000000));
-Log.d(TAG, String.format(&quot;浮点数:%.2f&quot;, 0.81634f));
-Log.d(TAG, String.format(&quot;字符串:%s&quot;, &quot;hello word&quot;));
-Log.d(TAG, String.format(&quot;布尔:%b&quot;, 8 &gt; 9));
-Log.d(TAG, String.format(&quot;百分比:%%%d&quot;, 80));
-Log.d(TAG, String.format(&quot;换行符:%n换行符&quot;));
-Log.d(TAG, String.format(&quot;日期R:%tR&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期T:%tT&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期D:%tD&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期F:%tF&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期c:%tc&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期H:%tH&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期I:%tI&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期k:%tk&quot;, new Date()));
-Log.d(TAG, String.format(&quot;日期l:%tl&quot;, new Date()));
-Log.d(TAG, String.format(&quot;整数:%,d--浮点数:%.2f--字符串:%s--布尔:%b--百分比:%%%d--换行符:%n换行符&quot;,
-            -80000000, 0.81634f, &quot;hello word&quot;, 8 &gt; 9, 80));
-Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--布尔:%4$b&quot;,
-            -80000000, &quot;hello word&quot;, 0.81634f, 8 &gt; 9));
-</code></pre><p><strong>输出</strong></p>
-<pre><code>12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 浮点数:0.82
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 字符串:hello word
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 布尔:false
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 百分比:%80
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 换行符:
-换行符
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期R:22:24
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期T:22:24:11
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期D:12/14/14
-12-14 22:24:11.231    1109-1109/loody.com.helloword D/MainActivity﹕ 日期F:2014-12-14
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期c:星期日 12月 14 22:24:11 GMT+08:00 2014
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期H:22
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期I:10
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期k:22
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 日期l:10
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000--浮点数:0.82--字符串:hello word--布尔:false--百分比:%80--换行符:
-换行符
-12-14 22:24:11.241    1109-1109/loody.com.helloword D/MainActivity﹕ 整数:-80,000,000--浮点数:0.82--字符串:hello word--布尔:false               
-</code></pre><h2 id="常见的转义符"><a href="#常见的转义符" class="headerlink" title="常见的转义符"></a>常见的转义符</h2><ul>
-<li>“:双引号(\&#34;) </li>
-<li>‘:单引号(\&#39;) </li>
-<li>&amp;:(\&#38;) </li>
-<li>小于号(&lt;):(\&#60;) </li>
-<li>大于号(&gt;):(\&#62;) </li>
-<li>空格：（\&#160;）</li>
-</ul>
+          常见的几种占位符 String.format
+%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
+%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
+%s: 字符串类型，如：”ljq”
+%b: 布尔类型，如：true
+%%: 百分比类型，如：％
+%n: 换行符
 
-          
+对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分组成，其中%[index$]的含义我们上面已经讲过，[最小宽度]的含义也很好理解，就是最终该整数转化的字符串最少包含多少位数字。我们来看看剩下2个部分的含义吧：
+标识
+‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用
+‘#’    只适用于8进制和16进制，8进制时在结果前面增加一个0，16进制时在结果前面增加0x
+‘+’    结果总是包括一个符号（一般情况下只适用于10进制，若对
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/14/2014-12-14-string-format/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -995,62 +828,21 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
       
         
           
-            <p>最近项目在采用android studio来开发，它采用的是Gradle构建系统，当我们要添加外部依赖的时候我们只需要在build.gradle下配置如下即可</p>
-<pre><code>dependencies {
+          最近项目在采用android studio来开发，它采用的是Gradle构建系统，当我们要添加外部依赖的时候我们只需要在build.gradle下配置如下即可
+dependencies {
     compile &apos;com.android.support:appcompat-v7:21.0.2&apos;
 }
-</code></pre><p>但是这是什么意思呢？于是就去学习了一下granle的依赖管理，原来定义外部依赖包含group, name和version这三个属性，上面的写法是一种简洁的写法，把它补全就是</p>
-<pre><code>dependencies {
+但是这是什么意思呢？于是就去学习了一下granle的依赖管理，原来定义外部依赖包含group, name和version这三个属性，上面的写法是一种简洁的写法，把它补全就是
+dependencies {
     compile group:&apos;com.android.support&apos;,name:&apos;support-v4&apos;,version:&apos;21.0.2&apos;    }
-</code></pre><h2 id="依赖管理简介"><a href="#依赖管理简介" class="headerlink" title="依赖管理简介"></a>依赖管理简介</h2><p>在配置完项目仓库后，我们可以声明其中的依赖，如果我们想要声明一个新的依赖，可以采用如下步骤：</p>
-<p>指定依赖的配置。<br>声明所需的依赖。<br>让我们看一下详细步骤：</p>
-<h2 id="配置中的依赖分类"><a href="#配置中的依赖分类" class="headerlink" title="配置中的依赖分类"></a>配置中的依赖分类</h2><p>在Gradle中，依赖是按照指定名称进行分类的，这些分类被称为配置项，我们可以使用配置项声明项目的外部依赖。</p>
-<p>Java插件指定了若干依赖配置项，其描述如下：当项目的源代码被编译时，</p>
-<p>compile配置项中的依赖是必须的。</p>
-<p>runtime配置项中包含的依赖在运行时是必须的。</p>
-<p>testCompile配置项中包含的依赖在编译项目的测试代码时是必须的。</p>
-<p>testRuntime配置项中包含的依赖在运行测试代码时是必须的。</p>
-<p>archives配置项中包含项目生成的文件（如Jar文件）。</p>
-<p>default配置项中包含运行时必须的依赖。</p>
-<h2 id="声明项目依赖"><a href="#声明项目依赖" class="headerlink" title="声明项目依赖"></a>声明项目依赖</h2><p>最普遍的依赖称为外部依赖，这些依赖存放在外部仓库中。一个外部依赖可以由以下属性指定：</p>
-<p><code>group</code>属性指定依赖的分组（在Maven中，就是groupId）。</p>
-<p><code>name</code>属性指定依赖的名称（在Maven中，就是artifactId）。</p>
-<p><code>vertion</code>属性指定外部依赖的版本（在Maven中，就是version）。</p>
-<p>我们假设我们需要指定以下依赖：</p>
-<p>依赖的分组是foo。</p>
-<p>依赖的名称是foo。</p>
-<p>依赖的版本是0.1。</p>
-<p>在项目编译时需要这些依赖。我们可以将以下代码片段加入到build.gradle中，进行依赖声明：</p>
-<pre><code>dependencies {
-    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
-}
-</code></pre><p>我们也可以采用一种快捷方式声明依赖：[group]:[name]:[version]。如果我们想用这种方式，我们可以将以下代码段加入到build.gradle中：</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;
-}
-</code></pre><p>我们也可以在同一个配置项中加入多个依赖，传统的方式如下：</p>
-<pre><code>dependencies {
-    compile (
-        [group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;],
-        [group: &apos;bar&apos;, name: &apos;bar&apos;, version: &apos;0.1&apos;]
-    )
-}
-</code></pre><p>如果采用快捷方式，那可以是这样：</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;, &apos;bar:bar:0.1&apos;
-}
-</code></pre><p>自然地，声明属于不同配置项的依赖也是可以的。比如说，如果我们想要声明属于compile和testCompile配置项的依赖，可以这么做：</p>
-<pre><code>dependencies {
-    compile group: &apos;foo&apos;, name: &apos;foo&apos;, version: &apos;0.1&apos;
-    testCompile group: &apos;test&apos;, name: &apos;test&apos;, version: &apos;0.1&apos;
-}
-</code></pre><p>同样的，给力的快捷方式又来了</p>
-<pre><code>dependencies {
-    compile &apos;foo:foo:0.1&apos;
-    testCompile &apos;test:test:0.1&apos;
-}                
-</code></pre>
-          
+依赖管理简介在配置完项目仓库后，我们可以声明其中的依赖
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/07/2014-12-07-about-gradle dependency management/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1163,22 +955,20 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
       
         
           
-            <p>前两天在开发中碰到一些Activity重用的需求，流程如下：</p>
-<p><code>MainActivity</code>–&gt;<code>FirstActivity</code>–&gt;<code>SecondActivity</code>–&gt;<code>LoginActivity</code>–&gt;<code>MainActivity</code></p>
-<p>因为MainActivity是程序的主界面，一般都将其放置栈底，不可能干掉他，但是我们又要怎么回到MainActivity而又不会重新创建它呢？那就是利用Android的启动模式，下面就来简单介绍一下。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在android里，有4种activity的启动模式，分别为： </p>
-<p><strong>standard</strong>: 标准模式，一调用startActivity()方法就会产生一个新的实例。</p>
-<p><strong>singleTop</strong>: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。</p>
-<p><strong>singleTask</strong>: 会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了。</p>
-<p><strong>singleInstance</strong>: 这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，只能有这个activity实例，不能有其他的实例。</p>
-<p>上面的例子中我们就可以设置MainActivity的启动模式为singleTask，这样就可以保证它单实例存在了。</p>
-<h2 id="四种加载模式的区别"><a href="#四种加载模式的区别" class="headerlink" title="四种加载模式的区别"></a>四种加载模式的区别</h2><p><strong>所属task的区别</strong></p>
-<p>一般情况下，“standard”和”singleTop”的activity的目标task，和收到的Intent的发送者在同一个task内，就相当于谁调用它，它就跟谁在同一个Task中。除非Intent包括参数FLAG_ACTIVITY_NEW_TASK。如果提供了FLAG_ACTIVITY_NEW_TASK参数，会启动到别的task里。<br>“singleTask”和”singleInstance” 总是把要启动的activity作为一个task的根元素，他们不会被启动到一个其他task里。</p>
-<p><strong>是否允许多个实例</strong></p>
-<p>“standard”和”singleTop”可以被实例化多次，并且是可以存在于不同的task中；这种实例化时一个task可以包括一个activity的多个实例；“singleTask”和”singleInstance”则限制只生成一个实例，并且是task的根元素。singleTop 要求如果创建intent的时候栈顶已经有要创建的Activity的实例，则将intent发送给该实例，而不创建新的实例。</p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p> 当我们调用OnNewIntent时的需要注意当前Activity可能会被后台回收，导致数据丢失，详见:<a href="http://blog.csdn.net/tyj1982/article/details/6848879" target="_blank" rel="external">http://blog.csdn.net/tyj1982/article/details/6848879</a></p>
+          前两天在开发中碰到一些Activity重用的需求，流程如下：
+MainActivity–&gt;FirstActivity–&gt;SecondActivity–&gt;LoginActivity–&gt;MainActivity
+因为MainActivity是程序的主界面，一般都将其放置栈底，不可能干掉他，但是我们又要怎么回到MainActivity而又不会重新创建它呢？那就是利用Android的启动模式，下面就来简单介绍一下。
+简介在android里，有4种activity的启动模式，分别为： 
+standard: 标准模式，一调用startActivity()方法就会产生一个新的实例。
+singleTop: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。
+singl
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/11/15/2014-11-15-about activity lauchMode/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1291,145 +1081,18 @@ Log.d(TAG, String.format(&quot;整数:%1$,d--浮点数:%3$.2f--字符串:%2$s--�
       
         
           
-            <p>相信接触Android久一点的朋友对于LayoutInflater一定不会陌生，都会知道它主要是用于加载布局的。而刚接触Android的朋友可能对LayoutInflater不怎么熟悉，因为加载布局的任务通常都是在Activity中调用setContentView()方法来完成的。其实setContentView()方法的内部也是使用LayoutInflater来加载布局的，只不过这部分源码是internal的，不太容易查看到。那么今天我们就来把LayoutInflater的工作流程仔细地剖析一遍，也许还能解决掉某些困扰你心头多年的疑惑。</p>
-<h2 id="LayoutInflater的用法"><a href="#LayoutInflater的用法" class="headerlink" title="LayoutInflater的用法"></a>LayoutInflater的用法</h2><p>首先需要获取到LayoutInflater的实例，有两种方法可以获取到，</p>
-<p>第一种写法如下：</p>
-<pre><code>LayoutInflater layoutInflater = LayoutInflater.from(context);
-</code></pre><p>另外一种写法：</p>
-<pre><code>LayoutInflater layoutInflater = (LayoutInflater)     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-</code></pre><p>其实第一种就是第二种的简单写法，只是Android给我们做了一下封装而已。得到了LayoutInflater的实例之后就可以调用它的inflate()方法来加载布局了，如下所示：</p>
-<pre><code>layoutInflater.inflate(resourceId, root);
-</code></pre><p>inflate()方法一般接收两个参数，第一个参数就是要加载的布局id，第二个参数是指给该布局的外部再嵌套一层父布局，如果不需要就直接传null。这样就成功成功创建了一个布局的实例，之后再将它添加到指定的位置就可以显示出来了。</p>
-<p>下面我们就通过一个非常简单的小例子，来更加直观地看一下LayoutInflater的用法。比如说当前有一个项目，其中MainActivity对应的布局文件叫做activity_main.xml，代码如下所示：</p>
-<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:id=&quot;@+id/main_layout&quot;
-        android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; &gt;
+          相信接触Android久一点的朋友对于LayoutInflater一定不会陌生，都会知道它主要是用于加载布局的。而刚接触Android的朋友可能对LayoutInflater不怎么熟悉，因为加载布局的任务通常都是在Activity中调用setContentView()方法来完成的。其实setContentView()方法的内部也是使用LayoutInflater来加载布局的，只不过这部分源码是internal的，不太容易查看到。那么今天我们就来把LayoutInflater的工作流程仔细地剖析一遍，也许还能解决掉某些困扰你心头多年的疑惑。
+LayoutInflater的用法首先需要获取到LayoutInflater的实例，有两种方法可以获取到，
+第一种写法如下：
+LayoutInflater layoutInflater = LayoutInflater.from(context);
+另外
+          ...
 
-&lt;/LinearLayout&gt;
-</code></pre><p>这个布局文件的内容非常简单，只有一个空的LinearLayout，里面什么控件都没有，因此界面上应该不会显示任何东西。<br>那么接下来我们再定义一个布局文件，给它取名为button_layout.xml，代码如下所示：</p>
-<pre><code>&lt;Button xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;Button&quot; /&gt;
-</code></pre><p>这个布局文件也非常简单，只有一个Button按钮而已。现在我们要想办法，如何通过LayoutInflater来将button_layout这个布局添加到主布局文件的LinearLayout中。根据刚刚介绍的用法，修改MainActivity中的代码，如下所示：</p>
-<pre><code>public class MainActivity extends Activity {
-
-    private LinearLayout mainLayout;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mainLayout = (LinearLayout) findViewById(R.id.main_layout);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View buttonLayout = layoutInflater.inflate(R.layout.button_layout, null);
-        mainLayout.addView(buttonLayout);
-    }
-}    
-</code></pre><p>可以看到，这里先是获取到了LayoutInflater的实例，然后调用它的inflate()方法来加载button_layout这个布局，最后调用LinearLayout的addView()方法将它添加到LinearLayout中。<br>现在可以运行一下程序，Button在界面上显示出来了！说明我们确实是借助LayoutInflater成功将button_layout这个布局添加到LinearLayout中了。LayoutInflater技术广泛应用于需要动态添加View的时候，比如在ScrollView和ListView中，经常都可以看到LayoutInflater的身影。</p>
-<p>当然，仅仅只是介绍了如何使用LayoutInflater显然是远远无法满足大家的求知欲的，知其然也要知其所以然，接下来我们就从源码的角度上看一看LayoutInflater到底是如何工作的。</p>
-<p>不管你是使用的哪个inflate()方法的重载，最终都会辗转调用到LayoutInflater的如下代码中：</p>
-<pre><code>public View inflate(XmlPullParser parser, ViewGroup root, boolean attachToRoot) {
-synchronized (mConstructorArgs) {
-    final AttributeSet attrs = Xml.asAttributeSet(parser);
-    mConstructorArgs[0] = mContext;
-    View result = root;
-    try {
-        int type;
-        while ((type = parser.next()) != XmlPullParser.START_TAG &amp;&amp;
-                type != XmlPullParser.END_DOCUMENT) {
-        }
-        if (type != XmlPullParser.START_TAG) {
-            throw new InflateException(parser.getPositionDescription()
-                    + &quot;: No start tag found!&quot;);
-        }
-        final String name = parser.getName();
-        if (TAG_MERGE.equals(name)) {
-            if (root == null || !attachToRoot) {
-                throw new InflateException(&quot;merge can be used only with a valid &quot;
-                        + &quot;ViewGroup root and attachToRoot=true&quot;);
-            }
-            rInflate(parser, root, attrs);
-        } else {
-            View temp = createViewFromTag(name, attrs);
-            ViewGroup.LayoutParams params = null;
-            if (root != null) {
-                params = root.generateLayoutParams(attrs);
-                if (!attachToRoot) {
-                    temp.setLayoutParams(params);
-                }
-            }
-            rInflate(parser, temp, attrs);
-            if (root != null &amp;&amp; attachToRoot) {
-                root.addView(temp, params);
-            }
-            if (root == null || !attachToRoot) {
-                result = temp;
-            }
-        }
-    } catch (XmlPullParserException e) {
-        InflateException ex = new InflateException(e.getMessage());
-        ex.initCause(e);
-        throw ex;
-    } catch (IOException e) {
-        InflateException ex = new InflateException(
-                parser.getPositionDescription()
-                + &quot;: &quot; + e.getMessage());
-        ex.initCause(e);
-        throw ex;
-    }
-    return result;
-       }
-    }
-</code></pre><p>从这里我们就可以清楚地看出，LayoutInflater其实就是使用Android提供的pull解析方式来解析布局文件的.这里只是创建出了一个根布局的实例而已，接下来会调用rInflate()方法来循环遍历这个根布局下的子元素，代码如下所示：</p>
-<pre><code>private void rInflate(XmlPullParser parser, View parent, final AttributeSet attrs)
-    throws XmlPullParserException, IOException {
-final int depth = parser.getDepth();
-int type;
-while (((type = parser.next()) != XmlPullParser.END_TAG ||
-        parser.getDepth() &gt; depth) &amp;&amp; type != XmlPullParser.END_DOCUMENT) {
-    if (type != XmlPullParser.START_TAG) {
-        continue;
-    }
-    final String name = parser.getName();
-    if (TAG_REQUEST_FOCUS.equals(name)) {
-        parseRequestFocus(parser, parent);
-    } else if (TAG_INCLUDE.equals(name)) {
-        if (parser.getDepth() == 0) {
-            throw new InflateException(&quot;&lt;include /&gt; cannot be the root element&quot;);
-        }
-        parseInclude(parser, parent, attrs);
-    } else if (TAG_MERGE.equals(name)) {
-        throw new InflateException(&quot;&lt;merge /&gt; must be the root element&quot;);
-    } else {
-        final View view = createViewFromTag(name, attrs);
-        final ViewGroup viewGroup = (ViewGroup) parent;
-        final ViewGroup.LayoutParams params = viewGroup.generateLayoutParams(attrs);
-        rInflate(parser, view, attrs);
-        viewGroup.addView(view, params);
-    }
-}
-    parent.onFinishInflate();
-}
-</code></pre><p>同样是createViewFromTag()方法来创建View的实例,然后还会递归调用rInflate()方法来查找这个View下的子元素，每次递归完成后则将这个View添加到父布局当中。这样的话，把整个布局文件都解析完成后就形成了一个完整的DOM结构，最终会把最顶层的根布局返回，至此inflate()过程全部结束。LayoutInflater的工作原理和流程就是这样</p>
-<h2 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h2><p> 我们觉得上面那个例子的button的大小不合适，想改变一下宽高，运行发现button的大小并没有改变，这是为什么呢？查看源码发现，inflate()方法还有个接收三个参数的方法重载，结构如下：</p>
-<pre><code>inflate(int resource, ViewGroup root, boolean attachToRoot)
-</code></pre><ol>
-<li><p>如果root为null，attachToRoot将失去作用，设置任何值都没有意义。</p>
-</li>
-<li><p>如果root不为null，attachToRoot设为true，则会在加载的布局文件的最外层再嵌套一层root布局。</p>
-</li>
-<li><p>如果root不为null，attachToRoot设为false，则root参数失去作用。</p>
-</li>
-<li><p>在不设置attachToRoot参数的情况下，如果root不为null，attachToRoot参数默认为true。 </p>
-</li>
-</ol>
-<p>上面例子中的button的情况就是第三种，不管你将Button的layout_width和layout_height的值修改成多少，都不会有任何效果的，因为这两个值现在已经完全失去了作用</p>
-<p>也许有些朋友心中会有一个巨大的疑惑。不对呀！平时在Activity中指定布局文件的时候，最外层的那个布局是可以指定大小的呀，layout_width和layout_height都是有作用的。确实，这主要是因为，在setContentView()方法中，Android会自动在布局文件的最外层再嵌套一个FrameLayout，所以layout_width和layout_height属性才会有效果.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>平时我们经常使用layout_width和layout_height来设置View的大小，并且一直都能正常工作，就好像这两个属性确实是用于设置View的大小的。而实际上则不然，它们其实是用于设置View在布局中的大小的，也就是说，首先View必须存在于一个布局中，之后如果将layout_width设置成match_parent表示让View的宽度填充满布局，如果设置成wrap_content表示让View的宽度刚好可以包含其内容，如果设置成具体的数值则View的宽度会变成相应的数值。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/26/2014-10-26-about LayoutInflater/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1542,89 +1205,19 @@ while (((type = parser.next()) != XmlPullParser.END_TAG ||
       
         
           
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>A simple charting library for Android, supporting line-, bar-, scatter-, candlestick- and piecharts, as well as scaling, dragging, selecting and animations. Supporting Android 2.2 (API level 8) and upwards.</p>
-<p>这个图表非常强大，很多属性设置起来非常方便，并且动画效果非常酷，之前用的<strong>achartengine</strong>，跟这个对比，简直low爆了，而且用起来也非常繁琐，建议大家尽早替换吧！下面以创建曲线为例作简单的讲解，其他曲线类似</p>
-<p>github地址：<a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li><p>xml</p>
-<pre><code>&lt;com.github.mikephil.charting.charts.LineChart
-    android:id=&quot;@+id/chart&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot; /&gt;
+          介绍A simple charting library for Android, supporting line-, bar-, scatter-, candlestick- and piecharts, as well as scaling, dragging, selecting and animations. Supporting Android 2.2 (API level 8) and upwards.
+这个图表非常强大，很多属性设置起来非常方便，并且动画效果非常酷，之前用的achartengine，跟这个对比，简直low爆了，而且用起来也非常繁琐，建议大家尽早替换吧！下面以创建曲线为例作简单的讲解，其他曲线类似
+github地址：https://github.com/PhilJay/MPAndroidChart
+使用
+xml
+&lt;com.github.mikephil.ch
+          ...
 
-LineChart chart = (LineChart) findViewById(R.id.chart);
-</code></pre></li>
-<li><p>code</p>
-<pre><code>LineChart chart = new LineChart(Context);
-</code></pre></li>
-<li><p>init data</p>
-<pre><code>ArrayList&lt;String&gt; xVals = new ArrayList&lt;String&gt;();
-ArrayList&lt;Entry&gt; yVals = new ArrayList&lt;Entry&gt;();
-
-LineDataSet set1 = new LineDataSet(yVals, title + &quot;曲线&quot;);
-set1.setColor(Color.RED);
-set1.setCircleColor(Color.RED);
-set1.setLineWidth(2f);
-set1.setCircleSize(4f);
-set1.setDrawCircles(true);
-set1....//可以根据需求设置一系列参数，非常详细
-
-ArrayList&lt;LineDataSet&gt; dataSets = new ArrayList&lt;LineDataSet&gt;();
-dataSets.add(set1); // add the datasets 创建多个表示多根曲线
-// create a data object with the datasets
-LineData data = new LineData(xVals, dataSets);
-//最后
-chart.setData(data);
-</code></pre></li>
-</ul>
-<h2 id="几点说明"><a href="#几点说明" class="headerlink" title="几点说明"></a>几点说明</h2><ol>
-<li>为了兼容低版本动画效果，此库必须导入第三方动画库nineoldandroids.jar，如果你是以jar包的形式应用并且你的项目已经引入了nineoldandroids.jar，请将项目中的nineoldandroids.jar删除，否则项目会报错</li>
-<li><p>可以直接调用方法将图表的截图保存到图库或者sd卡，非常方便</p>
-<pre><code>saveToGallery(String title): Saves the current chart state as an image to the gallery.
-saveToPath(String title, String pathOnSD): Saves the current chart state as an image to the specified path.
-</code></pre></li>
-<li><p>可以设置曲线展示动画方式（）</p>
-<pre><code>animateX(int durationMillis): Animates the charts values on the horizontal axis, meaning that the chart will build up within the specified time from left to right.
-animateY(int durationMillis): Animates the charts values on the vertical axis, meaning that the chart will build up within the specified time from bottom to top.
-animateXY(int xDuration, int yDuration): Animates both horizontal and vertical axis, resulting in a left/right bottom/top build-up.
-</code></pre></li>
-<li><p>可以改变图表中图例的颜色及显示位置</p>
-<pre><code>Legend legend = lineChart.getLegend();
-legend.setTextColor(Color.WHITE);
-legend.setPosition(LegendPosition.BELOW_CHART_CENTER);
-</code></pre></li>
-<li><p>可以设置图表、x轴、y轴、图例的字体</p>
-<pre><code>Typeface tf = Typeface.createFromAsset(getAssets(), &quot;fonts/OpenSans-SemiboldItalic.ttf&quot;);
-//图表
-chart.setValueTypeface(tf);
-//x轴
-XLabels x = chart.getXLabels();
-x.setTypeface(tf);
-//y轴
-YLabels y = lineChart.getYLabels();
-y.setTypeface(tf);
-//图例
-legend.setTypeface(tf)
-</code></pre></li>
-<li><p>可以给图表添加 Limit Lines </p>
-<pre><code>LimitLine maxLine = new LimitLine(maxValue);
-maxLine.setLineWidth(4f);
-maxLine.enableDashedLine(10f, 10f, 0f);
-maxLine.setDrawValue(false);
-maxLine.setLabelPosition(LimitLabelPosition.RIGHT);
-
-LimitLine minLine = new LimitLine(minValue);
-minLine.setLineWidth(4f);
-minLine.enableDashedLine(10f, 10f, 0f);
-minLine.setDrawValue(false);
-minLine.setLabelPosition(LimitLabelPosition.RIGHT);
-
-lineData.addLimitLine(maxLine);
-lineData.addLimitLine(minLine);
-</code></pre></li>
-</ol>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/19/2014-10-19-about MPAndroidChart/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1737,81 +1330,25 @@ lineData.addLimitLine(minLine);
       
         
           
-            <h2 id="为什么要签名"><a href="#为什么要签名" class="headerlink" title="为什么要签名"></a>为什么要签名</h2><ul>
-<li><p>开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。</p>
-</li>
-<li><p>由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。</p>
-</li>
-<li><p>APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖或替换掉。这样签名其实也是开发者的身份标识。交易中抵赖等事情发生时，签名可以防止抵赖的发生。</p>
-</li>
-</ul>
-<h3 id="签名的注意事项"><a href="#签名的注意事项" class="headerlink" title="签名的注意事项"></a>签名的注意事项</h3><ul>
-<li><p>Android系统要求所有的程序经过数字签名才能安装，如果没有可用的数字签名，系统将不许安装运行此程序。不管是模拟器还是真实手机。因此，在设备或者是模拟器上运行调试程序之前，必须为应用程序设置数字签名。</p>
-</li>
-<li><p>Android签名的数字证书不需要权威机构来认证，是开发者自己产生的数字证书，即所谓的自签名。数字证书用来标识应用程序的作者和在应用程序之间建立信任关系，而不是用来决定最终用户可以安装哪些应用程序。系统仅仅会在安装的时候测试签名证书的有效期，如果应用程序的签名是在安装之后才到期，那么应用程序仍然可以正常启用。</p>
-</li>
-<li><p>可以使用标准工具-Keytool and Jarsigner-生成密钥，来签名应用程序的.apk文件。签名后需使用zipalign优化程序。</p>
-</li>
-<li><p>模拟器开发环境，开发时通过ADB接口上传的程序会先自动被签有Debug权限，然后才传递到模拟器。Eclipse菜单的Window -&gt; Preferences -&gt; Android –&gt; Build 下显示的是我们默认的调试用的签名数字证书。</p>
-</li>
-<li><p>正式发布一个Android应用时，必须使用一个合适的私钥生成的数字证书来给程序签名，不能使用ADT插件或者ANT工具生成的调试证书来发布。</p>
-</li>
-</ul>
-<h2 id="签名的步骤"><a href="#签名的步骤" class="headerlink" title="签名的步骤"></a>签名的步骤</h2><h3 id="方法一：利用命令行"><a href="#方法一：利用命令行" class="headerlink" title="方法一：利用命令行"></a>方法一：利用命令行</h3><ol>
-<li><p>创建key</p>
-<p> 生成keystore (如已有可直接利用)<br> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>keytool -genkey -alias android.keystore -keyalg RSA -validity 10000 -keystore android.keystore</code></p>
-<ul>
-<li><p>参数意义：</p>
-<p>  -genkey 产生密钥</p>
-<p>  -alias 别名</p>
-<p>  -keyalg RSA 使用RSA算法对签名加密</p>
-<p>  -validity 10000 有效期限10000天</p>
-<p>  -keystore 密钥名</p>
-</li>
-</ul>
-</li>
-<li><p>使用步骤1中产生的key对apk签名</p>
-<p> 按照下面的命令行 在JAVA_HOME\bin&gt;目录下,输入:<code>jarsigner -verbose -keystore android.keystore -signedjar demo_signed.apk demo.apk android.keystore</code></p>
-</li>
-</ol>
-<p><strong>注意事项</strong></p>
-<p><strong>android工程的bin目录下的demo.apk默认是已经使用debug用户签名的，所以不能使用上述步骤对此文件再次签名。正确步骤应该是:在工程点击右键-&gt;Android Tools-Export Unsigned Application Package导出的apk采用上述步骤签名。</strong></p>
-<h3 id="方法二：使用Eclipse导出带签名的apk"><a href="#方法二：使用Eclipse导出带签名的apk" class="headerlink" title="方法二：使用Eclipse导出带签名的apk"></a>方法二：使用Eclipse导出带签名的apk</h3><p>选中project,单击右键选择Android Tools—&gt;Export Signed Application Package,按提示完成即可（没有key的先创建）</p>
-<h3 id="签名之后，用zipalign-压缩对齐-优化你的APK文件。"><a href="#签名之后，用zipalign-压缩对齐-优化你的APK文件。" class="headerlink" title="签名之后，用zipalign(压缩对齐)优化你的APK文件。"></a>签名之后，用zipalign(压缩对齐)优化你的APK文件。</h3><p>未签名的apk不能使用，也不能优化。签名之后的apk谷歌推荐使用zipalign.exe(位于android-sdk-windows ools目录下)工具对其优化：<br>在JAVA_HOME\bin&gt;目录下<code>zipalign -v 4 demo_signed.apk final.apk</code><br>如上，zipalign能够使apk文件中未压缩的数据在4个字节边界上对齐（4个字节是一个性能很好的值），这样android系统就可以使用mmap()(请自行查阅这个函数的用途)函数读取文件，可以在读取资源上获得较高的性能</p>
-<p>PS:</p>
-<ol>
-<li><p>在4个字节边界上对齐的意思就是，一般来说，是指编译器吧4个字节作为一个单位来进行读取的结果，这样的话，CPU能够对变量进行高效、快速的访问（较之前不对齐）。</p>
-</li>
-<li><p>对齐的根源：android系统中的Davlik虚拟机使用自己专有的格式DEX，DEX的结构是紧凑的，为了让运行时的性能更好，可以进一步用”对齐”进一步优化，但是大小一般会有所增加。</p>
-</li>
-</ol>
-<h2 id="渠道打包"><a href="#渠道打包" class="headerlink" title="渠道打包"></a>渠道打包</h2><h3 id="为什么需要在应用程序中增加渠道信息？"><a href="#为什么需要在应用程序中增加渠道信息？" class="headerlink" title="为什么需要在应用程序中增加渠道信息？"></a>为什么需要在应用程序中增加渠道信息？</h3><p>Android应用的发布需要面对各种各样的市场，我们称之为渠道。有的时候，我们需要知道应用是从哪个渠道下载的。比如，我们可能需要统计哪些市场带来的用户量比较大。再比如，我们可能有一些盈利需要和具体的渠道进行分成。这些都是统计渠道的信息。</p>
-<h3 id="一般如何在应用中加入渠道信息？"><a href="#一般如何在应用中加入渠道信息？" class="headerlink" title="一般如何在应用中加入渠道信息？"></a>一般如何在应用中加入渠道信息？</h3><p>为了统计渠道信息，就不得不在程序的某个地方加入渠道的信息，然后针对不同的渠道打不同的包。一般可以在Manifest文件中加入渠道编号，而不直接写在代码中。这样做的好处是，可以针对不同渠道，自动化去修改Manifest文件中的渠道编号，然后自动为该渠道打包。<br>Manifest文件支持Meta Data标签，建议使用这种自定义标签。例如下面的文件片段。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:versionCode=&quot;X&quot;
-    android:versionName=&quot;X.X.X&quot;
-    package=&quot;com.XXX&quot;&gt;
-    ……
-    &lt;application android:icon=&quot;@drawable/icon&quot;
-    android:label=&quot;@string/app_name&quot;&gt;
-    ……
-    &lt;meta-data android:name=&quot;CHANNEL&quot; android:value=&quot;C_001&quot; /&gt;
-    &lt;/application&gt;
-&lt;/manifest&gt;
-</code></pre><p>在这段代码示例中，我们在Application节点下增加了一个meta-data标签，名称是CHANNEL，值是C_001，是我们规定的一个渠道的编号。为不同的渠道打包，就要手工或者自动化修改C_001成为C_002、C_003等等其它我们定义的渠道编号，然后再打不同的包。</p>
-<h3 id="如何自动化打包过程？"><a href="#如何自动化打包过程？" class="headerlink" title="如何自动化打包过程？"></a>如何自动化打包过程？</h3><p>在这里介绍一款开源的打包工具 <strong>友盟渠道打包工具 (windows .net 4.0)</strong> 目前只支持windows版本</p>
-<p>github地址：<a href="https://github.com/umeng/umeng-muti-channel-build-tool" target="_blank" rel="external">https://github.com/umeng/umeng-muti-channel-build-tool</a></p>
-<p>现在最新版本号为:V3.2,本次更新最大的改变是放弃了 V2.x 版本中通过 Apktool 反编译apk文件打包的方式，这种打包方式会对开发的apk文件做出大幅度的修改，可能会产生许多不兼容的问题，比如对jar包中包含资源的情况无法支持，对包含 .so 文件的apk兼容性也不好，而且在打包时 AndroidManifest.xml 文件中的特殊标签会丢失。为了解决这些问题减少对开发者apk文件的修改, 我们决定放弃这种方式，而采用直接编辑二进制的AndroidManifest.xml 文件的方式。这种方式只会修改 AndroidManifest.xml 文件，对于apk包中的资源文件和代码文件都不会做任何改变。如果打包不成功，生成的apk文件有问题，在测试阶段也可以快速发现，因为修改只会影响AndroidManifest.xml 相关的少量的设置。</p>
-<h3 id="编辑渠道信息注意事项"><a href="#编辑渠道信息注意事项" class="headerlink" title="编辑渠道信息注意事项"></a>编辑渠道信息注意事项</h3><ol>
-<li>编辑渠道完成后按<code>Enter</code>确认</li>
-<li>常用渠道可以自行配置，模板地址：\UmengTools(Green)V3.2\V3.2\projects\template.xml(先配置好后再打开友盟打包工具)</li>
-<li>左下角配置文件可以自行填写，工具会自动保存你这次打包的信息（签名及渠道信息），下次可以在主页直接切换</li>
-</ol>
-<p>工具界面：</p>
-<p><img src="/images/umeng_package_tool.jpg" alt="umeng_package_too"></p>
+          为什么要签名
+开发Android的人这么多，完全有可能大家都把类名，包名起成了一个同样的名字，这时候如何区分？签名这时候就是起区分作用的。
 
-          
+由于开发商可能通过使用相同的Package Name来混淆替换已经安装的程序，签名可以保证相当名字，但是签名不同的包不被替换。
+
+APK如果使用一个key签名，发布时另一个key签名的文件将无法安装或覆盖老的版本，这样可以防止你已安装的应用被恶意的第三方覆盖或替换掉。这样签名其实也是开发者的身份标识。交易中抵赖等事情发生时，签名可以防止抵赖的发生。
+
+
+签名的注意事项
+Android系统要求所有的程序经过数字签名才能安装，如果没有可用的数字签名，系统将不许安装运行此程序。不管是模拟器还是真实手机。因此，在设备或者是模拟器上运行调试程序之前，必须为应用程序设置数字签名。
+
+Android签名的数字证书不需要权威机构来认证，是开发者自己产生的数字证书，即
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/23/2014-09-23-about android sign and muti-channel-build-tool /#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1924,35 +1461,33 @@ lineData.addLimitLine(minLine);
       
         
           
-            <p>与传统的png格式图片相比， 9.png 格式图片在图片四周有一圈一个像素点组成的边沿，该边沿用于对图片的可扩展区和内容显示区进行定义。 </p>
-<p>这种格式的图片在android 环境下具有自适应调节大小的能力。</p>
-<ol>
-<li><p>允许开发人员定义可扩展区域，当需要延伸图片以填充比图片本身更大区域时，可扩展区的内容被延展。</p>
-</li>
-<li><p>允许开发人员定义内容显示区，用于显示文字或其他内容</p>
-</li>
-</ol>
-<p>官网介绍地址：<a href="http://developer.android.com/tools/help/draw9patch.html" target="_blank" rel="external">http://developer.android.com/tools/help/draw9patch.html</a></p>
-<p>示意图：</p>
-<p><img src="/images/ninepatch_demo.jpg" alt="ninepatch_demo"></p>
-<p>上下左右的四条黑线表示如下：</p>
-<ol>
-<li><p>左边和上边的交叉区表示可扩展区域；右边和下边的交叉区表示文字显示区域</p>
-</li>
-<li><p>左边和上边的黑线必须有（否则，工程会报错的）；右边和下边的黑线可无，或者只有一个</p>
-</li>
-<li><p>当右边和下边的黑线都没有的时候，左边和上边的交叉区不仅仅表示该区域可扩展，也表示该区域是文字显示区域</p>
-</li>
-<li><p>当右边或者下边的黑线没有时，显示区以其对面的黑线为准</p>
-</li>
-</ol>
-<h2 id="制作方法"><a href="#制作方法" class="headerlink" title="制作方法"></a>制作方法</h2><p>在Android SDK目录（ANDROID_HOME）的tools文件夹下有个 <strong>draw9patch.bat</strong>的批处理文件，双击就可以打开.9图的编辑界面了，如下图：</p>
-<p><img src="/images/ui_draw9patch.jpg" alt="ui_draw9patch"></p>
-<p>File—&gt;Open 9-patch…,选择一张png图片，按照上面的说明即可完成.9图的制作，大家多尝试就知道啦！！现贴张我做好的图</p>
-<p><img src="/images/ui_draw9patch_demo.jpg" alt="ui_draw9patch_demo"></p>
-<p>ps:android自带的draw9patch用起来太痛苦了，在这里给大家推荐一款牛人写的编辑器（傻瓜式），用起来非常方便，这是教程地址：<a href="http://www.miui.com/thread-83505-1-1.html" target="_blank" rel="external">http://www.miui.com/thread-83505-1-1.html</a></p>
+          与传统的png格式图片相比， 9.png 格式图片在图片四周有一圈一个像素点组成的边沿，该边沿用于对图片的可扩展区和内容显示区进行定义。 
+这种格式的图片在android 环境下具有自适应调节大小的能力。
 
-          
+允许开发人员定义可扩展区域，当需要延伸图片以填充比图片本身更大区域时，可扩展区的内容被延展。
+
+允许开发人员定义内容显示区，用于显示文字或其他内容
+
+
+官网介绍地址：http://developer.android.com/tools/help/draw9patch.html
+示意图：
+
+上下左右的四条黑线表示如下：
+
+左边和上边的交叉区表示可扩展区域；右边和下边的交叉区表示文字显示区域
+
+左边和上边的黑线必须有（否则，工程会报错的）；右边和下边的黑线可无，或者只有一个
+
+当右边和下边的黑线都没有的时候，左边和上边的交叉区不仅仅表示该区域可扩展，也表示该区域是文字显示区域
+
+当右边或者
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/17/2014-09-17-draw9patch/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2028,7 +1563,7 @@ lineData.addLimitLine(minLine);
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -2037,7 +1572,7 @@ lineData.addLimitLine(minLine);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

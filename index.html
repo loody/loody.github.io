@@ -244,6 +244,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -274,39 +293,20 @@
       
         
           
-            <p>在平时的开发中，设计师在做设计稿的时候往往都是按照iphone的模板来做的，所以在切图的时候也不例外，她们给的切图是这样子的</p>
-<p><img src="/images/iphone-png.png" alt=""></p>
-<p>@2x,@3x是什么鬼，一问才知道这是为了做屏幕适配的一种文件命名方式，可以在Android资源文件的命名是不支持存在<strong>@</strong>字符的，所以我们得把所有的文件进行重命名，文件少点还行，多了就太累了，所以有没有办法可以快速对这些文件进行重命名呢？当然了，<strong>python</strong>就适合干这事</p>
-<p>关于python的安装什么在这里就不说了，大就可以去看廖雪峰写的<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="external">python教程</a>，讲的很详细</p>
-<p>我们看了上面的文件就知道，我们只需要把文件名中的@3x去掉就可以了，所以代码实现的思路也是这样，直接贴代码</p>
-<p>rename_res.py</p>
-<pre><code>#!/usr/bin/python
-# coding=utf-8
-import os
-import sys
+          在平时的开发中，设计师在做设计稿的时候往往都是按照iphone的模板来做的，所以在切图的时候也不例外，她们给的切图是这样子的
 
-path = sys.path[0] #sys.path[0]为当前文件夹的路径
+@2x,@3x是什么鬼，一问才知道这是为了做屏幕适配的一种文件命名方式，可以在Android资源文件的命名是不支持存在@字符的，所以我们得把所有的文件进行重命名，文件少点还行，多了就太累了，所以有没有办法可以快速对这些文件进行重命名呢？当然了，python就适合干这事
+关于python的安装什么在这里就不说了，大就可以去看廖雪峰写的python教程，讲的很详细
+我们看了上面的文件就知道，我们只需要把文件名中的@3x去掉就可以了，所以代码实现的思路也是这样，直接贴代码
+rename_res.py
+123456789101112131415161718192021#!/usr/bin/python# coding=utf-8import osimport syspat
+          ...
 
-filelist=os.listdir(path) #该文件夹下所有的文件（包括文件夹）
-for files in filelist: #遍历所有文件
-      oldpath=os.path.join(path,files); #原来的文件路径
-      if os.path.isdir(oldpath):
-        continue;
-      filename=os.path.splitext(files)[0]; #文件名
-      filetype=os.path.splitext(files)[1]; #文件扩展名
-
-      if filename.find(&apos;@3x&apos;)&gt;=0: #如果文件名中含有@3x
-        newpath=os.path.join(path,filename.split(&apos;@3x&apos;)[0]+filetype);
-        #取@3x前面的字符，若需要取后面的字符则使用filename.split(&apos;@3x&apos;)[1]
-        if not os.path.isfile(newpath):
-              os.rename(oldpath,newpath);
-              print newpath,&apos;ok&apos;
-</code></pre><p>将python文件拷贝到要进行重命名的文件下，执行<code>python rename_res.py</code>就可以完成文件的批量修改了</p>
-<p>有时候我们不想每次拷贝<code>*rename_res.py*</code>到相应文件夹里，我们也可以通过将相应文件夹动态的传递进来，改起来也很简单，只需要将path的获取方法改动一下，如下</p>
-<pre><code>path=sys.argv[1] #sys.argv[1]为我们执行python时传递的第二个参数
-</code></pre><p>最后执行<code>python rename_res.py /Users/loody/Downloads/切图/3x</code>即可</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/08/python批量修改文件名/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -400,8 +400,8 @@ for files in filelist: #遍历所有文件
       
         
           
-            <p>之前在分析Handler的工作原理的时候，在<code>Looper</code>类中有这么一段代码，当时就不怎么理解</p>
-<pre><code>static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
+          之前在分析Handler的工作原理的时候，在Looper类中有这么一段代码，当时就不怎么理解
+static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
   ...
 
 private static void prepare(boolean quitAllowed) {
@@ -410,148 +410,14 @@ private static void prepare(boolean quitAllowed) {
     }
     sThreadLocal.set(new Looper(quitAllowed));
 }
-</code></pre><p>这个ThreadLocal是用来干嘛的呢？下面就来说说我对ThreadLocal的理解</p>
-<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p><code>ThreadLocal</code>类用来提供线程内部的局部变量。这种变量在多线程环境下访问(通过<code>get</code>或<code>set</code>方法访问)时能保证各个线程里的变量相对独立于其他线程内的变量。</p>
-<p>在<code>Handler</code>的运行机制中，必须保证每个线程只有一个<code>Looper</code>对象，<code>Looper</code>类就是利用了<code>ThreadLocal</code>的特性</p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>我们来通过源码来分析下ThreadLocal的工作原理，我们先看下ThreadLocal有个内部类<code>Values</code>，它定义了6个成员变量，分别为</p>
-<pre><code> //长度必须是2的n次方的值
- private Object[] table;
+这个ThreadLocal是用来干嘛的呢？下面就
+          ...
 
-//计算下标的掩码， 它的值是table的长度-1,待会会讲到
- private int mask;
-
- //存放进来的实体的数量
- private int size;
-
- //被删除的实体的数量
- private int tombstones;
-
- //一个阈值，用来判断是否需要进行rehash
- private int maximumLoad;
-
- //下一个要进行清理的位置点
- private int clean;
-</code></pre><p>我们来看一下当Values对象被创建时进行了什么工作</p>
-<pre><code> /**
- * Constructs a new, empty instance.
- */
-Values() {
-    initializeTable(INITIAL_SIZE);
-    this.size = 0;
-    this.tombstones = 0;
-}
-
-/**
- * Creates a new, empty table with the given capacity.
- */
-private void initializeTable(int capacity) {
-    this.table = new Object[capacity * 2];
-    this.mask = table.length - 1;
-    this.clean = 0;
-    this.maximumLoad = capacity * 2 / 3; // 2/3
-}
-</code></pre><p>上面的代码我们可以看到，当初始化一个Values对象时，它会创建一个长度为capacity*2的数组。</p>
-<h3 id="add"><a href="#add" class="headerlink" title="add()"></a>add()</h3><p>在add()方法当中，也可以看到它会把ThreadLocal对象(key)和对应的value放在连续的位置中。    也就是table被设计为下标为0,2,4…2n的位置存放key，而1,3,5…(2n +1 )的位置存放value。直接通过下标存取线程变量， 它比用WeakReference类在内存占用上更经济，性能也更好。它也保证了在计算key的下标时，一定是偶数位。</p>
-<pre><code> void add(ThreadLocal&lt;?&gt; key, Object value) {
-    for (int index = key.hash &amp; mask;; index = next(index)) {
-        Object k = table[index];
-        if (k == null) {
-            table[index] = key.reference;
-            table[index + 1] = value;
-            return;
-        }
-    }
-}
-</code></pre><h3 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h3><p>再来看看set()方法</p>
-<pre><code> public void set(T value) {
-    Thread currentThread = Thread.currentThread();
-    Values values = values(currentThread);
-    if (values == null) {
-        values = initializeValues(currentThread);
-    }
-    values.put(this, value);
-}
-
-//获取当前线程的ThreadLocal
-Values values(Thread current) {
-    return current.localValues;
-}
-</code></pre><p>看看这里的values(currentThread)方法，其实就是取的当前线程的ThreadLocal。因为在Thread类的内容有一个成员专门用于存储线程的ThreadLocal的数据，那就是<code>localValues</code>，在<code>Thread.java</code>中</p>
-<pre><code>/**
- * Normal thread local values.
- */
-ThreadLocal.Values localValues;
-</code></pre><h3 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h3><p>接下来看看ThreadLocal的值到底是怎么进行存储的</p>
-<pre><code>/**
- * Sets entry for given ThreadLocal to given value, creating an
- * entry if necessary.
- */
-void put(ThreadLocal&lt;?&gt; key, Object value) {
-    cleanUp();
-
-    // Keep track of first tombstone. That&apos;s where we want to go back
-    // and add an entry if necessary.
-    int firstTombstone = -1;
-
-    for (int index = key.hash &amp; mask;; index = next(index)) {
-        Object k = table[index];
-
-        if (k == key.reference) {
-            // Replace existing entry.
-            table[index + 1] = value;
-            return;
-        }
-
-        if (k == null) {
-            if (firstTombstone == -1) {
-                // Fill in null slot.
-                table[index] = key.reference;
-                table[index + 1] = value;
-                size++;
-                return;
-            }
-
-            // Go back and replace first tombstone.
-            table[firstTombstone] = key.reference;
-            table[firstTombstone + 1] = value;
-            tombstones--;
-            size++;
-            return;
-        }
-
-        // Remember first tombstone.
-        if (firstTombstone == -1 &amp;&amp; k == TOMBSTONE) {
-            firstTombstone = index;
-        }
-    }
-}
-</code></pre><p>通过上面的存储思路，我们大概可以看出一个规则，那就是ThreadLocal的值在table数组中的存储位置总是为ThreadLocal的reference字段所标识的对象的下一个位置，比如ThreadLocal的reference对象在table数组的索引为index，那么ThreadLocal的值在table数组中的索引就是index+1。</p>
-<h3 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h3><p>最后在看一下<code>get()</code>方法,</p>
-<pre><code> public T get() {
-    // Optimized for the fast path.
-    Thread currentThread = Thread.currentThread();
-    Values values = values(currentThread);
-    if (values != null) {
-        Object[] table = values.table;
-        int index = hash &amp; values.mask;
-        if (this.reference == table[index]) {
-            return (T) table[index + 1];
-        }
-    } else {
-        values = initializeValues(currentThread);
-    }
-
-    return (T) values.getAfterMiss(this);
-}
-</code></pre><p> 很明显，返回的也是<code>table[index + 1]</code>。 </p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>根据ThreadLocal的特性，我们可以大概可以总结它的两个使用场景</p>
-<ol>
-<li>就是通过它在指定的线程中存储数据，数据存储以后，只有在指定线程中可以获取到存储的数据， 因为对于其它线程来说无法获取到数据。</li>
-<li>复杂逻辑下的对象传递，比如监听器的传递，有些时候一个线程中的任务过于复杂， 这可能表现为函数调用栈比较深以及代码入口的多样性，在这种情况下，我们又需要监听器能够贯穿整个线程的执行过程，这个时候可以怎么做呢？ 其实就可以采用ThreadLocal，采用ThreadLocal可以让监听器作为线程内的全局对象而存在，在线程内部只要通过get方法就可以获取到监听器。</li>
-</ol>
-<p>##参考<br><a href="http://blog.csdn.net/singwhatiwanna/article/details/48350919" target="_blank" rel="external">Android的消息机制之ThreadLocal的工作原理</a><br><a href="http://droidyue.com/blog/2016/03/13/learning-threadlocal-in-java/" target="_blank" rel="external">理解Java中的ThreadLocal</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/24/对ThreadLocal的理解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -615,6 +481,25 @@ void put(ThreadLocal&lt;?&gt; key, Object value) {
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -645,212 +530,17 @@ void put(ThreadLocal&lt;?&gt; key, Object value) {
       
         
           
-            <h2 id="Data-Binding-Library"><a href="#Data-Binding-Library" class="headerlink" title="Data Binding Library"></a>Data Binding Library</h2><p>去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且<br>Android Studio还没有很好的支持，就没有怎么实践，前段时间Android Studio发布了2.0正式版，而且已经内置了该框架的支持，配置起来也很简单</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在主目录的<code>build.gradle</code>中如下配置即可</p>
-<pre><code>android {
-    ....
-    dataBinding {
-        enabled = true
-    }
-}
-</code></pre><p>Layout文件跟之前有很大的不同，我们先看看原来的布局文件 <code>activity_main.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout 
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    android:orientation=&quot;vertical&quot;
-    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
+          Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的支持，就没有怎么实践，前段时间Android Studio发布了2.0正式版，而且已经内置了该框架的支持，配置起来也很简单
+配置在主目录的build.gradle中如下配置即可
+123456android &#123;   	....   	dataBinding &#123;       	enabled = true   	&#125;&#125;
+Layout文件跟之前有很大的不同，我们先看
+          ...
 
-    &lt;android.support.design.widget.AppBarLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            android:background=&quot;?attr/colorPrimary&quot;
-            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
-
-    &lt;/android.support.design.widget.AppBarLayout&gt;
-
-    &lt;LinearLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:orientation=&quot;vertical&quot;&gt;
-
-       &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;name&quot;/&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;age&quot;/&gt;
-
-        &lt;Button
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:gravity=&quot;center&quot;
-            android:onClick=&quot;onClickButton&quot;
-            android:text=&quot;jump&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/LinearLayout&gt;
-</code></pre><p>下面是Data Binding的 <code>activity_main.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
-
-&lt;data&gt;
-
-    &lt;import type=&quot;me.loody.databindingdemo.User&quot;/&gt;
-
-    &lt;variable
-        name=&quot;user&quot;
-        type=&quot;User&quot;/&gt;
-&lt;/data&gt;
-
-&lt;LinearLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    android:orientation=&quot;vertical&quot;
-    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
-
-    &lt;android.support.design.widget.AppBarLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            android:background=&quot;?attr/colorPrimary&quot;
-            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
-
-    &lt;/android.support.design.widget.AppBarLayout&gt;
-
-    &lt;LinearLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:orientation=&quot;vertical&quot;&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{user.name)}&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;test&quot;/&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{String.valueOf(user.age)}&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;test&quot;/&gt;
-
-        &lt;Button
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:gravity=&quot;center&quot;
-            android:onClick=&quot;onClickButton&quot;
-            android:text=&quot;jump&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/LinearLayout&gt;
-
-&lt;/layout&gt;
-</code></pre><p>我们看到Data Binding layout文件有点不同的是：起始根标签是layout，接下来一个data元素以及一个view的根元素。这个view元素就是你没有使用Data Binding的layout文件的根元素.</p>
-<p>我们定义的一个<code>User</code>类</p>
-<pre><code>public class User {
-    public final String name;
-    public final int age;
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-}
-</code></pre><h2 id="Binding数据"><a href="#Binding数据" class="headerlink" title="Binding数据"></a>Binding数据</h2><p>在MainActivity中添加如下代码</p>
-<pre><code>ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-User user = new User(&quot;loody&quot;, 27);
-activityMainBinding.setUser(user);
-</code></pre><p>这里的ActivityMainBinding是根据布局文件<code>activity_main</code>的名称生成的。布局文件和绑定的数据一定要写对，否则无法生成Binging文件</p>
-<p>这样我们程序就可以将User的信息显示出来了，如下图：</p>
-<p>其中布局文件还有还有两个节点</p>
-<blockquote>
-<p><strong>import</strong>:等价于java文件中的import导包</p>
-<p><strong>variable</strong>:申明变量  每一个variable元素描述了一个用于layout文件中Binding表达式的属性。</p>
-</blockquote>
-<p><em>同样Data Binding的layout也是支持include、ViewStub的，具体使用方法在这里不多说</em></p>
-<h2 id="Observable-Binding"><a href="#Observable-Binding" class="headerlink" title="Observable Binding"></a>Observable Binding</h2><p>通过Data Binding,我们已经把对象的属性绑定到UI上了，有的时候，代码会修改我们绑定的对象的某些属性，那么怎么通知界面刷新呢？这就要用到Observable Binding了，它有两种方式</p>
-<ol>
-<li><p>让你的绑定数据类继承BaseObservable，然后通过调用notifyPropertyChanged方法来通知界面属性改变，如下：</p>
-<pre><code>public class ObservableUser extends BaseObservable {
-    public String name;
-    public int age;
-
-    public ObservableUser(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    @Bindable
-    public String getName() {
-        return name;
-       }
-
-    @Bindable
-    public int getAge() {
-        return age;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-        notifyPropertyChanged(me.loody.databindingdemo.BR.name);
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-        notifyPropertyChanged(me.loody.databindingdemo.BR.age);
-    }
-}
-</code></pre><p> 在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了</p>
-</li>
-<li><p>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</p>
-</li>
-</ol>
-<pre><code>public class PlainUser {
-    public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
-    public final ObservableInt age = new ObservableInt();
-}
-</code></pre><p>然后使用下面的代码来访问：</p>
-<pre><code>user.name.set(&quot;loody&quot;);
-user.age.set(18); 
-</code></pre><p>调用set方法时，Data Binding Library就会自动的帮我们通知界面刷新了。</p>
-<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>以上就是关于Data Binding的一些基础实践，并没有多么复杂，关键是它要传达的一种思想即View的变化可以自动的反应在ViewModel，ViewModel的数据变化也会自动反应到View上，这种思想也就是我们常常提到的 MVVM 设计模式，最后借用一张图来介绍下MVVM</p>
-<p><img src="/images/mvvm.png" alt="mvvm"></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html" target="_blank" rel="external">https://developer.android.com/intl/zh-cn/tools/data-binding/guide.html</a><br><a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="external">Data Binding（数据绑定）用户指南</a><br><a href="http://gold.xitu.io/entry/56781baf00b01b78ac54c10a" target="_blank" rel="external">http://gold.xitu.io/entry/56781baf00b01b78ac54c10a</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/17/Data-Binding-实践/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -944,132 +634,15 @@ user.age.set(18);
       
         
           
-            <p>最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值得学习和借鉴的。</p>
-<p>回到刚刚的需求，在app中获取用户的未读消息数，我们在拿到消息数后怎么通知呢，这就要用到消息通知机制了，有人选择Android原生的<a href="http://developer.android.com/intl/zh-cn/reference/android/database/Observable.html" target="_blank" rel="external">android.database.Observable</a>，也有人选择<a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a>,或者<a href="http://square.github.io/otto/" target="_blank" rel="external">otto</a>，大家用的比较多的应该是EventBus吧，我在知乎上看到以前关于<a href="http://www.zhihu.com/question/32179258/answer/54989242" target="_blank" rel="external">RxJava和EventBus的区别？</a>，可以参读一下，大家支持使用Rxjava的还是占多数的，这里美恰团队也是使用的Rxjava来实现的事件总线，所以我也打算在项目中使用RxJava了，当然RxJava的功能远不止这么简单，那就从用RxJava实现事件总线开始吧，因为RxJava也是基于观察者模式,天生就具备这种事件通知的功能。</p>
-<p>首先我们看一下美恰的实现方式：</p>
-<pre><code>public class RxBus {
-    private Subject&lt;Object, Object&gt; mBus;
-    private static RxBus sInstance;
+          最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值得学习和借鉴的。
+回到刚刚的需求，在app中获取用户的未读消息数，我们在拿到消息数后怎么通知呢，这就要用到消息通知机制了，有人选择Android原生的android.database.Observable，也有人选择EventBus,或者otto，大家用的比较多的应该是EventBus吧，我在知乎上看到以前关于RxJava和EventBus的区别？，可以参读一下，大家支持使用Rxjava的还是占多
+          ...
 
-    private RxBus() {
-        mBus = new SerializedSubject&lt;&gt;(PublishSubject.create());
-    }
-
-    public static RxBus getInstance() {
-        if (sInstance == null) {
-            // [1]
-            synchronized (RxBus.class) {
-                if (sInstance == null) {
-                    //单例模式之双重检测：线程一在此之前线程二到达了位置[1],如果此处不二次判断，那么线程二执行到这里的时候还会重新new
-                    sInstance = new RxBus();
-                }
-            }
-        }
-        return sInstance;
-    }
-
-    private Subject&lt;Object, Object&gt; getBus() {
-        return mBus;
-    }
-
-    public static Observable&lt;Object&gt; toObserverable() {
-        return getInstance().getBus();
-    }
-
-    public static void send(Object obj) {
-           getInstance().getBus().onNext(obj);
-    }
-
-    public static boolean hasObservers() {
-        return getInstance().getBus().hasObservers();
-    }
-
-}
-</code></pre><p>下面是我的实现方式：</p>
-<pre><code>public class RxBus {
-    private static volatile RxBus mInstance;
-
-    private final Subject bus;
-
-    private Subject getBus() {
-        return bus;
-    }
-
-    //Subject是非线程安全的，要避免该问题，需要将 Subject转换为一个 SerializedSubject 
-    //PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
-    public RxBus() {    
-        bus = new SerializedSubject&lt;&gt;(PublishSubject.create());
-    }
-
-    public static RxBus getInstance() {
-        RxBus rxBus = mInstance;
-        if (mInstance == null) {
-            synchronized (RxBus.class) {
-                rxBus = mInstance;
-                if (mInstance == null) {
-                    rxBus = new RxBus();
-                    mInstance = rxBus;
-                }
-            }
-        }
-        return rxBus;
-    }
-
-    public static void post(Object o) {
-        if (hasObservers()){
-            getInstance().getBus().onNext(o);
-        }
-    }
-
-
-    public static &lt;T&gt; Observable&lt;T&gt; toObserverable(Class&lt;T&gt; eventType) {
-        return getInstance().getBus().ofType(eventType);
-    }
-
-    public static boolean hasObservers() {
-        return getInstance().getBus().hasObservers();
-    }
-}
-</code></pre><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
-<li><p>发送事件</p>
-<pre><code>RxBus.post(new UnreadChatMessageEvent());      
-</code></pre></li>
-<li><p>监听事件</p>
-<pre><code>mSubscription = RxBus.toObserverable(IncreaseEvent.class).subscribe(new Action1&lt;IncreaseEvent&gt;() {
-    @Override
-    public void call(IncreaseEvent increaseEvent) {
-        tv_increase.setText(increaseEvent.getNum() + &quot;&quot;);
-    }
-});
-</code></pre></li>
-</ol>
-<p>   这里有点需要注意，在生命周期结束的地方取消订阅事件，防止RxJava可能会引起的内存泄漏问题</p>
-<pre><code>   @Override
-protected void onDestroy() {
-    super.onDestroy();
-    if (mSubscription != null &amp;&amp; !mSubscription.isUnsubscribed()) {
-        mSubscription.unsubscribe();
-    }
-}
-</code></pre><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ol>
-<li>单例加了双重校验锁，更多单例讲解请看<a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></li>
-<li><p>根据传递的 eventType 类型返回特定类型(eventType)的 被观察者,我们可以看下<code>ofType</code>的源码实现：</p>
-<pre><code>public final &lt;R&gt; Observable&lt;R&gt; ofType(final Class&lt;R&gt; klass) {
-    return filter(new Func1&lt;T, Boolean&gt;() {
-        @Override
-        public final Boolean call(T t) {
-            return klass.isInstance(t);
-        }
-    }).cast(klass);
-}
-</code></pre><p> 其内部就是filter+cast，filter操作符可以使你提供一个指定的测试数据项，只有通过测试的数据才会被“发射”。cast操作符可以将一个Observable转换成指定类型的Observable。</p>
-</li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="external">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
-<p><a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></p>
-<p><a href="https://drakeet.me/rxbus" target="_blank" rel="external">https://drakeet.me/rxbus</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/10/用RxJava实现事件总线/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1182,212 +755,16 @@ protected void onDestroy() {
       
         
           
-            <p>在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解<code>include</code>、<code>merge</code>、<code>ViewStub</code>在优化布局中的使用方法</p>
-<h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">include</a>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
-<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-          android:layout_width=&quot;match_parent&quot;
-          android:layout_height=&quot;match_parent&quot;
-          android:background=&quot;@color/window_background&quot;
-          android:orientation=&quot;vertical&quot;&gt;
+          在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
+includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是布局重用，下面贴一个简单的例子toolbar.xml
+1234567891011&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"              android:layout_width="
+          ...
 
-    &lt;include layout=&quot;@layout/toolbar&quot;/&gt;
-
-               ...
-
-   &lt;/LinearLayout&gt;
-</code></pre><p>这里的toolbar就是被抽离出来的布局，这样我们在其他Activity需要加入toolbar的时候直接include<code>toolbar.xml</code>就可以了</p>
-<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">merge</a>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
-<ol>
-<li>当购物车为空时，显示<code>view_order_none.xml</code></li>
-<li>当购物车不为空时，显示列表ListView</li>
-</ol>
-<p>下面贴一下布局文件的源码fragment_cart.xml，方便大家理解</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;match_parent&quot;&gt;
-
-&lt;ViewStub
-    android:id=&quot;@+id/vs_cart_none&quot;
-    android:inflatedId=&quot;@+id/stub_fl&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:layout=&quot;@layout/view_order_none&quot;/&gt;
-
-
-&lt;ListView
-    android:id=&quot;@+id/lv&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;/&gt;
-
-&lt;/FrameLayout&gt;
-</code></pre><p><code>view_order_none.xml</code>代码如下</p>
-<pre><code>&lt;FrameLayout
-    android:id=&quot;@+id/fl_cart_none&quot;
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;
-</code></pre><p>这里<code>fragment_cart.xml</code>包含了两个布局，<code>ViewStub</code>（下面会介绍）和<code>ListView</code>，他们通过一个FramLayout包裹起来，其实我们再仔细一想，这个FrameLayout的存在有没有必要呢？结果是没有必要的，它只会让我们层级又多了一层，这个时候就可以用<code>merge</code>标签替换它了，这也是<code>merge</code>的使用场景,用merge替换后的代码如下</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;merge xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-         xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-         xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;match_parent&quot;&gt;
-
-&lt;ViewStub
-    android:id=&quot;@+id/vs_cart_none&quot;
-    android:inflatedId=&quot;@+id/stub_fl&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:layout=&quot;@layout/view_order_none&quot;/&gt;
-
-
-&lt;ListView
-    android:id=&quot;@+id/lv&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;/&gt;
-
-&lt;/merge&gt;
-</code></pre><h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><a href="http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html" target="_blank" rel="external">ViewStub</a>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
-<p>判断ViewStub是否加载</p>
-<pre><code>ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  
-// 加载购物车列表布局  
-vs_cart_none.setVisibility(View.VISIBLE);  
-// 获取到购物车ListView，注意这里是通过ViewStub的inflatedId来获取  
-FrameLayout stub_fl = findViewById(R.id.stub_fl);  
-if (vs_cart_none.getVisibility() == View.VISIBLE ) {  
-// 已经加载, 否则还没有加载
-    stub_fl.setVisibility(View.GONE); 
-}else{
-    stub_fl.setVisibility(View.VISIBLE); 
-}  
-</code></pre><p>上面我们是通过<code>vs_cart_none.setVisibility(View.VISIBLE);</code> 来加载ViewStub的布局的，还有另外一种方法</p>
-<pre><code>FrameLayout stub_fl；
-...
-
-ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);
-if(stub_fl==null){
-    //加载购物车布局
-    stub_fl = (ListView)vs_cart_none.inflate();
-}else{
-
-}
-</code></pre><p> 注意这两种加载方法的判断逻辑是不一样的</p>
-<p> 还有一点 我们的ViewStub布局中有这个么一个属性，android:inflatedId=”@+id/stub_fl”，在判断ViewStub是否加载的第一种方法中，我们是通过这个<code>inflatedId</code>来找到FrameLayout的，开始我也举得很疑惑，我们的FrameLayout不是有自己的id<code>stub_fl</code>吗？为什么要通过这个<code>inflatedId</code>来找，如果这两个id同时存在，该通过那个id来找，带着疑问我们去看下ViewStub的源码；</p>
-<pre><code> public ViewStub(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    super(context);
-
-    final TypedArray a = context.obtainStyledAttributes(attrs,
-            R.styleable.ViewStub, defStyleAttr, defStyleRes);
-    //获取inflatedId
-    mInflatedId = a.getResourceId(R.styleable.ViewStub_inflatedId, NO_ID);
-    mLayoutResource = a.getResourceId(R.styleable.ViewStub_layout, 0);
-    mID = a.getResourceId(R.styleable.ViewStub_id, NO_ID);
-    a.recycle();
-
-    setVisibility(GONE);//设置不可见
-    setWillNotDraw(true);//设置不绘制
-}
-
-
-@Override
-protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    setMeasuredDimension(0, 0);//宽高默认为0
-}
-
-
-/**
- * When visibility is set to {@link #VISIBLE} or {@link #INVISIBLE},
- * {@link #inflate()} is invoked and this StubbedView is replaced in its parent
- * by the inflated layout resource. After that calls to this function are passed
- * through to the inflated view.
- *
- * @param visibility One of {@link #VISIBLE}, {@link #INVISIBLE}, or {@link #GONE}.
- *
- * @see #inflate() 
- */
-@Override
-@android.view.RemotableViewMethod
-public void setVisibility(int visibility) {
-    if (mInflatedViewRef != null) {
-        //已经加载只设置是否可见
-        View view = mInflatedViewRef.get();
-        if (view != null) {
-            view.setVisibility(visibility);
-        } else {
-            throw new IllegalStateException(&quot;setVisibility called on un-referenced view&quot;);
-        }
-    } else {
-        super.setVisibility(visibility);
-        if (visibility == VISIBLE || visibility == INVISIBLE) {
-            //VISIBLE或INVISIBLE条件下就加载
-            inflate();
-        }
-    }
-}
-
-
- /**
- * Inflates the layout resource identified by {@link #getLayoutResource()}
- * and replaces this StubbedView in its parent by the inflated layout resource.
- *
- * @return The inflated layout resource.
- *
- */
-public View inflate() {
-    final ViewParent viewParent = getParent();
-
-    if (viewParent != null &amp;&amp; viewParent instanceof ViewGroup) {
-        if (mLayoutResource != 0) {
-            final ViewGroup parent = (ViewGroup) viewParent;
-            final LayoutInflater factory;
-            if (mInflater != null) {
-                factory = mInflater;
-            } else {
-                factory = LayoutInflater.from(mContext);
-            }
-            //此处的view为layout包裹的布局的根布局
-            final View view = factory.inflate(mLayoutResource, parent,
-                    false);
-            //如果布局中设置了inflatedId，就将这个id赋给view
-            if (mInflatedId != NO_ID) {
-                view.setId(mInflatedId);
-            }
-
-            final int index = parent.indexOfChild(this);
-            parent.removeViewInLayout(this);
-
-            final ViewGroup.LayoutParams layoutParams = getLayoutParams();
-            if (layoutParams != null) {
-                parent.addView(view, index, layoutParams);
-            } else {
-                parent.addView(view, index);
-            }
-
-            mInflatedViewRef = new WeakReference&lt;View&gt;(view);
-
-            if (mInflateListener != null) {
-                mInflateListener.onInflate(this, view);
-            }
-
-            return view;
-        } else {
-            throw new IllegalArgumentException(&quot;ViewStub must have a valid layoutResource&quot;);
-        }
-    } else {
-        throw new IllegalStateException(&quot;ViewStub must have a non-null ViewGroup viewParent&quot;);
-    }
-}
-</code></pre><p>所以如果ViewStub属性中设置了<code>android:inflatedId:stub_fl</code>,那么<code>view_order_none.xml</code>中的<code>android:id=&quot;@+id/fl_cart_none&quot;</code>就无效了，否则就可以通过<code>fl_cart_none</code>取到</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的介绍，我想大家应该大概了解include、merge、VIewStub的使用方法了，其实并不是有多难，只是我们很少用他们而已，我们在做性能优化优化的时候，UI布局的优化也是其中的一部分，那么让我们用上它们吧！</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html</a><br><a href="http://www.devtf.cn/?p=509" target="_blank" rel="external">http://www.devtf.cn/?p=509</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/04/使用include、merge、viewstub来优化你的布局/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1451,6 +828,25 @@ public View inflate() {
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -1481,219 +877,15 @@ public View inflate() {
       
         
           
-            <h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>我们知道，Android系统是<strong>单线程模型</strong>，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种<strong>单线程模型</strong>会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，导致退出整个应用程序或者短暂杀死应用程序,所以Android系统将大部分耗时、繁重任务交给子线程完成，不会在主线程中完成；同时，Android只允许主线程更新UI界面，子线程处理后的结果无法和主线程交互，即无法直接访问主线程，这就要用到<strong>Handler机制</strong>来解决此问题</p>
-<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>在我们在子线程中执行完耗时操作后很多情况下我们需要更新UI，但我们都知道，不能在子线程中更新UI。此时最常用的手段就是通过Handler将一个Message消息send到UI线程中，然后再在Handler的handleMessage方法中进行处理,常见代码</p>
-<pre><code>private Handler mHandle = new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what){
-            case xx:
-                break;
+          单线程模型我们知道，Android系统是单线程模型，即应用程序启动时，系统会创建一个主线程，又叫做UI线程，负责与UI组件（进行交互，比如控制UI界面界面显示、更新等，UI线程只能处理一些简单的、短暂的操作，如果要执行繁重的任务或者耗时很长的操作，比如访问网络、数据库、下载等，这种单线程模型会导致线程运行性能大大降低，甚至阻塞UI线程，如果被阻塞超过5秒，系统会提示应用程序无相应对话框，即ANR，导致退出整个应用程序或者短暂杀死应用程序,所以Android系统将大部分耗时、繁重任务交给子线程完成，不会在主线程中完成；同时，Android只允许主线程更新UI界面，子线程处理后的结果无法和主线程交互，即无法直接访问主线程，这就要用到Handler机制来解决此问题
+Handler在我们在子线程中执行完耗时操作后很多情况下我们需要更新UI，但我们都知道，不能在子线程中更新UI。此时最常用的手段就是
+          ...
 
-        }
-    }
-};
-
-new Thread() {
-    @Override
-    public void run() {
-        super.run();
-        //耗时操作
-        Message msg = new Message();
-        msg.what = WHAT;
-        mHandle.sendMessage(msg);
-    }
-}.start(); 
-</code></pre><p>每个Handler都会关联一个消息队列，消息队列被封装在Lopper中，而每个Looper又会关联一个线程(ThreadLocal)，也就是每个消息队列会关联一个线程。Handler就是一个消息处理器，将消息投递给消息队列，然后再由对应的线程从消息队列中挨个取出消息，并且执行。默认情况下，消息队列只有一个，即主线程的消息队列，这个消息队列是在<a href="http://blog.csdn.net/luoshengyang/article/details/6747696" target="_blank" rel="external">系统的启动过程中</a>的ActivityThread.main方法中创建的，通过Lopper.prepareMainLooper()来创建，然后最后执行Looper.loop()来启动消息循环。那么我们为什么在平时的使用Handler的时候，并没有使用Looper呀，其实是因为系统为我们创建好了，我们可以查看ActivityThread.java来看看这个过程，只列了关键代码：</p>
-<pre><code>public final class ActivityThread {
-......
-
-public static final void main(String[] args) {
-    ...
-
-    Looper.prepareMainLooper();// 1、创建消息循环Looper  
-    if (sMainThreadHandler == null) {
-        sMainThreadHandler = new Handler(); // 主线程的Handler 
-    }
-
-    ActivityThread thread = new ActivityThread();
-    thread.attach(false);
-
-    if (false) {
-        Looper.myLooper().setMessageLogging(new
-            LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));
-    }
-    Looper.loop();// 2、执行消息循环
-
-    if (Process.supportsProcesses()) {
-        throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);
-    }
-
-    thread.detach();
-    ...
-}
-
-......
-</code></pre><p>}</p>
-<p>通过上面的原理介绍，我们可以画出下面这个流程图</p>
-<p><img src="/images/handler-1.jpg" alt=""></p>
-<p>那么它们具体是怎么协作的呢？下面我们通过源码一步步解析，首先看下Handler</p>
-<pre><code>/**
- * Default constructor associates this handler with the {@link Looper} for the
- * current thread.
- *
- * If this thread does not have a looper, this handler won&apos;t be able to receive messages
- * so an exception is thrown.
- */
-public Handler() {
-    this(null, false);
-}
-
-public Handler(Callback callback, boolean async) {
-    if (FIND_POTENTIAL_LEAKS) {
-        final Class&lt;? extends Handler&gt; klass = getClass();
-        if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
-                (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
-            Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
-                klass.getCanonicalName());
-        }
-    }
-
-    mLooper = Looper.myLooper();   // 获取Looper
-    if (mLooper == null) {
-        throw new RuntimeException(
-            &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
-    }
-    mQueue = mLooper.mQueue;       // 获取消息队列
-    mCallback = null;
-}
-</code></pre><p>从Handler默认的构造函数中我们可以看到，Handler会在内部通过Looper.getLooper()来获取Looper对象，并且与之关联，那么Looper.myLooper又是如何工作的呢？我们继续往下看.</p>
-<pre><code>/**
- * Return the Looper object associated with the current thread.  Returns
- * null if the calling thread is not associated with a Looper.
- */
-public static Looper myLooper() {
-    return sThreadLocal.get();
-}
-
-/**
- * Initialize the current thread as a looper, marking it as an
- * application&apos;s main looper. The main looper for your application
- * is created by the Android environment, so you should never need
- * to call this function yourself.  See also: {@link #prepare()}
- */
-public static void prepareMainLooper() {
-    prepare();
-    setMainLooper(myLooper());
-    myLooper().mQueue.mQuitAllowed = false;
-}
-
-private synchronized static void setMainLooper(Looper looper) {
-    mMainLooper = looper;
-}
-
- /** Initialize the current thread as a looper.
-  * This gives you a chance to create handlers that then reference
-  * this looper, before actually starting the loop. Be sure to call
-  * {@link #loop()} after calling this method, and end it by calling
-  * {@link #quit()}.
-  */
-public static void prepare() {
-    if (sThreadLocal.get() != null) {
-        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
-    }
-    sThreadLocal.set(new Looper());
-}
-</code></pre><p> 我们看到myLooper()方法是通过sThreadLocal.get()来获取的，上面也提到，在ActivityThread.main方法中会调用<code>prepareMainLooper()</code>方法，prepareMainLooper中执行了<code>prepare</code>，<code>prepare</code>中会创建一个Looper并赋值给 <code>sThreadLocal</code>，这样Looper就和线程关联上了，而且有一点很重要，普通的线程是没有looper的，如果需要looper对象，那么必须要先调用Looper.prepare()方法，而且一个线程只能有一个looper ，而在Handler中，消息队列通过Looper与线程关联，而Handler又与Looper关联，因此Handler最终就和线程、线程的消息队列关联上了，那么创建了Looper后，是如何执行消息循环呢？我们来看下<code>Looper.loop()</code>方法</p>
-<h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><pre><code>public static void loop() {
-    final Looper me = myLooper();//获取looper对象
-    if (me == null) {
-        //若为空则说明当前线程不是LooperThread，抛出异常
-        throw new RuntimeException(&quot;No Looper; Looper.prepare() wasn&apos;t called on this thread.&quot;);
-    }
-    final MessageQueue queue = me.mQueue; 获取消息队列
-    .....
-    for (;;) {
-        //死循环不断取出消息
-        Message msg = queue.next(); // might block 
-        if (msg == null) {
-            // No message indicates that the message queue is quitting.
-            return;
-        }
-
-        // This must be in a local variable, in case a UI event sets the logger
-        //打印log，说明开始处理message。msg.target就是Handler对象
-        Printer logging = me.mLogging;
-        if (logging != null) {
-            logging.println(&quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot; +
-                    msg.callback + &quot;: &quot; + msg.what);
-        }
-
-        //开始处理message，msg.target就是Handler对象
-        msg.target.dispatchMessage(msg);
-
-        .....
-    }
-}
-</code></pre><p>很明显，就是一个大的循环，不断从消息队列出取出消息。然后调用一个很关键的方法msg.target.dispatchMessage(msg)开始处理消息。msg.target就是message对应的handler，所以对于Looper，我们结论就是通过Looper.prepare()来创建Looper对象(消息队列封装在Looper对象中)，并且保存在sThreadLoal中，然后通过Looper.loop()来执行消息循环，这两步通常是成对出现的！</p>
-<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><p>最后我们看看消息处理机制，先看看Message</p>
-<pre><code>public final class Message implements Parcelable {
-
-    public int what;
-
-    public int arg1; 
-
-    public int arg2;
-
-    public Object obj;
-
-
-    int flags;
-
-    long when;
-
-    Bundle data;
-
-    Handler target;         // target处理
-
-    Runnable callback;      // Runnable类型的callback
-
-    // sometimes we store linked lists of these things
-       Message next;           // 下一条消息，消息队列是链式存储的
-
-    ....
-}
-</code></pre><p>前面说到loop循环中处理信息的msg.target.dispatchMessage(msg)方法。现在我们来看下这个方法的源码</p>
-<pre><code>public void dispatchMessage(Message msg) {
-    //注意！这里先判断message的callback是否为空，否则就直接处理message的回调函数
-    if (msg.callback != null) {
-        handleCallback(msg);
-    } else {
-        if (mCallback != null) {
-            //正是在这调用我们平常重写handleMessage
-            if (mCallback.handleMessage(msg)) {
-                return;
-            }
-        }
-        handleMessage(msg);
-    }
-}
-</code></pre><p>这里为什么要先判断<code>msg.callback！=null呢</code>，因为<code>post(Runnable r)</code>方法也能用来处理事件</p>
-<pre><code>public final boolean post(Runnable r){
-    //获取消息并发送给消息队列
-    return  sendMessageDelayed(getPostMessage(r), 0);
-}
-
-private final Message getPostMessage(Runnable r) {  
-    Message m = Message.obtain();  
-    m.callback = r;  
-    return m;  
-}
-</code></pre><p>在post(Runnable r)时，会将Runnable包装成Message对象，并且将Runnable对象设置给Message对象的callback字段，最后会将该Message对象插入消息队列。</p>
-<p>至此，Handler的工作原理就说完了。    </p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/20/说说Handler的工作原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1806,149 +998,21 @@ private final Message getPostMessage(Runnable r) {
       
         
           
-            <h2 id="Groovy概述"><a href="#Groovy概述" class="headerlink" title="Groovy概述"></a>Groovy概述</h2><p>Groovy是Java平台上设计的面向对象编程语言。这门动态语言拥有类似Python、Ruby和Smalltalk中的一些特性，可以作为Java平台的脚本语言使用。</p>
-<p>Groovy的语法与Java非常相似，以至于多数的Java代码也是正确的Groovy代码。Groovy代码动态的被编译器转换成Java字节码。由于其运行在JVM上的特性，Groovy可以使用其他Java语言编写的库。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>通过Homebrew安装：</p>
-<pre><code>brew install groovy
-</code></pre><p>安装结束后，测试一下：</p>
-<pre><code>groovy -version
-</code></pre><p>上面为Mac OS X上的安装方法，其他平台的安装方式请参考 <a href="http://www.groovy-lang.org/install.html" target="_blank" rel="external">groovy install</a></p>
-<p>我们新建一个例子，命名test.groovy,里面输入这样一句话：</p>
-<pre><code>printlin &quot;hellow word&quot;
-</code></pre><p>在终端上执行这个文件：</p>
-<pre><code>groovy test.groovy
-</code></pre><p>结果：</p>
-<p><img src="/images/groovy-1.png" alt=""></p>
-<p>如果我们用java来打印这段话，代码是这样的：</p>
-<pre><code>public class HelloWorld {
-     public static void main(String[] args) {
-          System.out.println(&quot;Hello World&quot;)
-      }
-}
-</code></pre><p>对比一下，groovy是不是简单太多了</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>Groovy中支持动态类型，变量定义可以使用关键字<code>def</code>，即定义变量的时候可以不指定其类型。groovy会根据’=’右边的类型自动判断，比如我们定义一个变量value</p>
-<pre><code>def value = &quot;hello,groovy&quot; //结尾没有分号
-println value.class //输入value的类型
-</code></pre><p>输出是</p>
-<pre><code>class java.lang.String
-</code></pre><p>继续赋值</p>
-<pre><code>def value = &quot;hello,groovy&quot; 
-println value
-println value.class
-value = 1 //直接赋值另外一个数据类型 没有重新申明
-println value
-println value.class
-</code></pre><p>输出是</p>
-<pre><code>hello,groovy
-class java.lang.String
-1
-class java.lang.Integer
-</code></pre><p>可以看出，在groovy里，我们在运行时可以改变变量的数据类型</p>
-<p>##数据类型<br>作为动态语言，Groovy世界中的所有事物都是对象。所以，int，boolean这些Java中的基本数据类型，在Groovy代码中其实对应的是它们的包装数据类型。比如int对应为Integer，boolean对应为Boolean</p>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>groovy中容器有三种</p>
-<blockquote>
-<p>List：链表，其底层对应Java中的List接口，一般用ArrayList作为真正的实现类。<br>Map：键-值表，其底层对应Java中的LinkedHashMap。<br>Range：范围，它其实是List的一种拓展。    </p>
-</blockquote>
-<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List变量由[]定义，比如  </p>
-<pre><code>def list = [5,&apos;string&apos;,true] //List由[]定义，其元素可以是任何对象  
-</code></pre><p>变量存取：可以直接通过索引存取，而且不用担心索引越界。如果索引超过当前链表长度，List会自动往该索引添加元素</p>
-<pre><code>list[5] = &quot;hello&quot;
-list[100] = 100
-println list[5] 
-println list[100] 
-println list.size  
-</code></pre><p>分别输出 <code>hello</code>,<code>100</code>,<code>101</code>    </p>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>java中的map</p>
-<pre><code>Map&lt;String, String&gt;map = new HashMap&lt;String, String&gt;();
-map.put(&quot;name&quot;, &quot;mary&quot;);
-map.put(&quot;age&quot;,&quot;25&quot;);
-</code></pre><p>groovy定义:Map由[:]定义，注意其中的冒号。冒号左边是key，右边是Value。key必须是字符串，value可以是任何对象。另外，key可以用’’或””包起来，也可以不用引号包起来</p>
-<pre><code>def map = [&quot;name&quot;:&quot;mary&quot;,&quot;age&quot;:25]
-</code></pre><p>也可以这样写</p>
-<pre><code>def map = [name:&quot;mary&quot;,age:25] //Groovy 映射中的键不必是 String。在这个示例中，name 看起来像一个变量，但是在幕后，Groovy 会将它变成 String。
-</code></pre><p>取值也很方便</p>
-<pre><code>map.name
-map[&quot;name&quot;]
-</code></pre><h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p>我们先看一个用java代码实现的一个循环</p>
-<pre><code>for(int i=0;i&lt;5;i++){
-    System.out.println(&quot;Hello World&quot; + i);
-}
-</code></pre><p>打印5次<code>Hello World</code></p>
-<p>用groovy怎么实现呢</p>
-<pre><code>for(i=0;i&lt;5;i++){
-    println &quot;Hello World&quot; + i
-}
-</code></pre><p>更快刚简洁的呢？</p>
-<pre><code>for(i in 0..4){
-    println &quot;Hello World&quot; + i
-}
-</code></pre><p>或</p>
-<pre><code>for(i in 1..&lt;5){
-    println &quot;Hello World&quot; + i
-}
-</code></pre><p>其中 <code>0..4</code>、<code>1..&lt;5</code>就是groovy中的range</p>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包，英文叫Closure，是Groovy中非常重要的一个数据类型或者说一种概念了</p>
-<p>闭包的一些快捷写法，当闭包作为闭包或方法的最后一个参数。可以将闭包从参数圆括号中提取出来接在最后，如果闭包是唯一的一个参数，则闭包或方法参数所在的圆括号也可以省略。对于有多个闭包参数的，只要是在参数声明最后的，均可以按上述方式省略。例如</p>
-<ol>
-<li><p>没有参数</p>
-<pre><code>def closure = {  
-    println &quot;hello closure&quot; 
-} 
-</code></pre><p> //大括号括起来的<strong>代码块</strong>就是一个最简单的闭包</p>
-<p> 闭包有一个隐含的参数，这个参数名字叫it，和this的作用类似</p>
-<pre><code>def closure = {      
-    it -&gt; println &quot;hello $it&quot; 
-} 
-</code></pre><p> 调用</p>
-<pre><code>closure（&quot;closure&quot;）
-</code></pre><p>  两种的输出结果是一样的</p>
-</li>
-<li><p>有参数并且最后一个参数是闭包</p>
-<pre><code>def closure = {  
-    String name ,int age,Closure cl -&gt;  //这个箭头很关键。箭头前面是参数定义，箭头后面是代码  
-    println &quot;name is&quot; + name + &quot;, age is &quot; + age 
-    cl() //这是代码，最后一句是返回值 
-       //也可以使用return，和Groovy中普通函数一样  
-} 
-</code></pre><p> 调用的时候就可以将闭包从参数圆括号中提取出来接在最后</p>
-<pre><code>closure(&quot;mary&quot;,25){
-    println &quot;yes&quot;
-}
-</code></pre><p> 输出 </p>
-<pre><code>name is mary, age is 25
-yes
-</code></pre></li>
-</ol>
-<p>我们在渠道打包的时候有一段重命名apk文件的task代码</p>
-<pre><code>applicationVariants.all { variant -&gt;
-    variant.outputs.each { output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&apos;.apk&apos;)) {
-            def fileName =...
-            output.outputFile = new File(outputFile.parent, fileName)
-        }
-    }
-}
-</code></pre><p>之前硬是没看懂是什么意思，现在学习了基本的groovy语法，看起来很简单嘛。</p>
-<h2 id="默认导入"><a href="#默认导入" class="headerlink" title="默认导入"></a>默认导入</h2><p>下面这些包和类都是默认导入的，不用再显式地使用 import 语句</p>
-<ul>
-<li>java.io.*</li>
-<li>java.lang.*</li>
-<li>java.math.BigDecimal</li>
-<li>java.math.BigInteger</li>
-<li>java.net.*</li>
-<li>java.util.*</li>
-<li>groovy.lang.*</li>
-<li>groovy.util.*</li>
-</ul>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>了解了基本的groovy知识后，我们应该是深入地认识到 Groovy 就是 Java，只是缺少了你过去使用的许多语法规则。Groovy 是没有类型、没有修改符、没有 return、没有 Iterator、不需要导入集合的 Java。简而言之，Groovy 就是丢掉了许多包袱的 Java。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://blog.csdn.net/innost/article/details/48228651" target="_blank" rel="external">深入理解Android之Gradle</a></li>
-<li><a href="http://www.ibm.com/developerworks/cn/education/java/j-groovy/j-groovy.html" target="_blank" rel="external">精通groovy</a></li>
-<li><a href="http://www.groovy-lang.org/api.html" target="_blank" rel="external">Groovy API</a></li>
-</ul>
+          Groovy概述Groovy是Java平台上设计的面向对象编程语言。这门动态语言拥有类似Python、Ruby和Smalltalk中的一些特性，可以作为Java平台的脚本语言使用。
+Groovy的语法与Java非常相似，以至于多数的Java代码也是正确的Groovy代码。Groovy代码动态的被编译器转换成Java字节码。由于其运行在JVM上的特性，Groovy可以使用其他Java语言编写的库。
+安装通过Homebrew安装：1brew install groovy
+安装结束后，测试一下：1groovy -version
+上面为Mac OS X上的安装方法，其他平台的安装方式请参考 groovy install
+我们新建一个例子，命名test.groovy,里面输入这样一句话：1printlin "hellow word"
+在终端上执行这个文件：1groovy test.groovy
+结果
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/12/初识groovy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2061,125 +1125,20 @@ yes
       
         
           
-            <p>  目前android应用市场不计其数，作为一名android开发者，每次发布新版的时候，都是个令人头痛的问题，为了方面渠道统计分析，我们要给每个应用市场打包，甚至，还有公司很对每个渠道还要打不同的包比如免费版、收费版，这无疑给开发者带来很多麻烦，因为每次都要花一定时间在这方面。那有没有一些工具可以帮我们提高效率呢！答案当然是有咯！</p>
-<p>首先介绍下目前市场上比较广泛使用的打包方式</p>
-<h2 id="gradle设置productFlavor方式"><a href="#gradle设置productFlavor方式" class="headerlink" title="gradle设置productFlavor方式"></a>gradle设置productFlavor方式</h2><p>  这种方式很早以前奇大已经推出了详细教程，这里我就不多说，大家可以移步查看<a href="http://stormzhang.com/devtools/2015/01/15/android-studio-tutorial6/" target="_blank" rel="external">Gradle多渠道打包</a>，可以说这篇教程贡献非常大，帮助很多人少走不少弯路！感谢奇大的分享！</p>
-<h2 id="美团的打包方式"><a href="#美团的打包方式" class="headerlink" title="美团的打包方式"></a>美团的打包方式</h2><p>  这种方式是由<a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团技术团队</a>推出的</p>
-<p>  通过解压缩apk，我们知道，其实apk包就是个zip包，zip解压缩后有一个META-INF目录，如下图：</p>
-<p>  <img src="/images/apk_express.png" alt="image"></p>
-<p>  他们发现如果在META-INF目录内添加空文件，可以不用重新签名应用（不要问我为什么），这样我们就可以忘这里面添加一个空文件，文件的名字包含渠道名，然后我们在项目加载的时候通过解压缩将这个渠道名从文件命中取出来，调用友盟的<code>AnalyticsConfig.setChannel(channel)</code>就可以了。这样我们只需要打一个包，然后通过在这个包基础上插入带渠道名字的空文件到各个apk的META-INF目录中就可以了，当然这个操作是通过python脚本完成的</p>
-<p>  说到这里笔者要给大家填几个坑</p>
-<p>  如果你用的是友盟统计，请注意了，友盟给我们提供了两种设置渠道的方式</p>
-<ol>
-<li><p>AndroidManifest.xml配置</p>
-<pre><code>&lt;meta-data
-  android:name=&quot;UMENG_CHANNEL&quot;
-  android:value=&quot;Umeng&quot; &gt;
-</code></pre></li>
-<li><p>代码手动设置 </p>
-<pre><code>AnalyticsConfig.setChannel(channel)
-</code></pre><p>坑来了</p>
-<ol>
-<li><p>你不能同时设置两种方式，友盟技术给我的解释是他们会优先采用第一次取到的渠道名，也就是说如果你两种方式都设置了，很有可能你手动设置的值就无效了，测试下来确实如此（巨坑）</p>
-</li>
-<li><p>如果你只采用手动设置的方式，一定要讲设置的代码放置在Application类中。而不是放在启动的Activity里否则你就会发现后台统计到的渠道全是“<strong>unknow</strong>”、所以这点一定要注意。</p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><p> 说完了原理和坑，大家有没有觉得可以改进的地方呢，我们每次打完包后都要切换到相应的目录，再通过执行python脚本来网apk中插入渠道名，有没有方法可以在打包完后直接就执行python脚本呢，结果是可以的，因为我们用的是gradle打包，gradle是可以执行python命令的，我们只需要在打包完后再新建一个执行python的task，就可以了，废话不多说，上代码</p>
-<p>在gradle的android porject中加入</p>
-<pre><code>project.afterEvaluate {
-    //在Release执行以后
-    tasks.getByName(&quot;assembleRelease&quot;) {
-        it.doLast {
-            def fileName = &quot;secret_v&quot; + defaultConfig.versionName + &quot;_&quot; + releaseTime() + &quot;.apk&quot;
-            def rApk = new File(&quot;app/build/outputs/apk/&quot; + fileName)
-            if (rApk.exists()) {
-                packageChannel(rApk.absolutePath)
-            }
-        }
-    }
-}
-</code></pre><p>执行加入渠道名的python脚本</p>
-<pre><code>def packageChannel(String releaseApk) {
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine &apos;python&apos;,         rootProject.getRootDir().getAbsolutePath() + &quot;/app/multi_build.py&quot;, releaseApk
-        standardOutput = stdout
-    }
-        return stdout.toString().trim()
-    }
-    catch (ignored) {
-        return &quot;UnKnown&quot;;
-    }
-}
-</code></pre><p>multi_build.py脚本代码</p>
-<pre><code>#!/usr/bin/python
-# coding=utf-8
-import zipfile
-import shutil
-import os
-import datetime
-import sys
+            目前android应用市场不计其数，作为一名android开发者，每次发布新版的时候，都是个令人头痛的问题，为了方面渠道统计分析，我们要给每个应用市场打包，甚至，还有公司很对每个渠道还要打不同的包比如免费版、收费版，这无疑给开发者带来很多麻烦，因为每次都要花一定时间在这方面。那有没有一些工具可以帮我们提高效率呢！答案当然是有咯！
+首先介绍下目前市场上比较广泛使用的打包方式
+gradle设置productFlavor方式  这种方式很早以前奇大已经推出了详细教程，这里我就不多说，大家可以移步查看Gradle多渠道打包，可以说这篇教程贡献非常大，帮助很多人少走不少弯路！感谢奇大的分享！
+美团的打包方式  这种方式是由美团技术团队推出的
+  通过解压缩apk，我们知道，其实apk包就是个zip包，zip解压缩后有一个META-INF目录，如下图：
+  
+  他们发现如果在META-INF目录
+          ...
 
-# 空文件 便于写入 此空文件到apk包中作为channel文件
-src_empty_file = &apos;empty.txt&apos;
-# 创建一个空文件（不存在则创建）
-f = open(src_empty_file, &apos;w&apos;)
-f.close()
-
-
-# 获取渠道列表
-channel_file = &apos;channel.txt&apos;
-f = open(channel_file)
-lines = f.readlines()
-f.close()
-
-src_apk=sys.argv[1]
-
-# file name (with extension)
-src_apk_file_name = os.path.basename(src_apk)
-print(src_apk_file_name)
-
-# 分割文件名与后缀
-temp_list = os.path.splitext(src_apk_file_name)
-# name without extension
-src_apk_name = temp_list[0]
-# 后缀名，包含.   例如: &quot;.apk &quot;
-src_apk_extension = temp_list[1]
-
-# 创建生成目录,与文件名相关 放置在build/outputs/下,方便执行clean的时候清空历史记录
-output_dir = &apos;build/outputs/&apos; + src_apk_name + &apos;/&apos;
-# 目录不存在则创建
-if not os.path.exists(output_dir):
-    os.mkdir(output_dir)
-
-# 遍历渠道号并创建对应渠道号的apk文件
-for line in lines:
-    # 获取当前渠道号，因为从渠道文件中获得带有\n,所有strip一下
-    target_channel = line.strip()
-
-    target_apk = output_dir +src_apk_name + &quot;_&quot; + target_channel + src_apk_extension
-
-    # 拷贝建立新apk
-    shutil.copy(src_apk,  target_apk)
-    # zip获取新建立的apk文件
-    zipped = zipfile.ZipFile(target_apk, &apos;a&apos;, zipfile.ZIP_DEFLATED)
-    # 初始化渠道信息
-    empty_channel_file = &quot;META-INF/channel_{channel}&quot;.format(channel = target_channel)
-    # 写入渠道信息
-    zipped.write(src_empty_file, empty_channel_file)
-    # 关闭zip流
-    zipped.close()
-</code></pre><p>这样我们只需要执行 <code>./gradlew assembleRelease</code> 即可完成所有渠道的打包，时间在两分钟以内。</p>
-<h2 id="gradle插件打包方式"><a href="#gradle插件打包方式" class="headerlink" title="gradle插件打包方式"></a>gradle插件打包方式</h2><p>用作者的话说就是：<a href="https://github.com/mcxiaoke/packer-ng-plugin" target="_blank" rel="external">下一代Android渠道打包工具</a></p>
-<p>这种方式就是集我上面优化的美团方案于一身的另外一种打包方式，集成起来更方便，因为它是以gradle插件的方式引入项目的，所以不需要我们写python脚本.原理也跟美团的打包方式不一样<br>，具体可以参见作者的readme，写的很清楚</p>
-<p>笔者已经集成到项目中打包测试过，速度也非常快，但是在一些输出目录的配置上遇到一些问题，已经给作者提issue,待作者回复了并具体可行了我会再回来写一些具体的配置方法。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从上面三种打包方案来看，显然第一种方案已经不适合进行批量打包，但是如果你的项目需要一些特性定制的话，还是需要用到第一种方式的，至于美团和gradle插件的方式，他们的打包速度都非常的快，但是从集成的角度来看，gradle插件的方式会更加方面一些，作者甚至也指出美团打包方式在解压缩apk时的性能问题，不过从我目前的项目测试来看，并没有太大问题，所以我认为这两种方式都可以作为我们项目多渠道打包的选择</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/26/2016-02-26-android-multi- package/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2292,106 +1251,23 @@ for line in lines:
       
         
           
-            <p>相信大家对<a href="http://developer.android.com/intl/zh-cn/reference/android/widget/Toolbar.html" target="_blank" rel="external">Toobar</a>已经很熟悉了，这是android系统在5.0版本中推出的新控件,这里有有篇比较详细的介绍，不太明白的可以看看<a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1118/2006.html/" target="_blank" rel="external">android：ToolBar详解（手把手教程）</a></p>
-<p>接下来说今天的重点，怎么定制你的Toolbar</p>
-<p>很多app有自己的主色(非白)，就像新建一个项目系统自动生成的默认页，如下图：<br><img src="/images/custom_toolbar_1.png" alt=""></p>
-<p>我们来看一下布局代码</p>
-<pre><code> &lt;android.support.design.widget.AppBarLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
+          相信大家对Toobar已经很熟悉了，这是android系统在5.0版本中推出的新控件,这里有有篇比较详细的介绍，不太明白的可以看看android：ToolBar详解（手把手教程）
+接下来说今天的重点，怎么定制你的Toolbar
+很多app有自己的主色(非白)，就像新建一个项目系统自动生成的默认页，如下图：
+我们来看一下布局代码
+&lt;android.support.design.widget.AppBarLayout
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;wrap_content&quot;
+android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
 
-    &lt;android.support.v7.widget.Toolbar
-        android:id=&quot;@+id/toolbar&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;?attr/actionBarSize&quot;
-        android:background=&quot;?attr/colorPrimary&quot;
-        app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
+       &lt;android.support.v7.widg
+          ...
 
-&lt;/android.support.design.widget.AppBarLayout&gt;
-</code></pre><p>接下来是样式</p>
-<pre><code>&lt;style name=&quot;AppTheme.AppBarOverlay&quot; parent=&quot;ThemeOverlay.AppCompat.Dark.ActionBar&quot;/&gt;
-
-   &lt;style name=&quot;AppTheme.PopupOverlay&quot; parent=&quot;ThemeOverlay.AppCompat.Light&quot;/&gt;
-</code></pre><p>我们给</p>
-<p><code>AppBarLayout</code>：<code>android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;</code>，</p>
-<p><code>Toolbar</code>：<code>app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;</code></p>
-<p>Android 5.0引入一个全新的特性，允许你对view设置theme，这种设置会影响控件及其包含的子控件。这里对AppBarLayout的android:theme设置就有这种效果，而且系统目前只提供了两种默认的主题，Dark和Light,这里要说明的是android:theme如果设置的Dark主题，ToolBar的Title显示的是白色，如果设置的Light主题，Title是黑色，有点奇怪）</p>
-<p>那有人在想，app:popupTheme又是干嘛的呢？问得好，这里的app:popupTheme是设置菜单的样式的，也有下面两种设置方式</p>
-<ul>
-<li>ThemeOverlay.AppCompat.Light</li>
-</ul>
-<p><img src="/images/popupOverlay_light.png" alt=""></p>
-<ul>
-<li>ThemeOverlay.AppCompat.Dark</li>
-</ul>
-<p><img src="/images/popupOverlay_dark.png" alt=""></p>
-<hr>
-<p>上面的说的一些基本情况，如果我们要定制一些特使的Toolbar呢，接下来介绍几种定制的情况</p>
-<ol>
-<li><p>Toolbar的背景</p>
-<p> 直接在xml配置下Toolbar的背景就好了</p>
-<pre><code>android:background=&quot;@color/window_background&quot;
-</code></pre></li>
-<li><p>Toolbar的高度</p>
-<p> 系统默认取的是 </p>
-<pre><code>android:layout_height=&quot;?attr/actionBarSize&quot;
-</code></pre><p> 通过代码可以可知系统默认toolbar的告诉是<code>56dp</code>,很多app都觉得有点厚了，比如微信，网易，想把高度改小一点，比如48dp,该怎么改呢？直接定义Toolbar的告诉不就好了，</p>
-<pre><code>android:layout_height=&quot;48dp&quot;
-</code></pre><p> 效果是这样</p>
-<p> <img src="/images/custom_toolbar_height.png" alt=""></p>
-<p> 这里为了更直观的看到问题，我把返回按钮放出来了，发现问题了吧，返回键和menu键和title没有对齐，oh，no，这也太丑了，怎么解决呢，很简单，给toolbar加一句代码就好了</p>
-<pre><code>android:minHeight=&quot;48dp&quot;
-</code></pre><p> 搞定！</p>
-<p> <img src="/images/custom_toolbar_height_48.png" alt=""></p>
-</li>
-<li><p>Toolbar title的颜色和大小</p>
-<p> 其实这里我们Toolbar的背景不为白色的话，其实是不需要定制的，直接采用系统的Light主题就OK了，但是如果设计非要弄个白色，而我们又不喜欢Dark主题的纯黑字体，或者其他原因，那我们就只能自己定制了</p>
-<p> 大家应该和我一样，第一想到的是跟定制ActionBar一样，在style文件里配置一下不就好了吗？就像这样</p>
-<pre><code>&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
-    &lt;!-- Customize your theme here. --&gt;
-    &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;
-    &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;
-    &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;
-    &lt;item name=&quot;android:titleTextStyle&quot;&gt;@style/ActionBar.TitleText&lt;/item&gt;
-&lt;/style&gt;
-
-&lt;style name=&quot;ActionBar.TitleText&quot; parent=&quot;android:TextAppearance.Holo.Widget.ActionBar.Title&quot;&gt;
-    &lt;item name=&quot;android:textColor&quot;&gt;#FFFFFF&lt;/item&gt;
-    &lt;item name=&quot;android:textSize&quot;&gt;12sp&lt;/item&gt;
-&lt;/style&gt;
-</code></pre><p> 事实是根本不起作用。。</p>
-<p> 笔者尝试了很多种利用样式来改变的方式，都失败了，所以想了一种比较笨的方法，下面介绍一下，思路很简单，直接上代码</p>
-<pre><code>&lt;android.support.v7.widget.Toolbar
-    android:id=&quot;@+id/toolbar&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;48dp&quot;
-    android:background=&quot;@color/window_background&quot;
-    android:minHeight=&quot;48dp&quot;
-    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Dark&quot;&gt;
-
-    &lt;TextView
-        android:id=&quot;@+id/tv_title&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:ellipsize=&quot;end&quot;
-        android:gravity=&quot;left|center_vertical&quot;
-        android:singleLine=&quot;true&quot;
-        android:textColor=&quot;@color/colorAccent&quot;
-        android:textSize=&quot;28sp&quot;
-        tools:text=&quot;更多&quot;/&gt;
-&lt;/android.support.v7.widget.Toolbar&gt;
-</code></pre><p> 通过在BaseActivity里对外提供title设置方法</p>
-<pre><code>public void setTitle(String title) {
-    mTitle.setText(title);
-}    
-</code></pre><p> 如果有些子标题，也可以在toolbar下定制，为了看看效果，此处把字体设大了些，如图</p>
-<p> <img src="/images/toolbar_tm25.png" alt=""></p>
-<p> 以上就是我对定制toolbar的一些见解，如果你有不同的思路，请给我留言，一起探讨更好的方法</p>
-</li>
-</ol>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/21/2016-02-21-custom-toolbar/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2504,33 +1380,21 @@ for line in lines:
       
         
           
-            <h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果</p>
-<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>使用线程池有三点好处</p>
-<p>第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
-<p>第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</p>
-<p>第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控</p>
-<p>java中主要用到的线程池有下面四种</p>
-<ul>
-<li><strong>newSingleThreadExecutor</strong><br>创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这个唯一的线程因为异常结束，那么会有一个新的线程来替代它。此线程池保证所有任务的执行顺序按照任务的提交顺序执行。</li>
-<li><strong>newFixedThreadPool</strong><br>创建固定大小的线程池。每次提交一个任务就创建一个线程，直到线程达到线程池的最大大小。线程池的大小一旦达到最大值就会保持不变，如果某个线程因为执行异常而结束，那么线程池会补充一个新线程。</li>
-<li><strong>newCachedThreadPool</strong><br>创建一个可缓存的线程池。如果线程池的大小超过了处理任务所需要的线程，<br>那么就会回收部分空闲（60秒不执行任务）的线程，当任务数增加时，此线程池又可以智能的添加新线程来处理任务。此线程池不会对线程池大小做限制，线程池大小完全依赖于操作系统（或者说JVM）能够创建的最大线程大小。</li>
-<li><strong>newScheduledThreadPool</strong><br>创建一个大小无限的线程池。此线程池支持定时以及周期性执行任务的需求。</li>
-</ul>
-<p><a href="http://www.infoq.com/cn/articles/java-threadPool/" target="_blank" rel="external">JAVA线程池的分析和使用</a></p>
-<p><a href="http://www.oschina.net/question/565065_86540" target="_blank" rel="external">Java线程池使用说明</a></p>
-<h2 id="多线程下载的原理"><a href="#多线程下载的原理" class="headerlink" title="多线程下载的原理"></a>多线程下载的原理</h2><p>1、在本地创建一个大小跟服务器文件相同大小的临时文件。</p>
-<p>2、计算分配几个线程去下载服务器上的资源，知道每个线程下载文件的位置。</p>
-<p>从上面的原理可以看出，多线程下载就是讲一个文件分成几段，然后每段分别开线程去下载，可是我们平时在访问一个文件时都是对整个文件进行读写，那怎样才能进行分段访问呢？那就要用到下面它<a href="http://developer.android.com/intl/zh-cn/reference/java/io/RandomAccessFile.html" target="_blank" rel="external">RandomAccessFile</a>了，它是一个随机文件访问类</p>
-<p>我们在多线程断点下载的过程中，主要用到它的<code>seek</code>方法，</p>
-<pre><code>void seek(long pos)
+          多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
+线程池使用线程池有三点好处
+第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
+第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。
+第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控
+java中主要用到的线程池有下面四种
 
-This method sets the file-pointer offset, measured from the beginning of this file, at which the next read or write occurs.
-</code></pre><p>这个方法可以将文件的操作位置指向任何地方，其实所谓的<code>断点下载</code>就是利用的这点，让我们在下载过程中点击了暂停，我们记下此时文件已经下载的位置，当我们点继续下载的时候，我们只需拿到这个位置，然后调用<code>seek</code>方法，就可继续上次的下载了，而不用重新下载</p>
-<p>最后贴两个写的比较好的两个开源库</p>
-<p><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></p>
-<p><a href="https://github.com/Aspsine/MultiThreadDownload" target="_blank" rel="external">MultiThreadDownload</a></p>
+newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/31/2016-01-31-multi_thread_download/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2606,7 +1470,7 @@ This method sets the file-pointer offset, measured from the beginning of this fi
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -2615,7 +1479,7 @@ This method sets the file-pointer offset, measured from the beginning of this fi
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

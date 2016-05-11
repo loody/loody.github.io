@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的">
 <meta property="og:image" content="http://loody.github.io/images/mvvm.png">
-<meta property="og:updated_time" content="2016-04-26T02:05:23.000Z">
+<meta property="og:updated_time" content="2016-05-11T02:00:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data Binding 实践">
 <meta name="twitter:description" content="Data Binding Library去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且Android Studio还没有很好的">
@@ -242,6 +242,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -272,153 +291,17 @@
       
         <h2 id="Data-Binding-Library"><a href="#Data-Binding-Library" class="headerlink" title="Data Binding Library"></a>Data Binding Library</h2><p>去年的Google IO 大会上，Android 团队发布了一个数据绑定框架（Data Binding Library）。以后可以直接在 layout 布局 xml 文件中绑定数据了，无需再 findViewById 然后手工设置数据了。其语法和使用方式和 JSP 中的 EL 表达式非常类似。由于那时还只是测试版，而且<br>Android Studio还没有很好的支持，就没有怎么实践，前段时间Android Studio发布了2.0正式版，而且已经内置了该框架的支持，配置起来也很简单</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在主目录的<code>build.gradle</code>中如下配置即可</p>
-<pre><code>android {
-    ....
-    dataBinding {
-        enabled = true
-    }
-}
-</code></pre><p>Layout文件跟之前有很大的不同，我们先看看原来的布局文件 <code>activity_main.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout 
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    android:orientation=&quot;vertical&quot;
-    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
-
-    &lt;android.support.design.widget.AppBarLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            android:background=&quot;?attr/colorPrimary&quot;
-            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
-
-    &lt;/android.support.design.widget.AppBarLayout&gt;
-
-    &lt;LinearLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:orientation=&quot;vertical&quot;&gt;
-
-       &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;name&quot;/&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;age&quot;/&gt;
-
-        &lt;Button
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:gravity=&quot;center&quot;
-            android:onClick=&quot;onClickButton&quot;
-            android:text=&quot;jump&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/LinearLayout&gt;
-</code></pre><p>下面是Data Binding的 <code>activity_main.xml</code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
-
-&lt;data&gt;
-
-    &lt;import type=&quot;me.loody.databindingdemo.User&quot;/&gt;
-
-    &lt;variable
-        name=&quot;user&quot;
-        type=&quot;User&quot;/&gt;
-&lt;/data&gt;
-
-&lt;LinearLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    android:orientation=&quot;vertical&quot;
-    tools:context=&quot;me.loody.databindingdemo.MainActivity&quot;&gt;
-
-    &lt;android.support.design.widget.AppBarLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
-
-        &lt;android.support.v7.widget.Toolbar
-            android:id=&quot;@+id/toolbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;?attr/actionBarSize&quot;
-            android:background=&quot;?attr/colorPrimary&quot;
-            app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;/&gt;
-
-    &lt;/android.support.design.widget.AppBarLayout&gt;
-
-    &lt;LinearLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:orientation=&quot;vertical&quot;&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{user.name)}&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;test&quot;/&gt;
-
-        &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{String.valueOf(user.age)}&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;
-            tools:text=&quot;test&quot;/&gt;
-
-        &lt;Button
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:gravity=&quot;center&quot;
-            android:onClick=&quot;onClickButton&quot;
-            android:text=&quot;jump&quot;
-            android:textColor=&quot;@color/colorPrimaryDark&quot;
-            android:textSize=&quot;18dp&quot;/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/LinearLayout&gt;
-
-&lt;/layout&gt;
-</code></pre><p>我们看到Data Binding layout文件有点不同的是：起始根标签是layout，接下来一个data元素以及一个view的根元素。这个view元素就是你没有使用Data Binding的layout文件的根元素.</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">   	....</span><br><span class="line">   	dataBinding &#123;</span><br><span class="line">       	enabled = <span class="keyword">true</span></span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Layout文件跟之前有很大的不同，我们先看看原来的布局文件 <code>activity_main.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line">   <span class="tag">&lt;<span class="name">LinearLayout</span> </span><br><span class="line">   	<span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">       <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">       <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span></span><br><span class="line">       <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span><br><span class="line">       <span class="attr">tools:context</span>=<span class="string">"me.loody.databindingdemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span><br><span class="line">           <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">           <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme.AppBarOverlay"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span><br><span class="line">               <span class="attr">android:id</span>=<span class="string">"@+id/toolbar"</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span></span><br><span class="line">               <span class="attr">android:background</span>=<span class="string">"?attr/colorPrimary"</span></span><br><span class="line">               <span class="attr">app:popupTheme</span>=<span class="string">"@style/AppTheme.PopupOverlay"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">LinearLayout</span></span><br><span class="line">           <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">          <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span></span><br><span class="line">               <span class="attr">tools:text</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span></span><br><span class="line">               <span class="attr">tools:text</span>=<span class="string">"age"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">Button</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:gravity</span>=<span class="string">"center"</span></span><br><span class="line">               <span class="attr">android:onClick</span>=<span class="string">"onClickButton"</span></span><br><span class="line">               <span class="attr">android:text</span>=<span class="string">"jump"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面是Data Binding的 <code>activity_main.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">layout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">       <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">       <span class="attr">xmlns:bind</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">       <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">import</span> <span class="attr">type</span>=<span class="string">"me.loody.databindingdemo.User"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">variable</span></span><br><span class="line">           <span class="attr">name</span>=<span class="string">"user"</span></span><br><span class="line">           <span class="attr">type</span>=<span class="string">"User"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">LinearLayout</span></span><br><span class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span></span><br><span class="line">       <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span><br><span class="line">       <span class="attr">tools:context</span>=<span class="string">"me.loody.databindingdemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span><br><span class="line">           <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">           <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme.AppBarOverlay"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span><br><span class="line">               <span class="attr">android:id</span>=<span class="string">"@+id/toolbar"</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span></span><br><span class="line">               <span class="attr">android:background</span>=<span class="string">"?attr/colorPrimary"</span></span><br><span class="line">               <span class="attr">app:popupTheme</span>=<span class="string">"@style/AppTheme.PopupOverlay"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">LinearLayout</span></span><br><span class="line">           <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">           <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:text</span>=<span class="string">"@&#123;user.name)&#125;"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span></span><br><span class="line">               <span class="attr">tools:text</span>=<span class="string">"test"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:text</span>=<span class="string">"@&#123;String.valueOf(user.age)&#125;"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span></span><br><span class="line">               <span class="attr">tools:text</span>=<span class="string">"test"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">           <span class="tag">&lt;<span class="name">Button</span></span><br><span class="line">               <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">               <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">               <span class="attr">android:gravity</span>=<span class="string">"center"</span></span><br><span class="line">               <span class="attr">android:onClick</span>=<span class="string">"onClickButton"</span></span><br><span class="line">               <span class="attr">android:text</span>=<span class="string">"jump"</span></span><br><span class="line">               <span class="attr">android:textColor</span>=<span class="string">"@color/colorPrimaryDark"</span></span><br><span class="line">               <span class="attr">android:textSize</span>=<span class="string">"18dp"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们看到Data Binding layout文件有点不同的是：起始根标签是layout，接下来一个data元素以及一个view的根元素。这个view元素就是你没有使用Data Binding的layout文件的根元素.</p>
 <p>我们定义的一个<code>User</code>类</p>
-<pre><code>public class User {
-    public final String name;
-    public final int age;
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-}
-</code></pre><h2 id="Binding数据"><a href="#Binding数据" class="headerlink" title="Binding数据"></a>Binding数据</h2><p>在MainActivity中添加如下代码</p>
-<pre><code>ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-User user = new User(&quot;loody&quot;, 27);
-activityMainBinding.setUser(user);
-</code></pre><p>这里的ActivityMainBinding是根据布局文件<code>activity_main</code>的名称生成的。布局文件和绑定的数据一定要写对，否则无法生成Binging文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">public</span> <span class="keyword">final</span> String name;</span><br><span class="line">   	<span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">this</span>.name = name;</span><br><span class="line">       	<span class="keyword">this</span>.age = age;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Binding数据"><a href="#Binding数据" class="headerlink" title="Binding数据"></a>Binding数据</h2><p>在MainActivity中添加如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(<span class="keyword">this</span>, R.layout.activity_main);</span><br><span class="line">   User user = <span class="keyword">new</span> User(<span class="string">"loody"</span>, <span class="number">27</span>);</span><br><span class="line">   activityMainBinding.setUser(user);</span><br></pre></td></tr></table></figure>
+<p>这里的ActivityMainBinding是根据布局文件<code>activity_main</code>的名称生成的。布局文件和绑定的数据一定要写对，否则无法生成Binging文件</p>
 <p>这样我们程序就可以将User的信息显示出来了，如下图：</p>
 <p>其中布局文件还有还有两个节点</p>
 <blockquote>
@@ -428,46 +311,15 @@ activityMainBinding.setUser(user);
 <p><em>同样Data Binding的layout也是支持include、ViewStub的，具体使用方法在这里不多说</em></p>
 <h2 id="Observable-Binding"><a href="#Observable-Binding" class="headerlink" title="Observable Binding"></a>Observable Binding</h2><p>通过Data Binding,我们已经把对象的属性绑定到UI上了，有的时候，代码会修改我们绑定的对象的某些属性，那么怎么通知界面刷新呢？这就要用到Observable Binding了，它有两种方式</p>
 <ol>
-<li><p>让你的绑定数据类继承BaseObservable，然后通过调用notifyPropertyChanged方法来通知界面属性改变，如下：</p>
-<pre><code>public class ObservableUser extends BaseObservable {
-    public String name;
-    public int age;
-
-    public ObservableUser(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    @Bindable
-    public String getName() {
-        return name;
-       }
-
-    @Bindable
-    public int getAge() {
-        return age;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-        notifyPropertyChanged(me.loody.databindingdemo.BR.name);
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-        notifyPropertyChanged(me.loody.databindingdemo.BR.age);
-    }
-}
-</code></pre><p> 在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了</p>
-</li>
-<li><p>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</p>
-</li>
+<li>让你的绑定数据类继承BaseObservable，然后通过调用notifyPropertyChanged方法来通知界面属性改变，如下：</li>
 </ol>
-<pre><code>public class PlainUser {
-    public final ObservableField&lt;String&gt; name = new ObservableField&lt;&gt;();
-    public final ObservableInt age = new ObservableInt();
-}
-</code></pre><p>然后使用下面的代码来访问：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObservableUser</span> <span class="keyword">extends</span> <span class="title">BaseObservable</span> </span>&#123;</span><br><span class="line">  		<span class="keyword">public</span> String name;</span><br><span class="line">  		<span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">  		<span class="function"><span class="keyword">public</span> <span class="title">ObservableUser</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">      		<span class="keyword">this</span>.name = name;</span><br><span class="line">      		<span class="keyword">this</span>.age = age;</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="meta">@Bindable</span></span><br><span class="line">  		<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      		<span class="keyword">return</span> name;</span><br><span class="line"> 			&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="meta">@Bindable</span></span><br><span class="line">  		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      		<span class="keyword">return</span> age;</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">      		<span class="keyword">this</span>.name = name;</span><br><span class="line">      		notifyPropertyChanged(me.loody.databindingdemo.BR.name);</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">      		<span class="keyword">this</span>.age = age;</span><br><span class="line">      		notifyPropertyChanged(me.loody.databindingdemo.BR.age);</span><br><span class="line">  		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>在需要通知的属性的get方法上加上@Bindable，这样编译阶段会生成BR.[property name]，然后使用这个调用方法notifyPropertyChanged就可以通知界面刷新了
+</code></pre><ol>
+<li>Data Binding Library提供了很便利的类ObservableField，还有ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, ObservableLong, ObservableFloat, ObservableDouble, 和 ObservableParcelable，基本上涵盖了各种我们需要的类型</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PlainUser</span> </span>&#123;</span><br><span class="line">  		<span class="keyword">public</span> <span class="keyword">final</span> ObservableField&lt;String&gt; name = <span class="keyword">new</span> ObservableField&lt;&gt;();</span><br><span class="line">  		<span class="keyword">public</span> <span class="keyword">final</span> ObservableInt age = <span class="keyword">new</span> ObservableInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后使用下面的代码来访问：</p>
 <pre><code>user.name.set(&quot;loody&quot;);
 user.age.set(18); 
 </code></pre><p>调用set方法时，Data Binding Library就会自动的帮我们通知界面刷新了。</p>
@@ -608,7 +460,7 @@ user.age.set(18);
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -617,7 +469,7 @@ user.age.set(18);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

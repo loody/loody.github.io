@@ -293,83 +293,19 @@
       
         
           
-            <h6 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h6><p>UIL aims to provide a powerful, flexible and highly customizable instrument for image loading, caching and displaying. It provides a lot of configuration options and good control over the image loading and caching process.</p>
-<p><img src="http://loody.github.io/images/uil_demo.png" alt="uil_demo"></p>
-<p>Github：<a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">https://github.com/nostra13/Android-Universal-Image-Loader</a></p>
-<h6 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h6><ol>
-<li>多线程下载图片，图片可以来源于网络，文件系统，项目文件夹assets中以及drawable中等</li>
-<li>支持随意的配置ImageLoader，例如线程池，图片下载器，内存缓存策略，硬盘缓存策略，图片显示选项以及其他的一些配置</li>
-<li>支持图片的内存缓存，文件系统缓存或者SD卡缓存</li>
-<li>支持图片下载过程的监听</li>
-<li>根据控件(ImageView)的大小对Bitmap进行裁剪，减少Bitmap占用过多的内存</li>
-<li>较好的控制图片的加载过程，例如暂停图片加载，重新开始加载图片，一般使用         ListView,GridView中，滑动过程中暂停加载图片，停止滑动的时候去加载图片</li>
-<li>提供在较慢的网络下对图片进行加载</li>
-</ol>
-<h6 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h6><p><img src="http://loody.github.io/images/the_flow_chart.png" alt="the_flow_chart"></p>
-<h6 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h6><pre><code>uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;  
-</code></pre><ol>
-<li>下载JAR包添加到工程libs目录下</li>
-<li><p>配置Android Manifest文件</p>
-<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;  
-&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; 
-</code></pre></li>
-<li><p>配置ImageLoaderConfiguration这个类实现全局ImageLoader，可以选择在Application中初始化设置该类</p>
-<pre><code>ImageLoaderConfiguration config = new ImageLoaderConfiguration  
-.Builder(context)  
-.memoryCacheExtraOptions(480, 800) // max width, max height，即保存的每个缓存文件的最大长宽  
-.discCacheExtraOptions(480, 800, CompressFormat.JPEG, 75, null) // Can slow ImageLoader, use it carefully (Better don&apos;t use it)/设置缓存的详细信息，最好不要设置这个  
-.threadPoolSize(3)//线程池内加载的数量  
-.threadPriority(Thread.NORM_PRIORITY - 2)  
-.denyCacheImageMultipleSizesInMemory()  
-.memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024)) // You can pass your own memory cache implementation/你可以通过自己的内存缓存实现  
-.memoryCacheSize(2 * 1024 * 1024)    
-.discCacheSize(50 * 1024 * 1024)    
-.discCacheFileNameGenerator(new Md5FileNameGenerator())//将保存的时候的URI名称用MD5 加密  
-.tasksProcessingOrder(QueueProcessingType.LIFO)  
-.discCacheFileCount(100) //缓存的文件数量  
-.discCache(new UnlimitedDiscCache(cacheDir))//自定义缓存路径  
-.defaultDisplayImageOptions(DisplayImageOptions.createSimple())  
-.imageDownloader(new BaseImageDownloader(context, 5 * 1000, 30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间  
-.writeDebugLogs() // Remove for release app  
-.build();//开始构建  
-</code></pre><p> 以上的配置看个人需求进行选择，不是所有都要进行配置。<br> 配置好ImageLoaderConfiguration后，调用以下方法来实现初始化：</p>
-<pre><code>ImageLoader.getInstance().init(config);//全局初始化此配置 
-</code></pre></li>
-<li><p>使用ImageLoader加载图片</p>
-<p> 使用ImageLoader进行图片加载的时候，先要实例化ImageLoader，代码如下，建议放在基类Activity中，这样不必每次都去申明</p>
-<pre><code>ImageLoader imageLoader = ImageLoader.getInstance(); 
-imageLoader.displayImage(...); 
-//一般用这个方法比较多
-imageLoader.displayImage(Stirng uri, ImageView imageView, DisplayImageOptions options );
-</code></pre></li>
-</ol>
-<h6 id="ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系"><a href="#ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系" class="headerlink" title="ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系"></a>ImageLoaderConfiguration、ImageLoader、DisplayImageOptions三者的关系</h6><p><strong>ImageLoaderConfiguration</strong>：针对图片缓存的全局配置，主要有线程类、缓存大小、磁盘大小、图片下载与解析、日志方面的配置。</p>
-<p><strong>ImageLoader</strong>：具体下载图片，缓存图片，显示图片的具体执行类，它有两个具体的方法displayImage(…)、loadImage(…)，但是其实最终他们的实现都是displayImage(…)。</p>
-<p><strong>DisplayImageOptions</strong>：用于指导每一个Imageloader根据网络图片的状态（空白、下载错误、正在下载）显示对应的图片，是否将缓存加载到磁盘上，下载完后对图片进行怎么样的处理。</p>
-<p>从三者的协作关系上看，他们有点像厨房规定、厨师、客户个人口味之间的关系。ImageLoaderConfiguration就像是厨房里面的规定，每一个厨师要怎么着装，要怎么保持厨房的干净，这是针对每一个厨师都适用的规定，而且不允许个性化改变。ImageLoader就像是具体做菜的厨师，负责具体菜谱的制作。DisplayImageOptions就像每个客户的偏好，根据客户是重口味还是清淡，每一个imageLoader根据DisplayImageOptions的要求具体执行。</p>
-<h6 id="Acceptable-URIs-examples"><a href="#Acceptable-URIs-examples" class="headerlink" title="Acceptable URIs examples"></a>Acceptable URIs examples</h6><pre><code>String imageUri = &quot;http://site.com/image.png&quot;; // from Web
-String imageUri = &quot;file:///mnt/sdcard/image.png&quot;; // from SD card
-String imageUri = &quot;content://media/external/audio/albumart/13&quot;; // from content provider
-String imageUri = &quot;assets://image.png&quot;; // from assets
-String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (non-9patch images)
-</code></pre><h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><ol>
-<li>上述提到的2个权限必须加入，否则会出错</li>
-<li>ImageLoaderConfiguration必须配置并且全局化的初始化这个配置ImageLoader.getInstance().init(config);  否则也会出现错误提示</li>
-<li>ImageLoader是根据ImageView的height，width确定图片的宽高。</li>
-<li><p>如果经常出现OOM（别人那边看到的，觉得很有提的必要）</p>
-<ul>
-<li>减少配置之中线程池的大小，(.threadPoolSize).推荐1-5;</li>
-<li>使用.bitmapConfig(Bitmap.config.RGB_565)代替ARGB_8888;</li>
-<li>使用.imageScaleType(ImageScaleType.IN_SAMPLE_INT)或者        try.imageScaleType(ImageScaleType.EXACTLY)；</li>
-<li>避免使用RoundedBitmapDisplayer.他会创建新的ARGB_8888格式的Bitmap对象；</li>
-<li>使用.memoryCache(new WeakMemoryCache())，不要使用.cacheInMemory();</li>
-</ul>
-</li>
-</ol>
-<p>参考链接</p>
-<p><a href="http://blog.csdn.net/vipzjyno1/article/details/23206387" target="_blank" rel="external">http://blog.csdn.net/vipzjyno1/article/details/23206387</a><br><a href="http://www.cnblogs.com/kissazi2/p/3886563.html" target="_blank" rel="external">http://www.cnblogs.com/kissazi2/p/3886563.html</a><br><a href="http://blog.csdn.net/xiaanming/article/details/26810303" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/26810303</a></p>
+          简介UIL aims to provide a powerful, flexible and highly customizable instrument for image loading, caching and displaying. It provides a lot of configuration options and good control over the image loading and caching process.
 
-          
+Github：https://github.com/nostra13/Android-Universal-Image-Loader
+特性
+多线程下载图片，图片可以来源于网络，文件系统，项目文件夹assets中以及drawable中等
+支持随意的配置ImageLoader，例如线程池，图片下载器，内存缓存策略，硬盘缓存策略，图片显示选项以及其他的一
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/11/2014-09-11-about universal-image-loader/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -599,84 +535,15 @@ String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (n
       
         
           
-            <p> 之前在项目开发中，要实现一个图片的轮播功能，我的实现思路是ViewPager+Fragment,我使用FragmentPagerAdapter来处理多 Fragment 页面的横向滑动。不过我碰到了一个问题，即当 Fragment 对应的数据集发生改变时，我希望能够通过调用 <code>mAdapter.notifyDataSetChanged()</code>来触发 Fragment 页面使用新的数据调整或重新生成其内容，可是当我调用 notifyDataSetChanged() 后，发现什么都没发生,于是去查看源码``</p>
-<p>##【ViewPager】<br>ViewPager 如其名所述，是负责翻页的一个 View。准确说是一个 ViewGroup，包含多个 View 页，在手指横向滑动屏幕时，其负责对 View 进行切换。为了生成这些 View 页，需要提供一个 PagerAdapter 来进行和数据绑定以及生成最终的 View 页。</p>
-<ul>
-<li><strong>setAdapter()</strong><ul>
-<li>ViewPager 通过 setAdapter() 来建立与 PagerAdapter 的联系。这个联系是双向的，一方面，ViewPager 会拥有 PagerAdapter 对象，从而可以在需要时调用 PagerAdapter 的方法；另一方面，ViewPager 会在 setAdapter() 中调用 PagerAdapter 的 registerDataSetObserver() 方法，注册一个自己生成的 PagerObserver 对象，从而在 PagerAdapter 有所需要时（如notifyDataSetChanged() 或 notifyDataSetInvalidated() 时），可以调用 Observer 的 onChanged() 或 onInvalidated() 方法，从而实现 PagerAdapter 向 ViewPager 方向发送信息。</li>
-</ul>
-</li>
-<li><strong>dataSetChanged() </strong><ul>
-<li>在 PagerObserver.onChanged()，以及 PagerObserver.onInvalide() 中被调用。因此当 PagerAdapter.notifyDataSetChanged() 被触发时，ViewPager.dataSetChanged() 也可以被触发。该函数将使用 getItemPosition() 的返回值来进行判断，如果为 POSITION_UNCHANGED，则什么都不做；如果为 POSITION_NONE，则调用 PagerAdapter.destroyItem() 来去掉该对象，并设置为需要刷新 (needPopulate = true) 以便触发PagerAdapter.instantiateItem() 来生成新的对象。 </li>
-</ul>
-</li>
-</ul>
-<p>##【PagerAdapter】<br>PageAdapter 是 ViewPager 的支持者，ViewPager 将调用它来取得所需显示的页，而 PageAdapter 也会在数据变化时，通知 ViewPager。这个类也是FragmentPagerAdapter 以及 FragmentStatePagerAdapter 的基类。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
-<ul>
-<li><strong>getItemPosition()</strong><ul>
-<li>该函数用以返回给定对象的位置，给定对象是由 instantiateItem() 的返回值。</li>
-<li>在 ViewPager.dataSetChanged() 中将对该函数的返回值进行判断，以决定是否最终触发 PagerAdapter.instantiateItem() 函数。</li>
-<li>在 PagerAdapter 中的实现是直接传回 POSITION_UNCHANGED。如果该函数不被重载，则会一直返回 POSITION_UNCHANGED，从而导致 ViewPager.dataSetChanged() 被调用时，认为不必触发 PagerAdapter.instantiateItem()。很多人因为没有重载该函数，而导致调用<br>PagerAdapter.notifyDataSetChanged() 后，什么都没有发生。</li>
-</ul>
-</li>
-<li><strong>instantiateItem()</strong><ul>
-<li>在每次 ViewPager 需要一个用以显示的 Object 的时候，该函数都会被 ViewPager.addNewItem() 调用。</li>
-</ul>
-</li>
-<li><strong>notifyDataSetChanged()</strong><ul>
-<li>在数据集发生变化的时候，一般 Activity 会调用 PagerAdapter.notifyDataSetChanged()，以通知 PagerAdapter，而 PagerAdapter 则会通知在自己这里注册过的所有 DataSetObserver。其中之一就是在 ViewPager.setAdapter() 中注册过的 PageObserver。PageObserver 则进而调用 ViewPager.dataSetChanged()，从而导致 ViewPager 开始触发更新其内含 View 的操作。</li>
-</ul>
-</li>
-</ul>
-<p>##【FragmentPagerAdapter】</p>
-<p>FragmentPagerAdapter 继承自 PagerAdapter。相比通用的 PagerAdapter，该类更专注于每一页均为 Fragment 的情况。如文档所述，该类内的每一个生成的 Fragment 都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。因此，总体上来说，相对于继承自 PagerAdapter，更方便一些。</p>
-<ul>
-<li><strong>getItem()</strong><ul>
-<li>该类中新增的一个虚函数。函数的目的为生成新的 Fragment 对象。重载该函数时需要注意这一点。在需要时，该函数将被 instantiateItem() 所调用。</li>
-<li>如果需要向 Fragment 对象传递相对静态的数据时，我们一般通过 Fragment.setArguments() 来进行，这部分代码应当放到 getItem()。它们只会在新生成 Fragment 对象时执行一遍。</li>
-<li>如果需要在生成 Fragment 对象后，将数据集里面一些动态的数据传递给该 Fragment，那么，这部分代码不适合放到 getItem() 中。因为当数据集发生变化时，往往对应的 Fragment 已经生成，如果传递数据部分代码放到了 getItem() 中，这部分代码将不会被调用。这也是为什么很多人发现调用 PagerAdapter.notifyDataSetChanged() 后，getItem() 没有被调用的一个原因。</li>
-</ul>
-</li>
-<li><strong>instantiateItem()</strong><ul>
-<li>函数中判断一下要生成的 Fragment 是否已经生成过了，如果生成过了，就使用旧的，旧的将被 Fragment.attach()；如果没有，就调用 getItem() 生成一个新的，新的对象将被 FragmentTransation.add()。</li>
-<li>FragmentPagerAdapter 会将所有生成的 Fragment 对象通过 FragmentManager 保存起来备用，以后需要该 Fragment 时，都会从 FragmentManager 读取，而不会再次调用 getItem() 方法。</li>
-<li>如果需要在生成 Fragment 对象后，将数据集中的一些数据传递给该 Fragment，这部分代码应该放到这个函数的重载里。在我们继承的子类中，重载该函数，并调用 FragmentPagerAdapter.instantiateItem() 取得该函数返回 Fragment 对象，然后，我们该 Fragment 对象中对应的方法，将数据传递过去，然后返回该对象。</li>
-<li>否则，如果将这部分传递数据的代码放到 getItem()中，在 PagerAdapter.notifyDataSetChanged() 后，这部分数据设置代码将不会被调用。</li>
-</ul>
-</li>
-<li><strong>destroyItem()</strong><ul>
-<li>该函数被调用后，会对 Fragment 进行 FragmentTransaction.detach()。这里不是 remove()，只是 detach()，因此 Fragment 还在 FragmentManager 管理中，Fragment 所占用的资源不会被释放。</li>
-</ul>
-</li>
-</ul>
-<p>##【FragmentStatePagerAdapter】</p>
-<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。但是，和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面(就像 ListView 的实现一样)。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
-<ul>
-<li><strong>getItem()</strong><ul>
-<li>一个该类中新增的虚函数。</li>
-<li>函数的目的为生成新的 Fragment 对象。</li>
-<li>Fragment.setArguments() 这种只会在新建 Fragment 时执行一次的参数传递代码，可以放在这里。</li>
-<li>由于 FragmentStatePagerAdapter.instantiateItem() 在大多数情况下，都将调用 getItem() 来生成新的对象，因此如果在该函数中放置与数据集相关的 setter 代码，基本上都可以在 instantiateItem() 被调用时执行，但这和设计意图不符。毕竟还有部分可能是不会调用 getItem() 的。因此这部分代码应该放到 instantiateItem() 中。</li>
-</ul>
-</li>
-<li><strong>instantiateItem()</strong><ul>
-<li>除非碰到 FragmentManager 刚好从 SavedState 中恢复了对应的 Fragment 的情况外，该函数将会调用 getItem() 函数，生成新的 Fragment 对象。新的对象将被 FragmentTransaction.add()。</li>
-<li>FragmentStatePagerAdapter 就是通过这种方式，每次都创建一个新的 Fragment，而在不用后就立刻释放其资源，来达到节省内存占用的目的的。</li>
-</ul>
-</li>
-<li><strong>destroyItem()</strong><ul>
-<li>将 Fragment 移除，即调用 FragmentTransaction.remove()，并释放其资源。</li>
-</ul>
-</li>
-</ul>
-<p>讨论</p>
-<p>之前看到一些解决办法，有的认为这是一个 bug，应该被修复；有的建议不用 FragmentPagerAdapter，而改用 FragmentStatePagerAdapter，并且重载 getItemPosition() 并返回 POSITION_NONE，以触发销毁对象以及重建对象。从上面的分析中看，后者给出的建议确实可以达到调用 notifyDataSetChanged() 后，Fragment 被以新的参数重新建立的效果。</p>
-<p>但是问题在于，如果我们只能这么解决这个问题，岂不是 FragmentPagerAdapter 就用不上了？最关键的是，二者对应的情况不同。对于页面相对较少的情况，我仍旧希望能够将生成的 Fragment 保存在内存中，在需要显示的时候直接调用，而不要产生生成、销毁对象的额外的开销，这样效率更高。这种情况下，选择 FragmentPagerAdapter 是更适合，不加考虑的选择 FragmentStatePagerAdapter 是不合适的。我们不能够因噎废食。</p>
-<p>因此，对于 FragmentPagerAdapter 的解决方案就是，分别重载 getItem() 以及 instantiateItem() 对象。getItem() 只用于生成新的与数据无关的 Fragment；而 instantiateItem() 函数则先调用父类中的 instantiateItem() 取得所对应的 Fragment 对象，然后，根据对应的数据，调用该对象对应的方法进行数据设置。</p>
-<p>当然，不要忘记重载 getItemPosition() 函数，返回 POSITION_NONE，这个两个类的解决方案都需要的。二者不同之处在于，FragmentStatePagerAdapter 在会在因 POSITION_NONE 触发调用的 destroyItem() 中真正的释放资源，重新建立一个新的 Fragment；而 FragmentPagerAdapter 仅仅会在 destroyItem() 中 detach 这个 Fragment，在 instantiateItem() 时会使用旧的 Fragment，并触发 attach，因此没有释放资源及重建的过程。</p>
-<p>这样，当 notifyDataSetChanged() 被调用后，会最终触发 instantiateItem()，而不管 getItem() 是否被调用，我们都在重载的 instantiateItem() 函数中已经将所需要的数据传递给了相应的 Fragment。在 Fragment 接下来的 onCreateView(), onStart() 以及 onResume() 的事件中，它可以正确的读取新的数据，Fragment 被成功复用了。</p>
+           之前在项目开发中，要实现一个图片的轮播功能，我的实现思路是ViewPager+Fragment,我使用FragmentPagerAdapter来处理多 Fragment 页面的横向滑动。不过我碰到了一个问题，即当 Fragment 对应的数据集发生改变时，我希望能够通过调用 mAdapter.notifyDataSetChanged()来触发 Fragment 页面使用新的数据调整或重新生成其内容，可是当我调用 notifyDataSetChanged() 后，发现什么都没发生,于是去查看源码``
+##【ViewPager】ViewPager 如其名所述，是负责翻页的一个 View。准确说是一个 ViewGroup，包含多个 View 页，在手指横向滑动屏幕时，其负责对 View 进行切换。为了生成这些 View 页，需要提供一个 PagerAdapter 来进行和数据绑定以及生成最终的
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -789,51 +656,16 @@ String imageUri = &quot;drawable://&quot; + R.drawable.img; // from drawables (n
       
         
           
-            <h2 id="关于基站定位"><a href="#关于基站定位" class="headerlink" title="关于基站定位"></a>关于基站定位</h2><p>一般应用于手机用户，手机基站定位服务又叫做移动位置服务（LBS——Location Based Service），它是通过电信移动运营商的网络（如GSM网）获取移动终端用户的位置信息（经纬度坐标），在电子地图平台的支持下，为用户提供相应服务的一种增值业务，例如目前中国移动动感地带提供的动感位置查询服务等。</p>
-<h2 id="需求调研"><a href="#需求调研" class="headerlink" title="需求调研"></a>需求调研</h2><p>由于之前公司项目需要用到手机定位，公司采用的百度定位，对于百度定位，大家可以去百度开放平台查看API文档，地址是：<a href="http://developer.baidu.com/map/geosdk.htm" title="http://developer.baidu.com/map/geosdk.htm" target="_blank" rel="external"><em>http://developer.baidu.com/map/geosdk.htm</em></a>，在此就不多说，今天主要介绍基站定位的流程及一些注意事项，由于在APP使用的过程中，有很多客户反应百度定位失败的情况，为了解决这一问题，公司决定采用了外链定位策略–基站定位</p>
-<h2 id="基站定位原理"><a href="#基站定位原理" class="headerlink" title="基站定位原理"></a>基站定位原理</h2><p>首先,为什么移动和联通要疯狂建设基站呢?为什么在野外比较荒凉的地方,手机没有信号呢?那就是因为,我们每个人的手机都是靠搜索基站,跟基站互相通信赖以维生的,我们从一个地方走到另一个地方,手机获取的基站就从一个换成另一个,手机是在不断的搜索中渡过自己的一生:) ，基站定位,就是靠从用户手机上获得基站的信息,然后将基站信息上传给基站定位提供商的服务器,服务器拥有这些基站所在地的经纬度信息,返回给用户,用户就知道了自己的大概位置！</p>
-<h2 id="APP定位流程"><a href="#APP定位流程" class="headerlink" title="APP定位流程"></a>APP定位流程</h2><ul>
-<li>程序启动时／交易发生前，发起一次<strong>百度</strong>定位请求，如果此次定位失败，则间隔10秒重新进行<strong>百度</strong>定位（总共<em>3</em>次） </li>
-<li>如<strong>百度</strong>定位失败，则启动<strong>外链定位</strong>，获取移动设备搜索的基站信息，上送前置，失败后间隔10秒重新发送1次。 </li>
-<li>两种定位方式都未成功获取定位信息，则此次定位失败。</li>
-</ul>
-<p>基站信息的组成：</p>
-<pre><code>public int cellId; (cellId)//基站编号  
-public int mobileCountryCode;(mcc)//国家代码   
-public int mobileNetworkCode;(mnc)//网络代码  
-public int locationAreaCode;(lac)//区域代码  
-</code></pre><p> 各自的十六进制数拼成的字符串   lac+cellId+mcc+mnc </p>
-<p>基站信息组成发送后台接口</p>
-<pre><code>request:
-{
-    stations:&quot;18ACF27101cc0000&quot;//APP组件好的基站信息，直接转发后台
-    termInfo:&quot;btpos_123456789&quot;//账号+手机唯一序列号
-}
-</code></pre><p>部分关键代码：注意不同运营商之间获取基站信息的差异</p>
-<h2 id="中国电信"><a href="#中国电信" class="headerlink" title="中国电信"></a>中国电信</h2><pre><code>if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
-    CdmaCellLocation cdma = (CdmaCellLocation) mTelephonyManager .getCellLocation(); 
-    if (cdma == null) { 
-        FyLog.i(FyLog.TAG_APP_OTHERS, &quot;CdmaCellLocation is null&quot;); 
-        return null; 
-    } 
-    cellId = cdma.getBaseStationId(); 
-    lac = cdma.getNetworkId(); 
-    mcc = operator.substring(0, 3); 
-    mnc = String.valueOf(cdma.getSystemId()); 
-} 
-</code></pre><h2 id="中国联通-amp-中国移动"><a href="#中国联通-amp-中国移动" class="headerlink" title="中国联通&amp;中国移动"></a>中国联通&amp;中国移动</h2><pre><code>if(phoneType == TelephonyManager.PHONE_TYPE_GSM) {// 
-    GsmCellLocation gsm = (GsmCellLocation) mTelephonyManager.getCellLocation(); 
-    if (gsm == null) { 
-        FyLog.i(FyLog.TAG_APP_OTHERS, &quot;GsmCellLocation is null&quot;); 
-        return null; 
-    } 
-    cellId = gsm.getCid(); 
-    lac = gsm.getLac(); 
-    mcc = operator.substring(0, 3); 
-    mnc = operator.substring(3, 5); 
-} 
-</code></pre>
-          
+          关于基站定位一般应用于手机用户，手机基站定位服务又叫做移动位置服务（LBS——Location Based Service），它是通过电信移动运营商的网络（如GSM网）获取移动终端用户的位置信息（经纬度坐标），在电子地图平台的支持下，为用户提供相应服务的一种增值业务，例如目前中国移动动感地带提供的动感位置查询服务等。
+需求调研由于之前公司项目需要用到手机定位，公司采用的百度定位，对于百度定位，大家可以去百度开放平台查看API文档，地址是：http://developer.baidu.com/map/geosdk.htm，在此就不多说，今天主要介绍基站定位的流程及一些注意事项，由于在APP使用的过程中，有很多客户反应百度定位失败的情况，为了解决这一问题，公司决定采用了外链定位策略–基站定位
+基站定位原理首先,为什么移动和联通要疯狂建设基站呢?为什么在野外比较荒凉的地方,手机没有信号呢?那就是
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/10/2014-08-10-base station positioning/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -946,93 +778,18 @@ public int locationAreaCode;(lac)//区域代码
       
         
           
-            <p> <strong>ichartjs</strong> 是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 ichartjs致力于为您的应用提供简单、直观、可交互的体验级图表组件。是WEB/APP图表展示方面的解决方案 。如果你正在开发HTML5的应用，ichartjs正好适合您。 ichartjs目前支持饼图、环形图、折线图、面积图、柱形图、条形图。ichartjs是基于Apache License 2.0协议的开源项目。</p>
-<p>此文以制作一个3D的柱形图为例讲解ichartjs的使用</p>
-<p>首先,我们要去ichartjs官网下载其js库，因为我们的要用到东西就是在html文件中导入一个js文件即可</p>
-<p>ichartjs官网地址：<a href="http://www.ichartjs.com/" target="_blank" rel="external"><em>http://www.ichartjs.com/</em></a></p>
-<p>源代码地址：<a href="http://code.google.com/p/ichartjs/source/checkout" target="_blank" rel="external"><em>http://code.google.com/p/ichartjs/source/checkout</em></a></p>
-<p>将ichart.1.2.min.js放置assets文件中，新建一个html文件，也放置在assets文件下，代码如下：</p>
-<pre><code>&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;head&gt; 
-&lt;meta charset=&quot;UTF-8&quot; /&gt; 
-&lt;title&gt;ichartjs 示例&lt;/title&gt; 
-&lt;script type=&quot;text/javascript&quot; src=&quot;ichart.1.2.min.js&quot;&gt;&lt;/script&gt; 
-&lt;script type=&quot;text/javascript&quot;&gt; 
-$(function(){
-    var data = [
-                {name : &apos;IE&apos;,value : 35.75,color:&apos;#bc6666&apos;},
-                {name : &apos;Chrome&apos;,value : 29.84,color:&apos;#cbab4f&apos;},
-                {name : &apos;Firefox&apos;,value : 24.88,color:&apos;#76a871&apos;},
-                {name : &apos;Safari&apos;,value : 6.77,color:&apos;#9f7961&apos;},
-                {name : &apos;Opera&apos;,value : 2.02,color:&apos;#2ba5a4&apos;},
-                {name : &apos;Other&apos;,value : 0.73,color:&apos;#6f83a5&apos;}
-            ];
+           ichartjs 是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 ichartjs致力于为您的应用提供简单、直观、可交互的体验级图表组件。是WEB/APP图表展示方面的解决方案 。如果你正在开发HTML5的应用，ichartjs正好适合您。 ichartjs目前支持饼图、环形图、折线图、面积图、柱形图、条形图。ichartjs是基于Apache License 2.0协议的开源项目。
+此文以制作一个3D的柱形图为例讲解ichartjs的使用
+首先,我们要去ichartjs官网下载其js库，因为我们的要用到东西就是在html文件中导入一个js文件即可
+ichartjs官网地址：http://www.ichartjs.com/
+源代码地址：http://code.google.com/p/ichartjs/source/chec
+          ...
 
-    new iChart.Column3D({
-        render : &apos;canvasDiv&apos;,
-        data: data,
-        title : &apos;Top 5 Browsers from 1 to 29 Feb 2012&apos;,
-        width : 800,
-        height : 400,
-        align:&apos;left&apos;,
-        offsetx:50,
-        legend : {
-            enable : true
-        },
-        sub_option:{
-            label:{
-                color:&apos;#111111&apos;
-            }
-        },
-        coordinate:{
-            width:600,
-            scale:[{
-                 position:&apos;left&apos;,    
-                 start_scale:0,
-                 end_scale:40,
-                 scale_space:8,
-                 listeners:{
-                    parseText:function(t,x,y){
-                        return {text:t+&quot;%&quot;}
-                    }
-                }
-            }]
-        }
-    }).draw();
-});
-&lt;/script&gt; 
-</code></pre><p>以上画图部分的属性大家可以参照源代码中docs文件夹中的 API文档  所有的属性都有说明，可以根据自己需求定制不同的效果，在此不做详细说明,最后，在Activity中</p>
-<pre><code>package com.example.ichartjsdemo; 
-
-import android.annotation.SuppressLint; 
-import android.app.Activity; 
-import android.os.Bundle; 
-import android.view.Menu; 
-import android.webkit.WebView; 
-public class MainActivity extends Activity { 
-    private WebView webView; 
-    @SuppressLint({ &quot;JavascriptInterface&quot;, &quot;SetJavaScriptEnabled&quot; }) 
-    @Override 
-    protected void onCreate(Bundle savedInstanceState) { 
-        super.onCreate(savedInstanceState); 
-        setContentView(R.layout.activity_main); 
-        webView = (WebView) findViewById(R.id.webview); 
-        webView.getSettings().setJavaScriptEnabled(true); // 设定该WebView可以执行JavaScript程序 
-        webView.getSettings().setBuiltInZoomControls(true); // 设定该WebView可以缩放 
-        webView.loadUrl(&quot;file:///android_asset/line.html&quot;); 
-    } 
-
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu) { 
-        getMenuInflater().inflate(R.menu.main, menu); 
-        return false; 
-    } 
-} 
-</code></pre><p>运行效果图：</p>
-<p><img src="/images/ichartjs_in_android.png" alt="ichartjs_in_android.png"> </p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/03/2014-08-03-ichartjs in android/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1145,40 +902,21 @@ public class MainActivity extends Activity {
       
         
           
-            <p>最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案</p>
-<h2 id="手动设置ListView高度"><a href="#手动设置ListView高度" class="headerlink" title="手动设置ListView高度"></a>手动设置ListView高度</h2><pre><code>经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测量。于是需要手动代码设置ListView高度，实现代码如下：
+          最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案
+手动设置ListView高度经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测量。于是需要手动代码设置ListView高度，实现代码如下：
 
 &gt;取代ListView的LinearLayout，使之能够成功嵌套在ScrollView中
 
     public class LinearLayoutForListView extends LinearLayout {
         private BaseAdapter adapter;
-        private OnClickListener onClickListener = null;
-        public void bindLinearLayout() {
-        int count = adapter.getCount();
-        this.removeAllViews();
-        for (int i = 0; i &lt; count; i++) {
-            View v = adapter.getView(i, null, null);
-            v.setOnClickListener(this.onClickListener);
-            addView(v, i);
-        }
-           Log.v(&quot;countTAG&quot;, &quot;&quot; + count);
-    }
-    public LinearLayoutForListView(Context context) {
-        super(context);  
-</code></pre><p>采用这个方法有个细节需要注意：就是getView方法返回的View必须由LinearLayout组成，而且LinearLayout里面也不能有其他的如LinearLayout，RelativeLayout等的子布局，只能存在一个外围的LinearLayout布局，最近做的项目就是遇到这个问题，所以在ListView中遇到比较复杂的布局的时候就要考虑其他方案了，比如下面介绍的两种方法</p>
-<h2 id="采用LinearLayout取代ListView"><a href="#采用LinearLayout取代ListView" class="headerlink" title="采用LinearLayout取代ListView"></a>采用LinearLayout取代ListView</h2><pre><code>如果ListView 中Item的数量不是很大，完全没必要用ListView,用LinearLayout代替即可，也不会出现上述冲突问题
-</code></pre><h2 id="自定义可适应ScrollView的ListView"><a href="#自定义可适应ScrollView的ListView" class="headerlink" title="自定义可适应ScrollView的ListView"></a>自定义可适应ScrollView的ListView</h2><pre><code>这种方法比较省事，而且改动也很小，只需要自定义一个类继承自ListView，然后重写里面的onMeasure方法，代码如下：
+        private O
+          ...
 
- &gt; 重写该方法，达到使ListView适应ScrollView的效果
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2,
-        MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
-    }
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1291,34 +1029,17 @@ public class MainActivity extends Activity {
       
         
           
-            <p>##Flyme OS</p>
-<pre><code>Flyme OS是魅族公司基于Android4.0系统深度定制的手机操作系统。2009年2月18日魅族推出第一个基于Windows CE6.0内核的正式版本手机操作系统（只适用于魅族M8，称为Mymoblie操作系统），此后推出了为M9及MX深度定制的基于Android 2.2和Android 2.3的操作系统（未正式确立专有名称），但直到2012年6月25日才将为旗下手机基于Android 4.0.3的手机操作系统正式确立为“Flyme”。Eico Design亦参与其设计。此系统最新正式版本为适用于MX3的Flyme 3.0。
-</code></pre><p>##Smartbar</p>
-<pre><code>在 Flyme OS 2.0 中，我们探索出一套兼顾用户界面和操作体验的方案，整合了 Android 操作栏（Action bar）和虚拟导航键，我们称之为 Smartbar。在 Flyme OS 中，遵照 Android 4.0 开发规范设计的应用会自动匹配 Smartbar，并以更具亲和力的方式呈现给用户。如下图：
+          ##Flyme OS
+Flyme OS是魅族公司基于Android4.0系统深度定制的手机操作系统。2009年2月18日魅族推出第一个基于Windows CE6.0内核的正式版本手机操作系统（只适用于魅族M8，称为Mymoblie操作系统），此后推出了为M9及MX深度定制的基于Android 2.2和Android 2.3的操作系统（未正式确立专有名称），但直到2012年6月25日才将为旗下手机基于Android 4.0.3的手机操作系统正式确立为“Flyme”。Eico Design亦参与其设计。此系统最新正式版本为适用于MX3的Flyme 3.0。
+##Smartbar
+在 Flyme OS 2.0 中，我们探索出一套兼顾用户界面和操作体验的方案，整合了 Android 操作栏（Action bar）和虚拟导航键，我们称之为 Smartbar。在 Flyme OS 中，遵照 Andro
+          ...
 
-![smartbar](/images/meizu smartbar.jpg)
-
-由上图可以看出Smartbar中可以放置三个东西 返回键、系统菜单键以及Actionbar. 
-</code></pre><p>##适配</p>
-<p>首先给大家看一组图片，如下图： </p>
-<pre><code>![smartbr_no_adapter](/images/smartbr_no_adapter.jpg) 
-![smartbr_adapter](/images/smartbr_adapter.jpg)
-</code></pre><p> 有没有觉得左图下边红色部分放置到最下边smartbar里会好看得多（如右图），而且屏幕的整体面积也变得更大一些，这，就是我们要做的适配</p>
-<ul>
-<li>Smartbar实现Tab的三种方法<ul>
-<li>方法一：TabHost+Menu +Activity</li>
-<li>方法二：TabHost+Actionbar+Activity</li>
-<li>方法三：Actionbar+Fragment</li>
-</ul>
-</li>
-</ul>
-<p>具体实现源码请参照魅族开发者社区发布的Smartbar Demo 里面写的很清楚<br>下载地址：<a href="http://app.res.meizu.com/fileserver/developdownload/1/11988cc92fa64519867ecd398c8e3c98.rar" target="_blank" rel="external">http://app.res.meizu.com/fileserver/developdownload/1/11988cc92fa64519867ecd398c8e3c98.rar</a></p>
-<p>下面我们来分析一下android底部菜单的实现方法，我觉得最核心的是底部菜单的每个主页对应的界面我们是用什么展示的，两种</p>
-<p><strong>Activity</strong>： 这种方式又可以通过两种方式实现各个模块的切换，TabHost 和 ActivityGroup<br>    可采取上述方法中的方法一和方法二做适配</p>
-<p><strong>Fragment</strong>：（推荐使用）可采取上述方法中的方法三做适配</p>
-<p>ps：当你使用Actionbar的实现Tab的时候，记住要在Androidmanifest的 application 节点中加上 android:uiOptions=”splitActionBarWhenNarrow” 这句话才能让ActionBar显示在底部Smartbar中</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/12/2014-07-12-meizu smartbar adapter 1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1394,7 +1115,7 @@ public class MainActivity extends Activity {
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1403,7 +1124,7 @@ public class MainActivity extends Activity {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

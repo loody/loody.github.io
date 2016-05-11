@@ -69,7 +69,7 @@
 线程池使用线程池有三点好处
 第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
 第">
-<meta property="og:updated_time" content="2016-03-10T16:53:23.000Z">
+<meta property="og:updated_time" content="2016-05-11T15:04:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android中利用多线程实现断点下载">
 <meta name="twitter:description" content="多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
@@ -314,10 +314,8 @@
 <p>2、计算分配几个线程去下载服务器上的资源，知道每个线程下载文件的位置。</p>
 <p>从上面的原理可以看出，多线程下载就是讲一个文件分成几段，然后每段分别开线程去下载，可是我们平时在访问一个文件时都是对整个文件进行读写，那怎样才能进行分段访问呢？那就要用到下面它<a href="http://developer.android.com/intl/zh-cn/reference/java/io/RandomAccessFile.html" target="_blank" rel="external">RandomAccessFile</a>了，它是一个随机文件访问类</p>
 <p>我们在多线程断点下载的过程中，主要用到它的<code>seek</code>方法，</p>
-<pre><code>void seek(long pos)
-
-This method sets the file-pointer offset, measured from the beginning of this file, at which the next read or write occurs.
-</code></pre><p>这个方法可以将文件的操作位置指向任何地方，其实所谓的<code>断点下载</code>就是利用的这点，让我们在下载过程中点击了暂停，我们记下此时文件已经下载的位置，当我们点继续下载的时候，我们只需拿到这个位置，然后调用<code>seek</code>方法，就可继续上次的下载了，而不用重新下载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">long</span> pos)</span></span><br><span class="line"></span><br><span class="line">This method sets the file-pointer offset, measured from the beginning of <span class="keyword">this</span> file, at which the next read or write occurs.</span></span><br></pre></td></tr></table></figure>
+<p>这个方法可以将文件的操作位置指向任何地方，其实所谓的<code>断点下载</code>就是利用的这点，让我们在下载过程中点击了暂停，我们记下此时文件已经下载的位置，当我们点继续下载的时候，我们只需拿到这个位置，然后调用<code>seek</code>方法，就可继续上次的下载了，而不用重新下载</p>
 <p>最后贴两个写的比较好的两个开源库</p>
 <p><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></p>
 <p><a href="https://github.com/Aspsine/MultiThreadDownload" target="_blank" rel="external">MultiThreadDownload</a></p>
@@ -455,7 +453,7 @@ This method sets the file-pointer offset, measured from the beginning of this fi
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -464,7 +462,7 @@ This method sets the file-pointer offset, measured from the beginning of this fi
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
