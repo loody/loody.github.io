@@ -219,14 +219,14 @@
     
     
   <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>Canvas</tag>
          
          
            
@@ -239,36 +239,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        <title>微信支付需要注意的几个问题</title>
+        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
-        
-        <tag>占位符</tag>
+        <tag>微信支付</tag>
          
          
            
@@ -303,53 +281,15 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>微信支付需要注意的几个问题</title>
-        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
         
-        <tag>微信支付</tag>
+        <tag>占位符</tag>
          
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
-        
-        <tag>Canvas</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(二)</title>
-        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
-        
          
            
              
@@ -372,6 +312,64 @@
          
         <tag>hellocharts</tag>
          
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
+        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
+        
+        <tag>Gradle依赖申明</tag>
+         
+         
+           
+             
+              <breadCrumb title="Gradle" url="http://loody.github.io/categories/Gradle/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        
+        <tag>View的事件传递</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(二)</title>
+        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
+        
          
            
              
@@ -425,46 +423,6 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>实现滚动隐藏header的layout</title>
-        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
-        
-        <tag>Scrollable</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>HTTP缓存机制</title>
-        <pubTime>2015-04-15T16:00:00.000Z</pubTime>
-        
-        <tag>http缓存</tag>
-         
-         
-           
-             
-              <breadCrumb title="http" url="http://loody.github.io/categories/http/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -509,19 +467,39 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
+    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>高亮显示滚轮控件WheelView选中项</title>
-        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
+        <title>实现滚动隐藏header的layout</title>
+        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
         
-        <tag>WheelView高亮</tag>
+        <tag>Scrollable</tag>
          
          
            
              
               <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>HTTP缓存机制</title>
+        <pubTime>2015-04-15T16:00:00.000Z</pubTime>
+        
+        <tag>http缓存</tag>
+         
+         
+           
+             
+              <breadCrumb title="http" url="http://loody.github.io/categories/http/"/>
           
         </display>
     </data>
@@ -553,14 +531,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>CoordinatorLayout的使用场景</title>
-        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        <title>高亮显示滚轮控件WheelView选中项</title>
+        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
         
-        <tag>CoordinatorLayout</tag>
+        <tag>WheelView高亮</tag>
          
          
            
@@ -677,6 +655,46 @@
 
     
   <url>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>图表库MPAndroidChart简介</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
+        
+        <tag>MPAndroidChart</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoordinatorLayout的使用场景</title>
+        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        
+        <tag>CoordinatorLayout</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -719,14 +737,16 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>图表库MPAndroidChart简介</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
          
          
            
@@ -737,6 +757,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
@@ -757,26 +778,5 @@
     </data>
     </url>
 
-    
-  <url>
-    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
-        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
-        
-        <tag>Gradle依赖申明</tag>
-         
-         
-           
-             
-              <breadCrumb title="Gradle" url="http://loody.github.io/categories/Gradle/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
 </urlset>
