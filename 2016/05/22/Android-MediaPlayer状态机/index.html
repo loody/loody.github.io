@@ -66,7 +66,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
 <meta property="og:description" content="最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
 Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发Ill">
 <meta property="og:image" content="http://loody.github.io/images/MediaPlayer state.jpg">
-<meta property="og:updated_time" content="2016-05-22T10:46:03.000Z">
+<meta property="og:updated_time" content="2016-05-22T10:47:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MediaPlayer状态机">
 <meta name="twitter:description" content="最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
@@ -285,7 +285,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
 
       
         <p>最近在做视频播放相关的功能，主要涉及<code>MediaPlayer</code>，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中<code>MediaPlayer</code>的这些状态是怎么转换的</p>
-<p>Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时<code>MediaPlayer</code>的状态不正确则会引发<code>IllegalStateException</code>（已经掉坑）异常。</p>
+<p>Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时<code>MediaPlayer</code>的状态不正确则会引发<code>IllegalStateException</code>（已经掉坑,后面会写一下过程）异常。</p>
 <h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><p>官网上对<a href="https://developer.android.com/reference/android/media/MediaPlayer.html#StateDiagram" target="_blank" rel="external">MediaPlayer</a>的讲解时有一个状态转换图（和官网风格有点不搭），很详细的讲解了<code>MediaPlayer</code>的状态转换，其中</p>
 <blockquote>
 <p><strong>椭圆</strong>代表MediaPlayer对象可能驻留的状态。<br><strong>弧线</strong>表示驱动MediaPlayer在各个状态之间迁移的播放控制操作。这里有两种类型的弧线。以<strong>单箭头</strong>开始的弧代表同步的方法调用,以<strong>双箭头</strong>开头的代表的弧线代表异步方法调用。</p>
@@ -347,6 +347,10 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/26/视频播放过程中的横竖屏切换/" rel="prev" title="视频播放过程中的横竖屏切换">
+                视频播放过程中的横竖屏切换 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -437,7 +441,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -454,7 +458,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -234,6 +234,136 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/26/视频播放过程中的横竖屏切换/" itemprop="url">
+                  视频播放过程中的横竖屏切换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-26T20:46:12+08:00" content="2016-05-26">
+              2016-05-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/26/视频播放过程中的横竖屏切换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/26/视频播放过程中的横竖屏切换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在优化视频播放体验，需要实现视频的横竖屏自动及手动切换,先看看交互原型图
+
+最佳体验
+
+通过点击右下角按钮可以实现横竖屏切换；
+当手机的横竖屏开关打开，可以通过旋转手机实现自动横竖屏切换；
+当手机的横竖屏开关关闭，实现同方法1。
+
+之前的实现思路是将竖屏的Activity的方向写死为竖屏，点击全屏按钮，跳转到另一个Activity实现全屏播放，这种方法是很有问题的，首先我们不能通过手势转换屏幕实现横竖屏自动切换，其次，在切换横竖屏的过程中要保证播放的连续性，我们必须要对当前的视频维护一个单一的 MediaPalyer，显然这样做太麻烦了，下面来讲第二种思路
+通过横竖屏切换，在切换过程中对页面进行适配
+关于横竖屏切换过程中Activity生命周期的变化大家可以去网上搜一搜，这里就不说了，我这边采取了是非重启Activity的横竖屏切换，也就是在AndroidManifest.xml注册A
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/26/视频播放过程中的横竖屏切换/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/22/Android-MediaPlayer状态机/" itemprop="url">
                   Android MediaPlayer状态机
                 </a>
@@ -285,10 +415,10 @@
         
           
           最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
-Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发IllegalStateException（已经掉坑）异常。
+Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发IllegalStateException（已经掉坑,后面会写一下过程）异常。
 状态图官网上对MediaPlayer的讲解时有一个状态转换图（和官网风格有点不搭），很详细的讲解了MediaPlayer的状态转换，其中
 
-椭圆代表MediaPlayer对象可能驻留的状态。弧线表示驱动MediaPlayer在各个状态之间迁移的播放控制操作。这里有两种类型的弧线。以单箭头开始的弧代表同步的方法调用,以双箭头开头的代表的弧线代表
+椭圆代表MediaPlayer对象可能驻留的状态。弧线表示驱动MediaPlayer在各个状态之间迁移的播放控制操作。这里有两种类型的弧线。以单箭头开始的弧代表同步的方法调用,以双箭头开
           ...
 
           <div class="post-more-link text-center">
@@ -1276,135 +1406,6 @@ gradle设置productFlavor方式  这种方式很早以前奇大已经推出了�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/21/2016-02-21-custom-toolbar/" itemprop="url">
-                  定制你的Toolbar
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-21T20:00:20+08:00" content="2016-02-21">
-              2016-02-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/21/2016-02-21-custom-toolbar/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/21/2016-02-21-custom-toolbar/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          相信大家对Toobar已经很熟悉了，这是android系统在5.0版本中推出的新控件,这里有有篇比较详细的介绍，不太明白的可以看看android：ToolBar详解（手把手教程）
-接下来说今天的重点，怎么定制你的Toolbar
-很多app有自己的主色(非白)，就像新建一个项目系统自动生成的默认页，如下图：
-我们来看一下布局代码
-&lt;android.support.design.widget.AppBarLayout
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;wrap_content&quot;
-android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
-
-       &lt;android.support.v7.widg
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/21/2016-02-21-custom-toolbar/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1450,7 +1451,7 @@ android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1467,7 +1468,7 @@ android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

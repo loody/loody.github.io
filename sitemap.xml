@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://loody.github.io/2016/05/26/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%A8%AA%E7%AB%96%E5%B1%8F%E5%88%87%E6%8D%A2/</loc>
+    
+    <lastmod>2016-05-29T13:54:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2016/05/22/Android-MediaPlayer%E7%8A%B6%E6%80%81%E6%9C%BA/</loc>
     
-    <lastmod>2016-05-22T10:46:03.000Z</lastmod>
+    <lastmod>2016-05-22T10:47:57.000Z</lastmod>
     
   </url>
   
@@ -86,14 +93,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -121,6 +121,20 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -128,7 +142,21 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -142,21 +170,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -177,28 +191,14 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -219,20 +219,6 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -240,7 +226,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <loc>http://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -254,7 +240,21 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -268,6 +268,13 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/categories/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -275,7 +282,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
