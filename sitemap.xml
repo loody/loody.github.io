@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://loody.github.io/2016/07/17/React-Native%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2016-07-17T11:03:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2016/04/10/%E7%94%A8RxJava%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/</loc>
+    
+    <lastmod>2016-07-07T15:06:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2016/07/03/%E5%AE%9E%E7%8E%B0%E6%BB%91%E5%8A%A8%E6%B8%90%E5%8F%98%E7%9A%84%E5%AF%BC%E8%88%AA/</loc>
     
     <lastmod>2016-07-03T14:00:23.000Z</lastmod>
@@ -93,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/04/10/%E7%94%A8RxJava%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/</loc>
-    
-    <lastmod>2016-04-10T12:31:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/about/index.html</loc>
     
     <lastmod>2016-04-04T13:41:35.000Z</lastmod>
@@ -107,28 +114,14 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -142,35 +135,21 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
+    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -184,7 +163,21 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -212,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
+    <loc>http://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -226,7 +219,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
+    <loc>http://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -240,14 +233,14 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -261,7 +254,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -275,7 +268,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -289,7 +282,21 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     

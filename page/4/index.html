@@ -234,6 +234,132 @@
             
               
                 
+                <a class="post-title-link" href="/2014/11/15/2014-11-15-about activity lauchMode/" itemprop="url">
+                  Activity的四种启动模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-11-15T00:00:00+08:00" content="2014-11-15">
+              2014-11-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/11/15/2014-11-15-about activity lauchMode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/15/2014-11-15-about activity lauchMode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前两天在开发中碰到一些Activity重用的需求，流程如下：
+MainActivity–&gt;FirstActivity–&gt;SecondActivity–&gt;LoginActivity–&gt;MainActivity
+因为MainActivity是程序的主界面，一般都将其放置栈底，不可能干掉他，但是我们又要怎么回到MainActivity而又不会重新创建它呢？那就是利用Android的启动模式，下面就来简单介绍一下。
+简介在android里，有4种activity的启动模式，分别为： 
+standard: 标准模式，一调用startActivity()方法就会产生一个新的实例。
+singleTop: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。
+singl
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/11/15/2014-11-15-about activity lauchMode/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/10/26/2014-10-26-about LayoutInflater/" itemprop="url">
                   Android LayoutInflater原理分析
                 </a>
@@ -1341,133 +1467,6 @@ ichartjs官网地址：http://www.ichartjs.com/
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="url">
-                  解决ScrollView嵌套ListView的冲突问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-07-20T00:00:00+08:00" content="2014-07-20">
-              2014-07-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近项目中遇到了一个界面，里面涉及ScrollView嵌套ListView的问题，按照正常思路，在有ListView布局的外层套一个ScrollView,发现ListView显示不全，只显示部分的Item,经过研究，有以下3种解决方案
-手动设置ListView高度经过测试发现，在xml中直接指定ListView的高度，是可以解决这个问题的，但是ListView中的数据是可变的，实际高度还需要实际测量。于是需要手动代码设置ListView高度，实现代码如下：
-
-&gt;取代ListView的LinearLayout，使之能够成功嵌套在ScrollView中
-
-    public class LinearLayoutForListView extends LinearLayout {
-        private BaseAdapter adapter;
-        private O
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/20/2014-07-20-the conflict of the ScrollView nested ListView/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1513,7 +1512,7 @@ ichartjs官网地址：http://www.ichartjs.com/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1521,7 +1520,7 @@ ichartjs官网地址：http://www.ichartjs.com/
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1530,7 +1529,7 @@ ichartjs官网地址：http://www.ichartjs.com/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://loody.github.io/2016/04/10/用RxJava实现事件总线/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值">
-<meta property="og:updated_time" content="2016-04-10T12:31:42.000Z">
+<meta property="og:updated_time" content="2016-07-07T15:06:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用RxJava实现事件总线">
 <meta name="twitter:description" content="最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值">
@@ -371,12 +371,12 @@
 </code></pre></li>
 <li><p>监听事件</p>
 <pre><code>mSubscription = RxBus.toObserverable(IncreaseEvent.class).subscribe(new Action1&lt;IncreaseEvent&gt;() {
-    @Override
-    public void call(IncreaseEvent increaseEvent) {
-        tv_increase.setText(increaseEvent.getNum() + &quot;&quot;);
-    }
-});
-</code></pre></li>
+  @Override
+  public void call(IncreaseEvent increaseEvent) {
+      tv_increase.setText(increaseEvent.getNum() + &quot;&quot;);
+  }
+</code></pre><p>  });</p>
+</li>
 </ol>
 <p>   这里有点需要注意，在生命周期结束的地方取消订阅事件，防止RxJava可能会引起的内存泄漏问题</p>
 <pre><code>   @Override
@@ -390,14 +390,14 @@ protected void onDestroy() {
 <li>单例加了双重校验锁，更多单例讲解请看<a href="http://stormzhang.com/designpattern/2016/03/27/android-design-pattern-singleton/" target="_blank" rel="external">Android设计模式之单例模式</a></li>
 <li><p>根据传递的 eventType 类型返回特定类型(eventType)的 被观察者,我们可以看下<code>ofType</code>的源码实现：</p>
 <pre><code>public final &lt;R&gt; Observable&lt;R&gt; ofType(final Class&lt;R&gt; klass) {
-    return filter(new Func1&lt;T, Boolean&gt;() {
-        @Override
-        public final Boolean call(T t) {
-            return klass.isInstance(t);
-        }
-    }).cast(klass);
-}
-</code></pre><p> 其内部就是filter+cast，filter操作符可以使你提供一个指定的测试数据项，只有通过测试的数据才会被“发射”。cast操作符可以将一个Observable转换成指定类型的Observable。</p>
+ return filter(new Func1&lt;T, Boolean&gt;() {
+     @Override
+     public final Boolean call(T t) {
+         return klass.isInstance(t);
+     }
+ }).cast(klass);
+</code></pre><p>  }</p>
+<p>其内部就是filter+cast，filter操作符可以使你提供一个指定的测试数据项，只有通过测试的数据才会被“发射”。cast操作符可以将一个Observable转换成指定类型的Observable。</p>
 </li>
 </ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="external">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
@@ -529,7 +529,7 @@ protected void onDestroy() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -537,7 +537,7 @@ protected void onDestroy() {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -546,7 +546,7 @@ protected void onDestroy() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

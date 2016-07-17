@@ -234,6 +234,130 @@
             
               
                 
+                <a class="post-title-link" href="/2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="url">
+                  实现滚动隐藏header的layout
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-11T00:00:00+08:00" content="2015-04-11">
+              2015-04-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/11/2015-04-11-viewpager-head-scroll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/2015-04-11-viewpager-head-scroll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近薄荷新版加入了圈子的功能，圈子主页效果图如下：
+
+往上滑可以隐藏header,将4个tab停留在顶部，往下滑又可以展开header,其中tab里的内容还可以实现下拉刷新，上拉加载更多
+第一个想到的是外面包一层StickyScrollViewItems，可以很快的实现tab的悬浮，但是刷新的操作就必须放在外面了，于是又外面套了层swiperefreshlayout实现刷新，由于下面的tab有两个需要刷新，所以处理起来非常麻烦的，再加上scrollview+viewpager+listview的嵌套会出现各种冲突，所以这种思路从一开始就是个错误。于是想想有没有能实现滚动隐藏header的layout的呢？于是上github一搜，果然有类似效果的开源项目，那就是接下来要介绍的ViewPagerHeaderScrollDemo
+实现原理通过自定义TouchCallbackLayout，这个类继
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/04/11/2015-04-11-viewpager-head-scroll/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/06/2015-04-06-view-TouchEvent/" itemprop="url">
                   View的事件传递
                 </a>
@@ -1387,132 +1511,6 @@ dependencies {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/15/2014-11-15-about activity lauchMode/" itemprop="url">
-                  Activity的四种启动模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-15T00:00:00+08:00" content="2014-11-15">
-              2014-11-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/11/15/2014-11-15-about activity lauchMode/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/15/2014-11-15-about activity lauchMode/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前两天在开发中碰到一些Activity重用的需求，流程如下：
-MainActivity–&gt;FirstActivity–&gt;SecondActivity–&gt;LoginActivity–&gt;MainActivity
-因为MainActivity是程序的主界面，一般都将其放置栈底，不可能干掉他，但是我们又要怎么回到MainActivity而又不会重新创建它呢？那就是利用Android的启动模式，下面就来简单介绍一下。
-简介在android里，有4种activity的启动模式，分别为： 
-standard: 标准模式，一调用startActivity()方法就会产生一个新的实例。
-singleTop: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的newInstance()方法。如果不位于栈顶，会产生一个新的实例。
-singl
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/15/2014-11-15-about activity lauchMode/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1558,7 +1556,7 @@ singl
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1566,7 +1564,7 @@ singl
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1575,7 +1573,7 @@ singl
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
