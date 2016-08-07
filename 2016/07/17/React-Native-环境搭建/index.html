@@ -57,25 +57,22 @@
 
 
 
-<meta name="description" content="开发环境配置安装Homebrew1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wget 来安装：
-通过">
+<meta name="description" content="开发环境配置安装Homebrew1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wge">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native 环境搭建">
 <meta property="og:url" content="http://loody.github.io/2016/07/17/React-Native-环境搭建/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="开发环境配置安装Homebrew1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wget 来安装：
-通过">
+<meta property="og:description" content="开发环境配置安装Homebrew1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wge">
 <meta property="og:image" content="http://loody.github.io/images/react-native-run-ios.png">
 <meta property="og:image" content="http://loody.github.io/images/react-native-android.png">
 <meta property="og:image" content="http://loody.github.io/images/react-native-ios.png">
 <meta property="og:updated_time" content="2016-07-17T12:31:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 环境搭建">
-<meta name="twitter:description" content="开发环境配置安装Homebrew1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wget 来安装：
-通过">
+<meta name="twitter:description" content="开发环境配置安装Homebrew1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+安装Note.js建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wge">
 <meta name="twitter:image" content="http://loody.github.io/images/react-native-run-ios.png">
 
 
@@ -308,23 +305,23 @@
       
 
       
-        <h2 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h2><h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h2><h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
 <h3 id="安装Note-js"><a href="#安装Note-js" class="headerlink" title="安装Note.js"></a>安装Note.js</h3><p>建议使用 Node 的版本管理器 nvm 来安装新版本的 Node.js 。<br>首先需要安装 nvm 。官方推荐的做法是通过 curl 或者 wget 来安装：</p>
-<p>通过 curl 安装<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>brew install curl  <span class="comment"># 确保安装了 curl</span></span><br><span class="line"><span class="variable">$ </span>curl -o- <span class="symbol">https:</span>/<span class="regexp">/raw.githubusercontent.com/creationix</span><span class="regexp">/nvm/v</span><span class="number">0</span>.<span class="number">29.0</span>/install.sh | bash</span><br></pre></td></tr></table></figure></p>
-<p>通过 wget 安装<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>brew install wget  <span class="comment"># 确保安装了 wget</span></span><br><span class="line"><span class="variable">$ </span>wget -qO- <span class="symbol">https:</span>/<span class="regexp">/raw.githubusercontent.com/creationix</span><span class="regexp">/nvm/v</span><span class="number">0</span>.<span class="number">29.0</span>/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<p>通过 curl 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install curl  # 确保安装了 curl</span><br><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<p>通过 wget 安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install wget  # 确保安装了 wget</span><br><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash</span><br></pre></td></tr></table></figure></p>
 <p>完成后可以试试执行 nvm –version 检查下 nvm 是否安装成功。</p>
-<p>安装 Node.js<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install <span class="keyword">node</span> <span class="title">&amp;&amp; nvm</span> alias default <span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure></p>
-<h3 id="安装watchman"><a href="#安装watchman" class="headerlink" title="安装watchman"></a>安装watchman</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span><span class="keyword">install </span>watchman</span><br></pre></td></tr></table></figure>
-<h3 id="安装-flow"><a href="#安装-flow" class="headerlink" title="安装 flow"></a>安装 flow</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span><span class="keyword">install </span>flow</span><br></pre></td></tr></table></figure>
-<h3 id="安装-React-Native"><a href="#安装-React-Native" class="headerlink" title="安装 React Native"></a>安装 React Native</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> install -g react-<span class="keyword">native</span>-cli</span><br></pre></td></tr></table></figure>
+<p>安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install node &amp;&amp; nvm alias default node</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装watchman"><a href="#安装watchman" class="headerlink" title="安装watchman"></a>安装watchman</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install watchman</span><br></pre></td></tr></table></figure>
+<h3 id="安装-flow"><a href="#安装-flow" class="headerlink" title="安装 flow"></a>安装 flow</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install flow</span><br></pre></td></tr></table></figure>
+<h3 id="安装-React-Native"><a href="#安装-React-Native" class="headerlink" title="安装 React Native"></a>安装 React Native</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
 <p>至此，React Native的开发环境就装好了</p>
 <h2 id="代码编辑环境配置"><a href="#代码编辑环境配置" class="headerlink" title="代码编辑环境配置"></a>代码编辑环境配置</h2><h3 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h3><p>目前选择的是 Atom＋Nuclide<br>其他选型请参考这边文章 <a href="http://www.infoq.com/cn/articles/react-native-ide" target="_blank" rel="external">React Native 开发之 IDE 选型和配置</a></p>
 <h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p><a href="https://github.com/facebook/react-devtools" target="_blank" rel="external">React-devtools</a></p>
 <h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><blockquote>
 <p>请自备梯子</p>
 </blockquote>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>react-native init Project21</span><br><span class="line"><span class="variable">$ </span>cd Project21</span><br></pre></td></tr></table></figure>
-<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><h3 id="使用Android手机进行调试"><a href="#使用Android手机进行调试" class="headerlink" title="使用Android手机进行调试"></a>使用Android手机进行调试</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-<span class="keyword">native</span> run-android</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ react-native init Project21</span><br><span class="line">$ cd Project21</span><br></pre></td></tr></table></figure>
+<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><h3 id="使用Android手机进行调试"><a href="#使用Android手机进行调试" class="headerlink" title="使用Android手机进行调试"></a>使用Android手机进行调试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native run-android</span><br></pre></td></tr></table></figure>
 <p>这里有几点需要注意的是</p>
 <ol>
 <li><code>react-native run-android</code> 命令只在手机还没有安装项目时运行，然后就不再需要运行这个命令了，而是直接在手机界面上打开项目</li>
@@ -366,6 +363,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/07/Android-Wear/" rel="prev" title="Android Wear">
+                Android Wear <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -456,7 +457,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -464,7 +465,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -473,7 +474,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
