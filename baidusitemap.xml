@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://loody.github.io/2016/08/21/Retrofit%E5%B8%B8%E8%A7%84%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2016-08-21T15:42:52.000Z</lastmod>
+    <lastmod>2016-08-21T16:06:49.000Z</lastmod>
     <data>
         <display>
         <title>Retrofit常规配置</title>
@@ -15,6 +15,9 @@
          
          
            
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
         </display>
     </data>
     </url>
@@ -500,6 +503,26 @@
 
     
   <url>
+    <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoordinatorLayout的使用场景</title>
+        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        
+        <tag>CoordinatorLayout</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -532,26 +555,6 @@
         <tag>Smartbar</tag>
          
         <tag>适配</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>CoordinatorLayout的使用场景</title>
-        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
-        
-        <tag>CoordinatorLayout</tag>
          
          
            
@@ -650,26 +653,6 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>NinePatch的制作与使用</title>
-        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
-        
-        <tag>NinePatch</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -688,14 +671,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>图表库MPAndroidChart简介</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
+        <title>NinePatch的制作与使用</title>
+        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
+        <tag>NinePatch</tag>
          
          
            
@@ -730,14 +713,34 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Android LayoutInflater原理分析</title>
-        <pubTime>2014-10-25T16:00:00.000Z</pubTime>
+        <title>图表库MPAndroidChart简介</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
         
-        <tag>LayoutInflater</tag>
+        <tag>MPAndroidChart</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        
+        <tag>占位符</tag>
          
          
            
@@ -772,6 +775,26 @@
 
     
   <url>
+    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android LayoutInflater原理分析</title>
+        <pubTime>2014-10-25T16:00:00.000Z</pubTime>
+        
+        <tag>LayoutInflater</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -792,14 +815,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        <title>微信支付需要注意的几个问题</title>
+        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
-        <tag>占位符</tag>
+        <tag>微信支付</tag>
          
          
            
@@ -834,6 +857,24 @@
 
     
   <url>
+    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(二)</title>
+        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -843,44 +884,6 @@
         
         <tag>Canvas</tag>
          
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>微信支付需要注意的几个问题</title>
-        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
-        
-        <tag>微信支付</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(二)</title>
-        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
-        
          
            
              
