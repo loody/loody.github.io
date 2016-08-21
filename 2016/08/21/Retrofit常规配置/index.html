@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MediaPlayer," />
+  <meta name="keywords" content="retrofit," />
 
 
 
@@ -57,21 +57,22 @@
 
 
 
-<meta name="description" content="最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
-Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发Ill">
+<meta name="description" content="最近在新项目中集成了retrofit这套网络框架，在这里记录下它的一些常规设置，先列出retrofit的版本依赖及其他依赖,我们知道retrofit的底层网络实现是基于okhttp的，这里我们引用的是最新的okhttp3
+compile &amp;apos;com.squareup.retrofit2:retrofit:2.1.0&amp;apos; 
+compile &amp;apos;com.squareup.ret">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android MediaPlayer状态机">
-<meta property="og:url" content="http://loody.github.io/2016/05/22/Android-MediaPlayer状态机/index.html">
+<meta property="og:title" content="Retrofit常规配置">
+<meta property="og:url" content="http://loody.github.io/2016/08/21/Retrofit常规配置/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
-Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发Ill">
-<meta property="og:image" content="http://loody.github.io/images/MediaPlayer state.jpg">
-<meta property="og:updated_time" content="2016-05-22T10:47:57.000Z">
+<meta property="og:description" content="最近在新项目中集成了retrofit这套网络框架，在这里记录下它的一些常规设置，先列出retrofit的版本依赖及其他依赖,我们知道retrofit的底层网络实现是基于okhttp的，这里我们引用的是最新的okhttp3
+compile &amp;apos;com.squareup.retrofit2:retrofit:2.1.0&amp;apos; 
+compile &amp;apos;com.squareup.ret">
+<meta property="og:updated_time" content="2016-08-21T15:42:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android MediaPlayer状态机">
-<meta name="twitter:description" content="最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
-Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发Ill">
-<meta name="twitter:image" content="http://loody.github.io/images/MediaPlayer state.jpg">
+<meta name="twitter:title" content="Retrofit常规配置">
+<meta name="twitter:description" content="最近在新项目中集成了retrofit这套网络框架，在这里记录下它的一些常规设置，先列出retrofit的版本依赖及其他依赖,我们知道retrofit的底层网络实现是基于okhttp的，这里我们引用的是最新的okhttp3
+compile &amp;apos;com.squareup.retrofit2:retrofit:2.1.0&amp;apos; 
+compile &amp;apos;com.squareup.ret">
 
 
 
@@ -89,7 +90,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
   };
 </script>
 
-  <title> Android MediaPlayer状态机 | loody's blog </title>
+  <title> Retrofit常规配置 | loody's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +239,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
             
             
               
-                Android MediaPlayer状态机
+                Retrofit常规配置
               
             
           </h1>
@@ -250,8 +251,8 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-22T17:33:57+08:00" content="2016-05-22">
-              2016-05-22
+            <time itemprop="dateCreated" datetime="2016-08-21T21:25:51+08:00" content="2016-08-21">
+              2016-08-21
             </time>
           </span>
 
@@ -261,8 +262,8 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/22/Android-MediaPlayer状态机/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/22/Android-MediaPlayer状态机/" itemprop="commentsCount"></span>
+                <a href="/2016/08/21/Retrofit常规配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/21/Retrofit常规配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -284,39 +285,116 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
       
 
       
-        <p>最近在做视频播放相关的功能，主要涉及<code>MediaPlayer</code>，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中<code>MediaPlayer</code>的这些状态是怎么转换的</p>
-<p>Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时<code>MediaPlayer</code>的状态不正确则会引发<code>IllegalStateException</code>（已经掉坑,后面会写一下过程）异常。</p>
-<h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><p>官网上对<a href="https://developer.android.com/reference/android/media/MediaPlayer.html#StateDiagram" target="_blank" rel="external">MediaPlayer</a>的讲解时有一个状态转换图（和官网风格有点不搭），很详细的讲解了<code>MediaPlayer</code>的状态转换，其中</p>
-<blockquote>
-<p><strong>椭圆</strong>代表MediaPlayer对象可能驻留的状态。<br><strong>弧线</strong>表示驱动MediaPlayer在各个状态之间迁移的播放控制操作。这里有两种类型的弧线。以<strong>单箭头</strong>开始的弧代表同步的方法调用,以<strong>双箭头</strong>开头的代表的弧线代表异步方法调用。</p>
-</blockquote>
-<p><img src="/images/MediaPlayer state.jpg" alt=""></p>
-<p>下面分别解释一下图中的每个状态</p>
-<ul>
-<li><p><strong>Idle</strong>：当使用new()方法创建一个MediaPlayer对象或者调用了其reset()方法时，该MediaPlayer对象处于idle状态。这两种方法的一个重要差别就是：如果在这个状态下调用了getDuration()等方法（相当于调用时机不正确），通过reset()方法进入idle状态的话会触发OnErrorListener.onError()，并且MediaPlayer会进入Error状态；如果是新创建的MediaPlayer对象，则并不会触发onError(),也不会进入Error状态。</p>
-</li>
-<li><p><strong>End</strong>：通过release()方法可以进入End状态，只要MediaPlayer对象不再被使用，就应当尽快将其通过release()方法释放掉，以释放相关的软硬件组件资源，这其中有些资源是只有一份的（相当于临界资源）。如果MediaPlayer对象进入了End状态，则不会在进入任何其他状态了。</p>
-</li>
-<li><p><strong>Initialized</strong>：这个状态比较简单，MediaPlayer调用setDataSource()方法就进入Initialized状态，表示此时要播放的文件已经设置好了。</p>
-</li>
-<li><p><strong>Prepared</strong>：初始化完成之后还需要通过调用prepare()或prepareAsync()方法，这两个方法一个是同步的一个是异步的，只有进入Prepared状态，才表明MediaPlayer到目前为止都没有错误，可以进行文件播放。</p>
-</li>
-<li><p><strong>Preparing</strong>：这个状态比较好理解，主要是和prepareAsync()配合，如果异步准备完成，会触发OnPreparedListener.onPrepared()，进而进入Prepared状态。</p>
-</li>
-<li><p><strong>Started</strong>：显然，MediaPlayer一旦准备好，就可以调用start()方法，这样MediaPlayer就处于Started状态，这表明MediaPlayer正在播放文件过程中。可以使用isPlaying()测试MediaPlayer是否处于了Started状态。如果播放完毕，而又设置了循环播放，则MediaPlayer仍然会处于Started状态，类似的，如果在该状态下MediaPlayer调用了seekTo()或者start()方法均可以让MediaPlayer停留在Started状态。</p>
-</li>
-<li><p><strong>Paused</strong>：Started状态下MediaPlayer调用pause()方法可以暂停MediaPlayer，从而进入Paused状态，MediaPlayer暂停后再次调用start()则可以继续MediaPlayer的播放，转到Started状态，暂停状态时可以调用seekTo()方法，这是不会改变状态的。</p>
-</li>
-<li><p><strong>Stop</strong>：Started或者Paused状态下均可调用stop()停止MediaPlayer，而处于Stop状态的MediaPlayer要想重新播放，需要通过prepareAsync()和prepare()回到先前的Prepared状态重新开始才可以。</p>
-</li>
-<li><p><strong>PlaybackCompleted</strong>：文件正常播放完毕，而又没有设置循环播放的话就进入该状态，并会触发OnCompletionListener的onCompletion()方法。此时可以调用start()方法重新从头播放文件，也可以stop()停止MediaPlayer，或者也可以seekTo()来重新定位播放位置。</p>
-</li>
-<li><p><strong>Error</strong>：如果由于某种原因MediaPlayer出现了错误，会触发OnErrorListener.onError()事件，此时MediaPlayer即进入Error状态，及时捕捉并妥善处理这些错误是很重要的，可以帮助我们及时释放相关的软硬件资源，也可以改善用户体验。通过setOnErrorListener(android.media.MediaPlayer.OnErrorListener)可以设置该监听器。如果MediaPlayer进入了Error状态，可以通过调用reset()来恢复，使得MediaPlayer重新返回到Idle状态。</p>
-</li>
-</ul>
-<p>MediaPlayer对象会占用很有用的系统资源，因此在使用它的时候要应该特别小心，持有MediaPlayer对象的时间不应该比需要它的时间长，不再需要使用它的时候应该调用release()方法及时释放，保证分配给它的资源能够正确释放。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html#StateDiagram" target="_blank" rel="external">MediaPlayer State Diagram</a></p>
-<p><a href="http://blog.csdn.net/thl789/article/details/7370438" target="_blank" rel="external">http://blog.csdn.net/thl789/article/details/7370438</a></p>
+        <p>最近在新项目中集成了retrofit这套网络框架，在这里记录下它的一些常规设置，先列出retrofit的版本依赖及其他依赖,我们知道retrofit的底层网络实现是基于okhttp的，这里我们引用的是最新的okhttp3</p>
+<pre><code>compile &apos;com.squareup.retrofit2:retrofit:2.1.0&apos; 
+compile &apos;com.squareup.retrofit2:converter-gson:2.1.0&apos; 
+compile &apos;com.squareup.retrofit2:adapter-rxjava:2.1.0&apos; 
+compile &apos;com.squareup.okhttp3:okhttp:3.3.1&apos; 
+compile &apos;com.squareup.okhttp3:logging-interceptor:3.3.1&apos; 
+compile &apos;io.reactivex:rxandroid:1.1.0&apos;
+</code></pre><h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><pre><code>public class HeadInterceptor implements Interceptor {
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request original = chain.request();
+        Request request = original.newBuilder()
+                .header(&quot;app-version&quot;, &quot;&quot;)
+                .header(&quot;app-device&quot;, &quot;Android&quot;)
+                .header(&quot;os-version&quot;, &quot;&quot;)
+                .header(&quot;phone-model&quot;, &quot;&quot;)
+                .header(&quot;Accept&quot;, &quot;application/json&quot;)
+                .header(&quot;User-Agent&quot;, &quot;Android/retrofit&quot;)
+                .header(&quot;channel&quot;, &quot;&quot;)
+                .header(&quot;token&quot;, PrefUtils.getToken())
+                .method(original.method(), original.body())
+                .build();
+        return chain.proceed(request);
+    }
+}
+</code></pre><h3 id="缓存设置"><a href="#缓存设置" class="headerlink" title="缓存设置"></a>缓存设置</h3><pre><code>Cache cache=new Cache(FileUtils.getCacheDir(), 50 * 1024 * 1024)//设置50M的文件缓存大小
+public class CacheInterceptor implements Interceptor {
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+        if (!NetworkUtils.isNetworkAvailable()) {
+            request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_CACHE)
+                    .build();
+        }
+        Response response = chain.proceed(request);
+        if (NetworkUtils.isNetworkAvailable()) {
+            int maxAge = 0;
+            // 有网络时 设置缓存超时时间0个小时
+            response.newBuilder()
+                    .header(&quot;Cache-Control&quot;, &quot;public, max-age=&quot; + maxAge)
+                    .build();
+        } else {
+            // 无网络时，设置超时为4周
+            int maxStale = 60 * 60 * 24 * 28;
+            response.newBuilder()
+                    .header(&quot;Cache-Control&quot;, &quot;public, only-if-cached, max-stale=&quot; + maxStale)
+                    .build();
+        }
+        return chain.proceed(request);
+    }
+}
+</code></pre><h3 id="公共参数"><a href="#公共参数" class="headerlink" title="公共参数"></a>公共参数</h3><pre><code>public class CommonParameterInterceptor implements Interceptor {
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request originalRequest = chain.request();
+        HttpUrl modifiedUrl = originalRequest.url().newBuilder()
+                // Provide your custom parameter here
+                .addQueryParameter(&quot;token&quot;, PrefUtils.getToken())
+                .addQueryParameter(&quot;app_version&quot;, &quot;1.0.0&quot;)
+                //...
+                .build();
+        Request request = originalRequest.newBuilder().url(modifiedUrl).build();
+        return chain.proceed(request);
+
+    }
+}
+</code></pre><p>最后看完整的设置</p>
+<pre><code>private &lt;S&gt; S createService(Class&lt;S&gt; serviceClass) {
+    Retrofit retrofit = getBuilder().client(getHttpClient()).build();
+    return retrofit.create(serviceClass);
+}
+
+private Retrofit.Builder getBuilder() {
+    Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+    return builder;
+}
+
+private OkHttpClient getHttpClient() {
+   // log用拦截器
+   HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+   // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
+   if (BuildConfig.DEBUG) {
+       logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+   } else {
+       logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+   }
+    return new OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .addInterceptor(new HeadInterceptor())
+            .addInterceptor(new CacheInterceptor())
+            .addInterceptor(new CommonParameterInterceptor())
+            .cache(new Cache(FileUtils.getCacheDir(), 10 * 1024 * 1024))
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            })
+            .build();
+}
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wuxiaolong.me/2016/06/18/retrofits/" target="_blank" rel="external">http://wuxiaolong.me/2016/06/18/retrofits/</a><br><a href="http://zhaoshanshan.me/2015/10/12/Retrofit2-%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97/" target="_blank" rel="external">http://zhaoshanshan.me/2015/10/12/Retrofit2-%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97/</a></p>
 
       
     </div>
@@ -331,7 +409,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
       
         <div class="post-tags">
           
-            <a href="/tags/MediaPlayer/" rel="tag">#MediaPlayer</a>
+            <a href="/tags/retrofit/" rel="tag">#retrofit</a>
           
         </div>
       
@@ -340,17 +418,13 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/08/python批量修改文件名/" rel="next" title="python批量修改文件名">
-                <i class="fa fa-chevron-left"></i> python批量修改文件名
+              <a href="/2016/08/07/Android-Wear/" rel="next" title="Android Wear">
+                <i class="fa fa-chevron-left"></i> Android Wear
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/26/视频播放过程中的横竖屏切换/" rel="prev" title="视频播放过程中的横竖屏切换">
-                视频播放过程中的横竖屏切换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -365,10 +439,10 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/22/Android-MediaPlayer状态机/"
-     data-title="Android MediaPlayer状态机"
+        <div class="ds-share flat" data-thread-key="2016/08/21/Retrofit常规配置/"
+     data-title="Retrofit常规配置"
      data-content=""
-     data-url="http://loody.github.io/2016/05/22/Android-MediaPlayer状态机/">
+     data-url="http://loody.github.io/2016/08/21/Retrofit常规配置/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -395,8 +469,8 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/22/Android-MediaPlayer状态机/"
-           data-title="Android MediaPlayer状态机" data-url="http://loody.github.io/2016/05/22/Android-MediaPlayer状态机/">
+      <div class="ds-thread" data-thread-key="2016/08/21/Retrofit常规配置/"
+           data-title="Retrofit常规配置" data-url="http://loody.github.io/2016/08/21/Retrofit常规配置/">
       </div>
     
   </div>
@@ -509,7 +583,7 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#状态图"><span class="nav-number">1.</span> <span class="nav-text">状态图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">1.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存设置"><span class="nav-number">2.</span> <span class="nav-text">缓存设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公共参数"><span class="nav-number">3.</span> <span class="nav-text">公共参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

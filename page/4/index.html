@@ -234,6 +234,138 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/14/2014-12-14-string-format/" itemprop="url">
+                  android中的常见的占位符及转义字符
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-14T00:00:00+08:00" content="2014-12-14">
+              2014-12-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/14/2014-12-14-string-format/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/14/2014-12-14-string-format/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          常见的几种占位符 String.format
+%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
+%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
+%s: 字符串类型，如：”ljq”
+%b: 布尔类型，如：true
+%%: 百分比类型，如：％
+%n: 换行符
+
+对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分组成，其中%[index$]的含义我们上面已经讲过，[最小宽度]的含义也很好理解，就是最终该整数转化的字符串最少包含多少位数字。我们来看看剩下2个部分的含义吧：
+标识
+‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用
+‘#’    只适用于8进制和16进制，8进制时在结果前面增加一个0，16进制时在结果前面增加0x
+‘+’    结果总是包括一个符号（一般情况下只适用于10进制，若对
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/14/2014-12-14-string-format/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/07/2014-12-07-about-gradle dependency management/" itemprop="url">
                   Gradle如何声明所需的依赖以及依赖的分类（分组）
                 </a>
@@ -1348,128 +1480,6 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/10/2014-08-10-base station positioning/" itemprop="url">
-                  android的基站定位
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-10T00:00:00+08:00" content="2014-08-10">
-              2014-08-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/10/2014-08-10-base station positioning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/10/2014-08-10-base station positioning/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          关于基站定位一般应用于手机用户，手机基站定位服务又叫做移动位置服务（LBS——Location Based Service），它是通过电信移动运营商的网络（如GSM网）获取移动终端用户的位置信息（经纬度坐标），在电子地图平台的支持下，为用户提供相应服务的一种增值业务，例如目前中国移动动感地带提供的动感位置查询服务等。
-需求调研由于之前公司项目需要用到手机定位，公司采用的百度定位，对于百度定位，大家可以去百度开放平台查看API文档，地址是：http://developer.baidu.com/map/geosdk.htm，在此就不多说，今天主要介绍基站定位的流程及一些注意事项，由于在APP使用的过程中，有很多客户反应百度定位失败的情况，为了解决这一问题，公司决定采用了外链定位策略–基站定位
-基站定位原理首先,为什么移动和联通要疯狂建设基站呢?为什么在野外比较荒凉的地方,手机没有信号呢?那就是
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/10/2014-08-10-base station positioning/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1515,7 +1525,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1532,7 +1542,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -234,6 +234,112 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/21/Retrofit常规配置/" itemprop="url">
+                  Retrofit常规配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-21T21:25:51+08:00" content="2016-08-21">
+              2016-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/21/Retrofit常规配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/21/Retrofit常规配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在新项目中集成了retrofit这套网络框架，在这里记录下它的一些常规设置，先列出retrofit的版本依赖及其他依赖,我们知道retrofit的底层网络实现是基于okhttp的，这里我们引用的是最新的okhttp3
+compile &apos;com.squareup.retrofit2:retrofit:2.1.0&apos; 
+compile &apos;com.squareup.retrofit2:converter-gson:2.1.0&apos; 
+compile &apos;com.squareup.retrofit2:adapter-rxjava:2.1.0&apos; 
+compile &apos;com.squareup.okhttp3:okhttp:3.3.1&apos; 
+compile &apos;com.squareup.okhttp3:logging-in
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/21/Retrofit常规配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/07/Android-Wear/" itemprop="url">
                   Android Wear
                 </a>
@@ -1299,108 +1405,6 @@ Layout文件跟之前有很大的不同，我们先看
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/10/用RxJava实现事件总线/" itemprop="url">
-                  用RxJava实现事件总线
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-10T19:08:48+08:00" content="2016-04-10">
-              2016-04-10
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/10/用RxJava实现事件总线/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/10/用RxJava实现事件总线/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近在升级美恰SDK的过程中，客服妹子想要在app中提示用户的未读消息数，以方便更快的给到用户反馈，于是clone了他们的demo看了一下，看完之后觉得很震惊，因为他们用的一些技术都是目前比较火的库，包括rxjava,retrfit,okhttp,leakcanary,glide,picasso等等，像他们这种第三方服务商，用户的多样性还是很大的，但是他们也都毅然地选择了拥抱新技术，我觉得这是很值得学习和借鉴的。
-回到刚刚的需求，在app中获取用户的未读消息数，我们在拿到消息数后怎么通知呢，这就要用到消息通知机制了，有人选择Android原生的android.database.Observable，也有人选择EventBus,或者otto，大家用的比较多的应该是EventBus吧，我在知乎上看到以前关于RxJava和EventBus的区别？，可以参读一下，大家支持使用Rxjava的还是占多
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/10/用RxJava实现事件总线/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1446,7 +1450,7 @@ Layout文件跟之前有很大的不同，我们先看
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1463,7 +1467,7 @@ Layout文件跟之前有很大的不同，我们先看
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

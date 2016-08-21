@@ -234,6 +234,135 @@
             
               
                 
+                <a class="post-title-link" href="/2015/04/26/2015-04-26-recycleview-cardview/" itemprop="url">
+                  RecyclerView、CardView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-26T00:00:00+08:00" content="2015-04-26">
+              2015-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/26/2015-04-26-recycleview-cardview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/26/2015-04-26-recycleview-cardview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Android L的support library中包含了两个新的组件（RecyclerView和CardView），他们可以用于显示复杂的布局而且都默认采用了Material的风格。
+RecyclerView很多人将它跟ListView对比，说它升级版的ListView,其实它可以做的更多，比如GridView也可以用它来代替，还比如listView中item的样式有多种，也可以通过它来实现，拓展性很强，这里只是简单介绍下它们的使用方法，就以薄荷的收货地址为例，没用RecyclerView的样子如下图：
+
+使用起来很简单
+
+添加依赖
+compile &apos;com.android.support:recyclerview-v7:21.0.3&apos;
+compile &apos;com.android.support:cardview-v7:21.0.3&apos;
+
+添加xml文
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/04/26/2015-04-26-recycleview-cardview/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/16/2015-04-16-http缓存/" itemprop="url">
                   HTTP缓存机制
                 </a>
@@ -1390,138 +1519,6 @@ so top=height(View)+height(div)
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/14/2014-12-14-string-format/" itemprop="url">
-                  android中的常见的占位符及转义字符
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-14T00:00:00+08:00" content="2014-12-14">
-              2014-12-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/14/2014-12-14-string-format/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/14/2014-12-14-string-format/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          常见的几种占位符 String.format
-%d: 整数类型(十进制)，如：99，其中%04d表示在前面补0，即0099
-%f: 浮点类型，如：99.99 其中%.2f表示保留两位小数
-%s: 字符串类型，如：”ljq”
-%b: 布尔类型，如：true
-%%: 百分比类型，如：％
-%n: 换行符
-
-对整数进行格式化：%[index$][标识][最小宽度]转换方式我们可以看到，格式化字符串由4部分组成，其中%[index$]的含义我们上面已经讲过，[最小宽度]的含义也很好理解，就是最终该整数转化的字符串最少包含多少位数字。我们来看看剩下2个部分的含义吧：
-标识
-‘-‘    在最小宽度内左对齐，不可以与“用0填充”同时使用
-‘#’    只适用于8进制和16进制，8进制时在结果前面增加一个0，16进制时在结果前面增加0x
-‘+’    结果总是包括一个符号（一般情况下只适用于10进制，若对
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/14/2014-12-14-string-format/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1567,7 +1564,7 @@ so top=height(View)+height(div)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1584,7 +1581,7 @@ so top=height(View)+height(div)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
