@@ -234,6 +234,127 @@
             
               
                 
+                <a class="post-title-link" href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/" itemprop="url">
+                  FragmentPagerAdapter与FragmentStatePagerAdapter的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-18T00:00:00+08:00" content="2014-08-18">
+              2014-08-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+           之前在项目开发中，要实现一个图片的轮播功能，我的实现思路是ViewPager+Fragment,我使用FragmentPagerAdapter来处理多 Fragment 页面的横向滑动。不过我碰到了一个问题，即当 Fragment 对应的数据集发生改变时，我希望能够通过调用 mAdapter.notifyDataSetChanged()来触发 Fragment 页面使用新的数据调整或重新生成其内容，可是当我调用 notifyDataSetChanged() 后，发现什么都没发生,于是去查看源码``
+##【ViewPager】ViewPager 如其名所述，是负责翻页的一个 View。准确说是一个 ViewGroup，包含多个 View 页，在手指横向滑动屏幕时，其负责对 View 进行切换。为了生成这些 View 页，需要提供一个 PagerAdapter 来进行和数据绑定以及生成最终的
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/08/10/2014-08-10-base station positioning/" itemprop="url">
                   android的基站定位
                 </a>
@@ -754,7 +875,7 @@ Flyme OS是魅族公司基于Android4.0系统深度定制的手机操作系统�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -771,7 +892,7 @@ Flyme OS是魅族公司基于Android4.0系统深度定制的手机操作系统�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

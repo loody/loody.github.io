@@ -234,6 +234,135 @@
             
               
                 
+                <a class="post-title-link" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="url">
+                  WebViewClient和WebChromeClient的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-03T00:00:00+08:00" content="2015-05-03">
+              2015-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/03/2015-05-03-webviewclient-chromeclient/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          WebViewClientWebViewClient主要帮助WebView处理各种通知、请求事件等，比较常用的方法有
+public boolean shouldOverrideUrlLoading(WebView view, String url) 
+这个方法有以下三种情况：
+
+若没有设置 WebViewClient 则在点击链接之后由系统处理该 url，通常是使用浏览器打开或弹出浏览器选择对话框。
+若设置 WebViewClient 且该方法返回 true ，则说明由应用的代码处理该 url，WebView 不处理。薄荷现在很多自定义协议就属于这种情况
+若设置 WebViewClient 且该方法返回 false，则说明由 WebView 处理该 url，即用 WebView 加载该 url。    
+
+
+public void onPageStarted(WebView view, S
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/26/2015-04-26-recycleview-cardview/" itemprop="url">
                   RecyclerView、CardView
                 </a>
@@ -1386,139 +1515,6 @@ so top=height(View)+height(div)
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/21/2014-12-21-weixin-pay/" itemprop="url">
-                  微信支付需要注意的几个问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-21T00:00:00+08:00" content="2014-12-21">
-              2014-12-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/21/2014-12-21-weixin-pay/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/21/2014-12-21-weixin-pay/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          上周在项目中增加了支持微信支付的功能，遇到了不少问题，现将其mark如下
-微信支付流程
-获取access_token() 这步需要用到APP_ID 和 APP_SECRET，需要在微信开放平台注册应用获得
-
-生成预支付订单 
-
-调起微信支付
-
-支付完成后
- 微信会回调 WXPayEntryActivity 的public void onResp(BaseResp resp)方法，所以后续操作，放在这个回调函数中操作就可以了。
- resp.errCode== 0 ：表示支付成功
- resp.errCode== -1 ：表示支付失败
- resp.errCode== -2 ：表示取消支付
-具体步骤大家可以去微信开放平台下载demo文档查看，地址是：https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_a
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/21/2014-12-21-weixin-pay/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1564,7 +1560,7 @@ so top=height(View)+height(div)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1581,7 +1577,7 @@ so top=height(View)+height(div)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

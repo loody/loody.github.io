@@ -234,6 +234,139 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/21/2014-12-21-weixin-pay/" itemprop="url">
+                  微信支付需要注意的几个问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-21T00:00:00+08:00" content="2014-12-21">
+              2014-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/21/2014-12-21-weixin-pay/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/21/2014-12-21-weixin-pay/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          上周在项目中增加了支持微信支付的功能，遇到了不少问题，现将其mark如下
+微信支付流程
+获取access_token() 这步需要用到APP_ID 和 APP_SECRET，需要在微信开放平台注册应用获得
+
+生成预支付订单 
+
+调起微信支付
+
+支付完成后
+ 微信会回调 WXPayEntryActivity 的public void onResp(BaseResp resp)方法，所以后续操作，放在这个回调函数中操作就可以了。
+ resp.errCode== 0 ：表示支付成功
+ resp.errCode== -1 ：表示支付失败
+ resp.errCode== -2 ：表示取消支付
+具体步骤大家可以去微信开放平台下载demo文档查看，地址是：https://open.weixin.qq.com/paymch/readtemplate?t=open/resource/app_wx_pay_a
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/21/2014-12-21-weixin-pay/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/14/2014-12-14-string-format/" itemprop="url">
                   android中的常见的占位符及转义字符
                 </a>
@@ -1359,127 +1492,6 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/" itemprop="url">
-                  FragmentPagerAdapter与FragmentStatePagerAdapter的区别
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-18T00:00:00+08:00" content="2014-08-18">
-              2014-08-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           之前在项目开发中，要实现一个图片的轮播功能，我的实现思路是ViewPager+Fragment,我使用FragmentPagerAdapter来处理多 Fragment 页面的横向滑动。不过我碰到了一个问题，即当 Fragment 对应的数据集发生改变时，我希望能够通过调用 mAdapter.notifyDataSetChanged()来触发 Fragment 页面使用新的数据调整或重新生成其内容，可是当我调用 notifyDataSetChanged() 后，发现什么都没发生,于是去查看源码``
-##【ViewPager】ViewPager 如其名所述，是负责翻页的一个 View。准确说是一个 ViewGroup，包含多个 View 页，在手指横向滑动屏幕时，其负责对 View 进行切换。为了生成这些 View 页，需要提供一个 PagerAdapter 来进行和数据绑定以及生成最终的
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1525,7 +1537,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1542,7 +1554,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
