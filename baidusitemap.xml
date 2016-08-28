@@ -5,10 +5,10 @@
     
   <url>
     <loc>http://loody.github.io/2016/08/28/RxJava%E4%B8%AD%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%BB%84%E5%90%88%E7%9A%84%E5%A4%8D%E7%94%A8%E5%88%A9%E5%99%A8compose/</loc>
-    <lastmod>2016-08-28T13:40:04.000Z</lastmod>
+    <lastmod>2016-08-28T13:49:40.000Z</lastmod>
     <data>
         <display>
-        <title>RxJava中操作符的重用利器compose()</title>
+        <title>RxJava中操作符组合的复用利器compose()</title>
         <pubTime>2016-08-28T11:28:08.000Z</pubTime>
         
         <tag>RxJava</tag>
@@ -399,14 +399,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>实现滚动隐藏header的layout</title>
+        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>Scrollable</tag>
          
          
            
@@ -419,14 +419,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>实现滚动隐藏header的layout</title>
-        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
         
-        <tag>Scrollable</tag>
+        <tag>View的事件传递</tag>
          
          
            
@@ -481,14 +481,40 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>ichartjs在android应用中的使用</title>
-        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
+        <title>解决ScrollView嵌套ListView的冲突问题</title>
+        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
         
-        <tag>ichartjs</tag>
+        <tag>ScrollView</tag>
+         
+        <tag>ListView</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于魅族SmartBar的适配1</title>
+        <pubTime>2014-07-11T16:00:00.000Z</pubTime>
+        
+        <tag>魅族</tag>
+         
+        <tag>Smartbar</tag>
+         
+        <tag>适配</tag>
          
          
            
@@ -541,40 +567,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>解决ScrollView嵌套ListView的冲突问题</title>
-        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
+        <title>ichartjs在android应用中的使用</title>
+        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
         
-        <tag>ScrollView</tag>
-         
-        <tag>ListView</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于魅族SmartBar的适配1</title>
-        <pubTime>2014-07-11T16:00:00.000Z</pubTime>
-        
-        <tag>魅族</tag>
-         
-        <tag>Smartbar</tag>
-         
-        <tag>适配</tag>
+        <tag>ichartjs</tag>
          
          
            
@@ -653,6 +653,26 @@
 
     
   <url>
+    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>NinePatch的制作与使用</title>
+        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
+        
+        <tag>NinePatch</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -671,14 +691,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>NinePatch的制作与使用</title>
-        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
+        <title>图表库MPAndroidChart简介</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
         
-        <tag>NinePatch</tag>
+        <tag>MPAndroidChart</tag>
          
          
            
@@ -713,14 +733,16 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>图表库MPAndroidChart简介</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
          
          
            
@@ -773,16 +795,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
         
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
+        <tag>占位符</tag>
          
          
            
@@ -803,26 +823,6 @@
         <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
         <tag>微信支付</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
-        
-        <tag>占位符</tag>
          
          
            
