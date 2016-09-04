@@ -234,6 +234,117 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/24/对ThreadLocal的理解/" itemprop="url">
+                  对ThreadLocal的理解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-24T16:41:47+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/24/对ThreadLocal的理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/对ThreadLocal的理解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          之前在分析Handler的工作原理的时候，在Looper类中有这么一段代码，当时就不怎么理解
+static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
+  ...
+
+private static void prepare(boolean quitAllowed) {
+    if (sThreadLocal.get() != null) {
+        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
+    }
+    sThreadLocal.set(new Looper(quitAllowed));
+}
+这个ThreadLocal是用来干嘛的呢？下面就
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/24/对ThreadLocal的理解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/17/Data-Binding-实践/" itemprop="url">
                   Data Binding 实践
                 </a>
@@ -1288,138 +1399,6 @@ newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="url">
-                  高亮显示滚轮控件WheelView选中项
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-07T00:00:00+08:00" content="2015-06-07">
-              2015-06-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先看效果图
-
-本示例基于开源项目android-wheel修改，这个项目已经开源很早，相信很多人也已用过了，最近项目需要将当前选中的item高亮显示，现将我采用的方法分享一下
-我们显示的滚轮一般就两种类型（文字或者数字），对应的Adapter分别是ArrayWheelAdapter和NumericWheelAdapter，我们只需要重写这两个Adapter即可
-文字类型:
-public class UnitArrayWheelAdapter extends ArrayWheelAdapter&lt;String&gt; {
-    // Index of current item
-    int currentItem;
-    // Index of item to be highlighted
-    int currentValue;
-
-    /**
-     * Construc
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1465,7 +1444,7 @@ public class UnitArrayWheelAdapter extends ArrayWheelAdapter&lt;String&gt; {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1482,7 +1461,7 @@ public class UnitArrayWheelAdapter extends ArrayWheelAdapter&lt;String&gt; {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

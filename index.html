@@ -234,6 +234,130 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/04/Realm-java-实战/" itemprop="url">
+                  Realm Java 使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T20:35:20+08:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/Realm-java-实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/Realm-java-实战/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          需求由于项目的定位是工具，所以需要采用纯离线方式实现，这对客户端的开发者来说，无疑是一个大麻烦，因为还要涉及到数据的保存和同步，没办法，项目需要，只能开干
+Android ORM 框架对比项目规划的时间较短，没时间去自己实现一个数据库，好在现在已经有很多开源的ORM框架，下面这个网站是介绍目前比较流行的开源的ORM框架,地址是https://android.libhunt.com/categories/1414-orm,这里，我选择了 Realm Java
+Realm Java先放一张它官网对他的介绍截图逼格不要太高。
+realm是一个跨平台移动数据库引擎，支持Android、OC、React Native、Swift等语言。是第一个专门针对移动平台设计的数据库。目标是取代SQLite。
+性能这也是我选择它的原因之一，在性能方面表现非常抢眼，下面是它官网放出的一个性能对比https://r
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/04/Realm-java-实战/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/28/RxJava中操作符组合的复用利器compose/" itemprop="url">
                   RxJava中操作符组合的复用利器compose()
                 </a>
@@ -1314,117 +1438,6 @@ rename_res.py
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/24/对ThreadLocal的理解/" itemprop="url">
-                  对ThreadLocal的理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T16:41:47+08:00" content="2016-04-24">
-              2016-04-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/24/对ThreadLocal的理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/对ThreadLocal的理解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          之前在分析Handler的工作原理的时候，在Looper类中有这么一段代码，当时就不怎么理解
-static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
-  ...
-
-private static void prepare(boolean quitAllowed) {
-    if (sThreadLocal.get() != null) {
-        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
-    }
-    sThreadLocal.set(new Looper(quitAllowed));
-}
-这个ThreadLocal是用来干嘛的呢？下面就
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/24/对ThreadLocal的理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1470,7 +1483,7 @@ private static void prepare(boolean quitAllowed) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1487,7 +1500,7 @@ private static void prepare(boolean quitAllowed) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

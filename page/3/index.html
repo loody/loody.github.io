@@ -234,6 +234,138 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="url">
+                  高亮显示滚轮控件WheelView选中项
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-07T00:00:00+08:00" content="2015-06-07">
+              2015-06-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/07/2015-06-07-wheelview-highlight-current-item/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          先看效果图
+
+本示例基于开源项目android-wheel修改，这个项目已经开源很早，相信很多人也已用过了，最近项目需要将当前选中的item高亮显示，现将我采用的方法分享一下
+我们显示的滚轮一般就两种类型（文字或者数字），对应的Adapter分别是ArrayWheelAdapter和NumericWheelAdapter，我们只需要重写这两个Adapter即可
+文字类型:
+public class UnitArrayWheelAdapter extends ArrayWheelAdapter&lt;String&gt; {
+    // Index of current item
+    int currentItem;
+    // Index of item to be highlighted
+    int currentValue;
+
+    /**
+     * Construc
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/07/2015-06-07-wheelview-highlight-current-item/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/05/03/2015-05-03-webviewclient-chromeclient/" itemprop="url">
                   WebViewClient和WebChromeClient的区别
                 </a>
@@ -1381,140 +1513,6 @@ Canvas对象的获取方式有两种：
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="url">
-                  scrollview嵌套webview导致锚点无法使用的解决方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-25T00:00:00+08:00" content="2014-12-25">
-              2014-12-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
-思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
-实现：页面布局是这样的
-&lt;ScrollView&gt;
-    &lt;View&gt;
-
-    &lt;/View&gt;
-    &lt;WebView&gt;
-        &lt;div id=&quot;anchor&quot;&gt;&lt;/div&gt; 
-    &lt;/WebView&gt;
-&lt;/ScrollView&gt;
-so top=height(View)+height(div)
-首先View到顶部的距离好说，view.getTop即可，代码如下：
-/**
- 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1560,7 +1558,7 @@ so top=height(View)+height(div)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1577,7 +1575,7 @@ so top=height(View)+height(div)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

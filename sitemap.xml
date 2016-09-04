@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://loody.github.io/2016/09/04/Realm-java-%E5%AE%9E%E6%88%98/</loc>
+    
+    <lastmod>2016-09-04T14:59:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2016/08/28/RxJava%E4%B8%AD%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%BB%84%E5%90%88%E7%9A%84%E5%A4%8D%E7%94%A8%E5%88%A9%E5%99%A8compose/</loc>
     
     <lastmod>2016-08-28T13:49:40.000Z</lastmod>
@@ -135,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -149,13 +156,6 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -163,7 +163,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -171,13 +171,6 @@
   
   <url>
     <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -192,6 +185,13 @@
   
   <url>
     <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -226,13 +226,6 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -240,7 +233,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -254,7 +247,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -262,6 +255,13 @@
   
   <url>
     <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -289,14 +289,14 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -324,7 +324,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/tags/index.html</loc>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -332,6 +332,13 @@
   
   <url>
     <loc>http://loody.github.io/categories/index.html</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     

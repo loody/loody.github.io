@@ -234,6 +234,140 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="url">
+                  scrollview嵌套webview导致锚点无法使用的解决方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-12-25T00:00:00+08:00" content="2014-12-25">
+              2014-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/25/2014-12-25-scrollview-webview-anchor/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在开发者中碰到一个头疼的问题，发现webview嵌套在scrollview中后，webview的锚点定位功能失效，经过查阅一番折腾后发现还是没找到很好的方法解决，于是想了另外一种方法，
+思路：通过计算目标点在scrollview的位置top，调用scrollTo(0,top)方法定位
+实现：页面布局是这样的
+&lt;ScrollView&gt;
+    &lt;View&gt;
+
+    &lt;/View&gt;
+    &lt;WebView&gt;
+        &lt;div id=&quot;anchor&quot;&gt;&lt;/div&gt; 
+    &lt;/WebView&gt;
+&lt;/ScrollView&gt;
+so top=height(View)+height(div)
+首先View到顶部的距离好说，view.getTop即可，代码如下：
+/**
+ 
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/25/2014-12-25-scrollview-webview-anchor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/21/2014-12-21-weixin-pay/" itemprop="url">
                   微信支付需要注意的几个问题
                 </a>
@@ -1375,123 +1509,6 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/30/2014-08-30-meizu smartbar adapter 2/" itemprop="url">
-                  关于魅族SmartBar的适配2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-30T00:00:00+08:00" content="2014-08-30">
-              2014-08-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/30/2014-08-30-meizu smartbar adapter 2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/30/2014-08-30-meizu smartbar adapter 2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          顶栏与底栏同时存在及自定义底栏背景
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/30/2014-08-30-meizu smartbar adapter 2/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1537,7 +1554,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1554,7 +1571,7 @@ Github：https://github.com/nostra13/Android-Universal-Image-Loader
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
