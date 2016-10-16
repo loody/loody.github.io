@@ -234,6 +234,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/16/Retrofit-请求参数注解说明/" itemprop="url">
+                  Retrofit 请求参数注解说明
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T20:22:40+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/16/Retrofit-请求参数注解说明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/Retrofit-请求参数注解说明/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Retrofit是通过使用注解来简化请求的，下面就来看看Retrofit请求参数中用到的所有注解
+Retrofit 注解主要分为三大类
+
+请求方法类
+标记类
+参数类
+
+请求方法类首先Retrofit2.1.0版本中已经内置了下面8种注解方式：GET、POST、PUT、DELETE、HEAD、OPTIONS、PATCH、HTTP
+HTTP其中说一下HTTP请求，它可以替代其他7个注解
+这个注解通的比较少，主要用于自定义注解时用到，Api文档的解释如下
+
+Use a custom HTTP verb for a request.
+
+它有三个属性：method、path、hasBody
+最近正好用到它自定义了一个DELETE请求，用于支持传递Body注解参数，方法如下
+12@HTTP(method = "DELETE", path = "/api/v1/sync", hasBody = true
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/16/Retrofit-请求参数注解说明/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/04/Realm-java-实战/" itemprop="url">
                   Realm Java 使用
                 </a>
@@ -1312,132 +1447,6 @@ Android对播放音频/视频文件和流的控制是通过一个状态机来管
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/08/python批量修改文件名/" itemprop="url">
-                  python批量修改文件名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-08T18:45:50+08:00" content="2016-05-08">
-              2016-05-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/08/python批量修改文件名/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/08/python批量修改文件名/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          在平时的开发中，设计师在做设计稿的时候往往都是按照iphone的模板来做的，所以在切图的时候也不例外，她们给的切图是这样子的
-
-@2x,@3x是什么鬼，一问才知道这是为了做屏幕适配的一种文件命名方式，可以在Android资源文件的命名是不支持存在@字符的，所以我们得把所有的文件进行重命名，文件少点还行，多了就太累了，所以有没有办法可以快速对这些文件进行重命名呢？当然了，python就适合干这事
-关于python的安装什么在这里就不说了，大就可以去看廖雪峰写的python教程，讲的很详细
-我们看了上面的文件就知道，我们只需要把文件名中的@3x去掉就可以了，所以代码实现的思路也是这样，直接贴代码
-rename_res.py
-123456789101112131415161718192021#!/usr/bin/python# coding=utf-8import osimport syspat
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/08/python批量修改文件名/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1483,7 +1492,7 @@ rename_res.py
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1500,7 +1509,7 @@ rename_res.py
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
