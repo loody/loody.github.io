@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://loody.github.io/2016/12/11/Android%E4%B8%AD%E6%98%AF%E5%90%A6%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BEEnum/</loc>
+    
+    <lastmod>2016-12-11T10:19:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2016/10/16/Retrofit-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E8%AF%B4%E6%98%8E/</loc>
     
     <lastmod>2016-10-16T14:03:39.000Z</lastmod>
@@ -156,7 +163,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
+    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -170,14 +177,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -198,14 +198,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
+    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -213,6 +206,13 @@
   
   <url>
     <loc>http://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -240,7 +240,21 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -254,21 +268,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -289,14 +289,14 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -332,6 +332,13 @@
   
   <url>
     <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     

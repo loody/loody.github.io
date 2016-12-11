@@ -234,6 +234,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/31/2016-01-31-multi_thread_download/" itemprop="url">
+                  android中利用多线程实现断点下载
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-31T00:00:00+08:00" content="2016-01-31">
+              2016-01-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/31/2016-01-31-multi_thread_download/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/31/2016-01-31-multi_thread_download/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
+线程池使用线程池有三点好处
+第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
+第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。
+第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控
+java中主要用到的线程池有下面四种
+
+newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/31/2016-01-31-multi_thread_download/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/29/2015-11-29-CoordinatorLayout/" itemprop="url">
                   CoordinatorLayout的使用场景
                 </a>
@@ -1358,142 +1485,6 @@ LineCha
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/02/01/2015-02-01-canvas-2/" itemprop="url">
-                  Android中绘图学习笔记(二)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-02-01T00:00:00+08:00" content="2015-02-01">
-              2015-02-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/01/2015-02-01-canvas-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/01/2015-02-01-canvas-2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言上一节我们讲到了canvas可以绘制很多的图形，现在就来看看它的具体使用方法
-点
-一个点:
-drawPoint(float x, float y, Paint paint) //x:水平x轴，y:垂直y轴，第三个参数为Paint对象。
-
-多个点：
-drawPoints (float[] pts, Paint paint)
-
-drawPoints (float[] pts, int offset, int count, Paint paint) 
-
- eg:canvas.drawPoints(new float[]{20f, 20f, 120f, 20f, 120f, 120f, 20f, 120f}, painnt)//每个端点占用两个数据。
-
-
-线
-一条线:
-drawLine(float startX, float startY, float stopX, float stopY,
-
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/01/2015-02-01-canvas-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1539,7 +1530,7 @@ drawLine(float startX, float startY, float stopX, float stopY,
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1556,7 +1547,7 @@ drawLine(float startX, float startY, float stopX, float stopY,
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

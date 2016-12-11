@@ -234,6 +234,111 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/22/Android-MediaPlayer状态机/" itemprop="url">
+                  Android MediaPlayer状态机
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-22T17:33:57+08:00" content="2016-05-22">
+              2016-05-22
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/22/Android-MediaPlayer状态机/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/22/Android-MediaPlayer状态机/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在做视频播放相关的功能，主要涉及MediaPlayer，到我们知道，视频在播放过程中有很多状态，我们能很明显感知到的有播放、暂停、停止等，但其实远远不止，今天就来梳理下在视频播放的过程中MediaPlayer的这些状态是怎么转换的
+Android对播放音频/视频文件和流的控制是通过一个状态机来管理的，每种方法只能在一些特定的状态下使用，如果使用时MediaPlayer的状态不正确则会引发IllegalStateException（已经掉坑,后面会写一下过程）异常。
+状态图官网上对MediaPlayer的讲解时有一个状态转换图（和官网风格有点不搭），很详细的讲解了MediaPlayer的状态转换，其中
+
+椭圆代表MediaPlayer对象可能驻留的状态。弧线表示驱动MediaPlayer在各个状态之间迁移的播放控制操作。这里有两种类型的弧线。以单箭头开始的弧代表同步的方法调用,以双箭头开
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/22/Android-MediaPlayer状态机/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/08/python批量修改文件名/" itemprop="url">
                   python批量修改文件名
                 </a>
@@ -1281,133 +1386,6 @@ android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;&gt;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/31/2016-01-31-multi_thread_download/" itemprop="url">
-                  android中利用多线程实现断点下载
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-31T00:00:00+08:00" content="2016-01-31">
-              2016-01-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/31/2016-01-31-multi_thread_download/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/31/2016-01-31-multi_thread_download/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
-线程池使用线程池有三点好处
-第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
-第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。
-第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控
-java中主要用到的线程池有下面四种
-
-newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/31/2016-01-31-multi_thread_download/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1453,7 +1431,7 @@ newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1470,7 +1448,7 @@ newSingleThreadExecutor创建一个单线程的线程池。这个线程池只有
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
