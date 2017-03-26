@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://loody.github.io/2017/03/26/MultiDex%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
+    
+    <lastmod>2017-03-26T14:55:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2017/02/19/Apk%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B/</loc>
     
     <lastmod>2017-02-19T14:04:35.000Z</lastmod>
@@ -184,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -198,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -240,6 +247,13 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -247,7 +261,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -261,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -282,21 +296,7 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -317,6 +317,13 @@
   </url>
   
   <url>
+    <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -325,13 +332,6 @@
   
   <url>
     <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -352,14 +352,21 @@
   </url>
   
   <url>
-    <loc>http://loody.github.io/categories/index.html</loc>
+    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://loody.github.io/categories/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
