@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://loody.github.io/2017/03/26/MultiDex%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2017-03-26T14:55:30.000Z</lastmod>
+    <lastmod>2017-03-26T15:02:49.000Z</lastmod>
     <data>
         <display>
         <title>MultiDex源码解析</title>
@@ -501,26 +501,6 @@
     
     
   <url>
-    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>高亮显示滚轮控件WheelView选中项</title>
-        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
-        
-        <tag>WheelView高亮</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -529,28 +509,6 @@
         <pubTime>2015-11-28T16:00:00.000Z</pubTime>
         
         <tag>CoordinatorLayout</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>解决ScrollView嵌套ListView的冲突问题</title>
-        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
-        
-        <tag>ScrollView</tag>
-         
-        <tag>ListView</tag>
          
          
            
@@ -575,6 +533,28 @@
         <tag>Smartbar</tag>
          
         <tag>适配</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>解决ScrollView嵌套ListView的冲突问题</title>
+        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
+        
+        <tag>ScrollView</tag>
+         
+        <tag>ListView</tag>
          
          
            
@@ -733,26 +713,6 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>图表库MPAndroidChart简介</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
-        
-        <tag>MPAndroidChart</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -773,36 +733,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        <title>图表库MPAndroidChart简介</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
         
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
-        
-        <tag>占位符</tag>
+        <tag>MPAndroidChart</tag>
          
          
            
@@ -835,6 +773,28 @@
 
     
   <url>
+    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -843,6 +803,26 @@
         <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
         <tag>微信支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        
+        <tag>占位符</tag>
          
          
            
@@ -935,16 +915,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>hellocharts与MPAndroidChart的比较</title>
-        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
-         
-        <tag>hellocharts</tag>
+        <tag>View的事件传递</tag>
          
          
            
@@ -957,14 +935,16 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>hellocharts与MPAndroidChart的比较</title>
+        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>MPAndroidChart</tag>
+         
+        <tag>hellocharts</tag>
          
          
            
@@ -1017,6 +997,28 @@
 
     
   <url>
+    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>RecyclerView、CardView</title>
+        <pubTime>2015-04-25T16:00:00.000Z</pubTime>
+        
+        <tag>RecyclerView</tag>
+         
+        <tag>CardView</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1039,16 +1041,14 @@
 
     
   <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>RecyclerView、CardView</title>
-        <pubTime>2015-04-25T16:00:00.000Z</pubTime>
+        <title>高亮显示滚轮控件WheelView选中项</title>
+        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
         
-        <tag>RecyclerView</tag>
-         
-        <tag>CardView</tag>
+        <tag>WheelView高亮</tag>
          
          
            
