@@ -2,378 +2,385 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://loody.github.io/2017/03/26/MultiDex%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
+    <loc>https://loody.github.io/2017/03/30/Dalvik%20vs%20ART/</loc>
+    
+    <lastmod>2017-04-08T14:13:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2017/03/26/MultiDex%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
     
     <lastmod>2017-03-26T15:02:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2017/02/19/Apk%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B/</loc>
+    <loc>https://loody.github.io/2017/02/19/Apk%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B/</loc>
     
     <lastmod>2017-02-19T14:04:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2017/01/08/Dagger2-Scope-%E5%AE%9E%E7%8E%B0%E5%B1%80%E9%83%A8%E5%8D%95%E4%BE%8B/</loc>
+    <loc>https://loody.github.io/2017/01/08/Dagger2-Scope-%E5%AE%9E%E7%8E%B0%E5%B1%80%E9%83%A8%E5%8D%95%E4%BE%8B/</loc>
     
     <lastmod>2017-01-08T09:14:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/12/11/Android%E4%B8%AD%E6%98%AF%E5%90%A6%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BEEnum/</loc>
+    <loc>https://loody.github.io/2016/12/11/Android%E4%B8%AD%E6%98%AF%E5%90%A6%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BEEnum/</loc>
     
     <lastmod>2016-12-11T10:19:26.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/10/16/Retrofit-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E8%AF%B4%E6%98%8E/</loc>
+    <loc>https://loody.github.io/2016/10/16/Retrofit-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%B3%A8%E8%A7%A3%E8%AF%B4%E6%98%8E/</loc>
     
     <lastmod>2016-10-16T14:03:39.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/09/04/Realm-java-%E5%AE%9E%E6%88%98/</loc>
+    <loc>https://loody.github.io/2016/09/04/Realm-java-%E5%AE%9E%E6%88%98/</loc>
     
     <lastmod>2016-09-11T13:54:07.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/08/28/RxJava%E4%B8%AD%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%BB%84%E5%90%88%E7%9A%84%E5%A4%8D%E7%94%A8%E5%88%A9%E5%99%A8compose/</loc>
+    <loc>https://loody.github.io/2016/08/28/RxJava%E4%B8%AD%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%BB%84%E5%90%88%E7%9A%84%E5%A4%8D%E7%94%A8%E5%88%A9%E5%99%A8compose/</loc>
     
     <lastmod>2016-08-28T13:49:40.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/08/21/Retrofit%E5%B8%B8%E8%A7%84%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://loody.github.io/2016/08/21/Retrofit%E5%B8%B8%E8%A7%84%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2016-08-21T16:06:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/07/17/React-Native-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://loody.github.io/2016/07/17/React-Native-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2016-08-21T15:25:46.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/08/07/Android-Wear/</loc>
+    <loc>https://loody.github.io/2016/08/07/Android-Wear/</loc>
     
     <lastmod>2016-08-07T15:31:43.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/03/20/%E8%AF%B4%E8%AF%B4Handler%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://loody.github.io/2016/03/20/%E8%AF%B4%E8%AF%B4Handler%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
     
     <lastmod>2016-07-17T12:35:57.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/04/10/%E7%94%A8RxJava%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/</loc>
+    <loc>https://loody.github.io/2016/04/10/%E7%94%A8RxJava%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/</loc>
     
     <lastmod>2016-07-07T15:06:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/07/03/%E5%AE%9E%E7%8E%B0%E6%BB%91%E5%8A%A8%E6%B8%90%E5%8F%98%E7%9A%84%E5%AF%BC%E8%88%AA/</loc>
+    <loc>https://loody.github.io/2016/07/03/%E5%AE%9E%E7%8E%B0%E6%BB%91%E5%8A%A8%E6%B8%90%E5%8F%98%E7%9A%84%E5%AF%BC%E8%88%AA/</loc>
     
     <lastmod>2016-07-03T14:00:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/04/04/%E4%BD%BF%E7%94%A8include%E3%80%81merge%E3%80%81viewstub%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BD%A0%E7%9A%84%E5%B8%83%E5%B1%80/</loc>
+    <loc>https://loody.github.io/2016/04/04/%E4%BD%BF%E7%94%A8include%E3%80%81merge%E3%80%81viewstub%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BD%A0%E7%9A%84%E5%B8%83%E5%B1%80/</loc>
     
     <lastmod>2016-07-03T13:59:19.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/06/19/%E6%89%8B%E5%8A%BF%E8%B0%83%E6%95%B4%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BF%9B%E5%BA%A6%E5%8F%8A%E9%9F%B3%E9%87%8F/</loc>
+    <loc>https://loody.github.io/2016/06/19/%E6%89%8B%E5%8A%BF%E8%B0%83%E6%95%B4%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BF%9B%E5%BA%A6%E5%8F%8A%E9%9F%B3%E9%87%8F/</loc>
     
     <lastmod>2016-06-19T11:48:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/05/26/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%A8%AA%E7%AB%96%E5%B1%8F%E5%88%87%E6%8D%A2/</loc>
+    <loc>https://loody.github.io/2016/05/26/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%A8%AA%E7%AB%96%E5%B1%8F%E5%88%87%E6%8D%A2/</loc>
     
     <lastmod>2016-05-29T13:54:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/05/22/Android-MediaPlayer%E7%8A%B6%E6%80%81%E6%9C%BA/</loc>
+    <loc>https://loody.github.io/2016/05/22/Android-MediaPlayer%E7%8A%B6%E6%80%81%E6%9C%BA/</loc>
     
     <lastmod>2016-05-22T10:47:57.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/02/21/2016-02-21-custom-toolbar/</loc>
+    <loc>https://loody.github.io/2016/02/21/2016-02-21-custom-toolbar/</loc>
     
     <lastmod>2016-05-11T15:07:33.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/01/31/2016-01-31-multi_thread_download/</loc>
+    <loc>https://loody.github.io/2016/01/31/2016-01-31-multi_thread_download/</loc>
     
     <lastmod>2016-05-11T15:04:54.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/02/26/2016-02-26-android-multi-%20package/</loc>
+    <loc>https://loody.github.io/2016/02/26/2016-02-26-android-multi-%20package/</loc>
     
     <lastmod>2016-05-11T14:46:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/03/12/%E5%88%9D%E8%AF%86groovy/</loc>
+    <loc>https://loody.github.io/2016/03/12/%E5%88%9D%E8%AF%86groovy/</loc>
     
     <lastmod>2016-05-11T14:38:15.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/04/17/Data-Binding-%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>https://loody.github.io/2016/04/17/Data-Binding-%E5%AE%9E%E8%B7%B5/</loc>
     
     <lastmod>2016-05-11T02:00:01.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/05/08/python%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D/</loc>
+    <loc>https://loody.github.io/2016/05/08/python%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D/</loc>
     
     <lastmod>2016-05-11T01:51:21.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2016/04/24/%E5%AF%B9ThreadLocal%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+    <loc>https://loody.github.io/2016/04/24/%E5%AF%B9ThreadLocal%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
     
     <lastmod>2016-04-24T10:38:30.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/about/index.html</loc>
+    <loc>https://loody.github.io/about/index.html</loc>
     
     <lastmod>2016-04-04T13:41:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
+    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
+    <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
+    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    <loc>https://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
+    <loc>https://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>https://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
+    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
+    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>https://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <loc>https://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
+    <loc>https://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
+    <loc>https://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/tags/index.html</loc>
+    <loc>https://loody.github.io/categories/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://loody.github.io/categories/index.html</loc>
+    <loc>https://loody.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     

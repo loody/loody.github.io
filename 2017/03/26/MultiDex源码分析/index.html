@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,66 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="MultiDex," />
@@ -50,7 +98,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
 
 
 
@@ -60,7 +108,7 @@
 <meta name="description" content="MultiDex对于很多开发者来说应该并不陌生，大一点的项目应该都已经遇到了INSTALL_FAILED_DEXOPT 的问题,因为当 Android 系统安装一个应用的时候，有一步是对 Dex 进行优化，这个过程有一个专门的工具来处理，叫 DexOpt。DexOpt 是在第一次加载 Dex 文件的时候执行的。这个过程会生成一个 ODEX 文件，即 Optimised Dex。执行 ODEX 的效">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MultiDex源码解析">
-<meta property="og:url" content="http://loody.github.io/2017/03/26/MultiDex源码分析/index.html">
+<meta property="og:url" content="https://loody.github.io/2017/03/26/MultiDex源码分析/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="MultiDex对于很多开发者来说应该并不陌生，大一点的项目应该都已经遇到了INSTALL_FAILED_DEXOPT 的问题,因为当 Android 系统安装一个应用的时候，有一步是对 Dex 进行优化，这个过程有一个专门的工具来处理，叫 DexOpt。DexOpt 是在第一次加载 Dex 文件的时候执行的。这个过程会生成一个 ODEX 文件，即 Optimised Dex。执行 ODEX 的效">
 <meta property="og:updated_time" content="2017-03-26T15:02:49.000Z">
@@ -70,19 +118,33 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> MultiDex源码解析 | loody's blog </title>
 </head>
@@ -93,15 +155,11 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+
 
 
 
@@ -113,29 +171,33 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">loody's blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -148,7 +210,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -158,29 +220,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -188,9 +230,29 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -202,6 +264,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -212,10 +276,8 @@
             
 
   <div id="posts" class="posts-expand">
-
     
 
-  
   
 
   
@@ -223,6 +285,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2017/03/26/MultiDex源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
 
     
       <header class="post-header">
@@ -241,24 +314,32 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-26T21:10:18+08:00" content="2017-03-26">
-              2017-03-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:10:18+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -266,7 +347,6 @@
 
                 
                 
-
               
             </span>
           
@@ -274,17 +354,25 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2017/03/26/MultiDex源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/MultiDex源码分析/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/26/MultiDex源码分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
 
           
+
+          
+
           
 
         </div>
@@ -310,20 +398,20 @@
 </ol>
 <p>对此Android官方给出的解决方案就是采用MultiDex方案，关于MultiDex的使用方法，这里就不说了，本文主要从源码的角度来分析MultiDex的的整个工作流程</p>
 <p>首先我们从入口方法<code>MultiDex.install(this)</code>开始入手</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attachBaseContext</span><span class="params">(Context base)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.attachBaseContext(base);</span><br><span class="line">    MultiDex.install(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">attachBaseContext</span><span class="params">(Context base)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.attachBaseContext(base);</div><div class="line">    MultiDex.install(<span class="keyword">this</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们进入这个方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">install</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//在使用ART虚拟机的设备上(部分4.4设备，5.0+以上都默认ART环境)，已经原生支持多Dex，因此就不需要手动支持了</span></span><br><span class="line">    <span class="keyword">if</span> (IS_VM_MULTIDEX_CAPABLE) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ApplicationInfo applicationInfo = getApplicationInfo(context);</span><br><span class="line">        <span class="keyword">if</span> (applicationInfo == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// Looks like running on a test Context, so just return without patching.</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">synchronized</span> (installedApk) &#123;</span><br><span class="line">            String apkPath = applicationInfo.sourceDir;</span><br><span class="line">            <span class="keyword">if</span> (installedApk.contains(apkPath)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            installedApk.add(apkPath);</span><br><span class="line">            ClassLoader loader;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                loader = context.getClassLoader();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (RuntimeException e) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (loader == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">              <span class="comment">//清除之前缓存的dex文件(data/data/&lt;packagename&gt;/secondary-dexes)</span></span><br><span class="line">              clearOldDexDir(context);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">          	File dexDir = <span class="keyword">new</span> File(applicationInfo.dataDir, SECONDARY_FOLDER_NAME);</span><br><span class="line">          	<span class="comment">//加载缓存的dex文件(data/data/&lt;packagename&gt;/secondary-dexes)</span></span><br><span class="line">          	List&lt;File&gt; files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">false</span>);</span><br><span class="line">          	<span class="comment">//检测文件是否是zip文件</span></span><br><span class="line">            <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line">              	<span class="comment">//加载缓存的dex</span></span><br><span class="line">                installSecondaryDexes(loader, dexDir, files);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              	<span class="comment">//从Apk中提取dex</span></span><br><span class="line">                files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">true</span>);</span><br><span class="line">                <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line">                  	<span class="comment">//加载提取的dex</span></span><br><span class="line">                    installSecondaryDexes(loader, dexDir, files);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Zip files were not valid."</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Multi dex installation failed ("</span> + e.getMessage() + <span class="string">")."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Log.i(TAG, <span class="string">"install done"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">install</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">   <span class="comment">//在使用ART虚拟机的设备上(部分4.4设备，5.0+以上都默认ART环境)，已经原生支持多Dex，因此就不需要手动支持了</span></div><div class="line">    <span class="keyword">if</span> (IS_VM_MULTIDEX_CAPABLE) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">...</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ApplicationInfo applicationInfo = getApplicationInfo(context);</div><div class="line">        <span class="keyword">if</span> (applicationInfo == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">// Looks like running on a test Context, so just return without patching.</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (installedApk) &#123;</div><div class="line">            String apkPath = applicationInfo.sourceDir;</div><div class="line">            <span class="keyword">if</span> (installedApk.contains(apkPath)) &#123;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            installedApk.add(apkPath);</div><div class="line">            ClassLoader loader;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                loader = context.getClassLoader();</div><div class="line">            &#125; <span class="keyword">catch</span> (RuntimeException e) &#123;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (loader == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">              <span class="comment">//清除之前缓存的dex文件(data/data/&lt;packagename&gt;/secondary-dexes)</span></div><div class="line">              clearOldDexDir(context);</div><div class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">            &#125;</div><div class="line">          	File dexDir = <span class="keyword">new</span> File(applicationInfo.dataDir, SECONDARY_FOLDER_NAME);</div><div class="line">          	<span class="comment">//加载缓存的dex文件(data/data/&lt;packagename&gt;/secondary-dexes)</span></div><div class="line">          	List&lt;File&gt; files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">false</span>);</div><div class="line">          	<span class="comment">//检测文件是否是zip文件</span></div><div class="line">            <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</div><div class="line">              	<span class="comment">//加载缓存的dex</span></div><div class="line">                installSecondaryDexes(loader, dexDir, files);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">              	<span class="comment">//从Apk中提取dex</span></div><div class="line">                files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">true</span>);</div><div class="line">                <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</div><div class="line">                  	<span class="comment">//加载提取的dex</span></div><div class="line">                    installSecondaryDexes(loader, dexDir, files);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Zip files were not valid."</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Multi dex installation failed ("</span> + e.getMessage() + <span class="string">")."</span>);</div><div class="line">    &#125;</div><div class="line">    Log.i(TAG, <span class="string">"install done"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这里需要说明一下，在5.0以下的版本采用的是Dalvik，而5.0以上的运行时是ART。</p>
 <p>具体代码的分析已经在上面代码的注释里给出了，从这里我们也可以看出，整个<code>MultiDex.install(Context)</code>的过程中，关键的步骤就是<code>MultiDexExtractor#load</code>方法和<code>MultiDex#installSecondaryDexes</code>方法。</p>
 <p>先看<code>MultiDexExtractor#load</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">static List&lt;File&gt; load(Context context, ApplicationInfo applicationInfo, File dexDir,</span><br><span class="line">        boolean forceReload) throws IOException &#123;</span><br><span class="line">    final File sourceApk = new File(applicationInfo.sourceDir);</span><br><span class="line">    //获取crc，为后面做验证用</span><br><span class="line">    long currentCrc = getZipCrc(sourceApk);</span><br><span class="line">    List&lt;File&gt; files;</span><br><span class="line">    //先判断是否强制重新解压，这里第一次会优先使用已解压过的dex文件，如果加载失败就强制重新解压。</span><br><span class="line">    if (!forceReload &amp;&amp; !isModified(context, sourceApk, currentCrc)) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">        	//加载缓存的dex</span><br><span class="line">            files = loadExistingExtractions(context, sourceApk, dexDir);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            //加载失败、重新解压</span><br><span class="line">            files = performExtractions(sourceApk, dexDir);</span><br><span class="line">            putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    	//重新解压</span><br><span class="line">        files = performExtractions(sourceApk, dexDir);</span><br><span class="line">        putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + 1);</span><br><span class="line">    &#125;</span><br><span class="line">    return files;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">static List&lt;File&gt; load(Context context, ApplicationInfo applicationInfo, File dexDir,</div><div class="line">        boolean forceReload) throws IOException &#123;</div><div class="line">    final File sourceApk = new File(applicationInfo.sourceDir);</div><div class="line">    //获取crc，为后面做验证用</div><div class="line">    long currentCrc = getZipCrc(sourceApk);</div><div class="line">    List&lt;File&gt; files;</div><div class="line">    //先判断是否强制重新解压，这里第一次会优先使用已解压过的dex文件，如果加载失败就强制重新解压。</div><div class="line">    if (!forceReload &amp;&amp; !isModified(context, sourceApk, currentCrc)) &#123;</div><div class="line">        try &#123;</div><div class="line">        	//加载缓存的dex</div><div class="line">            files = loadExistingExtractions(context, sourceApk, dexDir);</div><div class="line">        &#125; catch (IOException ioe) &#123;</div><div class="line">            //加载失败、重新解压</div><div class="line">            files = performExtractions(sourceApk, dexDir);</div><div class="line">            putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + 1);</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">    	//重新解压</div><div class="line">        files = performExtractions(sourceApk, dexDir);</div><div class="line">        putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + 1);</div><div class="line">    &#125;</div><div class="line">    return files;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>再看<code>MultiDex#installSecondaryDexes</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">installSecondaryDexes</span><span class="params">(ClassLoader loader, File dexDir, List&lt;File&gt; files)</span></span><br><span class="line">        <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException, NoSuchFieldException,</span><br><span class="line">        InvocationTargetException, NoSuchMethodException, IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!files.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</span><br><span class="line">            V19.install(loader, files, dexDir);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">14</span>) &#123;</span><br><span class="line">            V14.install(loader, files, dexDir);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            V4.install(loader, files);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">installSecondaryDexes</span><span class="params">(ClassLoader loader, File dexDir, List&lt;File&gt; files)</span></span></div><div class="line">        <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException, NoSuchFieldException,</div><div class="line">        InvocationTargetException, NoSuchMethodException, IOException &#123;</div><div class="line">    <span class="keyword">if</span> (!files.isEmpty()) &#123;</div><div class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</div><div class="line">            V19.install(loader, files, dexDir);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">14</span>) &#123;</div><div class="line">            V14.install(loader, files, dexDir);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            V4.install(loader, files);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>因为在不同的SDK版本上，ClassLoader加载dex文件的方式有所不同，所以这里做了V4/V14/V19的兼容。</p>
 <p>这里主要看下 V14</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">V14</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">install</span><span class="params">(ClassLoader loader, List&lt;File&gt; additionalClassPathEntries,</span><br><span class="line">            File optimizedDirectory)</span></span><br><span class="line">                    <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException,</span><br><span class="line">                    NoSuchFieldException, InvocationTargetException, NoSuchMethodException </span>&#123;</span><br><span class="line">     		<span class="comment">//通过反射获取loader的pathList字段，loader是由Application.getClassLoader()获取的，实际获取到的是PathClassLoader对象的pathList字段</span></span><br><span class="line">            <span class="keyword">final</span> Field pathListField = findField(loader, <span class="string">"pathList"</span>);</span><br><span class="line">            <span class="keyword">final</span> Object dexPathList = pathListField.get(loader);</span><br><span class="line">            <span class="comment">//dexPathList是PathClassLoader的私有字段，里面保存的是Main Dex中的class</span></span><br><span class="line">            <span class="comment">//dexElements是一个数组，里面的每一个item就是一个Dex文件</span></span><br><span class="line">            <span class="comment">//为了把makeDexElements()返回的Elements[]对象添加到dexPathList字段的成员变量dexElements中</span></span><br><span class="line">            expandFieldArray(dexPathList, <span class="string">"dexElements"</span>, makeDexElements(dexPathList, <span class="keyword">new</span> ArrayList&lt;File&gt;(additionalClassPathEntries), optimizedDirectory));</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//返回的是其他Dex文件中获取到的Elements[]对象，内部通过反射makeDexElements()获取</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object[] makeDexElements(</span><br><span class="line">            Object dexPathList, ArrayList&lt;File&gt; files, File optimizedDirectory)</span><br><span class="line">                    <span class="keyword">throws</span> IllegalAccessException, InvocationTargetException,</span><br><span class="line">                    NoSuchMethodException &#123;</span><br><span class="line">        Method makeDexElements =</span><br><span class="line">                findMethod(dexPathList, <span class="string">"makeDexElements"</span>, ArrayList.class, File.class);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (Object[]) makeDexElements.invoke(dexPathList, files, optimizedDirectory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">V14</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">install</span><span class="params">(ClassLoader loader, List&lt;File&gt; additionalClassPathEntries,</span></span></div><div class="line">            File optimizedDirectory)</div><div class="line">                    <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException,</div><div class="line">                    NoSuchFieldException, InvocationTargetException, NoSuchMethodException &#123;</div><div class="line">     		<span class="comment">//通过反射获取loader的pathList字段，loader是由Application.getClassLoader()获取的，实际获取到的是PathClassLoader对象的pathList字段</span></div><div class="line">            <span class="keyword">final</span> Field pathListField = findField(loader, <span class="string">"pathList"</span>);</div><div class="line">            <span class="keyword">final</span> Object dexPathList = pathListField.get(loader);</div><div class="line">            <span class="comment">//dexPathList是PathClassLoader的私有字段，里面保存的是Main Dex中的class</span></div><div class="line">            <span class="comment">//dexElements是一个数组，里面的每一个item就是一个Dex文件</span></div><div class="line">            <span class="comment">//为了把makeDexElements()返回的Elements[]对象添加到dexPathList字段的成员变量dexElements中</span></div><div class="line">            expandFieldArray(dexPathList, <span class="string">"dexElements"</span>, makeDexElements(dexPathList, <span class="keyword">new</span> ArrayList&lt;File&gt;(additionalClassPathEntries), optimizedDirectory));</div><div class="line">    &#125;</div><div class="line">	<span class="comment">//返回的是其他Dex文件中获取到的Elements[]对象，内部通过反射makeDexElements()获取</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object[] makeDexElements(</div><div class="line">            Object dexPathList, ArrayList&lt;File&gt; files, File optimizedDirectory)</div><div class="line">                    <span class="keyword">throws</span> IllegalAccessException, InvocationTargetException,</div><div class="line">                    NoSuchMethodException &#123;</div><div class="line">        Method makeDexElements =</div><div class="line">                findMethod(dexPathList, <span class="string">"makeDexElements"</span>, ArrayList.class, File.class);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (Object[]) makeDexElements.invoke(dexPathList, files, optimizedDirectory);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>通过调用<strong>DexPathList#makeDexElements</strong>方法，可以加载我们上面解压得到的dex文件，我们看下V14的<code>DexPathList</code>源码(只看核心代码)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">final class DexPathList &#123;</span><br><span class="line">    private static final String DEX_SUFFIX = &quot;.dex&quot;;</span><br><span class="line">    private static final String JAR_SUFFIX = &quot;.jar&quot;;</span><br><span class="line">    private static final String ZIP_SUFFIX = &quot;.zip&quot;;</span><br><span class="line">    private static final String APK_SUFFIX = &quot;.apk&quot;;</span><br><span class="line"> </span><br><span class="line">    private static Element[] makeDexElements(ArrayList&lt;File&gt; files,</span><br><span class="line">            File optimizedDirectory) &#123;</span><br><span class="line">        ArrayList&lt;Element&gt; elements = new ArrayList&lt;Element&gt;();</span><br><span class="line">        for (File file : files) &#123;</span><br><span class="line">            ZipFile zip = null;</span><br><span class="line">            DexFile dex = null;</span><br><span class="line"></span><br><span class="line">            String name = file.getName();</span><br><span class="line">            if (name.endsWith(DEX_SUFFIX)) &#123;</span><br><span class="line">                // Raw dex file (not inside a zip/jar).</span><br><span class="line">                try &#123;</span><br><span class="line">                    dex = loadDexFile(file, optimizedDirectory);</span><br><span class="line">                &#125; catch (IOException ex) &#123;</span><br><span class="line"></span><br><span class="line">                    System.logE(&quot;Unable to load dex file: &quot; + file, ex);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else if (name.endsWith(APK_SUFFIX) || name.endsWith(JAR_SUFFIX)</span><br><span class="line">                    || name.endsWith(ZIP_SUFFIX)) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    zip = new ZipFile(file);</span><br><span class="line"></span><br><span class="line">                &#125; catch (IOException ex) &#123;</span><br><span class="line">                    System.logE(&quot;Unable to open zip file: &quot; + file, ex);</span><br><span class="line">                &#125;</span><br><span class="line">                try &#123;</span><br><span class="line">                    dex = loadDexFile(file, optimizedDirectory);</span><br><span class="line">                &#125; catch (IOException ignored) &#123;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                System.logW(&quot;Unknown file type for: &quot; + file);</span><br><span class="line">            &#125;</span><br><span class="line">            if ((zip != null) || (dex != null)) &#123;</span><br><span class="line"></span><br><span class="line">                elements.add(new Element(file, zip, dex));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return elements.toArray(new Element[elements.size()]);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    private static DexFile loadDexFile(File file, File optimizedDirectory)</span><br><span class="line">            throws IOException &#123;</span><br><span class="line">        if (optimizedDirectory == null) &#123;</span><br><span class="line">            return new DexFile(file);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            String optimizedPath = optimizedPathFor(file, optimizedDirectory);</span><br><span class="line"></span><br><span class="line">            return DexFile.loadDex(file.getPath(), optimizedPath, 0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     /**</span><br><span class="line">     * Element of the dex/resource file path</span><br><span class="line">     */</span><br><span class="line">    static class Element &#123;</span><br><span class="line">        public final File file;</span><br><span class="line">        public final ZipFile zipFile;</span><br><span class="line">		public final DexFile dexFile;</span><br><span class="line"></span><br><span class="line">        public Element(File file, ZipFile zipFile, DexFile dexFile) &#123;</span><br><span class="line">            this.file = file;</span><br><span class="line">            this.zipFile = zipFile;</span><br><span class="line">            this.dexFile = dexFile;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">final class DexPathList &#123;</div><div class="line">    private static final String DEX_SUFFIX = &quot;.dex&quot;;</div><div class="line">    private static final String JAR_SUFFIX = &quot;.jar&quot;;</div><div class="line">    private static final String ZIP_SUFFIX = &quot;.zip&quot;;</div><div class="line">    private static final String APK_SUFFIX = &quot;.apk&quot;;</div><div class="line"> </div><div class="line">    private static Element[] makeDexElements(ArrayList&lt;File&gt; files,</div><div class="line">            File optimizedDirectory) &#123;</div><div class="line">        ArrayList&lt;Element&gt; elements = new ArrayList&lt;Element&gt;();</div><div class="line">        for (File file : files) &#123;</div><div class="line">            ZipFile zip = null;</div><div class="line">            DexFile dex = null;</div><div class="line"></div><div class="line">            String name = file.getName();</div><div class="line">            if (name.endsWith(DEX_SUFFIX)) &#123;</div><div class="line">                // Raw dex file (not inside a zip/jar).</div><div class="line">                try &#123;</div><div class="line">                    dex = loadDexFile(file, optimizedDirectory);</div><div class="line">                &#125; catch (IOException ex) &#123;</div><div class="line"></div><div class="line">                    System.logE(&quot;Unable to load dex file: &quot; + file, ex);</div><div class="line">                &#125;</div><div class="line">            &#125; else if (name.endsWith(APK_SUFFIX) || name.endsWith(JAR_SUFFIX)</div><div class="line">                    || name.endsWith(ZIP_SUFFIX)) &#123;</div><div class="line">                try &#123;</div><div class="line">                    zip = new ZipFile(file);</div><div class="line"></div><div class="line">                &#125; catch (IOException ex) &#123;</div><div class="line">                    System.logE(&quot;Unable to open zip file: &quot; + file, ex);</div><div class="line">                &#125;</div><div class="line">                try &#123;</div><div class="line">                    dex = loadDexFile(file, optimizedDirectory);</div><div class="line">                &#125; catch (IOException ignored) &#123;</div><div class="line"></div><div class="line"> </div><div class="line">                &#125;</div><div class="line">            &#125; else &#123;</div><div class="line">                System.logW(&quot;Unknown file type for: &quot; + file);</div><div class="line">            &#125;</div><div class="line">            if ((zip != null) || (dex != null)) &#123;</div><div class="line"></div><div class="line">                elements.add(new Element(file, zip, dex));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return elements.toArray(new Element[elements.size()]);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line"></div><div class="line">    private static DexFile loadDexFile(File file, File optimizedDirectory)</div><div class="line">            throws IOException &#123;</div><div class="line">        if (optimizedDirectory == null) &#123;</div><div class="line">            return new DexFile(file);</div><div class="line">        &#125; else &#123;</div><div class="line">            String optimizedPath = optimizedPathFor(file, optimizedDirectory);</div><div class="line"></div><div class="line">            return DexFile.loadDex(file.getPath(), optimizedPath, 0);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">     /**</div><div class="line">     * Element of the dex/resource file path</div><div class="line">     */</div><div class="line">    static class Element &#123;</div><div class="line">        public final File file;</div><div class="line">        public final ZipFile zipFile;</div><div class="line">		public final DexFile dexFile;</div><div class="line"></div><div class="line">        public Element(File file, ZipFile zipFile, DexFile dexFile) &#123;</div><div class="line">            this.file = file;</div><div class="line">            this.zipFile = zipFile;</div><div class="line">            this.dexFile = dexFile;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们为什么要反射<code>pathList</code>字段呢？ClassLoader 在<code>findClass()</code>时会在<code>pathList</code>中寻找，因此通过反射手动添加其他Dex文件中的class到<code>pathList</code>字段中，就可以实现类的动态加载，这也是MultiDex方案的基本原理。</p>
 <p>至此，MultiDex的源码分析到这里就结束了，其实有很多概念还没有讲清楚，只是讲了个大致思路，后面有时间再来补充吧</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://blog.zongwu233.com/the-touble-of-multidex" target="_blank" rel="external">其实你不知道MultiDex到底有多坑</a></p>
@@ -335,6 +423,21 @@
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -342,9 +445,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MultiDex/" rel="tag">#MultiDex</a>
+            <a href="/tags/MultiDex/" rel="tag"># MultiDex</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -357,7 +464,13 @@
             
           </div>
 
+          <span class="post-nav-divider"></span>
+
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/Dalvik vs ART/" rel="prev" title="Android 运行时">
+                Android 运行时 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -372,25 +485,6 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/03/26/MultiDex源码分析/"
-     data-title="MultiDex源码解析"
-     data-content=""
-     data-url="http://loody.github.io/2017/03/26/MultiDex源码分析/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -402,8 +496,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/26/MultiDex源码分析/"
-           data-title="MultiDex源码解析" data-url="http://loody.github.io/2017/03/26/MultiDex源码分析/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -437,25 +534,32 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/loofee.png"
                alt="loody" />
           <p class="site-author-name" itemprop="name">loody</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">51</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
+
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
           
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -463,9 +567,11 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">70</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -479,18 +585,20 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/loody" target="_blank">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
@@ -500,29 +608,37 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
       
 
     </div>
@@ -545,35 +661,38 @@
   <span class="author" itemprop="copyrightHolder">loody</span>
 </div>
 
+
 <div class="powered-by">
-  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
 </div>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
 
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
-
-
-  
-
-
-
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -582,25 +701,45 @@
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
@@ -608,235 +747,106 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
 
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
 
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
+  
 
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
 
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
+  
 
-      $tocSelector.css('height', height);
+    
+      <script id="dsq-count-scr" src="https://loody.disqus.com/count.js" async></script>
+    
 
-      return height;
-    }
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://loody.github.io/2017/03/26/MultiDex源码分析/';
+          this.page.identifier = '2017/03/26/MultiDex源码分析/';
+          this.page.title = 'MultiDex源码解析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://loody.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
+  
 
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
 
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
 
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
 
-    onScroll($tocSelector);
+	
 
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
 
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
 
-          toggleTOCOverflowIndicators();
-      });
-    }
 
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
 
-  });
-</script>
+  
 
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
 
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
 
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
 
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
 
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
+  
 
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
 
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      }
-    };
-  });
-</script>
+      });
+    </script>
 
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"loody"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
-      <script src="/js/src/hook-duoshuo.js"></script>
-    
-  
-
-
-
-
-
-  
-  
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
   
-
 
 </body>
 </html>

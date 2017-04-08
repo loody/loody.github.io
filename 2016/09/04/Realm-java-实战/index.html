@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,66 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Realm Java," />
@@ -50,7 +98,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
 
 
 
@@ -61,33 +109,47 @@
 Android ORM 框架对比项目规划的时间较短，没时间去自己实现一个数据库，好在现在已经有很多开源的ORM框架，下面这个网站是介绍目前比较流行的开源的ORM框架,地址是https://android.libhunt.com/categori">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Realm Java 使用">
-<meta property="og:url" content="http://loody.github.io/2016/09/04/Realm-java-实战/index.html">
+<meta property="og:url" content="https://loody.github.io/2016/09/04/Realm-java-实战/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="需求由于项目的定位是工具，所以需要采用纯离线方式实现，这对客户端的开发者来说，无疑是一个大麻烦，因为还要涉及到数据的保存和同步，没办法，项目需要，只能开干
 Android ORM 框架对比项目规划的时间较短，没时间去自己实现一个数据库，好在现在已经有很多开源的ORM框架，下面这个网站是介绍目前比较流行的开源的ORM框架,地址是https://android.libhunt.com/categori">
-<meta property="og:image" content="http://loody.github.io/images/realm-cn.png">
+<meta property="og:image" content="https://loody.github.io/images/realm-cn.png">
 <meta property="og:updated_time" content="2016-09-11T13:54:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Realm Java 使用">
 <meta name="twitter:description" content="需求由于项目的定位是工具，所以需要采用纯离线方式实现，这对客户端的开发者来说，无疑是一个大麻烦，因为还要涉及到数据的保存和同步，没办法，项目需要，只能开干
 Android ORM 框架对比项目规划的时间较短，没时间去自己实现一个数据库，好在现在已经有很多开源的ORM框架，下面这个网站是介绍目前比较流行的开源的ORM框架,地址是https://android.libhunt.com/categori">
-<meta name="twitter:image" content="http://loody.github.io/images/realm-cn.png">
+<meta name="twitter:image" content="https://loody.github.io/images/realm-cn.png">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> Realm Java 使用 | loody's blog </title>
 </head>
@@ -98,15 +160,11 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+
 
 
 
@@ -118,29 +176,33 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">loody's blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -153,7 +215,7 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -163,29 +225,9 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -193,9 +235,29 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -207,6 +269,8 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -217,10 +281,8 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
             
 
   <div id="posts" class="posts-expand">
-
     
 
-  
   
 
   
@@ -228,6 +290,17 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2016/09/04/Realm-java-实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
 
     
       <header class="post-header">
@@ -246,24 +319,32 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T20:35:20+08:00" content="2016-09-04">
-              2016-09-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-04T20:35:20+08:00">
+                2016-09-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -271,7 +352,6 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 
                 
                 
-
               
             </span>
           
@@ -279,17 +359,25 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/09/04/Realm-java-实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/Realm-java-实战/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/04/Realm-java-实战/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
 
           
+
+          
+
           
 
         </div>
@@ -308,33 +396,33 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 <h2 id="Realm-Java"><a href="#Realm-Java" class="headerlink" title="Realm Java"></a>Realm Java</h2><p>先放一张它<a href="https://realm.io/cn/" target="_blank" rel="external">官网</a>对他的介绍截图<br><img src="/images/realm-cn.png" alt=""><br>逼格不要太高。</p>
 <p>realm是一个跨平台移动数据库引擎，支持Android、OC、React Native、Swift等语言。是第一个专门针对移动平台设计的数据库。目标是取代SQLite。</p>
 <h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>这也是我选择它的原因之一，在性能方面表现非常抢眼，下面是它官网放出的一个性能对比<br><a href="https://realm.io/news/realm-for-android/#realm-for-android" target="_blank" rel="external">https://realm.io/news/realm-for-android/#realm-for-android</a></p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Create a RealmConfiguration that saves the Realm file in the app's "files" directory</span></span><br><span class="line"> RealmConfiguration realmConfig = <span class="keyword">new</span> RealmConfiguration.Builder(getApplicationContext())</span><br><span class="line">         .name(<span class="string">"moon.realm"</span>)</span><br><span class="line">         .deleteRealmIfMigrationNeeded()<span class="comment">//调试时用</span></span><br><span class="line">         .build();</span><br><span class="line"> Realm.setDefaultConfiguration(realmConfig);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取</span></span><br><span class="line">Realm mRealm= Realm.getDefaultInstance();</span><br><span class="line"></span><br><span class="line"><span class="comment">//为了方便全局获取，我将Realm的获取放在了BaseActivity中</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Realm <span class="title">getRealm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mRealm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里有个原则必须要注意：realmConfig的build的线程和Realm获取的线程必须要保持一致否则就会抛出如下异常<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.IllegalStateException: Realm access from incorrect thread. Realm objects can only be accessed on the thread they were created.</span><br></pre></td></tr></table></figure></p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Create a RealmConfiguration that saves the Realm file in the app's "files" directory</span></div><div class="line"> RealmConfiguration realmConfig = <span class="keyword">new</span> RealmConfiguration.Builder(getApplicationContext())</div><div class="line">         .name(<span class="string">"moon.realm"</span>)</div><div class="line">         .deleteRealmIfMigrationNeeded()<span class="comment">//调试时用</span></div><div class="line">         .build();</div><div class="line"> Realm.setDefaultConfiguration(realmConfig);</div><div class="line"></div><div class="line"><span class="comment">//获取</span></div><div class="line">Realm mRealm= Realm.getDefaultInstance();</div><div class="line"></div><div class="line"><span class="comment">//为了方便全局获取，我将Realm的获取放在了BaseActivity中</span></div><div class="line"><span class="function"><span class="keyword">public</span> Realm <span class="title">getRealm</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> mRealm;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里有个原则必须要注意：realmConfig的build的线程和Realm获取的线程必须要保持一致否则就会抛出如下异常<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Caused by: java.lang.IllegalStateException: Realm access from incorrect thread. Realm objects can only be accessed on the thread they were created.</div></pre></td></tr></table></figure></p>
 <h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>所有的写操作（添加、修改和删除对象），必须包含在写入事务（transaction）中。写入事务可以提交或取消<br>事务的创建有两种方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一</span></span><br><span class="line">getRealm().beginTransaction();</span><br><span class="line"><span class="comment">//... add or update objects here ...</span></span><br><span class="line">getRealm().commitTransaction();</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二</span></span><br><span class="line">getRealm().executeTransaction(<span class="keyword">new</span> Realm.Transaction() &#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Realm realm)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//...add or update objects here ...</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//方式一</span></div><div class="line">getRealm().beginTransaction();</div><div class="line"><span class="comment">//... add or update objects here ...</span></div><div class="line">getRealm().commitTransaction();</div><div class="line"></div><div class="line"><span class="comment">//方式二</span></div><div class="line">getRealm().executeTransaction(<span class="keyword">new</span> Realm.Transaction() &#123;</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Realm realm)</span> </span>&#123;</div><div class="line">        <span class="comment">//...add or update objects here ...</span></div><div class="line">     &#125;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
 <p>后面在写为了方面查看，我就不加入添加事务代码了，但是大家在使用中一定要加上，否则运行会报错的</p>
 </blockquote>
 </blockquote>
-<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>首先我们定义个model<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Profile</span> <span class="keyword">extends</span> <span class="title">RealmObject</span> </span>&#123;</span><br><span class="line">    <span class="meta">@PrimaryKey</span></span><br><span class="line">    <span class="keyword">public</span> String id = UUID.randomUUID().toString();;</span><br><span class="line">    <span class="keyword">public</span> String username;</span><br><span class="line">    <span class="keyword">public</span> String avatar_url;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> duration;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> cycle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>首先我们定义个model<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Profile</span> <span class="keyword">extends</span> <span class="title">RealmObject</span> </span>&#123;</div><div class="line">    <span class="meta">@PrimaryKey</span></div><div class="line">    <span class="keyword">public</span> String id = UUID.randomUUID().toString();;</div><div class="line">    <span class="keyword">public</span> String username;</div><div class="line">    <span class="keyword">public</span> String avatar_url;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> duration;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> cycle;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这里只要我们继承了RealmObject,数据库在初始化的时候就会创建一个表名为Profile的表，字段为id、username、avatar_url、duration、cycle，其中带有注解@PrimaryKey的字段为主键</p>
 <p>由于Realm不支持ID自动递增，所以采用的UUID的方式（有点挫）</p>
-<p>增加数据一般有两个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一</span></span><br><span class="line">Profile profile = <span class="keyword">new</span> Profile();</span><br><span class="line">profile.username = <span class="string">"loody"</span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">getRealm().copyToRealm(profile)</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二</span></span><br><span class="line">Profile profile = getRealm().createObject(Profile.class)</span><br><span class="line">profile.username = <span class="string">"loody"</span>;</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Profile profile = getRealm().copyToRealm(profile);</span><br><span class="line">profile.deleteFromRealm();</span><br></pre></td></tr></table></figure>
-<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Profile profile = getRealm().copyToRealmOrUpdate(profile);</span><br><span class="line">profile.username = <span class="string">"jay"</span></span><br></pre></td></tr></table></figure>
+<p>增加数据一般有两个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//方式一</span></div><div class="line">Profile profile = <span class="keyword">new</span> Profile();</div><div class="line">profile.username = <span class="string">"loody"</span>;</div><div class="line"><span class="comment">//...</span></div><div class="line">getRealm().copyToRealm(profile)</div><div class="line"></div><div class="line"><span class="comment">//方式二</span></div><div class="line">Profile profile = getRealm().createObject(Profile.class)</div><div class="line">profile.username = <span class="string">"loody"</span>;</div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure></p>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Profile profile = getRealm().copyToRealm(profile);</div><div class="line">profile.deleteFromRealm();</div></pre></td></tr></table></figure>
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Profile profile = getRealm().copyToRealmOrUpdate(profile);</div><div class="line">profile.username = <span class="string">"jay"</span></div></pre></td></tr></table></figure>
 <p>这里有一点要注意，调用copyToRealmOrUpdate()方法的前提是Profile必须要定义主键</p>
-<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//集合</span></span><br><span class="line">RealmResults&lt;Profile&gt; mAllProfiles = getRealm().where(Profile.class).findAll();</span><br><span class="line"></span><br><span class="line"><span class="comment">//集合中的第一个</span></span><br><span class="line">Profile profile = mAllPeriods.first();</span><br><span class="line"></span><br><span class="line"><span class="comment">//集合中的最后一个</span></span><br><span class="line">Profile profile = mAllPeriods.last();</span><br></pre></td></tr></table></figure>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//集合</span></div><div class="line">RealmResults&lt;Profile&gt; mAllProfiles = getRealm().where(Profile.class).findAll();</div><div class="line"></div><div class="line"><span class="comment">//集合中的第一个</span></div><div class="line">Profile profile = mAllPeriods.first();</div><div class="line"></div><div class="line"><span class="comment">//集合中的最后一个</span></div><div class="line">Profile profile = mAllPeriods.last();</div></pre></td></tr></table></figure>
 <h4 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h4><p>Realm 支持以下查询条件：</p>
 <p><code>between</code>()、<code>greaterThan</code>()、<code>lessThan</code>()、<code>greaterThanOrEqualTo</code>() 和 <code>lessThanOrEqualTo</code>()<br><code>equalTo</code>() 和 <code>notEqualTo</code>()<br><code>contains</code>()、<code>beginsWith</code>() 和 <code>endsWith</code>()<br><code>isNull</code>() 和 <code>isNotNull</code>()<br><code>isEmpty</code>() 和 <code>isNotEmpty</code>()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///查询 duration 在5~7(包括)天的人</span></span><br><span class="line">RealmResults&lt;Profile&gt; mProfiles = getRealm().where(Profile.class).greaterThanOrEqualTo（<span class="string">"duration"</span>,<span class="number">5</span>）.lessThanOrEqualTo(<span class="string">"duration"</span>,<span class="number">7</span>).findAll();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">///查询 duration 在5~7(包括)天的人</span></div><div class="line">RealmResults&lt;Profile&gt; mProfiles = getRealm().where(Profile.class).greaterThanOrEqualTo（<span class="string">"duration"</span>,<span class="number">5</span>）.lessThanOrEqualTo(<span class="string">"duration"</span>,<span class="number">7</span>).findAll();</div></pre></td></tr></table></figure>
 <h3 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h3><p>当数据库结构发生改变的时候，我们需要配置Migration来实现数据迁移的操作。 比如要新增属性，新增表等</p>
-<p>首先我们在初始化数据库的时候要设定当前版本的版本号<code>schemaVersion</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration realmConfig = <span class="keyword">new</span> RealmConfiguration.Builder(getApplicationContext())</span><br><span class="line">              .name(<span class="string">"moon.realm"</span>)</span><br><span class="line">              .schemaVersion(<span class="number">1</span>）<span class="comment">//每次数据库发生变化需要改变此值，默认为0</span></span><br><span class="line">              .migration(<span class="keyword">new</span> MyMigration())<span class="comment">//迁移的配置</span></span><br><span class="line">              .build();</span><br></pre></td></tr></table></figure></p>
-<p>接着在不同的版本下做相应的配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMigration</span> <span class="keyword">implements</span> <span class="title">RealmMigration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">migrate</span><span class="params">(DynamicRealm realm, <span class="keyword">long</span> oldVersion, <span class="keyword">long</span> newVersion)</span> </span>&#123;</span><br><span class="line">        RealmSchema schema = realm.getSchema();</span><br><span class="line">        <span class="keyword">if</span> (oldVersion == <span class="number">1</span>) &#123;</span><br><span class="line">            schema.create(<span class="string">"Note"</span>).addField(<span class="string">"name"</span>, String.class);<span class="comment">//创建Note表并添加name字段，String</span></span><br><span class="line"></span><br><span class="line">            schema.get(<span class="string">"Profile"</span>).addField(<span class="string">"age"</span>, <span class="keyword">int</span>.class);<span class="comment">//向Profile表新增age字段,数据类型为int</span></span><br><span class="line">            oldVersion++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先我们在初始化数据库的时候要设定当前版本的版本号<code>schemaVersion</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">RealmConfiguration realmConfig = <span class="keyword">new</span> RealmConfiguration.Builder(getApplicationContext())</div><div class="line">              .name(<span class="string">"moon.realm"</span>)</div><div class="line">              .schemaVersion(<span class="number">1</span>）<span class="comment">//每次数据库发生变化需要改变此值，默认为0</span></div><div class="line">              .migration(<span class="keyword">new</span> MyMigration())<span class="comment">//迁移的配置</span></div><div class="line">              .build();</div></pre></td></tr></table></figure></p>
+<p>接着在不同的版本下做相应的配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMigration</span> <span class="keyword">implements</span> <span class="title">RealmMigration</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">migrate</span><span class="params">(DynamicRealm realm, <span class="keyword">long</span> oldVersion, <span class="keyword">long</span> newVersion)</span> </span>&#123;</div><div class="line">        RealmSchema schema = realm.getSchema();</div><div class="line">        <span class="keyword">if</span> (oldVersion == <span class="number">1</span>) &#123;</div><div class="line">            schema.create(<span class="string">"Note"</span>).addField(<span class="string">"name"</span>, String.class);<span class="comment">//创建Note表并添加name字段，String</span></div><div class="line"></div><div class="line">            schema.get(<span class="string">"Profile"</span>).addField(<span class="string">"age"</span>, <span class="keyword">int</span>.class);<span class="comment">//向Profile表新增age字段,数据类型为int</span></div><div class="line">            oldVersion++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="数据库查看"><a href="#数据库查看" class="headerlink" title="数据库查看"></a>数据库查看</h3><p>数据库创建好后，我们怎样方便实时查看我们的数据文件呢？因为realm不是基于sqlite实现的，这里我们要借助facebook调试工具–&gt;<a href="https://github.com/facebook/stetho" target="_blank" rel="external">Stetho</a></p>
 <p>引用方式很简单,在build.gradle加入</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123; url <span class="string">'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">compile <span class="string">'com.facebook.stetho:stetho:1.3.1'</span></span><br><span class="line">compile <span class="string">'com.uphyca:stetho_realm:0.9.0'</span><span class="comment">//专门针对realm的插件</span></span><br></pre></td></tr></table></figure>
-<p>初始化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stetho.initialize(</span><br><span class="line">    Stetho.newInitializerBuilder(<span class="keyword">this</span>)</span><br><span class="line">          .enableDumpapp(Stetho.defaultDumperPluginsProvider(<span class="keyword">this</span>))</span><br><span class="line">          .enableWebKitInspector(RealmInspectorModulesProvider.builder(<span class="keyword">this</span>).build())</span><br><span class="line">          .build());</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">    maven &#123; url <span class="string">'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">compile <span class="string">'com.facebook.stetho:stetho:1.3.1'</span></div><div class="line">compile <span class="string">'com.uphyca:stetho_realm:0.9.0'</span><span class="comment">//专门针对realm的插件</span></div></pre></td></tr></table></figure>
+<p>初始化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Stetho.initialize(</div><div class="line">    Stetho.newInitializerBuilder(<span class="keyword">this</span>)</div><div class="line">          .enableDumpapp(Stetho.defaultDumperPluginsProvider(<span class="keyword">this</span>))</div><div class="line">          .enableWebKitInspector(RealmInspectorModulesProvider.builder(<span class="keyword">this</span>).build())</div><div class="line">          .build());</div></pre></td></tr></table></figure></p>
 <p>最后我们在浏览器中输入<code>chrome://inspect</code>即可查看了</p>
 <p>以上是对Realm Java的一些基本用法的讲解，后面有机会会讲一些它的复杂用法</p>
 
@@ -344,6 +432,21 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -351,9 +454,13 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
       
         <div class="post-tags">
           
-            <a href="/tags/Realm-Java/" rel="tag">#Realm Java</a>
+            <a href="/tags/Realm-Java/" rel="tag"># Realm Java</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -365,6 +472,8 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -385,25 +494,6 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/09/04/Realm-java-实战/"
-     data-title="Realm Java 使用"
-     data-content=""
-     data-url="http://loody.github.io/2016/09/04/Realm-java-实战/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -415,8 +505,11 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/04/Realm-java-实战/"
-           data-title="Realm Java 使用" data-url="http://loody.github.io/2016/09/04/Realm-java-实战/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -450,25 +543,32 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/loofee.png"
                alt="loody" />
           <p class="site-author-name" itemprop="name">loody</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">51</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
+
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
           
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -476,9 +576,11 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">70</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -492,18 +594,20 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/loody" target="_blank">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
@@ -513,29 +617,37 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-ORM-框架对比"><span class="nav-number">2.</span> <span class="nav-text">Android ORM 框架对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Realm-Java"><span class="nav-number">3.</span> <span class="nav-text">Realm Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">4.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">5.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">5.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">5.2.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增"><span class="nav-number">5.3.</span> <span class="nav-text">增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删"><span class="nav-number">5.4.</span> <span class="nav-text">删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改"><span class="nav-number">5.5.</span> <span class="nav-text">改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查"><span class="nav-number">6.</span> <span class="nav-text">查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询条件"><span class="nav-number">6.0.1.</span> <span class="nav-text">查询条件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库迁移"><span class="nav-number">6.1.</span> <span class="nav-text">数据库迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库查看"><span class="nav-number">6.2.</span> <span class="nav-text">数据库查看</span></a></li></ol></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
       
 
     </div>
@@ -558,35 +670,38 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
   <span class="author" itemprop="copyrightHolder">loody</span>
 </div>
 
+
 <div class="powered-by">
-  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
 </div>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
 
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
-
-
-  
-
-
-
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -595,25 +710,45 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
@@ -621,235 +756,106 @@ Android ORM 框架对比项目规划的时间较短，没时间去自己实现�
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
 
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
 
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
+  
 
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
 
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
+  
 
-      $tocSelector.css('height', height);
+    
+      <script id="dsq-count-scr" src="https://loody.disqus.com/count.js" async></script>
+    
 
-      return height;
-    }
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://loody.github.io/2016/09/04/Realm-java-实战/';
+          this.page.identifier = '2016/09/04/Realm-java-实战/';
+          this.page.title = 'Realm Java 使用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://loody.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
+  
 
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
 
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
 
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
 
-    onScroll($tocSelector);
+	
 
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
 
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
 
-          toggleTOCOverflowIndicators();
-      });
-    }
 
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
 
-  });
-</script>
+  
 
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
 
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
 
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
 
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
 
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
+  
 
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
 
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      }
-    };
-  });
-</script>
+      });
+    </script>
 
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"loody"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
-      <script src="/js/src/hook-duoshuo.js"></script>
-    
-  
-
-
-
-
-
-  
-  
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
   
-
 
 </body>
 </html>

@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,66 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Retrofit注解," />
@@ -50,7 +98,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
 
 
 
@@ -69,7 +117,7 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 这个注解通的比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit 请求参数注解说明">
-<meta property="og:url" content="http://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/index.html">
+<meta property="og:url" content="https://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="Retrofit是通过使用注解来简化请求的，下面就来看看Retrofit请求参数中用到的所有注解
 Retrofit 注解主要分为三大类
@@ -97,19 +145,33 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> Retrofit 请求参数注解说明 | loody's blog </title>
 </head>
@@ -120,15 +182,11 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+
 
 
 
@@ -140,29 +198,33 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">loody's blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -175,7 +237,7 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -185,29 +247,9 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -215,9 +257,29 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -229,6 +291,8 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -239,10 +303,8 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
             
 
   <div id="posts" class="posts-expand">
-
     
 
-  
   
 
   
@@ -250,6 +312,17 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
 
     
       <header class="post-header">
@@ -268,24 +341,32 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-16T20:22:40+08:00" content="2016-10-16">
-              2016-10-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-16T20:22:40+08:00">
+                2016-10-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -293,7 +374,6 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 
                 
                 
-
               
             </span>
           
@@ -301,17 +381,25 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/10/16/Retrofit-请求参数注解说明/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/Retrofit-请求参数注解说明/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/16/Retrofit-请求参数注解说明/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
 
           
+
+          
+
           
 
         </div>
@@ -340,20 +428,20 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 </blockquote>
 <p>它有三个属性：method、path、hasBody</p>
 <p>最近正好用到它自定义了一个DELETE请求，用于支持传递Body注解参数，方法如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@HTTP</span>(method = <span class="string">"DELETE"</span>, path = <span class="string">"/api/v1/sync"</span>, hasBody = <span class="keyword">true</span>)</span><br><span class="line">Observable&lt;Response&lt;Object&gt;&gt; postSyncRemoveData(<span class="meta">@Body</span> SyncRemoveData syncData);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@HTTP</span>(method = <span class="string">"DELETE"</span>, path = <span class="string">"/api/v1/sync"</span>, hasBody = <span class="keyword">true</span>)</div><div class="line">Observable&lt;Response&lt;Object&gt;&gt; postSyncRemoveData(<span class="meta">@Body</span> SyncRemoveData syncData);</div></pre></td></tr></table></figure>
 <h2 id="标记类"><a href="#标记类" class="headerlink" title="标记类"></a>标记类</h2><p>该类型的注解用于标注请求和响应的格式。</p>
 <h3 id="FormUrlEncoded"><a href="#FormUrlEncoded" class="headerlink" title="FormUrlEncoded"></a>FormUrlEncoded</h3><p>表示请求发送编码表单数据，每个键值对需要使用@Field注解</p>
 <h3 id="Multipart"><a href="#Multipart" class="headerlink" title="Multipart"></a>Multipart</h3><p>表示请求发送multipart数据，需要配合使用@Part</p>
 <h3 id="Streaming"><a href="#Streaming" class="headerlink" title="Streaming"></a>Streaming</h3><p>表示响应用字节流的形式返回.如果没使用该注解,默认会把数据全部载入到内存中.该注解在在下载大文件的特别有用</p>
 <h2 id="参数类"><a href="#参数类" class="headerlink" title="参数类"></a>参数类</h2><h3 id="Body"><a href="#Body" class="headerlink" title="Body"></a>Body</h3><p>用于post请求发送非表单数据,比如想要以post方式传递json格式数据,及传递一个model对象，retrofit会将其转化成json格式的对象，当然取决你addConverterFactory（）采用的哪种方式了，converter有如下:Gson、Jackson、Moshi、Protobuf、Wire、Simple XML。示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@POST</span>(<span class="string">"/api/v1/users"</span>)</span><br><span class="line">Observable&lt;Response&lt;TokenModel&gt;&gt; postUser(<span class="meta">@Body</span> Auth auth);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@POST</span>(<span class="string">"/api/v1/users"</span>)</div><div class="line">Observable&lt;Response&lt;TokenModel&gt;&gt; postUser(<span class="meta">@Body</span> Auth auth);</div></pre></td></tr></table></figure>
 <h3 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h3><p>表单字段，与 FieldMap、FormUrlEncoded 配合</p>
 <h3 id="FieldMap"><a href="#FieldMap" class="headerlink" title="FieldMap"></a>FieldMap</h3><p>表单字段，与 Field、FormUrlEncoded 配合；接受 Map<string, string=""> 类型，非 String 类型会调用 toString() 方法，示例：</string,></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FormUrlEncoded</span></span><br><span class="line"><span class="meta">@POST</span>(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@FieldMap Map&lt;String, String&gt; options)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormUrlEncoded</span></div><div class="line"><span class="meta">@POST</span>(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@FieldMap Map&lt;String, String&gt; options)</span></span>;</div></pre></td></tr></table></figure>
 <h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><p>作为方法的参数传入，用于添加不固定值的Header，该注解会更新已有的请求头</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUserInfo</span><span class="params">(@Header(<span class="string">"token"</span>)</span> token)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUserInfo</span><span class="params">(@Header(<span class="string">"token"</span>)</span> token)</span></div></pre></td></tr></table></figure>
 <h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>用于添加固定请求头，可以同时添加多个。通过该注解添加的请求头不会相互覆盖，而是共同存在示例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Headers</span>(&#123;</span><br><span class="line">    <span class="string">"User-Agent:android"</span></span><br><span class="line">    <span class="string">"Cache-Control: max-age=64000"</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUserInfo</span><span class="params">(@Header(<span class="string">"token"</span>)</span> token)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Headers</span>(&#123;</div><div class="line">    <span class="string">"User-Agent:android"</span></div><div class="line">    <span class="string">"Cache-Control: max-age=64000"</span></div><div class="line">&#125;)</div><div class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUserInfo</span><span class="params">(@Header(<span class="string">"token"</span>)</span> token)</span></div></pre></td></tr></table></figure>
 <h3 id="HeaderMap"><a href="#HeaderMap" class="headerlink" title="HeaderMap"></a>HeaderMap</h3><p>与FieldMap类似</p>
 <h3 id="Part"><a href="#Part" class="headerlink" title="Part"></a>Part</h3><p>表单字段，与 PartMap 配合，适合文件上传情况</p>
 <h3 id="PartMap"><a href="#PartMap" class="headerlink" title="PartMap"></a>PartMap</h3><p>表单字段，与 Part 配合，适合文件上传情况；默认接受 Map<string, requestbody=""> 类型，非 RequestBody 会通过 Converter 转换</string,></p>
@@ -361,17 +449,17 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 <blockquote>
 <p><a href="http://baseurl/api/v1/user/id" target="_blank" rel="external">http://baseurl/api/v1/user/id</a></p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id)</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"api/v1/user/&#123;id&#125;"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Path(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id)</span>;</div></pre></td></tr></table></figure>
 <h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><blockquote>
 <p><a href="http://baseurl/api/v1/user?id=id" target="_blank" rel="external">http://baseurl/api/v1/user?id=id</a></p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Query(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id)</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Query(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id)</span>;</div></pre></td></tr></table></figure>
 <h3 id="QueryMap"><a href="#QueryMap" class="headerlink" title="QueryMap"></a>QueryMap</h3><blockquote>
 <p><a href="http://baseurl/api/v1/user?param1=Param1&amp;param2=Param2" target="_blank" rel="external">http://baseurl/api/v1/user?param1=Param1&amp;param2=Param2</a>…</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@QueryMap Map&lt;String, String&gt; options)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@QueryMap Map&lt;String, String&gt; options)</span></span>;</div></pre></td></tr></table></figure>
 <h3 id="Url"><a href="#Url" class="headerlink" title="Url"></a>Url</h3><p>指定请求路径，这个特别适用于动态设置url</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET(<span class="string">"api/v1/user"</span>)</span><br><span class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Url String url)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET(<span class="string">"api/v1/user"</span>)</div><div class="line"><span class="function">Call&lt;User&gt; <span class="title">getUser</span><span class="params">(@Url String url)</span></span>;</div></pre></td></tr></table></figure>
 <p>此请求将按照传递的url作为url请求</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://square.github.io/retrofit/2.x/retrofit/" target="_blank" rel="external">http://square.github.io/retrofit/2.x/retrofit/</a><br><a href="http://www.jianshu.com/p/0f97f94b171f?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://www.jianshu.com/p/0f97f94b171f?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
 
@@ -381,6 +469,21 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -388,9 +491,13 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
       
         <div class="post-tags">
           
-            <a href="/tags/Retrofit注解/" rel="tag">#Retrofit注解</a>
+            <a href="/tags/Retrofit注解/" rel="tag"># Retrofit注解</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -402,6 +509,8 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -422,25 +531,6 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/16/Retrofit-请求参数注解说明/"
-     data-title="Retrofit 请求参数注解说明"
-     data-content=""
-     data-url="http://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -452,8 +542,11 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/16/Retrofit-请求参数注解说明/"
-           data-title="Retrofit 请求参数注解说明" data-url="http://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -487,25 +580,32 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/loofee.png"
                alt="loody" />
           <p class="site-author-name" itemprop="name">loody</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">51</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
+
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
           
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -513,9 +613,11 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">70</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -529,18 +631,20 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/loody" target="_blank">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
@@ -550,29 +654,37 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求方法类"><span class="nav-number">1.</span> <span class="nav-text">请求方法类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记类"><span class="nav-number">2.</span> <span class="nav-text">标记类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FormUrlEncoded"><span class="nav-number">2.1.</span> <span class="nav-text">FormUrlEncoded</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multipart"><span class="nav-number">2.2.</span> <span class="nav-text">Multipart</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Streaming"><span class="nav-number">2.3.</span> <span class="nav-text">Streaming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数类"><span class="nav-number">3.</span> <span class="nav-text">参数类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body"><span class="nav-number">3.1.</span> <span class="nav-text">Body</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Field"><span class="nav-number">3.2.</span> <span class="nav-text">Field</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FieldMap"><span class="nav-number">3.3.</span> <span class="nav-text">FieldMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Header"><span class="nav-number">3.4.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Headers"><span class="nav-number">3.5.</span> <span class="nav-text">Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HeaderMap"><span class="nav-number">3.6.</span> <span class="nav-text">HeaderMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part"><span class="nav-number">3.7.</span> <span class="nav-text">Part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PartMap"><span class="nav-number">3.8.</span> <span class="nav-text">PartMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Path"><span class="nav-number">3.9.</span> <span class="nav-text">Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query"><span class="nav-number">3.10.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryMap"><span class="nav-number">3.11.</span> <span class="nav-text">QueryMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Url"><span class="nav-number">3.12.</span> <span class="nav-text">Url</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
       
 
     </div>
@@ -595,35 +707,38 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
   <span class="author" itemprop="copyrightHolder">loody</span>
 </div>
 
+
 <div class="powered-by">
-  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
 </div>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
 
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
-
-
-  
-
-
-
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -632,25 +747,45 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
@@ -658,235 +793,106 @@ HTTP其中说一下HTTP请求，它可以替代其他7个注解
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
 
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
 
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
+  
 
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
 
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
+  
 
-      $tocSelector.css('height', height);
+    
+      <script id="dsq-count-scr" src="https://loody.disqus.com/count.js" async></script>
+    
 
-      return height;
-    }
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://loody.github.io/2016/10/16/Retrofit-请求参数注解说明/';
+          this.page.identifier = '2016/10/16/Retrofit-请求参数注解说明/';
+          this.page.title = 'Retrofit 请求参数注解说明';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://loody.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
+  
 
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
 
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
 
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
 
-    onScroll($tocSelector);
+	
 
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
 
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
 
-          toggleTOCOverflowIndicators();
-      });
-    }
 
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
 
-  });
-</script>
+  
 
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
 
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
 
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
 
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
 
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
+  
 
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
 
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      }
-    };
-  });
-</script>
+      });
+    </script>
 
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"loody"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
-      <script src="/js/src/hook-duoshuo.js"></script>
-    
-  
-
-
-
-
-
-  
-  
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
   
-
 
 </body>
 </html>

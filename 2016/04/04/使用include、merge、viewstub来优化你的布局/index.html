@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,66 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="include,merge,ViewStub,性能优化," />
@@ -50,7 +98,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
 
 
 
@@ -61,7 +109,7 @@
 includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用include、merge、ViewStub来优化你的布局">
-<meta property="og:url" content="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/index.html">
+<meta property="og:url" content="https://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/index.html">
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解include、merge、ViewStub在优化布局中的使用方法
 includeinclude想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如divider,toolbar,我们可以将">
@@ -73,19 +121,33 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> 使用include、merge、ViewStub来优化你的布局 | loody's blog </title>
 </head>
@@ -96,15 +158,11 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?f99c8e8fc92fd70fbf50a1494cf47607";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
+
 
 
 
@@ -116,29 +174,33 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">loody's blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -151,7 +213,7 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -161,29 +223,9 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -191,9 +233,29 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -205,6 +267,8 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -215,10 +279,8 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
             
 
   <div id="posts" class="posts-expand">
-
     
 
-  
   
 
   
@@ -226,6 +288,17 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
 
     
       <header class="post-header">
@@ -244,24 +317,32 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-04T19:35:36+08:00" content="2016-04-04">
-              2016-04-04
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-04T19:35:36+08:00">
+                2016-04-04
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android性能优化/" itemprop="url" rel="index">
                     <span itemprop="name">Android性能优化</span>
                   </a>
@@ -269,7 +350,6 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
 
                 
                 
-
               
             </span>
           
@@ -277,17 +357,25 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/04/04/使用include、merge、viewstub来优化你的布局/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/04/04/使用include、merge、viewstub来优化你的布局/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
 
           
+
+          
+
           
 
         </div>
@@ -303,7 +391,7 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
       
         <p>在开发中UI布局是我们都会遇到的问题，随着UI越来越多，布局的重复性、复杂度也会随之增长，我们怎样布局才是最合理，性能最好的呢？Android官方也给出了很多优化布局的方案，下面我主要讲解<code>include</code>、<code>merge</code>、<code>ViewStub</code>在优化布局中的使用方法</p>
 <h2 id="include"><a href="#include" class="headerlink" title="include"></a>include</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">include</a>想必大家最熟悉了,它的用处就是当我们有一个布局在很多地方都用到的时候，比如<code>divider</code>,<code>toolbar</code>,我们可以将这个布局抽离出一个单独的xml文件，然后在其他需要用到它的时候include进来即可，简单来说就是<strong>布局重用</strong>，下面贴一个简单的例子<code>toolbar.xml</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">              <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">              <span class="attr">android:background</span>=<span class="string">"@color/window_background"</span></span><br><span class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/toolbar"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">   			...</span><br><span class="line">   				</span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:background</span>=<span class="string">"@color/window_background"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/toolbar"</span>/&gt;</span></div><div class="line"></div><div class="line">   			...</div><div class="line">   				</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这里的toolbar就是被抽离出来的布局，这样我们在其他Activity需要加入toolbar的时候直接include<code>toolbar.xml</code>就可以了</p>
 <h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">merge</a>标签的作用在于通过减少view的层级从而消除冗余ViewGroup，达到布局优化的目的.下面举一个购物车列表的例子</p>
 <ol>
@@ -311,12 +399,12 @@ includeinclude想必大家最熟悉了,它的用处就是当我们有一个布�
 <li>当购物车不为空时，显示列表ListView</li>
 </ol>
 <p>下面贴一下布局文件的源码fragment_cart.xml，方便大家理解</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">FrameLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">             <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">             <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">             <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">             <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ViewStub</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/vs_cart_none"</span></span><br><span class="line">        <span class="attr">android:inflatedId</span>=<span class="string">"@+id/stub_fl"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout</span>=<span class="string">"@layout/view_order_none"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ListView</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/lv"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">其中view_order_none.xml代码如下</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span><br><span class="line">    	<span class="attr">android:id</span>=<span class="string">"@+id/fl_cart_none"</span></span><br><span class="line">    	<span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    	<span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    	<span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    	<span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    	<span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">FrameLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">             <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">             <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">             <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">             <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ViewStub</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/vs_cart_none"</span></div><div class="line">        <span class="attr">android:inflatedId</span>=<span class="string">"@+id/stub_fl"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout</span>=<span class="string">"@layout/view_order_none"</span>/&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ListView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/lv"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>/&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div><div class="line"></div><div class="line">其中view_order_none.xml代码如下</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line">    	<span class="attr">android:id</span>=<span class="string">"@+id/fl_cart_none"</span></div><div class="line">    	<span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    	<span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    	<span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    	<span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    	<span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div></pre></td></tr></table></figure>
 <p>这里<code>fragment_cart.xml</code>包含了两个布局，<code>ViewStub</code>（下面会介绍）和<code>ListView</code>，他们通过一个FramLayout包裹起来，其实我们再仔细一想，这个FrameLayout的存在有没有必要呢？结果是没有必要的，它只会让我们层级又多了一层，这个时候就可以用<code>merge</code>标签替换它了，这也是<code>merge</code>的使用场景,用merge替换后的代码如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">merge</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">            <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">            <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">ViewStub</span></span><br><span class="line">       <span class="attr">android:id</span>=<span class="string">"@+id/vs_cart_none"</span></span><br><span class="line">       <span class="attr">android:inflatedId</span>=<span class="string">"@+id/stub_fl"</span></span><br><span class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout</span>=<span class="string">"@layout/view_order_none"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">ListView</span></span><br><span class="line">       <span class="attr">android:id</span>=<span class="string">"@+id/lv"</span></span><br><span class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">merge</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">merge</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">            <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">            <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">   <span class="tag">&lt;<span class="name">ViewStub</span></span></div><div class="line">       <span class="attr">android:id</span>=<span class="string">"@+id/vs_cart_none"</span></div><div class="line">       <span class="attr">android:inflatedId</span>=<span class="string">"@+id/stub_fl"</span></div><div class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">       <span class="attr">android:layout</span>=<span class="string">"@layout/view_order_none"</span>/&gt;</div><div class="line"></div><div class="line"></div><div class="line">   <span class="tag">&lt;<span class="name">ListView</span></span></div><div class="line">       <span class="attr">android:id</span>=<span class="string">"@+id/lv"</span></div><div class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>/&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">merge</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="ViewStub"><a href="#ViewStub" class="headerlink" title="ViewStub"></a>ViewStub</h2><p><a href="http://developer.android.com/intl/zh-cn/reference/android/view/ViewStub.html" target="_blank" rel="external">ViewStub</a>标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局像进度条、显示错误消息等可以使用<code>ViewStub</code>标签，以减少内存使用量，加快渲染速度。继续上面购物车列表为空的例子</p>
 <p>判断ViewStub是否加载</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  </span><br><span class="line"><span class="comment">// 加载购物车列表布局  </span></span><br><span class="line">vs_cart_none.setVisibility(View.VISIBLE);  </span><br><span class="line"><span class="comment">// 获取到购物车ListView，注意这里是通过ViewStub的inflatedId来获取  </span></span><br><span class="line">FrameLayout stub_fl = findViewById(R.id.stub_fl);  </span><br><span class="line"><span class="keyword">if</span> (vs_cart_none.getVisibility() == View.VISIBLE ) &#123;  </span><br><span class="line"><span class="comment">// 已经加载, 否则还没有加载</span></span><br><span class="line">	stub_fl.setVisibility(View.GONE); </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	stub_fl.setVisibility(View.VISIBLE); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ViewStub vs_cart_none = (ViewStub) findViewById(R.id.vs_cart_none);  </div><div class="line"><span class="comment">// 加载购物车列表布局  </span></div><div class="line">vs_cart_none.setVisibility(View.VISIBLE);  </div><div class="line"><span class="comment">// 获取到购物车ListView，注意这里是通过ViewStub的inflatedId来获取  </span></div><div class="line">FrameLayout stub_fl = findViewById(R.id.stub_fl);  </div><div class="line"><span class="keyword">if</span> (vs_cart_none.getVisibility() == View.VISIBLE ) &#123;  </div><div class="line"><span class="comment">// 已经加载, 否则还没有加载</span></div><div class="line">	stub_fl.setVisibility(View.GONE); </div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	stub_fl.setVisibility(View.VISIBLE); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面我们是通过<code>vs_cart_none.setVisibility(View.VISIBLE);</code> 来加载ViewStub的布局的，还有另外一种方法</p>
 <pre><code>FrameLayout stub_fl；
 ...
@@ -328,7 +416,7 @@ if(stub_fl==null){
 }
 </code></pre><p>注意这两种加载方法的判断逻辑是不一样的</p>
 <p>还有一点 我们的ViewStub布局中有这个么一个属性，android:inflatedId=”@+id/stub_fl”，在判断ViewStub是否加载的第一种方法中，我们是通过这个<code>inflatedId</code>来找到FrameLayout的，开始我也举得很疑惑，我们的FrameLayout不是有自己的id<code>stub_fl</code>吗？为什么要通过这个<code>inflatedId</code>来找，如果这两个id同时存在，该通过那个id来找，带着疑问我们去看下ViewStub的源码；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ViewStub</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> TypedArray a = context.obtainStyledAttributes(attrs,</span><br><span class="line">            R.styleable.ViewStub, defStyleAttr, defStyleRes);</span><br><span class="line">    <span class="comment">//获取inflatedId</span></span><br><span class="line">    mInflatedId = a.getResourceId(R.styleable.ViewStub_inflatedId, NO_ID);</span><br><span class="line">    mLayoutResource = a.getResourceId(R.styleable.ViewStub_layout, <span class="number">0</span>);</span><br><span class="line">    mID = a.getResourceId(R.styleable.ViewStub_id, NO_ID);</span><br><span class="line">    a.recycle();</span><br><span class="line"></span><br><span class="line">    setVisibility(GONE);<span class="comment">//设置不可见</span></span><br><span class="line">    setWillNotDraw(<span class="keyword">true</span>);<span class="comment">//设置不绘制</span></span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line"> </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">    setMeasuredDimension(<span class="number">0</span>, <span class="number">0</span>);<span class="comment">//宽高默认为0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * When visibility is set to &#123;<span class="doctag">@link</span> #VISIBLE&#125; or &#123;<span class="doctag">@link</span> #INVISIBLE&#125;,</span><br><span class="line"> * &#123;<span class="doctag">@link</span> #inflate()&#125; is invoked and this StubbedView is replaced in its parent</span><br><span class="line"> * by the inflated layout resource. After that calls to this function are passed</span><br><span class="line"> * through to the inflated view.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@param</span> visibility One of &#123;<span class="doctag">@link</span> #VISIBLE&#125;, &#123;<span class="doctag">@link</span> #INVISIBLE&#125;, or &#123;<span class="doctag">@link</span> #GONE&#125;.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@see</span> #inflate() </span><br><span class="line"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@android</span>.view.<span class="function">RemotableViewMethod</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVisibility</span><span class="params">(<span class="keyword">int</span> visibility)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mInflatedViewRef != <span class="keyword">null</span>) &#123;</span><br><span class="line">    	<span class="comment">//已经加载只设置是否可见</span></span><br><span class="line">        View view = mInflatedViewRef.get();</span><br><span class="line">        <span class="keyword">if</span> (view != <span class="keyword">null</span>) &#123;</span><br><span class="line">            view.setVisibility(visibility);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"setVisibility called on un-referenced view"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.setVisibility(visibility);</span><br><span class="line">        <span class="keyword">if</span> (visibility == VISIBLE || visibility == INVISIBLE) &#123;</span><br><span class="line">        	<span class="comment">//VISIBLE或INVISIBLE条件下就加载</span></span><br><span class="line">            inflate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span><br><span class="line"> * Inflates the layout resource identified by &#123;<span class="doctag">@link</span> #getLayoutResource()&#125;</span><br><span class="line"> * and replaces this StubbedView in its parent by the inflated layout resource.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> The inflated layout resource.</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> View <span class="title">inflate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ViewParent viewParent = getParent();</span><br><span class="line">    <span class="keyword">if</span> (viewParent != <span class="keyword">null</span> &amp;&amp; viewParent <span class="keyword">instanceof</span> ViewGroup) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mLayoutResource != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">final</span> ViewGroup parent = (ViewGroup) viewParent;</span><br><span class="line">            <span class="keyword">final</span> LayoutInflater factory;</span><br><span class="line">            <span class="keyword">if</span> (mInflater != <span class="keyword">null</span>) &#123;</span><br><span class="line">                factory = mInflater;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                factory = LayoutInflater.from(mContext);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//此处的view为layout包裹的布局的根布局</span></span><br><span class="line">            <span class="keyword">final</span> View view = factory.inflate(mLayoutResource, parent,</span><br><span class="line">                    <span class="keyword">false</span>);</span><br><span class="line">			<span class="comment">//如果布局中设置了inflatedId，就将这个id赋给view</span></span><br><span class="line">            <span class="keyword">if</span> (mInflatedId != NO_ID) &#123;</span><br><span class="line">                view.setId(mInflatedId);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> index = parent.indexOfChild(<span class="keyword">this</span>);</span><br><span class="line">            parent.removeViewInLayout(<span class="keyword">this</span>);</span><br><span class="line">            <span class="keyword">final</span> ViewGroup.LayoutParams layoutParams = getLayoutParams();</span><br><span class="line">            <span class="keyword">if</span> (layoutParams != <span class="keyword">null</span>) &#123;</span><br><span class="line">                parent.addView(view, index, layoutParams);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                parent.addView(view, index);</span><br><span class="line">            &#125;</span><br><span class="line">            mInflatedViewRef = <span class="keyword">new</span> WeakReference&lt;View&gt;(view);</span><br><span class="line">            <span class="keyword">if</span> (mInflateListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mInflateListener.onInflate(<span class="keyword">this</span>, view);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> view;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"ViewStub must have a valid layoutResource"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"ViewStub must have a non-null ViewGroup viewParent"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ViewStub</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(context);</div><div class="line"></div><div class="line">    <span class="keyword">final</span> TypedArray a = context.obtainStyledAttributes(attrs,</div><div class="line">            R.styleable.ViewStub, defStyleAttr, defStyleRes);</div><div class="line">    <span class="comment">//获取inflatedId</span></div><div class="line">    mInflatedId = a.getResourceId(R.styleable.ViewStub_inflatedId, NO_ID);</div><div class="line">    mLayoutResource = a.getResourceId(R.styleable.ViewStub_layout, <span class="number">0</span>);</div><div class="line">    mID = a.getResourceId(R.styleable.ViewStub_id, NO_ID);</div><div class="line">    a.recycle();</div><div class="line"></div><div class="line">    setVisibility(GONE);<span class="comment">//设置不可见</span></div><div class="line">    setWillNotDraw(<span class="keyword">true</span>);<span class="comment">//设置不绘制</span></div><div class="line">&#125;</div><div class="line">     </div><div class="line"> </div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">    setMeasuredDimension(<span class="number">0</span>, <span class="number">0</span>);<span class="comment">//宽高默认为0</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * When visibility is set to &#123;<span class="doctag">@link</span> #VISIBLE&#125; or &#123;<span class="doctag">@link</span> #INVISIBLE&#125;,</div><div class="line"> * &#123;<span class="doctag">@link</span> #inflate()&#125; is invoked and this StubbedView is replaced in its parent</div><div class="line"> * by the inflated layout resource. After that calls to this function are passed</div><div class="line"> * through to the inflated view.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> visibility One of &#123;<span class="doctag">@link</span> #VISIBLE&#125;, &#123;<span class="doctag">@link</span> #INVISIBLE&#125;, or &#123;<span class="doctag">@link</span> #GONE&#125;.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@see</span> #inflate() </div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="meta">@android</span>.view.<span class="function">RemotableViewMethod</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVisibility</span><span class="params">(<span class="keyword">int</span> visibility)</span> &#123;</div><div class="line">    <span class="keyword">if</span> (mInflatedViewRef != <span class="keyword">null</span>) &#123;</div><div class="line">    	<span class="comment">//已经加载只设置是否可见</span></div><div class="line">        View view = mInflatedViewRef.get();</div><div class="line">        <span class="keyword">if</span> (view != <span class="keyword">null</span>) &#123;</div><div class="line">            view.setVisibility(visibility);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"setVisibility called on un-referenced view"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">super</span>.setVisibility(visibility);</div><div class="line">        <span class="keyword">if</span> (visibility == VISIBLE || visibility == INVISIBLE) &#123;</div><div class="line">        	<span class="comment">//VISIBLE或INVISIBLE条件下就加载</span></div><div class="line">            inflate();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line"> * Inflates the layout resource identified by &#123;<span class="doctag">@link</span> #getLayoutResource()&#125;</div><div class="line"> * and replaces this StubbedView in its parent by the inflated layout resource.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> The inflated layout resource.</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> View <span class="title">inflate</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> ViewParent viewParent = getParent();</div><div class="line">    <span class="keyword">if</span> (viewParent != <span class="keyword">null</span> &amp;&amp; viewParent <span class="keyword">instanceof</span> ViewGroup) &#123;</div><div class="line">        <span class="keyword">if</span> (mLayoutResource != <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">final</span> ViewGroup parent = (ViewGroup) viewParent;</div><div class="line">            <span class="keyword">final</span> LayoutInflater factory;</div><div class="line">            <span class="keyword">if</span> (mInflater != <span class="keyword">null</span>) &#123;</div><div class="line">                factory = mInflater;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                factory = LayoutInflater.from(mContext);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//此处的view为layout包裹的布局的根布局</span></div><div class="line">            <span class="keyword">final</span> View view = factory.inflate(mLayoutResource, parent,</div><div class="line">                    <span class="keyword">false</span>);</div><div class="line">			<span class="comment">//如果布局中设置了inflatedId，就将这个id赋给view</span></div><div class="line">            <span class="keyword">if</span> (mInflatedId != NO_ID) &#123;</div><div class="line">                view.setId(mInflatedId);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> index = parent.indexOfChild(<span class="keyword">this</span>);</div><div class="line">            parent.removeViewInLayout(<span class="keyword">this</span>);</div><div class="line">            <span class="keyword">final</span> ViewGroup.LayoutParams layoutParams = getLayoutParams();</div><div class="line">            <span class="keyword">if</span> (layoutParams != <span class="keyword">null</span>) &#123;</div><div class="line">                parent.addView(view, index, layoutParams);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                parent.addView(view, index);</div><div class="line">            &#125;</div><div class="line">            mInflatedViewRef = <span class="keyword">new</span> WeakReference&lt;View&gt;(view);</div><div class="line">            <span class="keyword">if</span> (mInflateListener != <span class="keyword">null</span>) &#123;</div><div class="line">                mInflateListener.onInflate(<span class="keyword">this</span>, view);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> view;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"ViewStub must have a valid layoutResource"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"ViewStub must have a non-null ViewGroup viewParent"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>所以如果ViewStub属性中设置了<code>android:inflatedId:stub_fl</code>,那么<code>view_order_none.xml</code>中的<code>android:id=&quot;@+id/fl_cart_none&quot;</code>就无效了，否则就可以通过<code>fl_cart_none</code>取到</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的介绍，我想大家应该大概了解include、merge、VIewStub的使用方法了，其实并不是有多难，只是我们很少用他们而已，我们在做性能优化优化的时候，UI布局的优化也是其中的一部分，那么让我们用上它们吧！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/training/improving-layouts/reusing-layouts.html</a><br><a href="http://www.devtf.cn/?p=509" target="_blank" rel="external">http://www.devtf.cn/?p=509</a></p>
@@ -339,6 +427,21 @@ if(stub_fl==null){
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -346,15 +449,19 @@ if(stub_fl==null){
       
         <div class="post-tags">
           
-            <a href="/tags/include/" rel="tag">#include</a>
+            <a href="/tags/include/" rel="tag"># include</a>
           
-            <a href="/tags/merge/" rel="tag">#merge</a>
+            <a href="/tags/merge/" rel="tag"># merge</a>
           
-            <a href="/tags/ViewStub/" rel="tag">#ViewStub</a>
+            <a href="/tags/ViewStub/" rel="tag"># ViewStub</a>
           
-            <a href="/tags/性能优化/" rel="tag">#性能优化</a>
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -366,6 +473,8 @@ if(stub_fl==null){
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -386,25 +495,6 @@ if(stub_fl==null){
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/"
-     data-title="使用include、merge、ViewStub来优化你的布局"
-     data-content=""
-     data-url="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -416,8 +506,11 @@ if(stub_fl==null){
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/04/使用include、merge、viewstub来优化你的布局/"
-           data-title="使用include、merge、ViewStub来优化你的布局" data-url="http://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -451,25 +544,32 @@ if(stub_fl==null){
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/loofee.png"
                alt="loody" />
           <p class="site-author-name" itemprop="name">loody</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">51</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
+
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
           
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -477,9 +577,11 @@ if(stub_fl==null){
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">70</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -493,18 +595,20 @@ if(stub_fl==null){
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/loody" target="_blank">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
@@ -514,29 +618,37 @@ if(stub_fl==null){
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#include"><span class="nav-number">1.</span> <span class="nav-text">include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">2.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewStub"><span class="nav-number">3.</span> <span class="nav-text">ViewStub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
       
 
     </div>
@@ -559,35 +671,38 @@ if(stub_fl==null){
   <span class="author" itemprop="copyrightHolder">loody</span>
 </div>
 
+
 <div class="powered-by">
-  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
 </div>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
 
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
-
-
-  
-
-
-
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -596,25 +711,45 @@ if(stub_fl==null){
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
@@ -622,235 +757,106 @@ if(stub_fl==null){
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
 
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
 
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
+  
 
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
 
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
+  
 
-      $tocSelector.css('height', height);
+    
+      <script id="dsq-count-scr" src="https://loody.disqus.com/count.js" async></script>
+    
 
-      return height;
-    }
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://loody.github.io/2016/04/04/使用include、merge、viewstub来优化你的布局/';
+          this.page.identifier = '2016/04/04/使用include、merge、viewstub来优化你的布局/';
+          this.page.title = '使用include、merge、ViewStub来优化你的布局';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://loody.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
+  
 
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
 
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
 
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
 
-    onScroll($tocSelector);
+	
 
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
 
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
 
-          toggleTOCOverflowIndicators();
-      });
-    }
 
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
 
-  });
-</script>
+  
 
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
 
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
 
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
 
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
 
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
+  
 
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
 
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      }
-    };
-  });
-</script>
+      });
+    </script>
 
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"loody"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
-      <script src="/js/src/hook-duoshuo.js"></script>
-    
-  
-
-
-
-
-
-  
-  
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
   
-
 
 </body>
 </html>
