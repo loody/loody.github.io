@@ -551,16 +551,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>解决ScrollView嵌套ListView的冲突问题</title>
-        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
+        <title>ichartjs在android应用中的使用</title>
+        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
         
-        <tag>ScrollView</tag>
-         
-        <tag>ListView</tag>
+        <tag>ichartjs</tag>
          
          
            
@@ -597,14 +595,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>android的基站定位</title>
-        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
+        <title>解决ScrollView嵌套ListView的冲突问题</title>
+        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
         
-        <tag>基站定位</tag>
+        <tag>ScrollView</tag>
+         
+        <tag>ListView</tag>
          
          
            
@@ -617,14 +617,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>ichartjs在android应用中的使用</title>
-        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
+        <title>android的基站定位</title>
+        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
         
-        <tag>ichartjs</tag>
+        <tag>基站定位</tag>
          
          
            
@@ -743,26 +743,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android LayoutInflater原理分析</title>
-        <pubTime>2014-10-25T16:00:00.000Z</pubTime>
-        
-        <tag>LayoutInflater</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -783,34 +763,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
-        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
+        <title>Android LayoutInflater原理分析</title>
+        <pubTime>2014-10-25T16:00:00.000Z</pubTime>
         
-        <tag>Gradle依赖申明</tag>
-         
-         
-           
-             
-              <breadCrumb title="Gradle" url="https://loody.github.io/categories/Gradle/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>微信支付需要注意的几个问题</title>
-        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
-        
-        <tag>微信支付</tag>
+        <tag>LayoutInflater</tag>
          
          
            
@@ -845,6 +805,26 @@
 
     
   <url>
+    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
+        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
+        
+        <tag>Gradle依赖申明</tag>
+         
+         
+           
+             
+              <breadCrumb title="Gradle" url="https://loody.github.io/categories/Gradle/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -865,14 +845,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>https://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        <title>微信支付需要注意的几个问题</title>
+        <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
-        <tag>Canvas</tag>
+        <tag>微信支付</tag>
          
          
            
@@ -895,6 +875,26 @@
         <tag>scrollview嵌套webview</tag>
          
         <tag>锚点</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        
+        <tag>Canvas</tag>
          
          
            
@@ -1027,16 +1027,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>WebViewClient和WebChromeClient的区别</title>
-        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
+        <title>RecyclerView、CardView</title>
+        <pubTime>2015-04-25T16:00:00.000Z</pubTime>
         
-        <tag>WebViewClient</tag>
+        <tag>RecyclerView</tag>
          
-        <tag>WebChromeClient</tag>
+        <tag>CardView</tag>
          
          
            
@@ -1049,16 +1049,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>RecyclerView、CardView</title>
-        <pubTime>2015-04-25T16:00:00.000Z</pubTime>
+        <title>WebViewClient和WebChromeClient的区别</title>
+        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
         
-        <tag>RecyclerView</tag>
+        <tag>WebViewClient</tag>
          
-        <tag>CardView</tag>
+        <tag>WebChromeClient</tag>
          
          
            
