@@ -531,14 +531,14 @@
     
     
   <url>
-    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>https://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>CoordinatorLayout的使用场景</title>
-        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        <title>高亮显示滚轮控件WheelView选中项</title>
+        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
         
-        <tag>CoordinatorLayout</tag>
+        <tag>WheelView高亮</tag>
          
          
            
@@ -783,28 +783,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
-        
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -845,6 +823,28 @@
 
     
   <url>
+    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -853,6 +853,26 @@
         <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
         <tag>微信支付</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        
+        <tag>Canvas</tag>
          
          
            
@@ -887,26 +907,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
-        
-        <tag>Canvas</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -914,26 +914,6 @@
         <title>Android中绘图学习笔记(二)</title>
         <pubTime>2015-01-31T16:00:00.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(三)</title>
-        <pubTime>2015-02-07T16:00:00.000Z</pubTime>
-        
-        <tag>Matrix</tag>
-         
          
            
              
@@ -967,14 +947,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>Android中绘图学习笔记(三)</title>
+        <pubTime>2015-02-07T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>Matrix</tag>
          
          
            
@@ -987,14 +967,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>实现滚动隐藏header的layout</title>
-        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
         
-        <tag>Scrollable</tag>
+        <tag>View的事件传递</tag>
          
          
            
@@ -1020,6 +1000,26 @@
            
              
               <breadCrumb title="http" url="https://loody.github.io/categories/http/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>实现滚动隐藏header的layout</title>
+        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
+        
+        <tag>Scrollable</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
           
         </display>
     </data>
@@ -1071,14 +1071,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>高亮显示滚轮控件WheelView选中项</title>
-        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
+        <title>CoordinatorLayout的使用场景</title>
+        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
         
-        <tag>WheelView高亮</tag>
+        <tag>CoordinatorLayout</tag>
          
          
            
