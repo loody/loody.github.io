@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>https://loody.github.io/2017/05/21/Android-%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2017-05-21T14:45:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android 开发调试工具</title>
+        <pubTime>2017-05-21T12:43:42.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2017/03/30/Dalvik%20vs%20ART/</loc>
     <lastmod>2017-04-08T16:26:06.000Z</lastmod>
     <data>
@@ -531,46 +549,6 @@
     
     
   <url>
-    <loc>https://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>高亮显示滚轮控件WheelView选中项</title>
-        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
-        
-        <tag>WheelView高亮</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>ichartjs在android应用中的使用</title>
-        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
-        
-        <tag>ichartjs</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -605,6 +583,26 @@
         <tag>ScrollView</tag>
          
         <tag>ListView</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>ichartjs在android应用中的使用</title>
+        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
+        
+        <tag>ichartjs</tag>
          
          
            
@@ -783,6 +781,28 @@
 
     
   <url>
+    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -823,28 +843,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
-        
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/12/21/2014-12-21-weixin-pay/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -853,26 +851,6 @@
         <pubTime>2014-12-20T16:00:00.000Z</pubTime>
         
         <tag>微信支付</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
-        
-        <tag>Canvas</tag>
          
          
            
@@ -907,6 +885,26 @@
 
     
   <url>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        
+        <tag>Canvas</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -914,6 +912,26 @@
         <title>Android中绘图学习笔记(二)</title>
         <pubTime>2015-01-31T16:00:00.000Z</pubTime>
         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(三)</title>
+        <pubTime>2015-02-07T16:00:00.000Z</pubTime>
+        
+        <tag>Matrix</tag>
+         
          
            
              
@@ -947,14 +965,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
+    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Android中绘图学习笔记(三)</title>
-        <pubTime>2015-02-07T16:00:00.000Z</pubTime>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
         
-        <tag>Matrix</tag>
+        <tag>View的事件传递</tag>
          
          
            
@@ -967,14 +985,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>https://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>实现滚动隐藏header的layout</title>
+        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>Scrollable</tag>
          
          
            
@@ -1007,14 +1025,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/11/2015-04-11-viewpager-head-scroll/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>实现滚动隐藏header的layout</title>
-        <pubTime>2015-04-10T16:00:00.000Z</pubTime>
+        <title>WebViewClient和WebChromeClient的区别</title>
+        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
         
-        <tag>Scrollable</tag>
+        <tag>WebViewClient</tag>
+         
+        <tag>WebChromeClient</tag>
          
          
            
@@ -1049,16 +1069,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>https://loody.github.io/2015/06/07/2015-06-07-wheelview-highlight-current-item/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>WebViewClient和WebChromeClient的区别</title>
-        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
+        <title>高亮显示滚轮控件WheelView选中项</title>
+        <pubTime>2015-06-06T16:00:00.000Z</pubTime>
         
-        <tag>WebViewClient</tag>
-         
-        <tag>WebChromeClient</tag>
+        <tag>WheelView高亮</tag>
          
          
            
