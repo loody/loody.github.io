@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://loody.github.io/2017/06/04/Chrome-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95-Android-WebView/</loc>
+    
+    <lastmod>2017-06-04T06:27:29.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://loody.github.io/2017/05/21/Android-%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
     
-    <lastmod>2017-05-21T14:45:57.000Z</lastmod>
+    <lastmod>2017-05-22T14:12:52.000Z</lastmod>
     
   </url>
   
@@ -191,13 +198,6 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -219,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
+    <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
+    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -261,14 +261,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -282,7 +275,21 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -310,14 +317,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
+    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -331,7 +331,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>https://loody.github.io/2015/02/08/2015-02-08-canvas-matrix/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -374,6 +374,13 @@
   
   <url>
     <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
