@@ -114,7 +114,7 @@
 <meta property="og:description" content="上篇我们详细介绍了注解，相信你已经对注解有了大概的了解，以及它可以给我们带来什么帮助，这篇文章我们继续实现 Extra 中的需求，我们已经定义好了注解，那我们怎么根据定义的注解帮我们自动生成获取数据的代码呢，这就是我们今天要讲得注解解析器。
 先看下我们上篇文章定义的注解123456@Target(ElementType.FIELD)@Retention(RetentionPolicy.CLASS)">
 <meta property="og:image" content="https://loody.github.io/images/extra_processor.png">
-<meta property="og:updated_time" content="2017-07-16T14:12:38.000Z">
+<meta property="og:updated_time" content="2017-07-16T14:21:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译时注解项目实践之注解解析器">
 <meta name="twitter:description" content="上篇我们详细介绍了注解，相信你已经对注解有了大概的了解，以及它可以给我们带来什么帮助，这篇文章我们继续实现 Extra 中的需求，我们已经定义好了注解，那我们怎么根据定义的注解帮我们自动生成获取数据的代码呢，这就是我们今天要讲得注解解析器。
@@ -443,9 +443,10 @@
 <p>语法了解了，接下来只需要实现就好了，这里我主要说下思路</p>
 <ol>
 <li>通过注解处理器解析出我们申明的变量，主要是类型，变量名</li>
-<li>通过<a href="https://github.com/square/javapoet" target="_blank" rel="external">javapoet</a>生成java代码，</li>
+<li>通过<a href="https://github.com/square/javapoet" target="_blank" rel="external">javapoet</a>生成java代码，javapoet语法这里不做介绍，大家自行了解。</li>
 </ol>
 <p>具体代码我已经上传到github，见<a href="https://github.com/loody/Extra/blob/master/extra-compiler/src/main/java/me/loody/extra/compiler/ExtraParamProcessor.java" target="_blank" rel="external">ExtraParamProcessor</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://lizhaoxuan.github.io/2016/07/17/apt-Grammar-explanation/" target="_blank" rel="external">Android编译时注解框架-语法讲解</a><br><a href="https://github.com/square/javapoet" target="_blank" rel="external">javapoet</a></p>
 
       
     </div>
@@ -647,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义注解处理器"><span class="nav-number">1.</span> <span class="nav-text">自定义注解处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解处理器（APT）语法"><span class="nav-number">2.</span> <span class="nav-text">注解处理器（APT）语法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义注解处理器"><span class="nav-number">1.</span> <span class="nav-text">自定义注解处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解处理器（APT）语法"><span class="nav-number">2.</span> <span class="nav-text">注解处理器（APT）语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
