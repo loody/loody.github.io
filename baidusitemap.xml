@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://loody.github.io/2017/07/16/%E7%BC%96%E8%AF%91%E6%97%B6%E6%B3%A8%E8%A7%A3%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%E4%B9%8B%E6%B3%A8%E8%A7%A3%E8%A7%A3%E6%9E%90%E5%99%A8/</loc>
+    <lastmod>2017-07-16T14:12:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>编译时注解项目实践之注解解析器</title>
+        <pubTime>2017-07-16T12:04:58.000Z</pubTime>
+        
+        <tag>注解解析器</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2017/07/09/%E7%BC%96%E8%AF%91%E6%97%B6%E6%B3%A8%E8%A7%A3%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%E4%B9%8B%E6%B3%A8%E8%A7%A3/</loc>
-    <lastmod>2017-07-09T13:29:10.000Z</lastmod>
+    <lastmod>2017-07-16T12:36:55.000Z</lastmod>
     <data>
         <display>
         <title>编译时注解项目实践之注解</title>
@@ -591,40 +611,14 @@
     
     
   <url>
-    <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>解决ScrollView嵌套ListView的冲突问题</title>
-        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
+        <title>android的基站定位</title>
+        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
         
-        <tag>ScrollView</tag>
-         
-        <tag>ListView</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于魅族SmartBar的适配2</title>
-        <pubTime>2014-08-29T16:00:00.000Z</pubTime>
-        
-        <tag>魅族</tag>
-         
-        <tag>适配</tag>
-         
-        <tag>SmartBar</tag>
+        <tag>基站定位</tag>
          
          
            
@@ -659,14 +653,18 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>android的基站定位</title>
-        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
+        <title>关于魅族SmartBar的适配2</title>
+        <pubTime>2014-08-29T16:00:00.000Z</pubTime>
         
-        <tag>基站定位</tag>
+        <tag>魅族</tag>
+         
+        <tag>适配</tag>
+         
+        <tag>SmartBar</tag>
          
          
            
@@ -759,28 +757,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Activity的四种启动模式</title>
-        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
-        
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/10/26/2014-10-26-about%20LayoutInflater/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -821,14 +797,36 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
         
-        <tag>Canvas</tag>
+        <tag>占位符</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/11/15/2014-11-15-about%20activity%20lauchMode/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity的四种启动模式</title>
+        <pubTime>2014-11-14T16:00:00.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
          
          
            
@@ -850,24 +848,6 @@
         
         <tag>微信支付</tag>
          
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android中绘图学习笔记(二)</title>
-        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
-        
          
            
              
@@ -901,14 +881,54 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
         
-        <tag>占位符</tag>
+        <tag>Canvas</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android中绘图学习笔记(二)</title>
+        <pubTime>2015-01-31T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>hellocharts与MPAndroidChart的比较</title>
+        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
+        
+        <tag>MPAndroidChart</tag>
+         
+        <tag>hellocharts</tag>
          
          
            
@@ -981,16 +1001,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>hellocharts与MPAndroidChart的比较</title>
-        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
+        <title>WebViewClient和WebChromeClient的区别</title>
+        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
+        <tag>WebViewClient</tag>
          
-        <tag>hellocharts</tag>
+        <tag>WebChromeClient</tag>
          
          
            
@@ -1013,28 +1033,6 @@
         <tag>RecyclerView</tag>
          
         <tag>CardView</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>WebViewClient和WebChromeClient的区别</title>
-        <pubTime>2015-05-02T16:00:00.000Z</pubTime>
-        
-        <tag>WebViewClient</tag>
-         
-        <tag>WebChromeClient</tag>
          
          
            
@@ -1087,6 +1085,26 @@
 
     
   <url>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoordinatorLayout的使用场景</title>
+        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        
+        <tag>CoordinatorLayout</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1111,14 +1129,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>CoordinatorLayout的使用场景</title>
-        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        <title>ichartjs在android应用中的使用</title>
+        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
         
-        <tag>CoordinatorLayout</tag>
+        <tag>ichartjs</tag>
          
          
            
@@ -1131,14 +1149,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
+    <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>ichartjs在android应用中的使用</title>
-        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
+        <title>解决ScrollView嵌套ListView的冲突问题</title>
+        <pubTime>2014-07-19T16:00:00.000Z</pubTime>
         
-        <tag>ichartjs</tag>
+        <tag>ScrollView</tag>
+         
+        <tag>ListView</tag>
          
          
            

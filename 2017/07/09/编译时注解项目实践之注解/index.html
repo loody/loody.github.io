@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="loody's blog">
 <meta property="og:description" content="前言Extra 是最近为了实践编译时注解写的一个项目，主要功能是可以直接通过注解获取 Activity 通过 Intent 传递的数据。主要涉及到注解处理及自定义 gradle 插件相关的知识，下面会围绕这些知识总结一些心得
 注解当前有很多流行的库都是用了注解这种语法，如ButterKnife、Dagger2、Retrefit等，熟练的使用注解，不仅可以让代码看起来简洁明了，还可以在动态运行时执行">
-<meta property="og:updated_time" content="2017-07-09T13:29:10.000Z">
+<meta property="og:updated_time" content="2017-07-16T12:36:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译时注解项目实践之注解">
 <meta name="twitter:description" content="前言Extra 是最近为了实践编译时注解写的一个项目，主要功能是可以直接通过注解获取 Activity 通过 Intent 传递的数据。主要涉及到注解处理及自定义 gradle 插件相关的知识，下面会围绕这些知识总结一些心得
@@ -391,25 +391,12 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://github.com/loody/Extra" target="_blank" rel="external">Extra</a> 是最近为了实践编译时注解写的一个项目，主要功能是可以直接通过注解获取 Activity 通过 Intent 传递的数据。主要涉及到注解处理及自定义 gradle 插件相关的知识，下面会围绕这些知识总结一些心得</p>
 <h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>当前有很多流行的库都是用了注解这种语法，如ButterKnife、Dagger2、Retrefit等，熟练的使用注解，不仅可以让代码看起来简洁明了，还可以在动态运行时执行你想要的操作，甚至还能帮我生成代码。</p>
 <h2 id="注解类型"><a href="#注解类型" class="headerlink" title="注解类型"></a>注解类型</h2><p>注解类型主要分为三种，系统注解、元注解、自定义注解。</p>
-<h3 id="系统注解"><a href="#系统注解" class="headerlink" title="系统注解"></a>系统注解</h3><h4 id="1、-Override"><a href="#1、-Override" class="headerlink" title="1、@Override"></a>1、@Override</h4><pre><code>@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.SOURCE)
-public @interface Override {
-
-}
-</code></pre><p>用于告知编译器，我们需要覆写超类的当前方法。如果某个方法带有该注解但并没有覆写超类相应的方法，则编译器会生成一条错误信息。 可适用元素为方法，仅仅保留在java源文件中|</p>
-<h4 id="2、-Deprecated"><a href="#2、-Deprecated" class="headerlink" title="2、@Deprecated"></a>2、@Deprecated</h4><pre><code>@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
-public @interface Deprecated {
-
-}
-</code></pre><p>用于告知编译器，某一程序元素(比如方法，成员变量)不建议使用时，应该使用这个注解。Java在javadoc中推荐使用该注解，一般应该提供为什么该方法不推荐使用以及相应替代方法。可适合用于除注解类型声明之外的所有元素，保留时长为运行时VM。</p>
-<h4 id="3、-SuppressWarnings"><a href="#3、-SuppressWarnings" class="headerlink" title="3、@SuppressWarnings"></a>3、@SuppressWarnings</h4><pre><code>@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
-@Retention(RetentionPolicy.SOURCE)
-public @interface SuppressWarnings {
-    String[] value();
-}
-</code></pre><p>用于告知编译器忽略特定的警告信息，例在泛型中使用原生数据类型。 @SuppressWarnings可适合用于除注解类型声明和包名之外的所有元素，仅仅保留在java源文件中。</p>
+<h3 id="系统注解"><a href="#系统注解" class="headerlink" title="系统注解"></a>系统注解</h3><h4 id="1、-Override"><a href="#1、-Override" class="headerlink" title="1、@Override"></a>1、@Override</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.METHOD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Override &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用于告知编译器，我们需要覆写超类的当前方法。如果某个方法带有该注解但并没有覆写超类相应的方法，则编译器会生成一条错误信息。 可适用元素为方法，仅仅保留在java源文件中|</p>
+<h4 id="2、-Deprecated"><a href="#2、-Deprecated" class="headerlink" title="2、@Deprecated"></a>2、@Deprecated</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(value=&#123;CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE&#125;)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Deprecated &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用于告知编译器，某一程序元素(比如方法，成员变量)不建议使用时，应该使用这个注解。Java在javadoc中推荐使用该注解，一般应该提供为什么该方法不推荐使用以及相应替代方法。可适合用于除注解类型声明之外的所有元素，保留时长为运行时VM。</p>
+<h4 id="3、-SuppressWarnings"><a href="#3、-SuppressWarnings" class="headerlink" title="3、@SuppressWarnings"></a>3、@SuppressWarnings</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(&#123;TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SuppressWarnings &#123;</div><div class="line">    String[] value();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用于告知编译器忽略特定的警告信息，例在泛型中使用原生数据类型。 @SuppressWarnings可适合用于除注解类型声明和包名之外的所有元素，仅仅保留在java源文件中。</p>
 <p>此注解还可以接收参数，参数介绍如下</p>
 <table>
 <thead>
@@ -449,27 +436,12 @@ public @interface SuppressWarnings {
 </tr>
 </tbody>
 </table>
-<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><h4 id="1、-Documented"><a href="#1、-Documented" class="headerlink" title="1、@Documented"></a>1、@Documented</h4><pre><code>@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface Documented {
-
-}
-</code></pre><p>表示拥有该注解的元素可通过javadoc此类的工具进行文档化。该类型应用于注解那些影响客户使用带注释(comment)的元素声明的类型。如果类型声明是用Documented来注解的，这种类型的注解被作为被标注的程序成员的公共API。</p>
-<h4 id="2、-Inherited"><a href="#2、-Inherited" class="headerlink" title="2、@Inherited"></a>2、@Inherited</h4><pre><code>@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface Inherited {
-
-}
-</code></pre><p>表示该注解类型被自动继承，如果用户在当前类中查询这个元注解类型并且当前类的声明中不包含这个元注解类型，那么也将自动查询当前类的父类是否存在Inherited元注解，这个动作将被重复执行知道这个标注类型被找到，或者是查询到顶层的父类。</p>
-<h4 id="3、-Retention"><a href="#3、-Retention" class="headerlink" title="3、@Retention"></a>3、@Retention</h4><pre><code>@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface Retention {
-    RetentionPolicy value();
-}
-</code></pre><p>表示该注解类型的注解保留的时长。当注解类型声明中没有@Retention元注解，则默认保留策略为RetentionPolicy.CLASS。关于保留策略(RetentionPolicy)是枚举类型，共定义3种保留策略，如下表：</p>
+<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><h4 id="1、-Documented"><a href="#1、-Documented" class="headerlink" title="1、@Documented"></a>1、@Documented</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(ElementType.ANNOTATION_TYPE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Documented &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示拥有该注解的元素可通过javadoc此类的工具进行文档化。该类型应用于注解那些影响客户使用带注释(comment)的元素声明的类型。如果类型声明是用Documented来注解的，这种类型的注解被作为被标注的程序成员的公共API。</p>
+<h4 id="2、-Inherited"><a href="#2、-Inherited" class="headerlink" title="2、@Inherited"></a>2、@Inherited</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(ElementType.ANNOTATION_TYPE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Inherited &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示该注解类型被自动继承，如果用户在当前类中查询这个元注解类型并且当前类的声明中不包含这个元注解类型，那么也将自动查询当前类的父类是否存在Inherited元注解，这个动作将被重复执行知道这个标注类型被找到，或者是查询到顶层的父类。</p>
+<h4 id="3、-Retention"><a href="#3、-Retention" class="headerlink" title="3、@Retention"></a>3、@Retention</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(ElementType.ANNOTATION_TYPE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Retention &#123;</div><div class="line">    <span class="function">RetentionPolicy <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示该注解类型的注解保留的时长。当注解类型声明中没有@Retention元注解，则默认保留策略为RetentionPolicy.CLASS。关于保留策略(RetentionPolicy)是枚举类型，共定义3种保留策略，如下表：</p>
 <table>
 <thead>
 <tr>
@@ -492,13 +464,8 @@ public @interface Retention {
 </tr>
 </tbody>
 </table>
-<h4 id="4、-Target"><a href="#4、-Target" class="headerlink" title="4、@Target"></a>4、@Target</h4><pre><code>@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface Target {
-    ElementType[] value();
-}
-</code></pre><p>表示该注解类型的所使用的程序元素类型。当注解类型声明中没有@Target元注解，则默认为可适用所有的程序元素。如果存在指定的@Target元注解，则编译器强制实施相应的使用限制。关于程序元素(ElementType)是枚举类型，共定义8种程序元素，如下表：</p>
+<h4 id="4、-Target"><a href="#4、-Target" class="headerlink" title="4、@Target"></a>4、@Target</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(ElementType.ANNOTATION_TYPE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Target &#123;</div><div class="line">    ElementType[] value();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示该注解类型的所使用的程序元素类型。当注解类型声明中没有@Target元注解，则默认为可适用所有的程序元素。如果存在指定的@Target元注解，则编译器强制实施相应的使用限制。关于程序元素(ElementType)是枚举类型，共定义8种程序元素，如下表：</p>
 <table>
 <thead>
 <tr>
@@ -549,14 +516,8 @@ public @interface Target {
 <li>内部是否有参数？</li>
 </ul>
 <p>针对 ExtraParam 我们可以如下作答：<br>生命周期：编译时，因为要生成自动获取Intent传递数据的代码<br>针对的目标：变量<br>内部是否有参数：有，因为有时候我们希望变量的名字跟传递数据时Bundle的Key不同</p>
-<p>所以 ExtraParam 定义就出来了</p>
-<pre><code>@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.CLASS)
-public @interface ExtraParam {
-  //key in bundle
-  String value() default &quot;&quot;;
-}
-</code></pre><p>下篇文章讲下注解解析器（APT），敬请期待</p>
+<p>所以 ExtraParam 定义就出来了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ExtraParam &#123;</div><div class="line">  <span class="comment">//key in bundle</span></div><div class="line">  <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下篇文章讲注解解析器（APT），敬请期待</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://gityuan.com/2016/01/23/java-annotation/" target="_blank" rel="external">Java注解(Annotation)</a><br><a href="http://wingjay.com/2017/05/03/Java-%E6%8A%80%E6%9C%AF%E4%B9%8B%E6%B3%A8%E8%A7%A3-Annotation/" target="_blank" rel="external">Java 技术之注解 Annotation</a></p>
 
       
@@ -609,6 +570,10 @@ public @interface ExtraParam {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/16/编译时注解项目实践之注解解析器/" rel="prev" title="编译时注解项目实践之注解解析器">
+                编译时注解项目实践之注解解析器 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -682,7 +647,7 @@ public @interface ExtraParam {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -704,7 +669,7 @@ public @interface ExtraParam {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
