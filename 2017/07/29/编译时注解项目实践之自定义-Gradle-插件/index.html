@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="多线程,断点下载," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -105,25 +105,24 @@
 
 
 
-<meta name="description" content="多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
-线程池使用线程池有三点好处
-第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
-第">
+<meta name="description" content="上篇文章介绍了自定义注解处理,到这里Extra项目已经可以用起来了，我们只需要按照下面的方式就可以集成
+1234dependencies &amp;#123;    compile &quot;me.loody:extra:x.x.x&quot;    annotationProcessor &quot;me.loody:extra-compiler:x.x.x&quot;&amp;#125;
+有没有更简单的方法呢？当然有，就是自定义一个 Gradle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android中利用多线程实现断点下载">
-<meta property="og:url" content="https://loody.github.io/2016/01/31/2016-01-31-multi_thread_download/index.html">
+<meta property="og:title" content="编译时注解项目实践之自定义 Gradle 插件">
+<meta property="og:url" content="https://loody.github.io/2017/07/29/编译时注解项目实践之自定义-Gradle-插件/index.html">
 <meta property="og:site_name" content="loody's blog">
-<meta property="og:description" content="多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
-线程池使用线程池有三点好处
-第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
-第">
-<meta property="og:updated_time" content="2016-05-11T15:04:54.000Z">
+<meta property="og:description" content="上篇文章介绍了自定义注解处理,到这里Extra项目已经可以用起来了，我们只需要按照下面的方式就可以集成
+1234dependencies &amp;#123;    compile &quot;me.loody:extra:x.x.x&quot;    annotationProcessor &quot;me.loody:extra-compiler:x.x.x&quot;&amp;#125;
+有没有更简单的方法呢？当然有，就是自定义一个 Gradle">
+<meta property="og:image" content="https://loody.github.io/images/extra-gradle-plugin.png">
+<meta property="og:updated_time" content="2017-07-29T16:24:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android中利用多线程实现断点下载">
-<meta name="twitter:description" content="多线程首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果
-线程池使用线程池有三点好处
-第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。
-第">
+<meta name="twitter:title" content="编译时注解项目实践之自定义 Gradle 插件">
+<meta name="twitter:description" content="上篇文章介绍了自定义注解处理,到这里Extra项目已经可以用起来了，我们只需要按照下面的方式就可以集成
+1234dependencies &amp;#123;    compile &quot;me.loody:extra:x.x.x&quot;    annotationProcessor &quot;me.loody:extra-compiler:x.x.x&quot;&amp;#125;
+有没有更简单的方法呢？当然有，就是自定义一个 Gradle">
+<meta name="twitter:image" content="https://loody.github.io/images/extra-gradle-plugin.png">
 
 
 
@@ -155,7 +154,7 @@
 
 
 
-  <title> android中利用多线程实现断点下载 | loody's blog </title>
+  <title> 编译时注解项目实践之自定义 Gradle 插件 | loody's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -294,7 +293,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2016/01/31/2016-01-31-multi_thread_download/">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2017/07/29/编译时注解项目实践之自定义-Gradle-插件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="loody">
@@ -315,7 +314,7 @@
             
             
               
-                android中利用多线程实现断点下载
+                编译时注解项目实践之自定义 Gradle 插件
               
             
           </h1>
@@ -328,8 +327,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-31T00:00:00+08:00">
-                2016-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T22:37:11+08:00">
+                2017-07-29
               </time>
             
 
@@ -339,26 +338,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -367,7 +346,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2016/01/31/2016-01-31-multi_thread_download/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/07/29/编译时注解项目实践之自定义-Gradle-插件/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -394,29 +373,26 @@
       
 
       
-        <h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>首先我们要下载的文件是比较大的，有一两百M,因为单线程下载会非常慢，用户肯定是没有耐心去等待的，体验也会大打折扣，所以我采取了多线程的下载方式，同时采用了线程池的方式来管理多线程。因为线程池可以限制系统中执行线程的数量，根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果</p>
-<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>使用线程池有三点好处</p>
-<p>第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
-<p>第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</p>
-<p>第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控</p>
-<p>java中主要用到的线程池有下面四种</p>
-<ul>
-<li><strong>newSingleThreadExecutor</strong><br>创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这个唯一的线程因为异常结束，那么会有一个新的线程来替代它。此线程池保证所有任务的执行顺序按照任务的提交顺序执行。</li>
-<li><strong>newFixedThreadPool</strong><br>创建固定大小的线程池。每次提交一个任务就创建一个线程，直到线程达到线程池的最大大小。线程池的大小一旦达到最大值就会保持不变，如果某个线程因为执行异常而结束，那么线程池会补充一个新线程。</li>
-<li><strong>newCachedThreadPool</strong><br>创建一个可缓存的线程池。如果线程池的大小超过了处理任务所需要的线程，<br>那么就会回收部分空闲（60秒不执行任务）的线程，当任务数增加时，此线程池又可以智能的添加新线程来处理任务。此线程池不会对线程池大小做限制，线程池大小完全依赖于操作系统（或者说JVM）能够创建的最大线程大小。</li>
-<li><strong>newScheduledThreadPool</strong><br>创建一个大小无限的线程池。此线程池支持定时以及周期性执行任务的需求。</li>
-</ul>
-<p><a href="http://www.infoq.com/cn/articles/java-threadPool/" target="_blank" rel="external">JAVA线程池的分析和使用</a></p>
-<p><a href="http://www.oschina.net/question/565065_86540" target="_blank" rel="external">Java线程池使用说明</a></p>
-<h2 id="多线程下载的原理"><a href="#多线程下载的原理" class="headerlink" title="多线程下载的原理"></a>多线程下载的原理</h2><p>1、在本地创建一个大小跟服务器文件相同大小的临时文件。</p>
-<p>2、计算分配几个线程去下载服务器上的资源，知道每个线程下载文件的位置。</p>
-<p>从上面的原理可以看出，多线程下载就是讲一个文件分成几段，然后每段分别开线程去下载，可是我们平时在访问一个文件时都是对整个文件进行读写，那怎样才能进行分段访问呢？那就要用到下面它<a href="http://developer.android.com/intl/zh-cn/reference/java/io/RandomAccessFile.html" target="_blank" rel="external">RandomAccessFile</a>了，它是一个随机文件访问类</p>
-<p>我们在多线程断点下载的过程中，主要用到它的<code>seek</code>方法，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">long</span> pos)</span></span></div><div class="line"></div><div class="line">This method sets the file-pointer offset, measured from the beginning of <span class="keyword">this</span> file, at which the next read or write occurs.</div></pre></td></tr></table></figure>
-<p>这个方法可以将文件的操作位置指向任何地方，其实所谓的<code>断点下载</code>就是利用的这点，让我们在下载过程中点击了暂停，我们记下此时文件已经下载的位置，当我们点继续下载的时候，我们只需拿到这个位置，然后调用<code>seek</code>方法，就可继续上次的下载了，而不用重新下载</p>
-<p>最后贴两个写的比较好的两个开源库</p>
-<p><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></p>
-<p><a href="https://github.com/Aspsine/MultiThreadDownload" target="_blank" rel="external">MultiThreadDownload</a></p>
+        <p>上篇文章介绍了自定义注解处理,到这里<a href="https://github.com/loody/Extra" target="_blank" rel="external">Extra</a>项目已经可以用起来了，我们只需要按照下面的方式就可以集成</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile <span class="string">"me.loody:extra:x.x.x"</span></div><div class="line">    annotationProcessor <span class="string">"me.loody:extra-compiler:x.x.x"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有没有更简单的方法呢？当然有，就是自定义一个 Gradle 插件来帮助我们申明依赖，当然 Gradle 插件的作用远不止这些</p>
+<h2 id="自定义-Gradle-插件"><a href="#自定义-Gradle-插件" class="headerlink" title="自定义 Gradle 插件"></a>自定义 Gradle 插件</h2><p>自定义 Gradle 插件可以分为三个步骤</p>
+<ol>
+<li>配置 build.gradle</li>
+<li>创建 Groovy 脚本</li>
+<li>创建 resources 文件</li>
+</ol>
+<h3 id="配置-build-gradle"><a href="#配置-build-gradle" class="headerlink" title="配置 build.gradle"></a>配置 build.gradle</h3><p>首先我们新建一个 Android Library工程,将根目录下的 build.gradle 配置如下</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'groovy'</span></div><div class="line">apply <span class="string">plugin:</span> <span class="string">'maven'</span></div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile gradleApi()</div><div class="line">    compile localGroovy()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="创建-Groovy-脚本"><a href="#创建-Groovy-脚本" class="headerlink" title="创建 Groovy 脚本"></a>创建 Groovy 脚本</h3><p>接下来创建一个 ExtraPlugin.groovy 文件，通过实现 gradle 的Plugin接口，实现apply方法即可</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExtraPlugin</span> <span class="keyword">implements</span> <span class="title">Plugin</span>&lt;<span class="title">Project</span>&gt; &#123;</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">void</span> apply(Project project) &#123;</div><div class="line">        Project extra = project.rootProject.findProject(<span class="string">"extra"</span>)</div><div class="line">        Project extra_compiler = project.rootProject.findProject(<span class="string">"extra-compiler"</span>)</div><div class="line">        <span class="keyword">if</span> (extra &amp;&amp; extra_compiler) &#123;</div><div class="line">            project.dependencies &#123;</div><div class="line">                compile extra</div><div class="line">                annotationProcessor extra_compiler</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            String extraVersion = <span class="string">"0.1.1"</span></div><div class="line">            String extraCompilerVersion = <span class="string">"0.1.1"</span></div><div class="line">            ExtraPropertiesExtension ext = project.rootProject.ext</div><div class="line">            <span class="keyword">if</span> (ext.has(<span class="string">"extraVersion"</span>)) &#123;</div><div class="line">                extraVersion = ext.get(<span class="string">"extraVersion"</span>)</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (ext.has(<span class="string">"extraCompilerVersion"</span>)) &#123;</div><div class="line">                extraCompilerVersion = ext.get(<span class="string">"extraCompilerVersion"</span>)</div><div class="line">            &#125;</div><div class="line">            project.dependencies.add(<span class="string">"compile"</span>, <span class="string">"me.loody:extra:$&#123;extraVersion&#125;"</span>)</div><div class="line">            project.dependencies.add(<span class="string">"annotationProcessor"</span>, <span class="string">"me.loody:extra-compiler:$&#123;extraCompilerVersion&#125;"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="创建-resources-文件"><a href="#创建-resources-文件" class="headerlink" title="创建 resources 文件"></a>创建 resources 文件</h3><p>最后创建resources相关文件，目录结构如下<br><img src="/images/extra-gradle-plugin.png" alt="extra-gradle-plugin"></p>
+<p>me.loody.extra.properties 的内容如下</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">implementation-<span class="class"><span class="keyword">class</span>=<span class="title">me</span>.<span class="title">loody</span>.<span class="title">extra</span>.<span class="title">ExtraPlugin</span></span></div></pre></td></tr></table></figure>
+<p>有没有感觉跟自定义注解处理器很像！</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用自定义插件的方法是在主项目的build.gradle文件中，通过apply指令来加载自定义的插件，脚本如下所示：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'me.loody.extra'</span></div></pre></td></tr></table></figure>
+<p>其中plugin的名字，就是前面创建 me.loody.extra.properties 中的名字——me.loody.extra，通过这种方式，就加载了自定义的插件</p>
 
       
     </div>
@@ -444,14 +420,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/多线程/" rel="tag"># 多线程</a>
-          
-            <a href="/tags/断点下载/" rel="tag"># 断点下载</a>
-          
-        </div>
-      
 
       
         
@@ -461,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/29/2015-11-29-CoordinatorLayout/" rel="next" title="CoordinatorLayout的使用场景">
-                <i class="fa fa-chevron-left"></i> CoordinatorLayout的使用场景
+              <a href="/2017/07/16/编译时注解项目实践之注解解析器/" rel="next" title="编译时注解项目实践之注解解析器">
+                <i class="fa fa-chevron-left"></i> 编译时注解项目实践之注解解析器
               </a>
             
           </div>
@@ -470,10 +438,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/21/2016-02-21-custom-toolbar/" rel="prev" title="定制你的Toolbar">
-                定制你的Toolbar <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -624,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">2.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程下载的原理"><span class="nav-number">3.</span> <span class="nav-text">多线程下载的原理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义-Gradle-插件"><span class="nav-number">1.</span> <span class="nav-text">自定义 Gradle 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-build-gradle"><span class="nav-number">1.1.</span> <span class="nav-text">配置 build.gradle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Groovy-脚本"><span class="nav-number">1.2.</span> <span class="nav-text">创建 Groovy 脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-resources-文件"><span class="nav-number">1.3.</span> <span class="nav-text">创建 resources 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li></ol></div>
             
 
           </div>
