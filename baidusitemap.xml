@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>https://loody.github.io/2017/08/04/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2017-08-06T02:18:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>常用ADB命令</title>
+        <pubTime>2017-08-04T09:36:48.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2017/07/29/%E7%BC%96%E8%AF%91%E6%97%B6%E6%B3%A8%E8%A7%A3%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89-Gradle-%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2017-07-29T16:24:24.000Z</lastmod>
     <data>
@@ -650,15 +665,13 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>NinePatch的制作与使用</title>
-        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
+        <title>开源库universal-image-loader的学习</title>
+        <pubTime>2014-09-10T16:00:00.000Z</pubTime>
         
-        <tag>NinePatch</tag>
-         
          
            
              
@@ -670,13 +683,15 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
+    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>开源库universal-image-loader的学习</title>
-        <pubTime>2014-09-10T16:00:00.000Z</pubTime>
+        <title>NinePatch的制作与使用</title>
+        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
         
+        <tag>NinePatch</tag>
+         
          
            
              
@@ -750,19 +765,19 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
+        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
         
-        <tag>占位符</tag>
+        <tag>Gradle依赖申明</tag>
          
          
            
              
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+              <breadCrumb title="Gradle" url="https://loody.github.io/categories/Gradle/"/>
           
         </display>
     </data>
@@ -792,19 +807,19 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Gradle如何声明所需的依赖以及依赖的分类（分组）</title>
-        <pubTime>2014-12-06T16:00:00.000Z</pubTime>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
         
-        <tag>Gradle依赖申明</tag>
+        <tag>占位符</tag>
          
          
            
              
-              <breadCrumb title="Gradle" url="https://loody.github.io/categories/Gradle/"/>
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
           
         </display>
     </data>
@@ -832,16 +847,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>scrollview嵌套webview导致锚点无法使用的解决方案</title>
-        <pubTime>2014-12-24T16:00:00.000Z</pubTime>
+        <title>Android中绘图学习笔记(一)</title>
+        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
         
-        <tag>scrollview嵌套webview</tag>
-         
-        <tag>锚点</tag>
+        <tag>Canvas</tag>
          
          
            
@@ -854,14 +867,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
+    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>Android中绘图学习笔记(一)</title>
-        <pubTime>2015-01-24T16:00:00.000Z</pubTime>
+        <title>scrollview嵌套webview导致锚点无法使用的解决方案</title>
+        <pubTime>2014-12-24T16:00:00.000Z</pubTime>
         
-        <tag>Canvas</tag>
+        <tag>scrollview嵌套webview</tag>
+         
+        <tag>锚点</tag>
          
          
            
@@ -912,14 +927,16 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
+    <loc>https://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>View的事件传递</title>
-        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
+        <title>hellocharts与MPAndroidChart的比较</title>
+        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
         
-        <tag>View的事件传递</tag>
+        <tag>MPAndroidChart</tag>
+         
+        <tag>hellocharts</tag>
          
          
            
@@ -932,16 +949,14 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/03/08/2015-03-08-hellocharts/</loc>
+    <loc>https://loody.github.io/2015/04/06/2015-04-06-view-TouchEvent/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>hellocharts与MPAndroidChart的比较</title>
-        <pubTime>2015-03-07T16:00:00.000Z</pubTime>
+        <title>View的事件传递</title>
+        <pubTime>2015-04-05T16:00:00.000Z</pubTime>
         
-        <tag>MPAndroidChart</tag>
-         
-        <tag>hellocharts</tag>
+        <tag>View的事件传递</tag>
          
          
            
@@ -974,26 +989,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>HTTP缓存机制</title>
-        <pubTime>2015-04-15T16:00:00.000Z</pubTime>
-        
-        <tag>http缓存</tag>
-         
-         
-           
-             
-              <breadCrumb title="http" url="https://loody.github.io/categories/http/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1009,6 +1004,26 @@
            
              
               <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2015/04/16/2015-04-16-http%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>HTTP缓存机制</title>
+        <pubTime>2015-04-15T16:00:00.000Z</pubTime>
+        
+        <tag>http缓存</tag>
+         
+         
+           
+             
+              <breadCrumb title="http" url="https://loody.github.io/categories/http/"/>
           
         </display>
     </data>
@@ -1058,6 +1073,30 @@
 
     
   <url>
+    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于魅族SmartBar的适配1</title>
+        <pubTime>2014-07-11T16:00:00.000Z</pubTime>
+        
+        <tag>魅族</tag>
+         
+        <tag>Smartbar</tag>
+         
+        <tag>适配</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1078,18 +1117,34 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
         <display>
-        <title>关于魅族SmartBar的适配1</title>
-        <pubTime>2014-07-11T16:00:00.000Z</pubTime>
+        <title>ichartjs在android应用中的使用</title>
+        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
         
-        <tag>魅族</tag>
+        <tag>ichartjs</tag>
          
-        <tag>Smartbar</tag>
          
-        <tag>适配</tag>
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>android的基站定位</title>
+        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
+        
+        <tag>基站定位</tag>
          
          
            
@@ -1124,26 +1179,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android的基站定位</title>
-        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
-        
-        <tag>基站定位</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1154,26 +1189,6 @@
         <tag>FragmentPagerAdapter</tag>
          
         <tag>FragmentStatePagerAdapter</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>ichartjs在android应用中的使用</title>
-        <pubTime>2014-08-02T16:00:00.000Z</pubTime>
-        
-        <tag>ichartjs</tag>
          
          
            
