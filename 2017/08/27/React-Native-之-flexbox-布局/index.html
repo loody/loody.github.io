@@ -1,0 +1,862 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="flexbox,flexDirtection,flexWrap,justifyContent,alignItems,flex,alignSelf," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="flexbox 布局flexbox 布局即“弹性布局”，是 W3C 提出的 UI 设计模型规范的一种实现，有布局神器的美誉，React Native 实现了其中大部分功能，为什么说大部分功能，大家可以参考网页版 flex布局 就知道了，而且大部分 React Native 组件也都支持 flexbox 布局设置
+下面开始介绍 flexbox 布局属性
+flexDirtectionflexDirte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 之 flexbox 布局">
+<meta property="og:url" content="https://loody.github.io/2017/08/27/React-Native-之-flexbox-布局/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="flexbox 布局flexbox 布局即“弹性布局”，是 W3C 提出的 UI 设计模型规范的一种实现，有布局神器的美誉，React Native 实现了其中大部分功能，为什么说大部分功能，大家可以参考网页版 flex布局 就知道了，而且大部分 React Native 组件也都支持 flexbox 布局设置
+下面开始介绍 flexbox 布局属性
+flexDirtectionflexDirte">
+<meta property="og:image" content="https://loody.github.io/images/flex-dirtection.jpg">
+<meta property="og:image" content="https://loody.github.io/images/flex-wrap.jpg">
+<meta property="og:image" content="https://loody.github.io/images/flex-justify-content.jpg">
+<meta property="og:image" content="https://loody.github.io/images/flex-align-items.jpg">
+<meta property="og:updated_time" content="2017-08-27T14:03:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 之 flexbox 布局">
+<meta name="twitter:description" content="flexbox 布局flexbox 布局即“弹性布局”，是 W3C 提出的 UI 设计模型规范的一种实现，有布局神器的美誉，React Native 实现了其中大部分功能，为什么说大部分功能，大家可以参考网页版 flex布局 就知道了，而且大部分 React Native 组件也都支持 flexbox 布局设置
+下面开始介绍 flexbox 布局属性
+flexDirtectionflexDirte">
+<meta name="twitter:image" content="https://loody.github.io/images/flex-dirtection.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> React Native 之 flexbox 布局 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2017/08/27/React-Native-之-flexbox-布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React Native 之 flexbox 布局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-27T20:39:02+08:00">
+                2017-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/08/27/React-Native-之-flexbox-布局/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="flexbox-布局"><a href="#flexbox-布局" class="headerlink" title="flexbox 布局"></a>flexbox 布局</h2><p>flexbox 布局即“弹性布局”，是 W3C 提出的 UI 设计模型规范的一种实现，有布局神器的美誉，React Native 实现了其中<strong>大部分</strong>功能，为什么说大部分功能，大家可以参考网页版 <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">flex布局</a> 就知道了，而且大部分 React Native 组件也都支持 flexbox 布局设置</p>
+<p>下面开始介绍 flexbox 布局属性</p>
+<h2 id="flexDirtection"><a href="#flexDirtection" class="headerlink" title="flexDirtection"></a>flexDirtection</h2><p>flexDirtection 决定了组件内部子组件的方向是如何排列的，它的取值有两种</p>
+<ul>
+<li><strong>row</strong>: 水平方向，起点在左端</li>
+<li><strong>column</strong>: 垂直方向，起点在顶部</li>
+</ul>
+<p>默认是 <strong>column</strong> ，而 W3C 提出的 <strong>row-reverse</strong> 和 <strong>column-reverse</strong> 则不支持。</p>
+<p><img src="/images/flex-dirtection.jpg" alt="flex-dirtection"></p>
+<h2 id="flexWrap"><a href="#flexWrap" class="headerlink" title="flexWrap"></a>flexWrap</h2><p>在默认情况下，组件中的子组件按照 flexDirtection 决定的方向一直排列下去，即使超出了该方向的宽度或者高度也不管</p>
+<p>而 flexWrap 可以改变这种情况，它的取值有两种：<strong>wrap</strong>、<strong>nowrap</strong>，</p>
+<ul>
+<li><strong>wrap</strong>: 换行 （类似流式布局）</li>
+<li><strong>nowrap</strong>: 不换行</li>
+</ul>
+<p>默认值是 <strong>nowrap</strong>，</p>
+<p><img src="/images/flex-wrap.jpg" alt="flex-wrap"></p>
+<h2 id="justifyContent"><a href="#justifyContent" class="headerlink" title="justifyContent"></a>justifyContent</h2><p>justifyContent 用来定义在一个方向上的如何排列子组件，它有5种取值</p>
+<ul>
+<li><strong>flex-start</strong>：主轴起点对齐</li>
+<li><strong>flex-end</strong>：主轴终点</li>
+<li><strong>center</strong>：居中</li>
+<li><strong>space-between</strong>：两端对齐，项目之间的间隔都相等</li>
+<li><strong>space-around</strong>: 每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<p><img src="/images/flex-justify-content.jpg" alt="flex-justify-content"></p>
+<h2 id="alignItems"><a href="#alignItems" class="headerlink" title="alignItems"></a>alignItems</h2><p>alignItems 用来定义子组件的对齐方式，它有4种取值</p>
+<ul>
+<li><strong>flex-start</strong>: 顶部对齐</li>
+<li><strong>flex-end</strong>: 底部对齐</li>
+<li><strong>center</strong>: 中部对齐</li>
+<li><strong>stretch</strong>: 拉长对齐</li>
+</ul>
+<p><img src="/images/flex-align-items.jpg" alt="flex-align-items"></p>
+<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><p>flex 指设置伸缩项目的伸缩样式，类似 Android 中线性布局的 weight 属性</p>
+<h2 id="alignSelf"><a href="#alignSelf" class="headerlink" title="alignSelf"></a>alignSelf</h2><p>alignSelf 用来让组件忽略它的父组件样式中的 alignItems 的取值，而对该组件使用 alignSelf 对应的规则，它有5种取值方式</p>
+<ul>
+<li><strong>flex-start</strong>: 顶部对齐</li>
+<li><strong>flex-end</strong>: 底部对齐</li>
+<li><strong>center</strong>: 中部对齐</li>
+<li><strong>stretch</strong>: 拉长对齐</li>
+<li><strong>auto</strong>:使用父组件的 alignItems 值</li>
+</ul>
+<p>以上即是 flexbox 布局及基本介绍，图片引自<a href="http://weibo.com/1712131295/CoRnElNkZ?ref=collection&amp;type=comment#_rnd1503842408943" target="_blank" rel="external">勾三股四</a> 关于 CSS3 Flexbox 口诀，在此感谢</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flexbox/" rel="tag"># flexbox</a>
+          
+            <a href="/tags/flexDirtection/" rel="tag"># flexDirtection</a>
+          
+            <a href="/tags/flexWrap/" rel="tag"># flexWrap</a>
+          
+            <a href="/tags/justifyContent/" rel="tag"># justifyContent</a>
+          
+            <a href="/tags/alignItems/" rel="tag"># alignItems</a>
+          
+            <a href="/tags/flex/" rel="tag"># flex</a>
+          
+            <a href="/tags/alignSelf/" rel="tag"># alignSelf</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/04/常用ADB命令/" rel="next" title="常用ADB命令">
+                <i class="fa fa-chevron-left"></i> 常用ADB命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#flexbox-布局"><span class="nav-number">1.</span> <span class="nav-text">flexbox 布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flexDirtection"><span class="nav-number">2.</span> <span class="nav-text">flexDirtection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flexWrap"><span class="nav-number">3.</span> <span class="nav-text">flexWrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#justifyContent"><span class="nav-number">4.</span> <span class="nav-text">justifyContent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alignItems"><span class="nav-number">5.</span> <span class="nav-text">alignItems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex"><span class="nav-number">6.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alignSelf"><span class="nav-number">7.</span> <span class="nav-text">alignSelf</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "8aad98f13878428682fd1db72a1f81bf",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>

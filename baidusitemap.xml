@@ -4,6 +4,38 @@
 
     
   <url>
+    <loc>https://loody.github.io/2017/08/27/React-Native-%E4%B9%8B-flexbox-%E5%B8%83%E5%B1%80/</loc>
+    <lastmod>2017-08-27T14:03:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native 之 flexbox 布局</title>
+        <pubTime>2017-08-27T12:39:02.000Z</pubTime>
+        
+        <tag>flexbox</tag>
+         
+        <tag>flexDirtection</tag>
+         
+        <tag>flexWrap</tag>
+         
+        <tag>justifyContent</tag>
+         
+        <tag>alignItems</tag>
+         
+        <tag>flex</tag>
+         
+        <tag>alignSelf</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="https://loody.github.io/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2017/08/04/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2017-08-07T06:50:11.000Z</lastmod>
     <data>
@@ -641,6 +673,66 @@
     
     
   <url>
+    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>开源库universal-image-loader的学习</title>
+        <pubTime>2014-09-10T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>NinePatch的制作与使用</title>
+        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
+        
+        <tag>NinePatch</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于android签名及渠道打包</title>
+        <pubTime>2014-09-22T16:00:00.000Z</pubTime>
+        
+        <tag>签名</tag>
+         
+        <tag>多渠道打包</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -703,6 +795,26 @@
 
     
   <url>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>android中的常见的占位符及转义字符</title>
+        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
+        
+        <tag>占位符</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -743,48 +855,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>scrollview嵌套webview导致锚点无法使用的解决方案</title>
-        <pubTime>2014-12-24T16:00:00.000Z</pubTime>
-        
-        <tag>scrollview嵌套webview</tag>
-         
-        <tag>锚点</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android中的常见的占位符及转义字符</title>
-        <pubTime>2014-12-13T16:00:00.000Z</pubTime>
-        
-        <tag>占位符</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -812,6 +882,28 @@
         <title>Android中绘图学习笔记(二)</title>
         <pubTime>2015-01-31T16:00:00.000Z</pubTime>
         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>scrollview嵌套webview导致锚点无法使用的解决方案</title>
+        <pubTime>2014-12-24T16:00:00.000Z</pubTime>
+        
+        <tag>scrollview嵌套webview</tag>
+         
+        <tag>锚点</tag>
+         
          
            
              
@@ -989,26 +1081,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>CoordinatorLayout的使用场景</title>
-        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
-        
-        <tag>CoordinatorLayout</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1033,6 +1105,26 @@
 
     
   <url>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoordinatorLayout的使用场景</title>
+        <pubTime>2015-11-28T16:00:00.000Z</pubTime>
+        
+        <tag>CoordinatorLayout</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://loody.github.io/2014/08/03/2014-08-03-ichartjs%20in%20android/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1041,6 +1133,26 @@
         <pubTime>2014-08-02T16:00:00.000Z</pubTime>
         
         <tag>ichartjs</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>android的基站定位</title>
+        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
+        
+        <tag>基站定位</tag>
          
          
            
@@ -1075,46 +1187,6 @@
 
     
   <url>
-    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>android的基站定位</title>
-        <pubTime>2014-08-09T16:00:00.000Z</pubTime>
-        
-        <tag>基站定位</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>NinePatch的制作与使用</title>
-        <pubTime>2014-09-16T16:00:00.000Z</pubTime>
-        
-        <tag>NinePatch</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://loody.github.io/2014/07/20/2014-07-20-the%20conflict%20of%20the%20ScrollView%20nested%20ListView/</loc>
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     <data>
@@ -1126,24 +1198,6 @@
          
         <tag>ListView</tag>
          
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>开源库universal-image-loader的学习</title>
-        <pubTime>2014-09-10T16:00:00.000Z</pubTime>
-        
          
            
              
@@ -1167,28 +1221,6 @@
         <tag>适配</tag>
          
         <tag>SmartBar</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://loody.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于android签名及渠道打包</title>
-        <pubTime>2014-09-22T16:00:00.000Z</pubTime>
-        
-        <tag>签名</tag>
-         
-        <tag>多渠道打包</tag>
          
          
            

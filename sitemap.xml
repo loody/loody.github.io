@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://loody.github.io/2017/08/27/React-Native-%E4%B9%8B-flexbox-%E5%B8%83%E5%B1%80/</loc>
+    
+    <lastmod>2017-08-27T14:03:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://loody.github.io/2017/08/04/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/</loc>
     
     <lastmod>2017-08-07T06:50:11.000Z</lastmod>
@@ -226,6 +233,27 @@
   </url>
   
   <url>
+    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://loody.github.io/2014/10/19/2014-10-19-about%20MPAndroidChart/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -247,6 +275,13 @@
   </url>
   
   <url>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -261,20 +296,6 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://loody.github.io/2015/01/25/2015-01-25-canvas-1/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -283,6 +304,13 @@
   
   <url>
     <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -345,14 +373,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -366,13 +394,6 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -380,7 +401,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
+    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -394,13 +415,6 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://loody.github.io/2014/08/30/2014-08-30-meizu%20smartbar%20adapter%202/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -408,7 +422,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/09/23/2014-09-23-about%20android%20sign%20and%20muti-channel-build-tool%20/</loc>
+    <loc>https://loody.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -416,13 +430,6 @@
   
   <url>
     <loc>https://loody.github.io/categories/index.html</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://loody.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
