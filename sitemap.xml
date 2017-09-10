@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://loody.github.io/2017/09/10/React-Native-%E4%B9%8B-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    
+    <lastmod>2017-09-10T13:44:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://loody.github.io/2017/08/27/React-Native-%E4%B9%8B-flexbox-%E5%B8%83%E5%B1%80/</loc>
     
     <lastmod>2017-08-27T14:03:31.000Z</lastmod>
@@ -233,13 +240,6 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://loody.github.io/2014/09/17/2014-09-17-draw9patch/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
@@ -275,14 +275,21 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
+    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/12/07/2014-12-07-about-gradle%20dependency%20management/</loc>
+    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/2014/12/14/2014-12-14-string-format/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -304,13 +311,6 @@
   
   <url>
     <loc>https://loody.github.io/2015/02/01/2015-02-01-canvas-2/</loc>
-    
-    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://loody.github.io/2014/12/25/2014-12-25-scrollview-webview-anchor/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
+    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/04/26/2015-04-26-recycleview-cardview/</loc>
+    <loc>https://loody.github.io/2015/05/03/2015-05-03-webviewclient-chromeclient/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -373,14 +373,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
+    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2015/11/29/2015-11-29-CoordinatorLayout/</loc>
+    <loc>https://loody.github.io/2014/07/12/2014-07-12-meizu%20smartbar%20adapter%201/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -394,14 +394,14 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
+    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://loody.github.io/2014/08/18/2014-08-18-FragmentPagerAdapter&FragmentStatePagerAdapter/</loc>
+    <loc>https://loody.github.io/2014/08/10/2014-08-10-base%20station%20positioning/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -422,7 +422,7 @@
   </url>
   
   <url>
-    <loc>https://loody.github.io/tags/index.html</loc>
+    <loc>https://loody.github.io/2014/09/11/2014-09-11-about%20universal-image-loader/</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     
@@ -430,6 +430,13 @@
   
   <url>
     <loc>https://loody.github.io/categories/index.html</loc>
+    
+    <lastmod>2016-03-10T16:53:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://loody.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-10T16:53:23.000Z</lastmod>
     

@@ -1,0 +1,824 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React Native,组件的生命周期," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="组件的生命周期一个 React Native 组件从它被加载到最终被卸载，会经历一个完整的生命周期，在这个生命周期里，开发者可以定义一些生命周期函数，用来处理在特定条件下组件将要执行的操作，比如在某个时间点读取数据等，类似 Android 系统中 Activity 的生命周期。
+虚拟DOM当应用启动，React Native在内存中维护着一个虚拟DOM，组件的生命周期就是指组件初始化并挂载到虚拟D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 之 组件的生命周期">
+<meta property="og:url" content="https://loody.github.io/2017/09/10/React-Native-之-组件的生命周期/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="组件的生命周期一个 React Native 组件从它被加载到最终被卸载，会经历一个完整的生命周期，在这个生命周期里，开发者可以定义一些生命周期函数，用来处理在特定条件下组件将要执行的操作，比如在某个时间点读取数据等，类似 Android 系统中 Activity 的生命周期。
+虚拟DOM当应用启动，React Native在内存中维护着一个虚拟DOM，组件的生命周期就是指组件初始化并挂载到虚拟D">
+<meta property="og:image" content="https://loody.github.io/images/react-native-component-lifecycle.png">
+<meta property="og:updated_time" content="2017-09-10T13:44:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 之 组件的生命周期">
+<meta name="twitter:description" content="组件的生命周期一个 React Native 组件从它被加载到最终被卸载，会经历一个完整的生命周期，在这个生命周期里，开发者可以定义一些生命周期函数，用来处理在特定条件下组件将要执行的操作，比如在某个时间点读取数据等，类似 Android 系统中 Activity 的生命周期。
+虚拟DOM当应用启动，React Native在内存中维护着一个虚拟DOM，组件的生命周期就是指组件初始化并挂载到虚拟D">
+<meta name="twitter:image" content="https://loody.github.io/images/react-native-component-lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> React Native 之 组件的生命周期 | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2017/09/10/React-Native-之-组件的生命周期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React Native 之 组件的生命周期
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T20:57:31+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/09/10/React-Native-之-组件的生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h2><p>一个 React Native 组件从它被加载到最终被卸载，会经历一个完整的生命周期，在这个生命周期里，开发者可以定义一些生命周期函数，用来处理在特定条件下组件将要执行的操作，比如在某个时间点读取数据等，类似 Android 系统中 Activity 的生命周期。</p>
+<h4 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h4><p>当应用启动，React Native在内存中维护着一个虚拟DOM，组件的生命周期就是指组件初始化并挂载到虚拟DOM为起始，到组件从虚拟DOM卸载为终结。生命周期的方法就是组件在虚拟DOM中不同状态的描述。</p>
+<h4 id="三个阶段"><a href="#三个阶段" class="headerlink" title="三个阶段"></a>三个阶段</h4><p>组件的生命周期分为三个阶段，如下图，分别是挂载（mounting）、更新（updating）和卸载（Unmounting），其中挂载和更新阶段都会调用render方法进行绘制。下面对这三个阶段分别进行讲解。</p>
+<p><img src="/images/react-native-component-lifecycle.png" alt="react-native-component-lifecycle"></p>
+<h2 id="挂载（Mounting）"><a href="#挂载（Mounting）" class="headerlink" title="挂载（Mounting）"></a><strong>挂载（Mounting）</strong></h2><ul>
+<li>constructor()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ul>
+<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a><strong>constructor</strong></h4><p>constructor是RN组件的构造方法，它在RN组件被加载前先被调用。当我们的组件继承自React.Component时，需要在构造方法中最先调用<code>super(props)</code>。如果不需要初始化state，则不需要实现构造方法。<br>在构造方法中初始化state，如下所示。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">constructor(props) &#123;</div><div class="line">  <span class="keyword">super</span>(props);</div><div class="line">  <span class="keyword">this</span>.state = &#123;</div><div class="line">    color: props.initialColor</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a><strong>componentWillMount</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillMount()</div></pre></td></tr></table></figure>
+<p>componentWillMount方法在挂载前被立即调用。它在render方法前被执行，因此，在componentWillMount方法中设置state并不会导致重新被渲染。它只会被执行一次，通常情况下，建议使用constructor方法来代替它。</p>
+<h4 id="render"><a href="#render" class="headerlink" title="render"></a><strong>render</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render()</div></pre></td></tr></table></figure>
+<p>该方法是必须的，一旦调用，则会去检查 this.props 和 this.state 的数据并返回一个 React 元素。render方法中不应该修改组件的props和state，因为render方法是“纯洁的”，这意味着每次调用该方法时都会返回相同的结果。render方法在更新阶段也会被调用，前提是shouldComponentUpdate方法返回true。</p>
+<h4 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a><strong>componentDidMount</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentDidMount()</div></pre></td></tr></table></figure>
+<p>componentDidMount方法在组件被挂载后立即调用，在render方法后被执行。开发者可以在这个方法中获取其中的元素或者子组件，需要注意的是，子组件的componentDidMount方法会在父组件的componentDidMount方法之前调用。如果需要从网络加载数据显示到界面上，在这里进行网络请求是一个不错的选择。在componentDidMount方法中设置state将会被重新渲染。</p>
+<h3 id="更新（Updating）"><a href="#更新（Updating）" class="headerlink" title="更新（Updating）"></a><strong>更新（Updating）</strong></h3><ul>
+<li>componentWillReceiveProps()</li>
+<li>shouldComponentUpdate()</li>
+<li>componentWillUpdate()</li>
+<li>render()</li>
+<li>componentDidUpdate()</li>
+</ul>
+<p>改变props或者state时可以导致更新，当一个组件被重新渲染时，会调用如下方法。</p>
+<h4 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a><strong>componentWillReceiveProps</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps(nextProps)</div></pre></td></tr></table></figure>
+<p>componentWillReceiveProps方法会在挂载的组件接收到新的props时被调用，它接收一个Object类型参数nextProps，表示新的props。通常在这个方法中接收新的props值，并根据props的变化，通过调用 this.setState() 来更新组件state，this.setState()不会触发 render方法的调用。<br>在挂载的过程中，初始的props并不会触发调用componentWillReceiveProps方法，这个方法只会在组件中的props更新时被调用，另外，调用this.setState()也不会触发调用componentWillReceiveProps方法。</p>
+<h4 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a><strong>shouldComponentUpdate</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">shouldComponentUpdate</span><span class="params">(nextProps, nextState)</span></span></div></pre></td></tr></table></figure>
+<p>当组件接收到新的props和state时，shouldComponentUpdate方法被调用，它接收两个Object参数，nextProps是新的props，nextState是新的state。<br>shouldComponentUpdate方法默认返回true，用来保证数据变化时，组件能够重新渲染。你也可以重载这个方法，通过检查变化前后props和state，来决定组件是否需要重新渲染。如果返回false，则组件不会被重新渲染，也不会调用本方法后面的componentWillUpdate和componentDidUpdate方法。</p>
+<h4 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate"></a><strong>componentWillUpdate</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillUpdate(nextProps, nextState)</div></pre></td></tr></table></figure>
+<p>如果组件props或者state改变，并且此前的shouldComponentUpdate方法返回为 true，则会调用该方法。componentWillUpdate方法会在组件重新渲染前被调用，因此，可以在这个方法中为重新渲染做一些准备工作。需要注意的是，在这个方法中，不能使用 this.setState 来更改state，如果想要根据props来更改state，需要在componentWillReceiveProps方法中去实现，而不是在这里。</p>
+<h4 id="render-1"><a href="#render-1" class="headerlink" title="render"></a><strong>render</strong></h4><p>同挂载的 render</p>
+<h4 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a><strong>componentDidUpdate</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentDidUpdate(prevProps, prevState)</div></pre></td></tr></table></figure>
+<p>组件重新渲染完成后会调用componentDidUpdate方法。两个参数分别是渲染前的props和渲染前的state。这个方法也适合写网络请求，比如可以将当前的props和prevProps进行对比，发生变化则请求网络。</p>
+<h3 id="卸载（Unmounting）"><a href="#卸载（Unmounting）" class="headerlink" title="卸载（Unmounting）"></a><strong>卸载（Unmounting）</strong></h3><ul>
+<li>componentWillUnmount()</li>
+</ul>
+<p>卸载就是从DOM中删除组件，会调用如下方法。</p>
+<h4 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount()"></a><strong>componentWillUnmount()</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillUnmount()</div></pre></td></tr></table></figure>
+<p>componentWillUnmount方法在组件卸载和销毁之前被立即调用。可以在这个方法中执行必要的清理工作，比如，关掉计时器、取消网络请求、清除组件装载中创建的DOM元素等等。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">https://facebook.github.io/react/docs/react-component.html</a><br><a href="http://liuwangshu.cn/rn/component/1-lifecycle.html" target="_blank" rel="external">React Native组件（一）组件的生命周期</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React-Native/" rel="tag"># React Native</a>
+          
+            <a href="/tags/组件的生命周期/" rel="tag"># 组件的生命周期</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/27/React-Native-之-flexbox-布局/" rel="next" title="React Native 之 flexbox 布局">
+                <i class="fa fa-chevron-left"></i> React Native 之 flexbox 布局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的生命周期"><span class="nav-number">1.</span> <span class="nav-text">组件的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">1.0.1.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三个阶段"><span class="nav-number">1.0.2.</span> <span class="nav-text">三个阶段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载（Mounting）"><span class="nav-number">2.</span> <span class="nav-text">挂载（Mounting）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">2.0.1.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillMount"><span class="nav-number">2.0.2.</span> <span class="nav-text">componentWillMount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#render"><span class="nav-number">2.0.3.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentDidMount"><span class="nav-number">2.0.4.</span> <span class="nav-text">componentDidMount</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新（Updating）"><span class="nav-number">2.1.</span> <span class="nav-text">更新（Updating）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillReceiveProps"><span class="nav-number">2.1.1.</span> <span class="nav-text">componentWillReceiveProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shouldComponentUpdate"><span class="nav-number">2.1.2.</span> <span class="nav-text">shouldComponentUpdate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillUpdate"><span class="nav-number">2.1.3.</span> <span class="nav-text">componentWillUpdate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#render-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentDidUpdate"><span class="nav-number">2.1.5.</span> <span class="nav-text">componentDidUpdate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载（Unmounting）"><span class="nav-number">2.2.</span> <span class="nav-text">卸载（Unmounting）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillUnmount"><span class="nav-number">2.2.1.</span> <span class="nav-text">componentWillUnmount()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "8aad98f13878428682fd1db72a1f81bf",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
