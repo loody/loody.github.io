@@ -1,0 +1,822 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React Native,Fetch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Fetch我们在Android开发中，目前比较流行的网络请求框架是retrofit、volley等，同样在React Native开发中，我们使用Fetch做网络请求，下面我们就来介绍下Fetch的使用方法。
+首先我们看一个简单的示例代码，获取知乎日报内容
+12345678fetch(&apos;https://news-at.zhihu.com/api/4/news/latest&apos;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 之 网络请求Fetch">
+<meta property="og:url" content="https://loody.github.io/2017/10/14/React-Native-之-网络请求Fetch/index.html">
+<meta property="og:site_name" content="loody's blog">
+<meta property="og:description" content="Fetch我们在Android开发中，目前比较流行的网络请求框架是retrofit、volley等，同样在React Native开发中，我们使用Fetch做网络请求，下面我们就来介绍下Fetch的使用方法。
+首先我们看一个简单的示例代码，获取知乎日报内容
+12345678fetch(&apos;https://news-at.zhihu.com/api/4/news/latest&apos;)">
+<meta property="og:updated_time" content="2017-10-15T08:36:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 之 网络请求Fetch">
+<meta name="twitter:description" content="Fetch我们在Android开发中，目前比较流行的网络请求框架是retrofit、volley等，同样在React Native开发中，我们使用Fetch做网络请求，下面我们就来介绍下Fetch的使用方法。
+首先我们看一个简单的示例代码，获取知乎日报内容
+12345678fetch(&apos;https://news-at.zhihu.com/api/4/news/latest&apos;)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":true,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> React Native 之 网络请求Fetch | loody's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">loody's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://loody.github.io/2017/10/14/React-Native-之-网络请求Fetch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loody">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/loofee.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="loody's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React Native 之 网络请求Fetch
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T15:49:46+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/10/14/React-Native-之-网络请求Fetch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h2><p>我们在Android开发中，目前比较流行的网络请求框架是retrofit、volley等，同样在React Native开发中，我们使用Fetch做网络请求，下面我们就来介绍下Fetch的使用方法。</p>
+<p>首先我们看一个简单的示例代码，获取知乎日报内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'https://news-at.zhihu.com/api/4/news/latest'</span>)</div><div class="line">           .then((response) =&gt; response.json())<span class="comment">//把response转为json格式</span></div><div class="line">           .then((jsondata) =&gt; &#123;    <span class="comment">//上面的转好的json</span></div><div class="line"></div><div class="line">           &#125;)</div><div class="line">           .<span class="keyword">catch</span>((error) =&gt; &#123;</div><div class="line">               console.error(error);</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<p>啥情况，这么简洁，是的，有点像RxJava的链式调用再配上Labda表达式</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>稍微解释下，这里没有看到method方法，因为fetch默认的就是GET方法，所以这里省略了没写，如果写全，我们可以这么写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'https://news-at.zhihu.com/api/4/news/latest'</span>，&#123;method:<span class="string">'GET'</span>&#125;)</div><div class="line">           .then((response) =&gt; response.json())<span class="comment">//把response转为json格式</span></div><div class="line">           .then((jsondata) =&gt; &#123;    <span class="comment">//上面的转好的json</span></div><div class="line"></div><div class="line">           &#125;)</div><div class="line">           .<span class="keyword">catch</span>((error) =&gt; &#123;</div><div class="line">               console.error(error);</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>自定义Headers是我们经常要做的，这里也很简单，比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'https://news-at.zhihu.com/api/4/news/latest'</span>，&#123;</div><div class="line">            method:<span class="string">'GET'</span>,</div><div class="line">            headers: &#123;</div><div class="line">              <span class="string">'Accept'</span>: <span class="string">'application/json'</span>,</div><div class="line">              <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</div><div class="line">              <span class="string">'xxx'</span>:<span class="string">'xxx'</span></div><div class="line">           &#125;&#125;)</div><div class="line">           .then((response) =&gt; response.json())<span class="comment">//把response转为json格式</span></div><div class="line">           .then((jsondata) =&gt; &#123;    <span class="comment">//上面的转好的json</span></div><div class="line"></div><div class="line">           &#125;)</div><div class="line">           .<span class="keyword">catch</span>((error) =&gt; &#123;</div><div class="line">               console.error(error);</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<p>关于请求头Header的话，还可以通过 Headers() 构造函数来创建一个你自己的 headers 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var myHeaders = <span class="keyword">new</span> Headers();</div><div class="line">myHeaders.append(<span class="string">"Content-Type"</span>, <span class="string">"text/plain"</span>);</div><div class="line">myHeaders.append(<span class="string">"Content-Length"</span>, content.length.toString());</div><div class="line">myHeaders.append(<span class="string">"X-Custom-Header"</span>, <span class="string">"ProcessThisImmediately"</span>);</div></pre></td></tr></table></figure>
+<p>也可以传一个多维数组或者对象字面量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var myHeaders = <span class="keyword">new</span> Headers(&#123;</div><div class="line">  <span class="string">"Content-Type"</span>: <span class="string">"text/plain"</span>,</div><div class="line">  <span class="string">"Content-Length"</span>: content.length.toString(),</div><div class="line">  <span class="string">"X-Custom-Header"</span>: <span class="string">"ProcessThisImmediately"</span>,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'xxxxx'</span>，&#123;</div><div class="line">            method:<span class="string">'GET'</span>,</div><div class="line">            headers: myHeaders</div><div class="line">           &#125;)</div><div class="line">           .then((response) =&gt; response.json())<span class="comment">//把response转为json格式</span></div><div class="line">           .then((jsondata) =&gt; &#123;    <span class="comment">//上面的转好的json</span></div><div class="line"></div><div class="line">           &#125;)</div><div class="line">           .<span class="keyword">catch</span>((error) =&gt; &#123;</div><div class="line">               console.error(error);</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<h2 id="Body"><a href="#Body" class="headerlink" title="Body"></a>Body</h2><p>Body是我们在做POST请求要提交的参数，应该怎么设置呢？看代码就知道啦</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'xxxxx'</span>，&#123;</div><div class="line">            method:<span class="string">'POST'</span>,</div><div class="line">            headers: &#123;</div><div class="line">              <span class="string">'Accept'</span>: <span class="string">'application/json'</span>,</div><div class="line">              <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</div><div class="line">            &#125;</div><div class="line">            body:JSON.stringify(&#123;</div><div class="line">              firstParam: <span class="string">'xxx'</span>,</div><div class="line">              secondParam: <span class="string">'xxx'</span>,</div><div class="line">            &#125;</div><div class="line">           &#125;)</div><div class="line">           .then((response) =&gt; response.json())<span class="comment">//把response转为json格式</span></div><div class="line">           .then((jsondata) =&gt; &#123;    <span class="comment">//上面的转好的json</span></div><div class="line"></div><div class="line">           &#125;)</div><div class="line">           .<span class="keyword">catch</span>((error) =&gt; &#123;</div><div class="line">               console.error(error);</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>Fetch API 是基于 Promise 设计，那么关于 Promise 的内容可以参考下面的教程：<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
+<p>我们知道网络请求是一个天然的异步操作，Fetch 方法会返回一个Promise，这种模式可以简化异步风格的代码。Promise 对象是一个返回值的代理，它允许你为异步操作的成功或失败指定处理方法。 这使得异步方法可以像同步方法那样返回值：异步方法会返回一个包含了原返回值的 Promise 对象来替代原返回值。</p>
+<p>就像上面的第一个 then 返回的是response，接着我们调用了 response.json()将其转成了json对象，然后我们有调用了一个then，这时候返回的是jsondata，也就是上一步转成的json对象，then方法就是这么向下传递的，我们可以写无数个then</p>
+<h2 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h2><p>除了上面的用法，我们还可以通过使用Request()构造函数来创建一个request对象，然后再作为参数传给fetch()。这里就相当于把url和header或者其他的参数综合起来！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var url=<span class="string">'https://news-at.zhihu.com/api/4/news/latest'</span>;</div><div class="line">var myOptions = &#123; method: <span class="string">'GET'</span>,</div><div class="line">               headers: myHeaders,&#125;;</div><div class="line">var myRequest = <span class="keyword">new</span> Request(url, myOptions );</div><div class="line">fetch(myRequest)</div><div class="line">  .then()</div><div class="line">  ...</div></pre></td></tr></table></figure>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>属性：</p>
+<ul>
+<li>status (number) - HTTP请求结果参数，在100–599 范围</li>
+<li>statusText (String) - 服务器返回的状态报告</li>
+<li>ok (boolean) - 如果返回200表示请求成功则为true</li>
+<li>headers (Headers) - 返回头部信息，下面详细介绍</li>
+<li>url (String) - 请求的地址</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>text() - 以string的形式生成请求text</li>
+<li>json() - 生成JSON.parse(responseText)的结果</li>
+<li>blob() - 生成一个Blob</li>
+<li>arrayBuffer() - 生成一个ArrayBuffer</li>
+<li>formData() - 生成格式化的数据，可用于其他的请求</li>
+</ul>
+<p>其他方法：<br>…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>(Promise)[<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise</a>]<br>(React Native入门（八）之网络请求Fetch)[<a href="http://blog.csdn.net/aiynmimi/article/details/77368129" target="_blank" rel="external">http://blog.csdn.net/aiynmimi/article/details/77368129</a>]<br>(React Native探索（五）使用fetch进行网络请求)[<a href="http://liuwangshu.cn/rn/primer/5-fetch.html" target="_blank" rel="external">http://liuwangshu.cn/rn/primer/5-fetch.html</a>]</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React-Native/" rel="tag"># React Native</a>
+          
+            <a href="/tags/Fetch/" rel="tag"># Fetch</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/10/React-Native-之-组件的生命周期/" rel="next" title="React Native 之 组件的生命周期">
+                <i class="fa fa-chevron-left"></i> React Native 之 组件的生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/loofee.png"
+               alt="loody" />
+          <p class="site-author-name" itemprop="name">loody</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/loody" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2396231120/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch"><span class="nav-number">1.</span> <span class="nav-text">Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Headers"><span class="nav-number">3.</span> <span class="nav-text">Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Body"><span class="nav-number">4.</span> <span class="nav-text">Body</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">5.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">6.</span> <span class="nav-text">Request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response"><span class="nav-number">7.</span> <span class="nav-text">Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loody</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "8aad98f13878428682fd1db72a1f81bf",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
